@@ -28,7 +28,7 @@ $('#ordersPage').on('pageshow', function(event){
 			success: function(data){
 				$('#departmentsSelectA').html('<option data-placeholder="true">Wybierz</option>');
     			$.each(data.oddzialy, function(i, item){
-					$('#departmentsSelectA').append('<option value="'  + item.kth_id +  '">' + item.dak_skrot + ' </option>');
+					$('#departmentsSelectA').append('<option value="'  + item.kth_id +  '">' + item.dak_skrot + ' ' + item.kth_id + ' </option>');
 				})
 				$('#departmentsSelectA').selectmenu('refresh');
        		}
@@ -36,9 +36,10 @@ $('#ordersPage').on('pageshow', function(event){
 	},
 	
 	displayOrders: function(departmentId, costSourceId){
+		var self = this;
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.DoAkceptacji',
-			data: {'OdbId': departmentId, 'CkId': costSourceId, 'AuthKey': localStorage.getItem("auth_key")},
+			data: {'OdbId': 1048308, 'CkId': 0, 'AuthKey': localStorage.getItem("auth_key")},
 			type: 'GET',
            	cache: true,
 			dataType: 'jsonp',
@@ -46,21 +47,93 @@ $('#ordersPage').on('pageshow', function(event){
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
 				$('#ordersList').html('');
-    			console.log(data);
     			$.each(data.zamowienia, function(i, item){
-					$('#ordersList').append('<li><span class="paramName">Numer dokumentu: <span class="paramValue">' + item.ds_id + '</span></span><span class="paramName">Nazwa Centrum Kosztowego <span class="paramValue">' + item.ck_nazwa + '</span></span><span class="paramName">Cena netto:  <span class="paramValue">' + item.ds_netto + 'zl</span></span><span class="paramName">VAT <span class="paramValue">' + item.ds_vat + 'zl</span></span><span class="paramName">Cena Brutto: <span class="paramValue">' + item.ds_brutto + '</span></span></li>');
+					$('#ordersList').append('<li id="orderdetail'+item.ds_id+'"><span class="paramName">Numer dokumentu: <span class="paramValue">' + item.ds_id + '</span></span><span class="paramName">Nazwa Centrum Kosztowego <span class="paramValue">' + item.ck_nazwa + '</span></span><span class="paramName">Cena netto:  <span class="paramValue">' + item.ds_netto + 'zł</span></span><span class="paramName">VAT <span class="paramValue">' + item.ds_vat + 'zł</span></span><span class="paramName">Cena Brutto: <span class="paramValue">' + item.ds_brutto + 'zł</span></span><br/><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-detail-btn">Szczegóły</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-accept-btn">Akceptuj</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-cancel-btn">Odrzuć</a><div id="poz'+item.ds_id+'"></div></li>');
+
+					//$('#ordersList').listview('refresh');
+					//$('.order-detail-btn').button('refresh');
 				})
 
-				$('#ordersList').listview('refresh');
+				
+					$('.order-detail-btn').on('click', function(event) {
+		 				var doc_id = $(event.target).attr('data-docid');
+		 				self.displayOrderDetail(doc_id);
+		 			})
+
+					$('.order-accept-btn').on('click', function(event) {
+		 				var doc_id = $(event.target).attr('data-docid');
+		 				self.acceptOrder(doc_id);
+		 			})
+
+		 			$('.order-cancel-btn').on('click', function(event) {
+		 				var doc_id = $(event.target).attr('data-docid');
+		 				self.cancelOrder(doc_id);
+		 			})
 
 				if(data.zamowienia.length == 0){
 					$('#ordersList').append('<span>W danym centrum kosztowym brak zamówień</span>');
 				}
        		},
-       		error: function(){
-       			alert('error');
+       		error: function(event){
+       			var doc_id = $(event.target).attr('data-docid');
+       			alert('error ' + doc_id);
        		}
    		});
+	},
+
+	displayOrderDetail: function(doc_id){
+		$.ajax({
+			url: Config.serviceURL + 'BPK.pkg_json.PozycjeDokDoAkceptacji',
+			data: {'DsId': doc_id, 'AuthKey': localStorage.getItem("auth_key")},
+			type: 'GET',
+           	cache: true,
+			dataType: 'jsonp',
+			crossDomain: true,
+			contentType: 'application/json; charset=utf-8',
+			success: function(data){           
+    			$('#poz' + doc_id ).html('');
+    			$.each(data.pozycje, function(i, item){
+					$('#poz' + doc_id ).append('<span>'+ item.tow_nazwa +' ' +  item.pds_ilosc + item.pds_jm_symbol +'</span><br/>');
+				})
+			}
+		})
+	},
+
+
+	acceptOrder: function(doc_id){
+		 $.ajax({
+			url: Config.serviceURL + 'BPK.pkg_json.AkceptujZamowienieCale',
+			data: {'DsId': doc_id, 'Uwagi': '', 'AuthKey': localStorage.getItem("auth_key")},
+			type: 'GET',
+           	cache: true,
+			dataType: 'jsonp',
+			crossDomain: true,
+			contentType: 'application/json; charset=utf-8',
+			success: function(data){           
+				if(data.Zaakceptowane == 'T'){
+    				alert('Zamówienie zostało zaakceptowane');
+    				$('#orderdetail'+doc_id).html('');	
+    			}
+			}
+		})
+	},
+
+	cancelOrder: function(doc_id){
+		 $.ajax({
+			url: Config.serviceURL + 'BPK.pkg_json.OdrzucZamowienie',
+			data: {'DsId': doc_id, 'Uwagi': '', 'AuthKey': localStorage.getItem("auth_key")},
+			type: 'GET',
+           	cache: true,
+			dataType: 'jsonp',
+			crossDomain: true,
+			contentType: 'application/json; charset=utf-8',
+			success: function(data){           
+    			if(data.Odrzucone == 'T'){
+    				alert('Zamówienie zostało odrzucone');
+    				$('#orderdetail'+doc_id).html('');	
+    			}
+			}
+		})
 	},
 
 	updateAdressesSelect: function(departmentId){
@@ -132,6 +205,5 @@ $('#ordersPage').on('pageshow', function(event){
 		 	var cost_source_id = $(event.target).val();
 		 	self.displayOrders(department_id, cost_source_id);
 		 })
-
 	}
 }

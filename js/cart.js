@@ -5,7 +5,6 @@ $('#cart').on('pageshow', function(){
   BPApp.Cart = {
   	start: function(){
   		this.displayProductsFromCart();
-  		this.displayDepartmentsSelect();
   		this.bindEvents();
   	},
 
@@ -22,18 +21,22 @@ $('#cart').on('pageshow', function(){
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
 				success: function(cart){   
-					console.log('display products');
 					$('#cartProducts').html('');
-					console.log(cart);
 					if(cart){
 						$.each(cart.pozycje, function(i, item){
 						$('#cartProducts').append('<li class="kontener" data-inset="true"><a href="#product" class="bpm-cart-prod" data-productid="' + item.tow_id + '">' + item.tow_nazwa + '</a><div data-role="controlgroup" data-type="horizontal" data-mini="true" class="kontrolki" ><span class="productcountlabel">sztuk:</span><span class="productcount">' +  item.pds_ilosc +'</span><a data-role="button" data-icon="arrow-u" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-up" data-count="' +  item.pds_ilosc +'" data-pdsid="' + item.tow_id + '">Więcej</a><a data-role="button" data-icon="arrow-d" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-down" data-count="' + item.pds_ilosc + '" data-pdsid="' + item.tow_id + '">Mniej</a><a data-role="button" data-icon="delete" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-remove" data-pdsid="' + item.tow_id + '">Usuń</a></div></li>');
 						})
 						$('#cartProducts').listview('refresh');
 						self.bindEvents();
-						
 						if(cart.pozycje.length > 0){
-							$('#departmentsSelect').show();
+							self.displayDepartmentsSelect();
+							$('#bpm-cartselects').show();
+							$('#submitOrder').show();
+							$('#emptyCartMsg').hide();
+						}else{
+							$('#bpm-cartselects').hide();
+							$('#submitOrder').hide();
+							$('#emptyCartMsg').show();
 						}
 					}	
           		}
@@ -56,6 +59,7 @@ $('#cart').on('pageshow', function(){
 					$('#departmentsSelect').append('<option value="' + item.kth_id +'">' +  item.dak_skrot + '</option>');
 				})
 				$('#departmentsSelect').selectmenu('refresh');
+				$('#departmentsSelect').show();
 			}
 		})
 	},
@@ -194,7 +198,7 @@ $('#cart').on('pageshow', function(){
 		var cartId = this.getCartId();
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.UstawOdbiorceDlaKoszyk',
-			data: {'OdbId': department_id,  'KoszId': cartId, 'AuthKey': localStorage.getItem("auth_key"), 'Callback': ''},
+			data: {'OdbId': department_id,  'KoszId': cartId, 'AuthKey': localStorage.getItem("auth_key")},
 			type: 'GET',
             cache: true,
 			dataType: 'jsonp',
@@ -202,6 +206,12 @@ $('#cart').on('pageshow', function(){
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){              
 				console.log(message);
+				if(message.ustawione == 'T'){
+					alert('Ustawiłeś oddział');
+				}
+          	},
+          	error: function(error){
+          		console.log(error);
           	}
     	});
 	},
@@ -229,14 +239,20 @@ $('#cart').on('pageshow', function(){
 		var cartId = this.getCartId();
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.UstawAdresDlaKoszyk',
-			data: {'AdrId': adress_id,  'KoszId': cartId, 'AuthKey': localStorage.getItem("auth_key"), 'Callback': ''},
+			data: {'AdrId': adress_id,  'KoszId': cartId, 'AuthKey': localStorage.getItem("auth_key")},
 			type: 'GET',
             cache: true,
 			dataType: 'jsonp',
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){              
-				$('#costCenterSelect').show();
+				if(message.ustawione == 'T'){
+					alert('Ustawiłeś adres');
+					$('#costCenterSelect').show();
+				}
+          	},
+          	error: function(error){
+          		console.log(error);
           	}
     	});
 	},
@@ -265,6 +281,7 @@ $('#cart').on('pageshow', function(){
 
 	submitOrder: function(){
 		var cartId = this.getCartId();
+		var self = this;
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.ZamowKoszyk',
 			data: {'KoszId': cartId, 'AuthKey': localStorage.getItem("auth_key")},
@@ -278,6 +295,7 @@ $('#cart').on('pageshow', function(){
 					localStorage.setItem('cartId', null);
 					$('#products').html('');
 					alert(message.Komunikat);
+					self.displayProductsFromCart();
 				}
           	},
           	error: function(message){
@@ -296,37 +314,45 @@ $('#cart').on('pageshow', function(){
 	bindEvents: function(){
 		var self = this;
 
-		//this.onButtonClick();
+		this.onButtonClick();
 
-		// $('.bpm-cart-remove').on('click', function(event) {
-		// 	self.removeProduct(event);
-		// });
+		$('.bpm-cart-remove').on('click', function(event) {
+			self.removeProduct(event);
+		});
 		
-		// $('.bpm-cart-up').on('click', function(event) {
-		// 	var count =  $(event.target).attr('data-count');
-		// 	self.increaseProduct(event, parseInt(count) + 1);
-		// });
+		$('.bpm-cart-up').on('click', function(event) {
+			var count =  $(event.target).attr('data-count');
+			self.increaseProduct(event, parseInt(count) + 1);
+		});
 
 		$('.bpm-cart-down').on('click', function(event) {
 			var count = $(event.target).attr('data-count');
-			alert(count);
 			self.increaseProduct(event, (parseInt(count) -1) );
 		});
 
-		// $('#departmentsSelect').on('change', function(event){
-		// 	var department_id = event.target.value;
-		// 	self.setDepartment(department_id);
-		// 	self.getDepartmentAdresses(department_id);
-		// });
+		$('#departmentsSelect').on('change', function(event){
+			var department_id = event.target.value;
+			self.setDepartment(department_id);
+			self.getDepartmentAdresses(department_id);
+		});
 
-		// $('#departmentsAdressesSelect').on('change', function(event){
-		// 	var adress_id = event.target.value;
-		// 	self.setAdress(adress_id);
-		// 	self.getCostCenters(adress_id);
-		// });
+		$('#departmentsAdressesSelect').on('change', function(event){
+			var adress_id = event.target.value;
+			self.setAdress(adress_id);
+			self.getCostCenters(adress_id);
+		});
 
-		// $('#submitOrder').on('click', function(event){
-		// 	self.submitOrder();
-		// });
+		$('#costCenterSelect').on('change', function(event){
+			var cost_center_id = event.target.value;
+			if(cost_center_id){
+				$('#submitOrder').show();
+			}else{
+				$('#submitOrder').hide();
+			}
+		});
+
+		$('#submitOrder').on('click', function(event){
+			self.submitOrder();
+		});
 	}	
 }
