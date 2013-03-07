@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>jQuery Mobile: Theme Download</title>
+		<link rel="stylesheet" href="themes/bpmobile.min.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile.structure-1.3.0.min.css" />
+		<link rel="stylesheet" href="css/app.css" />
+		<script src="js/jquery-1.9.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+		<script src="js/app.js"></script>
+    <script src="js/config.js"></script>
+	</head>
+	<body>
+		
+<!-- START PAGE -->		
+		
+		<div data-role="page" data-theme="a">		
+
+			<div data-role="header" data-position="inline">
+				<!-- klawisz data-rel="back" automatycznie obsługuje poruszanie się wstecz -->
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#home" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">7</span></a>	
+			</div>
+			
+			<div data-role="content">			
+				<div class="ui-grid">
+					<a data-transition="slidedown" href="#categories"><img src="./img/katalog2.png" alt="Katalog" /></a>
+					<a data-transition="slidedown" href="#priceListPage" id="priceList" style="display:none;"><img src="./img/cennik2.png" alt="Cennik" /></a>
+					<a data-transition="slidedown" href="#departmentsPage" id="departments" style="display:none;"><img src="./img/oddzialy2.png" alt="Oddziały" /></a>
+					<a data-transition="slidedown" href="#reportsPage" id="reports" style="display:none;"><img src="./img/raporty.png" alt="Raporty" /></a>
+					<a data-transition="slidedown" href="#ordersPage" id="orders" style="display:none;"><img src="./img/zamowienia2.png" alt="Zamówienia" /></a>
+					<a data-transition="slidedown" href="#cart" id="cartLink" style="display:none;"><img src="./img/koszyk2.png" alt="Koszyk" /></a>
+					<a data-transition="slidedown" href="#loginPage" id="login" ><img src="./img/zaloguj2.png" alt="Zaloguj" /></a>
+					<a data-transition="slidedown" href="#logoutPage" id="logout" style="display:none;" ><img src="./img/wyloguj2.png" alt="Wyloguj" /></a>
+				</div>
+			</div>			
+
+			<div data-role="footer" data-position="fixed">
+				<div><a href="#contact"><h6 class="infolinia">Infolinia</h6></a></div>
+			</div>
+					
+		</div>
+		
+<!-- LOGIN PAGE -->			
+		
+		<div data-role="page" data-theme="a" id="loginPage">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#home" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">7</span></a>	
+			</div>
+			
+			<div data-role="content">
+				<div class="controls" >
+					<label for="user_login">Login:</label>
+					<span><input type="text" id="user_login" name="login" placeholder="Login" value="piotr@" data-theme="b"></span>
+					<label for="password"  >Hasło:</label>
+					<span><input type="text" id="password" name="password" placeholder="Hasło" value="apmob" data-theme="b"></span>
+					<a data-role="button" data-theme="a" id="loginbtn">Zaloguj</a>
+				</div>
+			</div>
+				
+			<div data-role="footer" data-position="fixed">
+				<div><a href="#contact"><h6 class="infolinia">Infolinia</h6></a></div>
+			</div>
+					
+		</div>		
+
+<!-- LOGOUT PAGE -->			
+		<div data-role="page" data-theme="a" id="logoutPage">
+			
+		</div>		
+		
+
+<!-- HOME PAGE -->		
+
+		<div data-role="page" data-theme="a" id="home">
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">7</span></a>	
+			</div>
+			
+			<div data-role="content">			
+				<div class="ui-grid">
+					<a data-transition="slidedown" href="#categories"><img src="./img/katalog2.png" alt="Katalog" /></a>
+					<a data-transition="slidedown" href="#priceListPage" id="priceList"><img src="./img/cennik2.png" alt="Cennik" /></a>
+					<a data-transition="slidedown" href="#departments" id="departments"><img src="./img/oddzialy2.png" alt="Oddziały" /></a>
+					<a data-transition="slidedown" href="#reports" id="reportsLink"><img src="./img/raporty.png" alt="Raporty" /></a>
+					<a data-transition="slidedown" href="#orders" id="orders"><img src="./img/zamowienia2.png" alt="Zamówienia" /></a>
+					<a data-transition="slidedown" href="#cart" id="cartLink"><img src="./img/koszyk2.png" alt="Koszyk" /></a>
+					<a data-transition="slidedown" href="#login" id="login" style="display:none;"><img src="./img/zaloguj2.png" alt="Zaloguj" /></a>
+					<a data-transition="slidedown" href="#logout" id="logout"><img src="./img/wyloguj2.png" alt="Wyloguj" /></a>
+				</div>
+			</div>			
+
+			<div data-role="footer" data-position="fixed">
+				<div><a href="#contact"><h6 class="infolinia">Infolinia</h6></a></div>
+			</div>
+			
+		</div>	
+		
+<!-- CATEGORIES PAGE -->		
+		
+		<div data-role="page" data-theme="a" id="categories">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#home" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">7</span></a>	
+			</div>
+			
+			<div data-role="content">
+				<ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="categoriesList">   
+					<li><a data-transition="slide" href="#subcategories">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+				</ul>
+			</div>
+				
+			<div data-role="footer" data-position="fixed">
+				<div><a href="#contact"><h6 class="infolinia">Infolinia</h6></a></div>
+			</div>
+					
+		</div>		
+		
+<!-- SUB-CATEGORIES PAGE -->		
+		
+		<div data-role="page" data-theme="a" id="subcategories">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#home" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">7</span></a>	
+			</div>
+			
+			<div data-role="content">
+				<ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="subcategoriesList">   
+					<li><a data-transition="slide" href="#products">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+				</ul>
+			</div>
+				
+			<div data-role="footer" data-position="fixed">
+				<div><a href="#contact"><h6 class="infolinia">Infolinia</h6></a></div>
+			</div>
+					
+		</div>		
+		
+<!-- PRODUCTS PAGE -->		
+		
+		<div data-role="page" data-theme="a" id="products">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#home" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">7</span></a>	
+			</div>
+			
+			<div data-role="content">
+				<ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="productsList">   
+					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+				</ul>
+			</div>
+				
+			<div data-role="footer" data-position="fixed">
+				<div><a href="#contact"><h6 class="infolinia">Infolinia</h6></a></div>
+			</div>
+					
+		</div>
+				
+<!-- PRODUCT PAGE -->		
+		
+		<div data-role="page" data-theme="a" id="product">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#home" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">7</span></a>	
+			</div>
+			
+			<div data-role="content">
+				<h1 id="product_name">Product title</h1>
+				<div class="ui-grid-a">
+					<div class="ui-block-a" id="product_image"><img src="https://www.biuroplus-krakow.pl/obrazek?id=1122531" /></div>
+					<ul class="ui-block-b bpm-productdatalist">
+						<!-- JS ma zwracać tylko dane, bez etykiety -->
+						<li class="bpm-productlabel">Cena (netto):<span class="bpm-productdata" id="product_price_netto">10zł</span></li>
+						<li class="bpm-productlabel">Cena (brutto):<span class="bpm-productdata" id="product_price_brutto">12,30zł</span></li>
+						<li class="bpm-productlabel">Dostepność:<span class="bpm-productdata" id="count">17 sztuk</span></li>
+					</ul>
+				</div>
+				<p id="product_details">Quisque elementum pulvinar semper. Suspendisse ut elit sed nibh cursus iaculis. Nam vitae lacus sed orci pellentesque mollis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non erat ligula. Praesent viverra velit sed elit porttitor ac lobortis tellus sagittis. Sed libero purus, venenatis tristique condimentum ac, rhoncus in dolor. Sed neque ipsum, porta a imperdiet nec, venenatis quis sapien. Duis accumsan gravida rutrum. Aenean tempus, mauris in molestie faucibus, nisl sem cursus nibh, at varius elit tellus eu justo. Donec eu lorem tortor. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean sit amet felis nibh.</p>
+				<div class="controls" >
+					<input id="productId" value="" type="hidden" data-theme="b"/>
+					<label for="productCount"  >Sztuk zamówienia:</label>
+					<input id="productCount" name="productCount" value="1" data-theme="b" />
+					<a data-role="button" data-theme="a" id="addToCart">Dodaj do koszyka</a>
+				</div>
+							   
+			</div>
+				
+			<div data-role="footer" data-position="fixed">
+				<div><a href="#contact"><h6 class="infolinia">Infolinia</h6></a></div>
+			</div>
+					
+		</div>		
+		
+<!-- PRICE LIST PAGE -->		
+		
+		<div data-role="page" data-theme="a" id="priceListPage">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#home" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">7</span></a>	
+			</div>
+			
+			<div data-role="content">
+				<ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="productsPriceList">   
+					<!--li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li-->
+				</ul>
+			</div>
+				
+			<div data-role="footer" data-position="fixed">
+				<div><a href="#contact"><h6 class="infolinia">Infolinia</h6></a></div>
+			</div>
+					
+		</div>		
+		
+<!-- DEPARTMENTS PAGE -->		
+		
+		<div data-role="page" data-theme="a" id="departmentsPage">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#home" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">7</span></a>	
+			</div>
+			
+			<!-- refreshing elements in jqm: http://andymatthews.net/read/2011/12/14/Refreshing-jQuery-Mobile-listviews,-buttons,-select-dropdowns,-and-input-fields -->
+			<div data-role="content">
+				<div data-role="fieldcontain" >
+					<label for="departmentsList" class="select">Oddział:</label>
+					<!-- zmienione ID! -->
+					<select id="departmentsList" name="departmentsList" data-native-menu="false">
+						<option data-placeholder="true">Wybierz</option>
+						<option value="BIURO PLUS KRAKÓW - ODBIORCA, BONARKA 21, KRAKÓW 1049020">BIURO PLUS KRAKÓW - ODBIORCA, BONARKA 21, KRAKÓW 1049020</option>
+						<option value="rush1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+						<option value="express1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+						<option value="overnight1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+					</select>
+				</div>
+				<div data-role="fieldcontain" >
+					<label for="adresses" class="select">Adres:</label>
+					<select id="adresses" name="adresses" data-native-menu="false">
+						<option data-placeholder="true">Wybierz</option>
+						<option value="BIURO PLUS KRAKÓW - ODBIORCA, BONARKA 21, KRAKÓW 1049020">BIURO PLUS KRAKÓW - ODBIORCA, BONARKA 21, KRAKÓW 1049020</option>
+						<option value="rush2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+						<option value="express2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+						<option value="overnight2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+					</select>
+				</div>
+				<!--div data-role="fieldcontain" >
+					<label for="costs-sources" class="select">Centrum kosztowe:</label>
+					<select id="costs-sources" name="costs-sources" data-native-menu="false">
+						<option data-placeholder="true">Wybierz</option>
+						<option value="BIURO PLUS KRAKÓW - ODBIORCA, BONARKA 21, KRAKÓW 1049020">BIURO PLUS KRAKÓW - ODBIORCA, BONARKA 21, KRAKÓW 1049020</option>
+						<option value="rush3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+						<option value="express3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+						<option value="overnight3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+					</select>
+				</div-->
+				
+				<ul data-role="listview"  data-theme="c" id="departmentdata" class="bpm-departmentdatalist">
+					<!--li class="bpm-departmentdatalabel">Nazwa: <span class="bpm-departmentdata">KSIĘGOWOŚĆ 8760</span></li>
+					<li class="bpm-departmentdatalabel">Ilość dokumentów do akceptacji: <span class="bpm-departmentdata">0</span></li>
+					<li class="bpm-departmentdatalabel">Suma netto dokumentów do akceptacji: <span class="bpm-departmentdata">0</span></li>
+					<li class="bpm-departmentdatalabel">Pozostały limit: <span class="bpm-departmentdata">200</span></li-->
+				</ul>
+				
+			</div>
+				
+			<div data-role="footer" data-position="fixed">
+				<div><a href="#contact"><h6 class="infolinia">Infolinia</h6></a></div>
+			</div>
+					
+		</div>		
+		
+<!-- REPORTS PAGE -->		
+		
+		
+		<div data-role="page" data-theme="a" id="reportsPage">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#home" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">7</span></a>	
+			</div>
+			
+
+			<div data-role="content">
+
+				<div data-role="fieldcontain" >
+					<label for="reportsSelect" class="select">Rodzaj raportu:</label>
+					<select id="reportsSelect" name="reportsSelect" data-native-menu="false">
+						<option data-placeholder="true">Wybierz</option>
+					</select>
+				</div>
+				
+				<div data-role="fieldcontain" >
+					<input data-theme="b" type="date" id="dateSince" value="2013-01-10" />
+				</div>
+				
+				<div data-role="fieldcontain" >
+					<input data-theme="b" type="date" id="dateTo" value="2013-02-10" />					
+				</div>
+				
+				<a data-role="button" id="createReport">Generuj raport</a>
+
+				<!-- może wymagać zmian -->
+				<a data-role="button" id="linkToReport" href="none" style="display:none;">Generuj raport</a>
+				
+			</div>
+				
+			<div data-role="footer" data-position="fixed">
+				<div><a href="#contact"><h6 class="infolinia">Infolinia</h6></a></div>
+			</div>
+					
+		</div>
+		
+<!-- ORDERS PAGE -->		
+		
+		
+		<div data-role="page" data-theme="a" id="ordersPage">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#home" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">7</span></a>	
+			</div>
+			
+
+			<div data-role="content">		
+
+				<div data-role="fieldcontain" >
+					<label for="departmentsSelectA" class="select">Oddział:</label>
+					<select id="departmentsSelectA" name="departmentsSelectA" data-native-menu="false">
+						<option data-placeholder="true">Wybierz</option>
+						<option value="Raportdsf">Raport Raport Raport Raport Raport Raport Raport Raport Raport </option>
+						<option value="rush2dsfds">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Raport  ligula lorem, ornare eu sollicitudin vitae</option>
+						<option value="express2sdfsd">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+						<option value="overnight2sdfsd">Lorem ipsum dolor sit Raport , consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+					</select>
+				</div>
+				
+				<div data-role="fieldcontain" >
+					<label for="adressesSelectA" class="select">Adress:</label>
+					<select id="adressesSelectA" name="adressesSelectA" data-native-menu="false">
+						<option data-placeholder="true">Wybierz</option>
+						<option value="Raportdsf">Raport Raport Raport Raport Raport Raport Raport Raport Raport </option>
+						<option value="rush2dsfds">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Raport  ligula lorem, ornare eu sollicitudin vitae</option>
+						<option value="express2sdfsd">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+						<option value="overnight2sdfsd">Lorem ipsum dolor sit Raport , consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+					</select>
+				</div>
+				
+				<div data-role="fieldcontain" >
+					<label for="costSourcesSelectA" class="select">Centrum kosztowe:</label>
+					<select id="costSourcesSelectA" name="costSourcesSelectA" data-native-menu="false">
+						<option data-placeholder="true">Wybierz</option>
+						<option value="Raportdsf">Raport Raport Raport Raport Raport Raport Raport Raport Raport </option>
+						<option value="rush2dsfds">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Raport  ligula lorem, ornare eu sollicitudin vitae</option>
+						<option value="express2sdfsd">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+						<option value="overnight2sdfsd">Lorem ipsum dolor sit Raport , consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+					</select>				
+				</div>
+				
+				<ul id="ordersList" data-role="listview" class="bpm-ordersdatalist">
+					<!--li>
+						<span class="paramName">Numer dokumentu: <span class="paramValue">12</span></span> 
+						<span class="paramName">Nazwa Centrum Kosztowego:<span class="paramValue">AAA</span></span>  
+						<span class="paramName">Cena netto:  <span class="paramValue">200zł</span></span>  
+						<span class="paramName">VAT <span class="paramValue">46zł</span></span>  
+						<span class="paramName">Cena Brutto: <span class="paramValue">246zł</span></span> 
+					</li-->
+				</ul> 
+				
+			</div>
+				
+			<div data-role="footer" data-position="fixed">
+				<div><a href="#contact"><h6 class="infolinia">Infolinia</h6></a></div>
+			</div>
+					
+		</div>
+		
+<!-- CART PAGE -->		
+		
+		
+		<div data-role="page" data-theme="a" id="cart">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#home" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">7</span></a>	
+			</div>
+			
+
+			<div data-role="content">
+				
+				 <div id="cartProducts" data-role="listview" data-inset="true" style="padding-left: 15px;">
+					 <li class="kontener" data-inset="true">
+						<a href="#product" data-productid="1069744">DATOWNIK SZKIELETOWY 2100 4MM POL.</a>
+						<div data-role="controlgroup" data-type="horizontal" data-mini="true" class="kontrolki" >
+							<span class="productcountlabel">sztuk:</span>	
+							<span class="productcount">4</span>	
+							
+							<a data-role="button" data-icon="arrow-u" data-iconpos="notext" data-wrapperels="span" data-count="4" data-pdsid="443361">Więcej</a>	
+							<a data-role="button" data-icon="arrow-d" data-iconpos="notext" data-wrapperels="span" data-count="4" data-pdsid="443361">Mniej</a>
+							<a data-role="button"  data-icon="delete" data-iconpos="notext" data-wrapperels="span" data-pdsid="443361">Usuń</a>
+					
+						</div>						
+
+					</li>
+					 <li class="kontener" data-inset="true">
+						<a href="#product" data-productid="1069744">DATOWNIK SZKIELETOWY 2100 4MM POL.</a>
+						<div data-role="controlgroup" data-type="horizontal" data-mini="true" class="kontrolki" >
+							<span class="productcountlabel">sztuk:</span>	
+							<span class="productcount">4</span>	
+							
+							<a data-role="button" data-icon="arrow-u" data-iconpos="notext" data-wrapperels="span" data-count="4" data-pdsid="443361">Więcej</a>	
+							<a data-role="button" data-icon="arrow-d" data-iconpos="notext" data-wrapperels="span" data-count="4" data-pdsid="443361">Mniej</a>
+							<a data-role="button"  data-icon="delete" data-iconpos="notext" data-wrapperels="span" data-pdsid="443361">Usuń</a>
+					
+						</div>						
+
+					</li>
+					 <li class="kontener" data-inset="true">
+						<a href="#product" data-productid="1069744">DATOWNIK SZKIELETOWY 2100 4MM POL.</a>
+						<div data-role="controlgroup" data-type="horizontal" data-mini="true" class="kontrolki" >
+							<span class="productcountlabel">sztuk:</span>	
+							<span class="productcount">4</span>	
+							
+							<a data-role="button" data-icon="arrow-u" data-iconpos="notext" data-wrapperels="span" data-count="4" data-pdsid="443361">Więcej</a>	
+							<a data-role="button" data-icon="arrow-d" data-iconpos="notext" data-wrapperels="span" data-count="4" data-pdsid="443361">Mniej</a>
+							<a data-role="button"  data-icon="delete" data-iconpos="notext" data-wrapperels="span" data-pdsid="443361">Usuń</a>
+					
+						</div>						
+
+					</li>
+				</div>
+				
+				<div id="bpm-cartselects">
+					<div data-role="fieldcontain" >
+						<label for="departmentsSelect" class="select">Oddział:</label>
+						<select id="departmentsSelect" name="departmentsSelect" data-native-menu="false">
+							<option data-placeholder="true">Wybierz</option>
+							<option value="Raportdsf">Raport Raport Raport Raport Raport Raport Raport Raport Raport </option>
+							<option value="rush2dsfds">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Raport  ligula lorem, ornare eu sollicitudin vitae</option>
+							<option value="express2sdfsd">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+							<option value="overnight2sdfsd">Lorem ipsum dolor sit Raport , consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+						</select>
+					</div>
+					
+					<div data-role="fieldcontain" >
+						<label for="departmentsAdressesSelect" class="select">Adress:</label>
+						<select id="departmentsAdressesSelect" name="departmentsAdressesSelect" data-native-menu="false">
+							<option data-placeholder="true">Wybierz</option>
+							<option value="Raportdsf">Raport Raport Raport Raport Raport Raport Raport Raport Raport </option>
+							<option value="rush2dsfds">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Raport  ligula lorem, ornare eu sollicitudin vitae</option>
+							<option value="express2sdfsd">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+							<option value="overnight2sdfsd">Lorem ipsum dolor sit Raport , consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+						</select>
+					</div>
+					
+					<div data-role="fieldcontain" >
+						<label for="costCenterSelect" class="select">Centrum kosztowe:</label>
+						<select id="costCenterSelect" name="costCenterSelect" data-native-menu="false">
+							<option data-placeholder="true">Wybierz</option>
+							<option value="Raportdsf">Raport Raport Raport Raport Raport Raport Raport Raport Raport </option>
+							<option value="rush2dsfds">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Raport  ligula lorem, ornare eu sollicitudin vitae</option>
+							<option value="express2sdfsd">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+							<option value="overnight2sdfsd">Lorem ipsum dolor sit Raport , consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
+						</select>				
+					</div>
+				</div>
+
+				<a id="submitOrder" data-role="button">Zrób zamówienie</a>
+
+			</div>
+				
+			<div data-role="footer" data-position="fixed">
+				<div><a href="#contact"><h6 class="infolinia">Infolinia</h6></a></div>
+			</div>
+					
+		</div>
+		
+		<script src="js/application.js"></script>
+    <script src="js/department.js"></script>
+    <script src="js/report.js"></script>
+    <!--script src="js/search.js"></script-->
+    <script src="js/categories.js"></script>
+    <script src="js/category.js"></script>
+    <script src="js/price_list.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/product.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/order.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/logout.js"></script>
+  <script>
+    BPApp.start();
+  </script>
+
+	</body>
+</html>

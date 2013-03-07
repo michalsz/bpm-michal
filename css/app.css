@@ -1,0 +1,215 @@
+/****************************** JQ UI */
+
+.ui-body-a, .ui-overlay-a {
+	background-image: none;
+}
+
+
+/* show full text in select option boxes */
+li[role=option] .ui-btn-inner a {white-space:normal!important;}
+
+.ui-header, .ui-footer {
+	margin: 0 10px;
+	padding: 5px 0;
+}
+
+.ui-header .ui-title, .ui-footer .ui-title {
+	margin: 0;
+	height: 34px;
+}
+
+.ui-popup .ui-header {
+	border-radius: 0;
+	-webkit-border-radius: 0;
+}
+
+.ui-popup .ui-title {
+	height:auto;
+}
+
+.bpm-navbutton, .bpm-navbutton .ui-btn-inner {
+	background: none;
+	background-image: none;
+	border:0;
+	outline:0;
+	-webkit-box-shadow: none!important;
+	box-shadow: none!important;
+	text-shadow: none;
+
+}
+
+.bpm-navbutton .ui-btn-inner {
+	height: 34px;
+	width: 32px;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	padding: 0;
+	margin: 0 10px;
+
+}
+
+.ui-grid {
+	text-align: center;
+}
+
+.ui-input-search {
+	margin: 10px!important;
+}
+
+.ui-listview-filter {
+	background: #222;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator {
+	float: left;
+	width: 20px;	
+	height: 20px;
+	margin-right: 10px;
+}
+
+input[type=date]::-webkit-inner-spin-button {
+	display:none;
+}
+
+/****************************** HEADER */
+
+.ui-header {
+	-webkit-border-bottom-right-radius: 20px;
+	-webkit-border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px; 
+}
+
+.back {
+	background: url(../img/back_icon.png) no-repeat center center;
+}
+
+.back .ui-btn-text {
+	display:none;
+}
+
+.cart {
+	background: url(../img/cart_icon.png) no-repeat center left;
+	padding-left: 20px;
+}
+
+.cart-number {
+	font-size: 1.5em;
+	line-height: 34px;
+	color: white;
+	opacity: 0.95;
+}
+
+.logo {
+	background: url(../img/logo.png) no-repeat center -1px;
+	background-size: auto;
+	margin: 0 auto;
+	text-indent: -9999px;
+	height:34px;
+}
+
+
+/****************************** CONTENT */
+
+/****************************** PAGES */
+
+/* LOGIN */
+
+#loginbtn, #addToCart {
+	margin-top: 30px;
+}
+
+/* PRODUCT */
+
+.ui-block-a {
+	max-height: 300px;
+	overflow: hidden;
+}
+
+.ui-block-a img {
+	max-width: 100%;
+}
+
+.bpm-productdatalist {
+	list-style-type: none;
+}
+
+.bpm-productlabel {
+	padding-bottom:10px;
+	padding-left:10px;
+	font-size: 1.2em;
+}
+.bpm-productdata {
+	display:block;
+	font-size: 1.4em;
+}
+
+.bpm-departmentdatalist, 
+.bpm-ordersdatalist,
+#cartProducts, #bpm-cartselects {
+	margin: 0!important;
+	margin-top: 30px!important;
+}
+
+.bpm-departmentdata, .bpm-orderdata {
+	font-weight: bold;
+	float:right;
+}
+
+/* ORDERS */
+
+.paramName {
+	display:block;
+	width: 100%;
+}
+
+.paramValue {
+	font-weight: bold;
+	float:right;
+}
+
+/* CART */
+
+.kontrolki {
+	padding-left: 15px;
+}
+
+.productcount {
+	line-height: 33px;
+	padding-right: 15px;
+	padding-left: 15px;
+	font-size: 27px;
+	float:left;	
+}
+
+.productcountlabel {
+	line-height: 33px;
+	font-size: 16px;
+	float:left;
+}
+
+/****************************** FOOTER */
+
+.ui-footer {
+	-webkit-border-top-right-radius: 20px;
+	-webkit-border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	border-top-left-radius: 20px; 
+	margin: 0 10px;	
+}
+
+.ui-footer-fixed {
+	width:auto;
+}
+
+.infolinia {
+	background: url(../img/infolinia.png) no-repeat center -1px;
+	background-size: auto;	
+	margin: 0 auto;
+	text-indent: -9999px;
+	height:34px;
+}
+
+
+
+
