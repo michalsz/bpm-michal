@@ -85,7 +85,7 @@ $('#departmentsPage').on('pageshow', function(event){
 				$.each(data.centra, function(i, item){
 					var limit = item.stat_limit !== null ? item.stat_limit : 0
 					$('#departmentdata').append('<li class="bpm-departmentdatalabel">Nazwa: <span class="bpm-departmentdata">' + item.ck_nazwa + '</li>');
-					$('#departmentdata').append('<li class="bpm-departmentdatalabel">Ilość dokumentów do akceptacji: <span class="bpm-departmentdata">' + item.stat_count + '</span></li>');
+					$('#departmentdata').append('<li class="bpm-departmentdatalabel">Dokumenty do akceptacji <span class="bpm-departmentdata">' + item.stat_count + '</span></li>');
 					$('#departmentdata').append('<li class="bpm-departmentdatalabel">Suma netto dokumentów do akceptacji: <span class="bpm-departmentdata">' + item.stat_sum_netto + 'zł</span></li>');
 					$('#departmentdata').append('<li class="bpm-departmentdatalabel">Pozostały limit: <span class="bpm-departmentdata">' +  limit +'zł</span></li>');
 					$('#departmentdata').listview('refresh');
