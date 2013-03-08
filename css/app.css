@@ -116,15 +116,28 @@ input[type=date]::-webkit-inner-spin-button {
 
 @media (max-width: 480px) {  
 	.logo {
-		background: url(../img/logo480.png) no-repeat center 40%;
+		background: url(../img/logo.png) no-repeat center 40%;
 	}
+	.menu-titles > a > img {
+		max-width: 32%;
+	}	
 }
+
+@media (max-width: 320px) {  
+	.logo {
+		background: url(../img/logo.png) no-repeat center 40%;
+	}
+	.menu-titles > a > img {
+		max-width: 45%;
+	}	
+}
+
+
+
 
 /****************************** MENU */
 
-.menu-titles > a > img {
-	max-width: 45%;
-}
+
 
 
 /****************************** CONTENT */
