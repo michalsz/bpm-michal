@@ -118,7 +118,7 @@ input[type=date]::-webkit-inner-spin-button {
 
 /****************************** MENU */
 
-.menu > a > img {
+.menu-titles > a > img {
 	max-width: 142px;
 }
 
