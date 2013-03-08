@@ -108,6 +108,12 @@ input[type=date]::-webkit-inner-spin-button {
 	height:34px;
 }
 
+/****************************** MENU */
+
+#menu > a > img {
+	max-width: 144px;
+}
+
 
 /****************************** CONTENT */
 
