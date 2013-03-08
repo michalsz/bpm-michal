@@ -188,28 +188,5 @@ input[type=date]::-webkit-inner-spin-button {
 	float:left;
 }
 
-/****************************** FOOTER */
-
-.ui-footer {
-	-webkit-border-top-right-radius: 20px;
-	-webkit-border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
-	border-top-left-radius: 20px; 
-	margin: 0 10px;	
-}
-
-.ui-footer-fixed {
-	width:auto;
-}
-
-.infolinia {
-	background: url(../img/infolinia.png) no-repeat center -1px;
-	background-size: auto;	
-	margin: 0 auto;
-	text-indent: -9999px;
-	height:34px;
-}
-
-
 
 
