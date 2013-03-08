@@ -60,6 +60,10 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 	background: #222;
 }
 
+.ui-li .ui-btn-text a.ui-link-inherit {
+	white-space: normal;
+}
+
 input[type=date]::-webkit-calendar-picker-indicator {
 	float: left;
 	width: 20px;	
