@@ -26,6 +26,9 @@ $('#reportsPage').on('pageshow', function(event){
 
 					});
 					$('#reportsSelect').selectmenu('refresh');
+					$('#createReport').attr('href','');
+					$('#createReport span span').html('Wygeneruj raport (pdf)');
+					$('#createReport').trigger('create');					
 	       		},
 				error: function(message){
 						console.log('errr');
@@ -76,8 +79,9 @@ $('#reportsPage').on('pageshow', function(event){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){     
-    			$('#linkToReport').html('<a href="' + data.raport_url + '" target="_blank">Link do raportu</a>');
-       			$('#linkToReport').show();
+    			$('#createReport').attr('href',data.raport_url);
+    			$('#createReport span span').html('Pobierz raport (pdf)');
+    			$('#createReport').trigger('create');
        		},
 			error: function(message){
 					console.log('errr');
