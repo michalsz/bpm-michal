@@ -159,21 +159,22 @@
 			</div>
 			
 			<div data-role="content">
-				<h1 id="product_name">Product title</h1>
+				<h1 id="product_name"></h1>
 				<div class="ui-grid-a">
 					<div class="ui-block-a" id="product_image"><img src="https://www.biuroplus-krakow.pl/obrazek?id=1122531" /></div>
 					<ul class="ui-block-b bpm-productdatalist">
-						<!-- JS ma zwracać tylko dane, bez etykiety -->
-						<li class="bpm-productlabel">Cena (netto):<span class="bpm-productdata" id="product_price_netto">10zł</span></li>
-						<li class="bpm-productlabel">Cena (brutto):<span class="bpm-productdata" id="product_price_brutto">12,30zł</span></li>
-						<li class="bpm-productlabel">Dostepność:<span class="bpm-productdata" id="count">17 sztuk</span></li>
+						<li class="bpm-productlabel">Cena (netto):<span class="bpm-productdata" id="product_price_netto"></span></li>
+						<li class="bpm-productlabel">Cena (brutto):<span class="bpm-productdata" id="product_price_brutto"></span></li>
+						<li class="bpm-productlabel">Dostepność:<span class="bpm-productdata" id="count"></span></li>
 					</ul>
 				</div>
-				<p id="product_details">Quisque elementum pulvinar semper. Suspendisse ut elit sed nibh cursus iaculis. Nam vitae lacus sed orci pellentesque mollis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non erat ligula. Praesent viverra velit sed elit porttitor ac lobortis tellus sagittis. Sed libero purus, venenatis tristique condimentum ac, rhoncus in dolor. Sed neque ipsum, porta a imperdiet nec, venenatis quis sapien. Duis accumsan gravida rutrum. Aenean tempus, mauris in molestie faucibus, nisl sem cursus nibh, at varius elit tellus eu justo. Donec eu lorem tortor. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean sit amet felis nibh.</p>
+				<p id="product_details"></p>
 				<div class="controls" >
 					<input id="productId" value="" type="hidden" data-theme="b"/>
-					<label for="productCount"  >Sztuk zamówienia:</label>
-					<input id="productCount" name="productCount" value="1" data-theme="b" />
+					<div data-role="fieldcontain">
+						<label for="productCount"  >Sztuk zamówienia:</label>
+						<input id="productCount" name="productCount" value="1" data-theme="b" />
+					</div>
 					<a data-role="button" data-theme="a" id="addToCart">Dodaj do koszyka</a>
 				</div>
 							   
