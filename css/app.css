@@ -91,6 +91,7 @@ input[type=date]::-webkit-inner-spin-button {
 .cart {
 	background: url(../img/cart_icon.png) no-repeat center left;
 	padding-left: 20px;
+	max-width: 40px;	
 }
 
 .cart-number {
@@ -106,6 +107,13 @@ input[type=date]::-webkit-inner-spin-button {
 	margin: 0 auto;
 	text-indent: -9999px;
 	height:34px;
+}
+
+@media (max-width: 480px) {  
+	.logo {
+		background: url(../img/logo.png) no-repeat center 40%;
+		background-size: 50%;
+	}
 }
 
 /****************************** MENU */
