@@ -119,7 +119,7 @@ input[type=date]::-webkit-inner-spin-button {
 		background: url(../img/logo.png) no-repeat center 40%;
 	}
 	.menu-titles > a > img {
-		max-width: 32%;
+		max-width: 30%;
 	}	
 }
 
