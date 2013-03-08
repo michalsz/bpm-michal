@@ -6,7 +6,6 @@ BPApp.ProductList = {
 	start: function(){
 		this.getProductPriceList();
 		this.onButtonClick();
-		//this.onPaginationClick();
 	},
 
 	getProductPriceList: function(){
@@ -23,8 +22,7 @@ BPApp.ProductList = {
 				$('#productsPriceList').html('');
         		$.each(data.towary, function(i, item){
 					BPApp.ProductList.getProductDetails(item.tow_id, 'productsPriceList');
-				})
-
+				});
 				BPApp.ProductList.onButtonClick();
 				if(data.towary.length == 0){
 						alert('Twój cennik nie został ustawiony');
@@ -37,6 +35,7 @@ BPApp.ProductList = {
 	},
 
 	getProductDetails: function(product_id, element_id){
+		var self = this;		
 		var auth_key = localStorage.getItem("auth_key");
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.Towar',
@@ -49,26 +48,18 @@ BPApp.ProductList = {
 			success: function(item){       
           		$('#' + element_id).append('<li><a data-transition="slide" class="bpm-price-btn" data-productid="' + item.tow_id + '" href="#product">' + item.tow_nazwa + '</a></li>');
           		$('#productsPriceList').listview('refresh');
+				self.onButtonClick();          		       		
           	},
           	error: function(){
           		alert('error');
           	}
-    	});
+    	});    	
 	},
 
 	onButtonClick: function(){
-		$('.bpm-price-btn').on('click', function(event) {
+		$('.bpm-price-btn').on('tap', function(event) {		
 			var id = $(event.target).attr('data-productid');
 			localStorage.setItem("product_id", id);
 		});
-	},
-
-	onPaginationClick: function(){
-		var self = this;
-      	$('.pagination_link').on('click', function(event) {
-	        var startPoz = $(event.target).attr('data-startpoz');
-    	    localStorage.setItem('startPoz', startPoz);
-        	self.getProducts(localStorage.getItem("subcategory"))
-      	} )
 	}
 }
