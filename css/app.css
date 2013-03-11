@@ -72,7 +72,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 
 input[type=date]::-webkit-inner-spin-button {
-	display:none;
+/*	display:none; */
 }
 
 /****************************** HEADER */
@@ -141,7 +141,7 @@ input[type=date]::-webkit-inner-spin-button {
 
 /****************************** MENU */
 
-.menu-titles > a > img:hover, .menu-titles > a > img:focus  {
+.menu-titles > a > img:hover  { /* .menu-titles > a > img:focus */
 	opacity: 0.5;
 }
 
