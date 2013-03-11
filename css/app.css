@@ -68,13 +68,14 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 	opacity: 0.5!important;
 }
 
+/*
 input[type=date]::-webkit-calendar-picker-indicator {
 	float: left;
 	width: 20px;	
 	height: 20px;
 	margin-right: 10px;
 }
-
+*/
 input[type=date]::-webkit-inner-spin-button {
 /*	display:none; */
 }
