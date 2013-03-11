@@ -141,7 +141,9 @@ input[type=date]::-webkit-inner-spin-button {
 
 /****************************** MENU */
 
-
+.menu-titles > a > img:hover, .menu-titles > a > img:focus  {
+	opacity: 0.5;
+}
 
 
 /****************************** CONTENT */
