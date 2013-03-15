@@ -222,6 +222,7 @@ input[type=date]::-webkit-inner-spin-button {
 
 .kontrolki {
 	padding-left: 15px;
+	padding-bottom: 10px;	
 }
 
 .productcount {
@@ -237,6 +238,8 @@ input[type=date]::-webkit-inner-spin-button {
 	font-size: 16px;
 	float:left;
 }
+
+
 
 
 
