@@ -118,7 +118,7 @@ $('#cart').on('pageshow', function(){
 			success: function(message){              
 				if(message.Komunikat == ''){
 					self.updateProductCount();
-					alert('Produkt został dodany');
+					//alert('Produkt został dodany');
 				}
           	},
 			error: function(message){
@@ -212,7 +212,7 @@ $('#cart').on('pageshow', function(){
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){              
 				if(message.ustawione == 'T'){
-					alert('Ustawiłeś oddział');
+					//alert('Ustawiłeś oddział');
 				}
           	},
           	error: function(error){
@@ -252,7 +252,7 @@ $('#cart').on('pageshow', function(){
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){              
 				if(message.ustawione == 'T'){
-					alert('Ustawiłeś adres');
+					//alert('Ustawiłeś adres');
 					$('#costCenterSelect').show();
 				}
           	},
@@ -295,7 +295,7 @@ $('#cart').on('pageshow', function(){
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){              
 				if(message.ustawione == 'T'){
-					alert('Ustawiłeś centrum kosztowe');
+					//alert('Ustawiłeś centrum kosztowe');
 					$('#costCenterSelect').show();
 				}
           	},

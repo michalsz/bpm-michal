@@ -9,9 +9,9 @@ BPApp.Logout = {
 	},
 
 	logout: function(){
-		localStorage.setItem("auth_key", '');
+		localStorage.removeItem("auth_key");
 		localStorage.setItem("authorized", false);
-		localStorage.setItem("login", '');
+		localStorage.removeItem("login", '');
 		window.location = "index.html";
 	}
 }

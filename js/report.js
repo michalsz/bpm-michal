@@ -79,7 +79,7 @@ $('#reportsPage').on('pageshow', function(event){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){     
-    			$('#createReport').attr('href',data.raport_url);
+    			$('#createReport').attr('href','https://docs.google.com/viewer?url='+data.raport_url);
     			$('#createReport span span').html('Pobierz raport (pdf)');
     			$('#createReport').trigger('create');
        		},

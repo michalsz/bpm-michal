@@ -58,14 +58,16 @@ BPApp.Product = {
 		var authorized = localStorage.getItem("authorized");
 		if (authorized) {
 			this.addToCartEventBind();
+			console.log('addToCartEventBind');			
 		} else {
 			this.notAuthorisedEventBind();			
+			console.log('notAuthorisedEventBind');
 		};		
 
 	},
 
 	addToCartEventBind: function(){
-		$('#addToCart').on('click', function(event) {
+		$('#addToCart').on('tap', function(event) {
 			var productId = $('#productId').val(); 
 			var productCount = $('#productCount').val();
 			var productName = $('#productName_' + productId).html();
@@ -74,7 +76,7 @@ BPApp.Product = {
 	},
 	
 	notAuthorisedEventBind: function(){
-		$('#addToCart').on('click', function(event) {
+		$('#addToCart').on('tap', function(event) {
 				alert('Aby dodać produkt do koszyka musisz być naszym klientem. Zaloguj się, bądź skontaktuj z naszą infolinią.');
 		})
 	}

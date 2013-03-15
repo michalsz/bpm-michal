@@ -21,6 +21,11 @@ var BPApp = {
 		}else{
 			$('#login').show();
 			$('#logout').hide();
+			$('#priceList').hide();
+			$('#departments').hide();
+			$('#reports').hide();
+			$('#orders').hide();
+			$('#cartLink').hide();			
 		}
 	},
 
