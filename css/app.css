@@ -220,6 +220,17 @@ input[type=date]::-webkit-inner-spin-button {
 
 /* CART */
 
+#cartSummary {
+	margin: 17px 0;
+	text-align: right;
+	font-size: 33px;	
+}
+
+#cartSummary span {
+	min-width: 155px;
+	display: inline-block;
+}
+
 .kontrolki {
 	padding-left: 15px;
 	padding-bottom: 10px;	
