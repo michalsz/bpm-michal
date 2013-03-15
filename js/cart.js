@@ -26,7 +26,7 @@ $('#cart').on('pageshow', function(){
 						$.each(cart.pozycje, function(i, item){
 							$('#cartProducts').append('<li class="kontener" data-inset="true"><a href="#product" class="bpm-cart-prod" data-productid="' + item.tow_id + '">' + item.tow_nazwa + '</a><div data-role="controlgroup" data-type="horizontal" data-mini="true" class="kontrolki" ><span class="productcountlabel">sztuk:</span><span class="productcount">' +  item.pds_ilosc +'</span><a data-role="button" data-icon="arrow-u" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-up" data-count="' +  item.pds_ilosc +'" data-pdsid="' + item.pds_id + '">Więcej</a><a data-role="button" data-icon="arrow-d" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-down" data-count="' + item.pds_ilosc + '" data-pdsid="' + item.pds_id + '">Mniej</a><a data-role="button" data-icon="delete" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-remove" data-pdsid="' + item.pds_id + '">Usuń</a></div></li>').trigger('create'); 
 
-						})
+						});
 						$('#cartProducts').listview('refresh');
 						
 						self.bindEvents();
@@ -36,10 +36,12 @@ $('#cart').on('pageshow', function(){
 							self.cartSummary();
 							$('#bpm-cartselects').show();
 							$('#submitOrder').show();
+							$('#cartSummary').show();
 							$('#emptyCartMsg').hide();
 						}else{
 							$('#bpm-cartselects').hide();
 							$('#submitOrder').hide();
+							$('#cartSummary').hide();							
 							$('#emptyCartMsg').show();
 						}
 					}	
@@ -70,9 +72,11 @@ $('#cart').on('pageshow', function(){
 
 	createCart: function(){
 		var self = this;
-		if(localStorage.getItem('cartId')){
+		if(localStorage.getItem('cartId') != 'undefined' && localStorage.getItem('cartId') != null ){
+			//console.log('get cart from local');
 			return localStorage.getItem('cartId');
 		}else{
+			//console.log('get cart from server');
 			$.ajax({
 				url: Config.serviceURL + 'BPK.pkg_json.DodajKoszyk',
 				data: {'AuthKey': localStorage.getItem("auth_key")},
@@ -82,13 +86,13 @@ $('#cart').on('pageshow', function(){
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
 				success: function(cart){              
-					console.log('cartId ' + cart["kosz_id"]);
-					console.log('dane ustawione ' + cart["dane_ustawione"]);
+					//console.log('cartId ' + cart["kosz_id"]);
+					//console.log('dane ustawione ' + cart["dane_ustawione"]);
 					localStorage.setItem('cartId', cart['kosz_id']);
           		},
           		error: function(message){
-					console.log('errr');
-          			console.log(message);
+					//console.log('errr');
+          			//console.log(message);
           		}
     		});
 		}
@@ -118,8 +122,8 @@ $('#cart').on('pageshow', function(){
 				}
           	},
 			error: function(message){
-					console.log('errr');
-          			console.log(message);
+					//console.log('errr');
+          			//console.log(message);
           		}
     	});
 	},
@@ -148,7 +152,7 @@ $('#cart').on('pageshow', function(){
 	},
 
 	removeProduct: function(event){
-		var pdsId =  $(event.target).attr('data-pdsid');
+		var pdsId =  $(event.target).parents('a').attr('data-pdsid');
 		var cartId = this.getCartId();
 		var self = this;
 		$.ajax({
@@ -164,17 +168,18 @@ $('#cart').on('pageshow', function(){
 				self.updateProductCount();
           	},
           	error: function(message){
-					console.log('errr remove');
-          			console.log(message);
+					//console.log('errr remove');
+          			//console.log(message);
           	}
     	});
 
 	},
 
 	increaseProduct: function(event, number){
-		var pdsId =  $(event.target).attr('data-pdsid');
+		var pdsId =  $(event.target).parents('a').attr('data-pdsid');
 		var cartId = this.getCartId();
 		var self = this;
+		//console.log('KoszId' + cartId + 'PdsId' + pdsId + 'Ilosc' + number);
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.ZmienPozycjeKoszyk',
 			data: {'KoszId': cartId, 'PdsId': pdsId, 'Ilosc': number, 'AuthKey': localStorage.getItem("auth_key")},
@@ -183,13 +188,14 @@ $('#cart').on('pageshow', function(){
 			dataType: 'jsonp',
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
-			success: function(message){              
+			success: function(message){   
+				//console.log(message);           
 				self.displayProductsFromCart();
 				self.updateProductCount();
           	},
           	error: function(message){
-					console.log('errr increase');
-          			console.log(message);
+					//console.log('errr increase');
+          			//console.log(message);
           	}
     	});
 	},
@@ -210,7 +216,7 @@ $('#cart').on('pageshow', function(){
 				}
           	},
           	error: function(error){
-          		console.log(error);
+          		//console.log(error);
           	}
     	});
 	},
@@ -251,7 +257,7 @@ $('#cart').on('pageshow', function(){
 				}
           	},
           	error: function(error){
-          		console.log(error);
+          		//console.log(error);
           	}
     	});
 	},
@@ -294,7 +300,7 @@ $('#cart').on('pageshow', function(){
 				}
           	},
           	error: function(error){
-          		console.log(error);
+          		//console.log(error);
           	}
     	});
 	},
@@ -321,7 +327,7 @@ $('#cart').on('pageshow', function(){
 				}
           	},
           	error: function(message){
-          		console.log(message);	
+          		//console.log(message);	
           	}
     	});
 	},
@@ -338,14 +344,14 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(cartData){              
-				//console.log(cartData);
+				////console.log(cartData);
 				$('#cartSummary').html('');
 				$('#cartSummary').append('<span>Suma brutton:</span> <span> '+ cartData.ds_brutto_w +' zł</span>');
 				$('#cartSummary').append('<br/>');
 				$('#cartSummary').append('<span>Suma netto:</span> <span> '+ cartData.ds_netto_w +' zł</span>');
           	},
           	error: function(message){
-          		console.log(message);	
+          		//console.log(message);	
           	}
     	});
 	},
@@ -367,12 +373,12 @@ $('#cart').on('pageshow', function(){
 		});
 		
 		$('.bpm-cart-up').on('click', function(event) {
-			var count =  $(event.target).attr('data-count');
+			var count = $(event.target).parent().parent().attr('data-count');
 			self.increaseProduct(event, parseInt(count) + 1);
 		});
 
 		$('.bpm-cart-down').on('click', function(event) {
-			var count = $(event.target).attr('data-count');
+			var count = $(event.target).parent().parent().attr('data-count');
 			self.increaseProduct(event, (parseInt(count) -1) );
 		});
 
