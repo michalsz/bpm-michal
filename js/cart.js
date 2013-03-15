@@ -24,12 +24,14 @@ $('#cart').on('pageshow', function(){
 					$('#cartProducts').html('');
 					if(cart){
 						$.each(cart.pozycje, function(i, item){
-						$('#cartProducts').append('<li class="kontener" data-inset="true"><a href="#product" class="bpm-cart-prod" data-productid="' + item.tow_id + '">' + item.tow_nazwa + '</a><div data-role="controlgroup" data-type="horizontal" data-mini="true" class="kontrolki" ><span class="productcountlabel">sztuk:</span><span class="productcount">' +  item.pds_ilosc +'</span><a data-role="button" data-icon="arrow-u" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-up" data-count="' +  item.pds_ilosc +'" data-pdsid="' + item.tow_id + '">Więcej</a><a data-role="button" data-icon="arrow-d" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-down" data-count="' + item.pds_ilosc + '" data-pdsid="' + item.tow_id + '">Mniej</a><a data-role="button" data-icon="delete" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-remove" data-pdsid="' + item.tow_id + '">Usuń</a></div></li>');
+							$('#cartProducts').append('<li class="kontener" data-inset="true"><a href="#product" class="bpm-cart-prod" data-productid="' + item.tow_id + '">' + item.tow_nazwa + '</a><div data-role="controlgroup" data-type="horizontal" data-mini="true" class="kontrolki" ><span class="productcountlabel">sztuk:</span><span class="productcount">' +  item.pds_ilosc +'</span><a data-role="button" data-icon="arrow-u" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-up" data-count="' +  item.pds_ilosc +'" data-pdsid="' + item.pds_id + '">Więcej</a><a data-role="button" data-icon="arrow-d" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-down" data-count="' + item.pds_ilosc + '" data-pdsid="' + item.pds_id + '">Mniej</a><a data-role="button" data-icon="delete" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-remove" data-pdsid="' + item.pds_id + '">Usuń</a></div></li>');
 						})
 						$('#cartProducts').listview('refresh');
 						self.bindEvents();
+
 						if(cart.pozycje.length > 0){
 							self.displayDepartmentsSelect();
+							self.cartSummary();
 							$('#bpm-cartselects').show();
 							$('#submitOrder').show();
 							$('#emptyCartMsg').hide();
@@ -66,7 +68,7 @@ $('#cart').on('pageshow', function(){
 
 	createCart: function(){
 		var self = this;
-		if(parseInt(localStorage.getItem('cartId') > 0)){
+		if(localStorage.getItem('cartId')){
 			return localStorage.getItem('cartId');
 		}else{
 			$.ajax({
@@ -79,6 +81,7 @@ $('#cart').on('pageshow', function(){
 				contentType: 'application/json; charset=utf-8',
 				success: function(cart){              
 					console.log('cartId ' + cart["kosz_id"]);
+					console.log('dane ustawione ' + cart["dane_ustawione"]);
 					localStorage.setItem('cartId', cart['kosz_id']);
           		},
           		error: function(message){
@@ -143,11 +146,9 @@ $('#cart').on('pageshow', function(){
 	},
 
 	removeProduct: function(event){
-		console.log('remove');
 		var pdsId =  $(event.target).attr('data-pdsid');
 		var cartId = this.getCartId();
 		var self = this;
-		console.log('remove');
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.UsunPozycjeKoszyk',
 			data: {'KoszId': cartId, 'PdsId': pdsId, 'AuthKey': localStorage.getItem("auth_key")},
@@ -157,7 +158,6 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){
-				localStorage.setItem('productCount', parseInt(localStorage.getItem("productCount")) - 1);
 				self.displayProductsFromCart();
 				self.updateProductCount();
           	},
@@ -173,7 +173,6 @@ $('#cart').on('pageshow', function(){
 		var pdsId =  $(event.target).attr('data-pdsid');
 		var cartId = this.getCartId();
 		var self = this;
-		console.log('increase');
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.ZmienPozycjeKoszyk',
 			data: {'KoszId': cartId, 'PdsId': pdsId, 'Ilosc': number, 'AuthKey': localStorage.getItem("auth_key")},
@@ -185,7 +184,6 @@ $('#cart').on('pageshow', function(){
 			success: function(message){              
 				self.displayProductsFromCart();
 				self.updateProductCount();
-				console.log(message);
           	},
           	error: function(message){
 					console.log('errr increase');
@@ -205,7 +203,6 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){              
-				console.log(message);
 				if(message.ustawione == 'T'){
 					alert('Ustawiłeś oddział');
 				}
@@ -257,7 +254,6 @@ $('#cart').on('pageshow', function(){
     	});
 	},
 
-
 	getCostCenters: function(adressId){
 		var cartId = this.getCartId();
 		var departamentId = $('#departmentsSelect').val();
@@ -279,6 +275,29 @@ $('#cart').on('pageshow', function(){
 		});
 	},
 
+	setCostCenter: function(cost_center_id){
+		var cartId = this.getCartId();
+		$.ajax({
+			url: Config.serviceURL + 'BPK.pkg_json.UstawCkDlaKoszyk',
+			data: {'CkId': cost_center_id,  'KoszId': cartId, 'AuthKey': localStorage.getItem("auth_key")},
+			type: 'GET',
+            cache: true,
+			dataType: 'jsonp',
+			crossDomain: true,
+			contentType: 'application/json; charset=utf-8',
+			success: function(message){              
+				if(message.ustawione == 'T'){
+					alert('Ustawiłeś centrum kosztowe');
+					$('#costCenterSelect').show();
+				}
+          	},
+          	error: function(error){
+          		console.log(error);
+          	}
+    	});
+	},
+
+
 	submitOrder: function(){
 		var cartId = this.getCartId();
 		var self = this;
@@ -296,7 +315,32 @@ $('#cart').on('pageshow', function(){
 					$('#products').html('');
 					alert(message.Komunikat);
 					self.displayProductsFromCart();
+					self.updateProductCount();
 				}
+          	},
+          	error: function(message){
+          		console.log(message);	
+          	}
+    	});
+	},
+
+	cartSummary: function(){
+		var cartId = this.getCartId();
+		var self = this;
+		$.ajax({
+			url: Config.serviceURL + 'BPK.pkg_json.Koszyk',
+			data: {'KoszId': cartId, 'AuthKey': localStorage.getItem("auth_key")},
+			type: 'GET',
+            cache: true,
+			dataType: 'jsonp',
+			crossDomain: true,
+			contentType: 'application/json; charset=utf-8',
+			success: function(cartData){              
+				//console.log(cartData);
+				$('#cartSummary').html('');
+				$('#cartSummary').append('<span>Suma brutton:</span> <span> '+ cartData.ds_brutto_w +' zł</span>');
+				$('#cartSummary').append('<br/>');
+				$('#cartSummary').append('<span>Suma netto:</span> <span> '+ cartData.ds_netto_w +' zł</span>');
           	},
           	error: function(message){
           		console.log(message);	
@@ -344,15 +388,20 @@ $('#cart').on('pageshow', function(){
 
 		$('#costCenterSelect').on('change', function(event){
 			var cost_center_id = event.target.value;
-			if(cost_center_id){
-				$('#submitOrder').show();
-			}else{
-				$('#submitOrder').hide();
-			}
+			self.setCostCenter(cost_center_id);
+//			if(cost_center_id){
+//				$('#submitOrder').show();
+//			}else{
+//				$('#submitOrder').hide();
+//			}
 		});
 
 		$('#submitOrder').on('click', function(event){
 			self.submitOrder();
+		});
+
+		$('#checkCart').on('click', function(event){
+			self.cartSummary();
 		});
 	}	
 }
