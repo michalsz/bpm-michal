@@ -13,5 +13,12 @@ BPApp.Logout = {
 		localStorage.setItem("authorized", false);
 		localStorage.removeItem("login", '');
 		window.location = "index.html";
+		$('#login').show();
+		$('#logout').hide();
+		$('#priceList').hide();
+		$('#departments').hide();
+		$('#reports').hide();
+		$('#orders').hide();
+		$('#cartLink').hide();	
 	}
 }
