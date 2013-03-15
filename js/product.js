@@ -55,7 +55,13 @@ BPApp.Product = {
 	},
 
 	bindEvents: function(){
-		this.addToCartEventBind();
+		var authorized = localStorage.getItem("authorized");
+		if (authorized) {
+			this.addToCartEventBind();
+		} else {
+			this.notAuthorisedEventBind();			
+		};		
+
 	},
 
 	addToCartEventBind: function(){
@@ -64,6 +70,12 @@ BPApp.Product = {
 			var productCount = $('#productCount').val();
 			var productName = $('#productName_' + productId).html();
 			BPApp.Cart.addProduct(productName, productId, productCount);
+		})
+	},
+	
+	notAuthorisedEventBind: function(){
+		$('#addToCart').on('click', function(event) {
+				alert('Aby dodać produkt do koszyka musisz być naszym klientem. Zaloguj się, bądź skontaktuj z naszą infolinią.');
 		})
 	}
 }
