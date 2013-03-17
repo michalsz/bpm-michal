@@ -66,6 +66,10 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 
 [data-role="button"]:hover {
 /*	opacity: 0.5!important; */
+	background-color: #18a88f!important;
+	background-image: none!important;
+	text-shadow: none!important;
+/*	color: white!important; */
 }
 
 /*

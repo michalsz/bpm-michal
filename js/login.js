@@ -20,7 +20,16 @@ BPApp.Login = {
 				dataType: 'jsonp',
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
-				success: function(data){              
+				success: function(data){ 
+					
+					localStorage.removeItem("auth_key");		
+					localStorage.removeItem("cartId");
+					localStorage.removeItem("category");
+					localStorage.removeItem("login");
+					localStorage.removeItem("productCount");
+					localStorage.removeItem("product_id");
+					localStorage.removeItem("subcategory");					             
+					
 					localStorage.setItem("auth_key", data.auth_key);
 					localStorage.setItem("authorized", data.success);
 					localStorage.setItem("login", login);
