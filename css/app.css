@@ -213,11 +213,15 @@ input[type=date]::-webkit-inner-spin-button {
 /* ORDERS */
 
 .paramName {
-	display:block;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #eee;
+	display:inline-block;
 	width: 100%;
 }
 
 .paramValue {
+	width:40%;
 	font-weight: bold;
 	float:right;
 }

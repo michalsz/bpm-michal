@@ -48,7 +48,7 @@ $('#ordersPage').on('pageshow', function(event){
 			success: function(data){           
 				$('#ordersList').html('');
     			$.each(data.zamowienia, function(i, item){
-					$('#ordersList').append('<li id="orderdetail'+item.ds_id+'"><span class="paramName">Numer dokumentu: <span class="paramValue">' + item.ds_id + '</span></span><span class="paramName">Nazwa Centrum Kosztowego <span class="paramValue">' + item.ck_nazwa + '</span></span><span class="paramName">Cena netto:  <span class="paramValue">' + item.ds_netto + 'zł</span></span><span class="paramName">VAT <span class="paramValue">' + item.ds_vat + 'zł</span></span><span class="paramName">Cena Brutto: <span class="paramValue">' + item.ds_brutto + 'zł</span></span><br/><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-detail-btn">Szczegóły</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-accept-btn">Akceptuj</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-cancel-btn">Odrzuć</a><div id="poz'+item.ds_id+'"></div></li>');
+					$('#ordersList').append('<li id="orderdetail'+item.ds_id+'"><span class="paramName">Numer dokumentu: <span class="paramValue">' + item.ds_id + '</span></span><span class="paramName">Nazwa Centrum Kosztowego <span class="paramValue">' + item.ck_nazwa + '</span></span><span class="paramName">Cena netto:  <span class="paramValue">' + item.ds_netto + 'zł</span></span><span class="paramName">VAT <span class="paramValue">' + item.ds_vat + 'zł</span></span><span class="paramName">Cena Brutto: <span class="paramValue">' + item.ds_brutto + 'zł</span></span><div id="poz'+item.ds_id+'"></div><a id="orderdetails" href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-detail-btn">Szczegóły</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-accept-btn">Akceptuj</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-cancel-btn">Odrzuć</a></li>').trigger('create');
 
 					//$('#ordersList').listview('refresh');
 
@@ -56,17 +56,17 @@ $('#ordersPage').on('pageshow', function(event){
 
 				$('.order-detail-btn').on('click', function(event) {
 
- 				var doc_id = $(event.target).attr('data-docid');
+ 				var doc_id = $(event.target).parents('a').attr('data-docid');
 	 				self.displayOrderDetail(doc_id);
 	 			})
 
 				$('.order-accept-btn').on('click', function(event) {
-	 				var doc_id = $(event.target).attr('data-docid');
+	 				var doc_id = $(event.target).parents('a').attr('data-docid');
 	 				self.acceptOrder(doc_id);
 	 			})
 
 	 			$('.order-cancel-btn').on('click', function(event) {
-	 				var doc_id = $(event.target).attr('data-docid');
+	 				var doc_id = $(event.target).parents('a').attr('data-docid');
 	 				self.cancelOrder(doc_id);
 	 			})
 
@@ -93,7 +93,7 @@ $('#ordersPage').on('pageshow', function(event){
 			success: function(data){           
     			$('#poz' + doc_id ).html('');
     			$.each(data.pozycje, function(i, item){
-					$('#poz' + doc_id ).append('<span>'+ item.tow_nazwa +' ' +  item.pds_ilosc + item.pds_jm_symbol +'</span><br/>');
+					$('#poz' + doc_id).html('<span class="paramName">Szczegóły: <span class="paramValue">'+ item.tow_nazwa +' ' +  item.pds_ilosc + item.pds_jm_symbol +'</span></span>');
 				})
 			}
 		})
