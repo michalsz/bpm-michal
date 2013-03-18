@@ -1,6 +1,6 @@
 $('#subcategories').on('pageshow', function(){
-	$('#subcategoriesList').html('<h2>Ładowanie...</h2>');
-	BPApp.Category.start();
+	$('#subcategoriesList').html('<h2 style="padding-left:10px;">Ładowanie...</h2>');
+	BPApp.Category.start(); 
 	
 });
 
