@@ -118,8 +118,9 @@ $('#cart').on('pageshow', function(){
 			success: function(message){              
 				if(message.Komunikat == ''){
 					self.updateProductCount();
-					//alert('Produkt został dodany');
+					
 				}
+				alert('Produkt został dodany');
           	},
 			error: function(message){
 					//console.log('errr');
