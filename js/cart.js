@@ -146,7 +146,7 @@ $('#cart').on('pageshow', function(){
 					if(cart['pozycje']){
 						productCount = cart['pozycje'].length;
 						localStorage.setItem("productCount", productCount);
-    					$('.cart-number').text(productCount);
+    					$('.cart-number').html(productCount);
 					}	
           		}
     		});
