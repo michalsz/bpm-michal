@@ -1,4 +1,5 @@
 $('#product').on('pageshow', function(event) {
+	$('#product_name').html('Ładowanie...');
 	BPApp.Product.start();
 });
 
