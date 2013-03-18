@@ -346,7 +346,7 @@ $('#cart').on('pageshow', function(){
 			success: function(cartData){              
 				////console.log(cartData);
 				$('#cartSummary').html('');
-				$('#cartSummary').append('<span>Suma brutton:</span> <span> '+ cartData.ds_brutto_w +' zł</span>');
+				$('#cartSummary').append('<span>Suma brutto:</span> <span> '+ cartData.ds_brutto_w +' zł</span>');
 				$('#cartSummary').append('<br/>');
 				$('#cartSummary').append('<span>Suma netto:</span> <span> '+ cartData.ds_netto_w +' zł</span>');
           	},
