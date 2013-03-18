@@ -1,5 +1,6 @@
 $('#product').on('pageshow', function(event) {
 	$('#product_name').html('Ładowanie...');
+	$('#productCount').parents('.controls').show();  
 	BPApp.Product.start();
 });
 
@@ -73,8 +74,7 @@ BPApp.Product = {
 			var productCount = $('#productCount').val();
 			var productName = $('#productName_' + productId).html();
 			$('#addToCart').unbind('tap'); $('#addToCart').unbind('click');
-			$('#addToCart').remove(); 
-			$('#productCount').parents('.controls').remove(); 
+			$('#productCount').parents('.controls').hide(); 
 			
 			BPApp.Cart.addProduct(productName, productId, productCount);
 			
