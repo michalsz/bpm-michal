@@ -121,6 +121,7 @@ $('#cart').on('pageshow', function(){
 					
 				}
 				alert('Produkt został dodany');
+				BPApp.Product.bindEvents();
           	},
 			error: function(message){
 					//console.log('errr');
@@ -358,7 +359,7 @@ $('#cart').on('pageshow', function(){
 	},
 
 	onButtonClick: function(){
-		$('.bpm-cart-prod').on('click', function(event) {
+		$('.bpm-cart-prod').on('tap', function(event) {
 			var id = $(event.target).attr('data-productid');
 			localStorage.setItem("product_id", id);
 		});
@@ -369,16 +370,16 @@ $('#cart').on('pageshow', function(){
 
 		this.onButtonClick();
 
-		$('.bpm-cart-remove').on('click', function(event) {
+		$('.bpm-cart-remove').on('tap', function(event) {
 			self.removeProduct(event);
 		});
 		
-		$('.bpm-cart-up').on('click', function(event) {
+		$('.bpm-cart-up').on('tap', function(event) {
 			var count = $(event.target).parent().parent().attr('data-count');
 			self.increaseProduct(event, parseInt(count) + 1);
 		});
 
-		$('.bpm-cart-down').on('click', function(event) {
+		$('.bpm-cart-down').on('tap', function(event) {
 			var count = $(event.target).parent().parent().attr('data-count');
 			self.increaseProduct(event, (parseInt(count) -1) );
 		});
@@ -405,11 +406,11 @@ $('#cart').on('pageshow', function(){
 //			}
 		});
 
-		$('#submitOrder').on('click', function(event){
+		$('#submitOrder').on('tap', function(event){
 			self.submitOrder();
 		});
 
-		$('#checkCart').on('click', function(event){
+		$('#checkCart').on('tap', function(event){
 			self.cartSummary();
 		});
 	}	
