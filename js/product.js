@@ -72,7 +72,10 @@ BPApp.Product = {
 			var productId = $('#productId').val(); 
 			var productCount = $('#productCount').val();
 			var productName = $('#productName_' + productId).html();
-			$('#addToCart').unbind('click');
+			$('#addToCart').unbind('tap'); $('#addToCart').unbind('click');
+			$('#addToCart').remove(); 
+			$('#productCount').parents('.controls').remove(); 
+			
 			BPApp.Cart.addProduct(productName, productId, productCount);
 			
 		})

@@ -116,12 +116,9 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){              
-				if(message.Komunikat == ''){
-					self.updateProductCount();
-					
-				}
+				self.updateProductCount();				
 				alert('Produkt został dodany');
-				//BPApp.Product.bindEvents();
+
           	},
 			error: function(message){
 					//console.log('errr');
