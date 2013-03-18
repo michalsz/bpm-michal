@@ -121,7 +121,7 @@ $('#cart').on('pageshow', function(){
 					
 				}
 				alert('Produkt został dodany');
-				BPApp.Product.bindEvents();
+				//BPApp.Product.bindEvents();
           	},
 			error: function(message){
 					//console.log('errr');
