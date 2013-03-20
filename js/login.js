@@ -33,6 +33,7 @@ BPApp.Login = {
 					localStorage.setItem("auth_key", data.auth_key);
 					localStorage.setItem("authorized", data.success);
 					localStorage.setItem("login", login);
+					localStorage.setItem("showLoginMessage", 1);
 					window.location = "index.html";
 	            },
     	        error: function(){

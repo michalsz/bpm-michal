@@ -2,8 +2,13 @@ var BPApp = {
 
 	start: function(){
 		this.displayProfile();
-		$('.page').on('pageshow', function(){
+		$('.page').on('pageshow', function(event){
 			BPApp.Cart.updateProductCount();
+			var showLoginMessage = localStorage.getItem("showLoginMessage");
+			localStorage.setItem("showLoginMessage", 0);
+			if(showLoginMessage == 0){
+				$('#loginMessage').html('');
+			}
 		});
 		this.setupAjax();
 	},
@@ -18,6 +23,13 @@ var BPApp = {
 			$('#reports').show();
 			$('#orders').show();
 			$('#cartLink').show();
+			var showLoginMessage = localStorage.getItem("showLoginMessage");
+			var login = localStorage.getItem("login");
+			if(showLoginMessage == 1){
+				$('#loginMessage').html('Zostałes pomyślnie zalogowany jako ' + login);
+			}else{
+				$('#loginMessage').html('');
+			}
 		}else{
 			$('#login').show();
 			$('#logout').hide();
