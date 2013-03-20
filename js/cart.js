@@ -86,13 +86,9 @@ $('#cart').on('pageshow', function(){
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
 				success: function(cart){              
-					//console.log('cartId ' + cart["kosz_id"]);
-					//console.log('dane ustawione ' + cart["dane_ustawione"]);
 					localStorage.setItem('cartId', cart['kosz_id']);
           		},
           		error: function(message){
-					//console.log('errr');
-          			//console.log(message);
           		}
     		});
 		}
@@ -118,6 +114,7 @@ $('#cart').on('pageshow', function(){
 			success: function(message){              
 				self.updateProductCount();				
 				alert('Produkt został dodany');
+				$('#backToProducts').show();
 
           	},
 			error: function(message){
