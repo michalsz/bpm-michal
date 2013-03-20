@@ -1,14 +1,27 @@
 $('#departmentsPage').on('pageshow', function(event){
 	BPApp.Department.start();
 });
+
+$('#departmentPage').on('pageshow', function(event){
+	var department_id = localStorage.getItem("department_id");
+	BPApp.Department.getAdresses(department_id);
+});
   
+$('#costSourcesPage').on('pageshow', function(event){
+	var department_id = localStorage.getItem("department_id");
+	var adress_id = localStorage.getItem("adress_id");
+	BPApp.Department.getCostsSource(department_id, adress_id);
+});
+
+
+
   BPApp.Department = {
   	start: function(){
   		this.displayDepartments();
-  		this.bindEvents();
   	},
 
 	displayDepartments: function(){
+		var self = this;
 		var auth_key = localStorage.getItem("auth_key");
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.Oddzialy',
@@ -19,11 +32,11 @@ $('#departmentsPage').on('pageshow', function(event){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){     
-    			$('#departmentsList').html('<option value="">Wybierz</option>');
+    			$('#departmentsList').html('');
     			$.each(data.oddzialy, function(i, item){
-    				$('#departmentsList').append('<option value="' + item.kth_id + '">'+ item.dak_skrot +'</option>');
-					$('#departmentsList').selectmenu('refresh');
+    				$('#departmentsList').append('<li><a href="#departmentPage" class="bpm-department-button"  data-depid="' + item.kth_id + '">'+ item.dak_skrot +'</li>');
 				})
+				self.bindEvents();
        		},
        		error: function(){
        			console.log('error');
@@ -40,19 +53,19 @@ $('#departmentsPage').on('pageshow', function(event){
 	bindEvents: function(){
 		var self = this;
 
-		$('#departmentsList').on('change', function(event) {
-			var department_id = $(event.target).val();
-			self.getAdresses(department_id);
+		$('.bpm-department-button').on('click', function(event) {
+			var department_id = $(event.target).attr('data-depid');
+			localStorage.setItem("department_id", department_id);
 		})
 
-		$('#adresses').on('change', function(event) {
-			var department_id = $('#departmentsList').val();
-			var adress_id = $(event.target).val();
-			self.getCostsSource(department_id, adress_id);
+		$('.bpm-adress-button').on('click', function(event) {
+			var adress_id = $(event.target).attr('data-adressid');
+			localStorage.setItem("adress_id", adress_id);
 		})
 	},
 
 	getAdresses: function(department_id){
+		var self = this;
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.AdresyOddzialu',
 			data: {'OdbId': department_id, 'AuthKey': localStorage.getItem("auth_key")},
@@ -62,11 +75,11 @@ $('#departmentsPage').on('pageshow', function(event){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
-				$('#adresses').html('<option value="">Wybierz</option>');
+				$('#adresses').html('');
 				$.each(data.adresy, function(i, item){
-					$('#adresses').append('<option value="' + item.dak_id + '">'+ item.adr_opis +'</option>');
-					$('#adresses').selectmenu('refresh');
+					$('#adresses').append('<li><a href="#costSourcesPage" class="bpm-adress-button" data-adressid="' + item.dak_id + '">'+ item.adr_opis +'</li>');
 				})
+				self.bindEvents();
        		}
    		});
 	},
@@ -81,14 +94,15 @@ $('#departmentsPage').on('pageshow', function(event){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
-				$('#departmentdata').html('');
+				$('#costSources').html('');
+				console.log(data.centra);
 				$.each(data.centra, function(i, item){
 					var limit = item.stat_limit !== null ? item.stat_limit : 0
-					$('#departmentdata').append('<li class="bpm-departmentdatalabel">Nazwa: <span class="bpm-departmentdata">' + item.ck_nazwa + '</li>');
-					$('#departmentdata').append('<li class="bpm-departmentdatalabel">Dokumenty do akceptacji <span class="bpm-departmentdata">' + item.stat_count + '</span></li>');
-					$('#departmentdata').append('<li class="bpm-departmentdatalabel">Suma netto dokumentów do akceptacji: <span class="bpm-departmentdata">' + item.stat_sum_netto + 'zł</span></li>');
-					$('#departmentdata').append('<li class="bpm-departmentdatalabel">Pozostały limit: <span class="bpm-departmentdata">' +  limit +'zł</span></li>');
-					$('#departmentdata').listview('refresh');
+					$('#costSources').append('<li class="bpm-departmentdatalabel">Nazwa: <span class="bpm-departmentdata">' + item.ck_nazwa + '</li>');
+					$('#costSources').append('<li class="bpm-departmentdatalabel">Dokumenty do akceptacji <span class="bpm-departmentdata">' + item.stat_count + '</span></li>');
+					$('#costSources').append('<li class="bpm-departmentdatalabel">Suma netto dokumentów do akceptacji: <span class="bpm-departmentdata">' + item.stat_sum_netto + 'zł</span></li>');
+					$('#costSources').append('<li class="bpm-departmentdatalabel">Pozostały limit: <span class="bpm-departmentdata">' +  limit +'zł</span></li>');
+					//$('#costSources').listview('refresh');
 				})
        		}
    		});

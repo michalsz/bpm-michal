@@ -194,15 +194,6 @@
 			
 			<div data-role="content">
 				<ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="productsPriceList">   
-					<!--li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-					<li><a data-transition="slide" href="#product">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li-->
 				</ul>
 			</div>
 							
@@ -221,17 +212,11 @@
 			<!-- refreshing elements in jqm: http://andymatthews.net/read/2011/12/14/Refreshing-jQuery-Mobile-listviews,-buttons,-select-dropdowns,-and-input-fields -->
 			<div data-role="content">
 				<div data-role="fieldcontain" >
-					<label for="departmentsList" class="select">Oddział:</label>
 					<!-- zmienione ID! -->
-					<select id="departmentsList" name="departmentsList" data-native-menu="true">
-						<option data-placeholder="true">Wybierz</option>
-						<option value="BIURO PLUS KRAKÓW - ODBIORCA, BONARKA 21, KRAKÓW 1049020">BIURO PLUS KRAKÓW - ODBIORCA, BONARKA 21, KRAKÓW 1049020</option>
-						<option value="rush1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
-						<option value="express1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
-						<option value="overnight1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
-					</select>
+					<ul id="departmentsList" name="departmentsList" data-role="listview" data-theme="b">
+					</ul>
 				</div>
-				<div data-role="fieldcontain" >
+				<!--div data-role="fieldcontain" >
 					<label for="adresses" class="select">Adres:</label>
 					<select id="adresses" name="adresses" data-native-menu="true">
 						<option data-placeholder="true">Wybierz</option>
@@ -240,15 +225,51 @@
 						<option value="express2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
 						<option value="overnight2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ligula lorem, ornare eu sollicitudin vitae</option>
 					</select>
-				</div>
+				</div-->
 				
 				<ul data-role="listview"  data-theme="c" id="departmentdata" class="bpm-departmentdatalist">
 				</ul>
 				
 			</div>
 					
-		</div>		
+		</div>	
+
+<!-- DEPARTMENT PAGE -->	
+		<div data-role="page" data-theme="a" id="departmentPage">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number"></span></a>	
+			</div>
+
+			<div data-role="content">
+				<div data-role="fieldcontain" >
+					<!-- zmienione ID! -->
+					<ul id="adresses" name="departmentsList" data-role="listview" data-theme="b">
+					</ul>
+				</div>
+			</div>
+		</div>
 		
+<!-- COST SOURCES -->	
+		<div data-role="page" data-theme="a" id="costSourcesPage">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number"></span></a>	
+			</div>
+
+			<div data-role="content">
+				<div data-role="fieldcontain" >
+					<ul id="costSources" >
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
 <!-- REPORTS PAGE -->		
 		
 		
