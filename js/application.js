@@ -24,9 +24,9 @@ var BPApp = {
 			$('#orders').show();
 			$('#cartLink').show();
 			var showLoginMessage = localStorage.getItem("showLoginMessage");
-			var login = localStorage.getItem("login");
+			var nazwa = localStorage.getItem("nazwa");
 			if(showLoginMessage == 1){
-				$('#loginMessage').html('Zostałes pomyślnie zalogowany jako ' + login);
+				$('#loginMessage').html('Zostałes pomyślnie zalogowany jako ' + nazwa);
 			}else{
 				$('#loginMessage').html('');
 			}
