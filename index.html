@@ -33,6 +33,7 @@
 					<a data-transition="slidedown" href="#departmentsPage" id="departments" style="display:none;"><img src="./img/oddzialy2.png" alt="Oddziały" /></a>
 					<a data-transition="slidedown" href="#reportsPage" id="reports" style="display:none;"><img src="./img/raporty.png" alt="Raporty" /></a>
 					<a data-transition="slidedown" href="#ordersPage" id="orders" style="display:none;"><img src="./img/zamowienia2.png" alt="Zamówienia" /></a>
+					<a data-transition="slidedown" href="#myWaitnigOrdersPage" id="myWaitingOrders" style="display:none;"><img src="./img/zamowienia2.png" alt="Zamówienia" /></a>
 					<a data-transition="slidedown" href="#cart" id="cartLink" style="display:none;"><img src="./img/koszyk2.png" alt="Koszyk" /></a>
 					<a data-transition="slidedown" href="#loginPage" id="login" ><img src="./img/zaloguj2.png" alt="Zaloguj" /></a>
 					<a data-transition="slidedown" href="tel:122964524" id="infolinia" ><img src="./img/infolinia.png" alt="Infolinia" /></a>
@@ -315,37 +316,95 @@
 				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number"></span></a>	
 			</div>
 			
-
 			<div data-role="content">		
 
 				<div data-role="fieldcontain" >
-					<label for="departmentsSelectA" class="select">Oddział:</label>
-					<select id="departmentsSelectA" name="departmentsSelectA" data-native-menu="true">
-					</select>
+					<ul id="departmentsListA" >
+					</ul>
 				</div>
-				
-				<div data-role="fieldcontain" >
-					<label for="adressesSelectA" class="select">Adress:</label>
-					<select id="adressesSelectA" name="adressesSelectA" data-native-menu="true">
-					</select>
-				</div>
-				
-				<div data-role="fieldcontain" >
-					<label for="costSourcesSelectA" class="select">Centrum kosztowe:</label>
-					<select id="costSourcesSelectA" name="costSourcesSelectA" data-native-menu="true">
-					</select>				
-				</div>
-				
-				<ul id="ordersList" data-role="listview" class="bpm-ordersdatalist">
-
-				</ul> 
 				
 			</div>
 					
 		</div>
+
+<!-- ORDERS ADDRESSES PAGE -->		
 		
+		<div data-role="page" data-theme="a" id="ordersAddressesPage">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number"></span></a>	
+			</div>
+			
+			<div data-role="content">		
+				<div data-role="fieldcontain" >
+					<ul id="addressesListA" >
+					</ul>
+				</div>
+			</div>
+					
+		</div>
+
+<!-- ORDERS COSTSSOURCES PAGE -->		
+		
+		<div data-role="page" data-theme="a" id="ordersCostSourcesPage">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number"></span></a>	
+			</div>
+			
+			<div data-role="content">		
+				<div data-role="fieldcontain" >
+					<ul id="costSourcesListA" >
+					</ul>
+				</div>
+			</div>
+					
+		</div>
+
+<!-- ORDERS LIST PAGE -->		
+		
+		<div data-role="page" data-theme="a" id="ordersListPage">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number"></span></a>	
+			</div>
+			
+			<div data-role="content">		
+				<div data-role="fieldcontain" >
+					<ul id="ordersList" >
+					</ul>
+				</div>
+			</div>
+					
+		</div>
+
+<!-- MY WAINING ORDERS PAGE -->		
+		
+		<div data-role="page" data-theme="a" id="myWaitnigOrdersPage">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">BiuroPlus Mobile</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number"></span></a>	
+			</div>
+			
+			<div data-role="content">		
+				<div data-role="fieldcontain" >
+					<ul id="myWaitingOrdersList" >
+					</ul>
+				</div>
+			</div>
+					
+		</div>
+
+
 <!-- CART PAGE -->		
-		
 		
 		<div data-role="page" data-theme="a" id="cart">		
 

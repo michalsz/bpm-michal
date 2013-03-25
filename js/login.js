@@ -21,7 +21,6 @@ BPApp.Login = {
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
 				success: function(data){ 
-					
 					localStorage.removeItem("auth_key");		
 					localStorage.removeItem("cartId");
 					localStorage.removeItem("category");
@@ -34,6 +33,8 @@ BPApp.Login = {
 					localStorage.setItem("authorized", data.success);
 					localStorage.setItem("login", login);
 					localStorage.setItem("nazwa", data.nazwa);
+					localStorage.setItem("rola", data.rola);
+					localStorage.setItem("akceptant", data.akceptant);
 					localStorage.setItem("showLoginMessage", 1);
 					window.location = "index.html";
 	            },

@@ -15,13 +15,18 @@ var BPApp = {
 
 	displayProfile: function(){
 		var authorized = localStorage.getItem("authorized");
+		var akceptant = localStorage.getItem("akceptant");
 		if(authorized == 'true'){
 			$('#login').hide();
 			$('#logout').show();
 			$('#priceList').show();
 			$('#departments').show();
 			$('#reports').show();
-			$('#orders').show();
+			if(akceptant == 'T'){
+				$('#orders').show();
+			}else{
+				$('#myWaitingOrders').show();
+			}
 			$('#cartLink').show();
 			var showLoginMessage = localStorage.getItem("showLoginMessage");
 			var nazwa = localStorage.getItem("nazwa");

@@ -1,11 +1,34 @@
 $('#ordersPage').on('pageshow', function(event){
-	BPApp.Order.start()
+	BPApp.Order.start();
+});
+
+$('#ordersAddressesPage').on('pageshow', function(event){
+	var department_id = localStorage.getItem("department_id");
+	BPApp.Order.displayAddresses(department_id);
+	BPApp.Order.bindEvents();
+});
+
+$('#ordersCostSourcesPage').on('pageshow', function(event){
+	var department_id = localStorage.getItem("department_id");
+	var address_id = localStorage.getItem("address_id");
+	BPApp.Order.displayCostSources(department_id, address_id);
+	BPApp.Order.bindEvents();
+});
+
+$('#ordersListPage').on('pageshow', function(event){
+	var department_id = localStorage.getItem("department_id");
+	var cost_id = localStorage.getItem("cost_id");
+	BPApp.Order.displayOrders(department_id, cost_id);
+});
+
+$('#myWaitnigOrdersPage').on('pageshow', function(event){
+	BPApp.Order.displayMyWaitnigOrders();
 });
 
 
   BPApp.Order = {
   	start: function(){
-  		this.updateDepartmentsSelect();
+  		this.displayDepartments();
   		//this.displayOrders();
   		this.bindEvents();
   	},
@@ -14,7 +37,7 @@ $('#ordersPage').on('pageshow', function(event){
   		//$('#departmentsSelect').html('');
   	},
 
-	updateDepartmentsSelect: function(){
+	displayDepartments: function(){
   		this.clearOldData();
 		var auth_key = localStorage.getItem("auth_key");
 		$.ajax({
@@ -26,11 +49,11 @@ $('#ordersPage').on('pageshow', function(event){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){
-				$('#departmentsSelectA').html('<option data-placeholder="true">Wybierz</option>');
+				$('#departmentsListA').html('');
     			$.each(data.oddzialy, function(i, item){
-					$('#departmentsSelectA').append('<option value="'  + item.kth_id +  '">' + item.dak_skrot + ' ' + item.kth_id + ' </option>');
+					$('#departmentsListA').append('<li><a href="#ordersAddressesPage" class="bpm-order-button" data-depid="'  + item.kth_id +  '">' + item.dak_skrot + ' </a></li>');
 				})
-				$('#departmentsSelectA').selectmenu('refresh');
+				//$('#departmentsSelectA').selectmenu('refresh');
        		}
    		});
 	},
@@ -136,7 +159,8 @@ $('#ordersPage').on('pageshow', function(event){
 		})
 	},
 
-	updateAdressesSelect: function(departmentId){
+	displayAddresses: function(departmentId){
+		var self = this;
 		if(departmentId.length > 0){
 			$.ajax({
 				url: Config.serviceURL + 'BPK.pkg_json.AdresyOddzialu',
@@ -147,34 +171,35 @@ $('#ordersPage').on('pageshow', function(event){
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
 				success: function(data){           
-					$('#adressesSelectA').html('<option data-placeholder="true">Wybierz</option>');
+					$('#addressesListA').html('');
 					$.each(data.adresy, function(i, item){
-						$('#adressesSelectA').append('<option value="'  + item.dak_id +  '">' + item.adr_opis + ' </option>');
+						$('#addressesListA').append('<li><a href="#ordersCostSourcesPage" class="bpm-orders-costs-button"  data-addrressid="' + item.dak_id +  '">' + item.adr_opis + ' </a></li>');
 					})
-					$('#adressesSelectA').selectmenu('refresh');
+					self.bindEvents();
        			}
    			});
    		}
 	},
 
 
-	updateCostSourcesSelect: function(adressId){
-		var department_id = $('#departmentsSelectA').val();
-		if(department_id.length > 0){
+	displayCostSources: function(departmentId, adressId){
+		var self = this;
+		if(departmentId.length > 0){
 			$.ajax({
 				url: Config.serviceURL + 'BPK.pkg_json.CentraKosztowe',
-				data: {'OdbId': department_id, 'AdrId': adressId, 'Stat': 'A', 'AuthKey': localStorage.getItem("auth_key")},
+				data: {'OdbId': departmentId, 'AdrId': adressId, 'Stat': 'A', 'AuthKey': localStorage.getItem("auth_key")},
 				type: 'GET',
            		cache: true,
 				dataType: 'jsonp',
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
 				success: function(data){           
-					$('#costSourcesSelectA').html('<option data-placeholder="true">Wybierz</option>');
+					console.log(data);
+					$('#costSourcesListA').html('');
 					$.each(data.centra, function(i, item){
-						$('#costSourcesSelectA').append('<option value="'  + item.ck_id +  '">' + item.ck_nazwa + ' </option>');
+						$('#costSourcesListA').append('<li><a href="#ordersListPage" class="bpm-orders-orders-button" data-costid="'  + item.ck_id +  '">' + item.ck_nazwa + ' </a></li>');
 					})
-					$('#costSourcesSelectA').selectmenu('refresh');
+					self.bindEvents();
        			}
    			});
    		}
@@ -191,10 +216,25 @@ $('#ordersPage').on('pageshow', function(event){
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
 				console.log(data);
-				//$('#costSourcesSelectA').html('<option data-placeholder="true">Wybierz</option>');
-				//$.each(data.centra, function(i, item){
-				//		$('#costSourcesSelectA').append('<option value="'  + item.ck_id +  '">' + item.ck_nazwa + ' </option>');
-				//})
+       		}
+   		});
+	},
+
+	displayMyWaitnigOrders: function(){
+		$.ajax({
+			url: Config.serviceURL + 'BPK.pkg_json.OczekNaAkceptAkceptanta',
+			data: {'AuthKey': localStorage.getItem("auth_key")},
+			type: 'GET',
+        	cache: true,
+			dataType: 'jsonp',
+			crossDomain: true,
+			contentType: 'application/json; charset=utf-8',
+			success: function(data){           
+				console.log(data);
+				$('#myWaitingOrdersList').html('');
+				$.each(data.zamowienia, function(i, item){
+					$('#myWaitingOrdersList').append('<li>Numer: ' +  item.ds_numer  + ' Data: ' + item.ds_data + ' Wartość netto ' + item.ds_netto + '</li>');
+				})
 				//$('#costSourcesSelectA').selectmenu('refresh');
        		}
    		});
@@ -202,24 +242,19 @@ $('#ordersPage').on('pageshow', function(event){
 
 	bindEvents: function(){
 		var self = this;
-		 $('#departmentsSelectA').on('change', function(event) {
-		 	var department_id = $(event.target).val();
-		 	if(department_id){
-		 		self.updateAdressesSelect(department_id);
-		 	}
+		 $('.bpm-order-button').on('click', function(event) {
+		 	var department_id = $(event.target).attr('data-depid');
+			localStorage.setItem("department_id", department_id);
 		 })
 
-		 $('#adressesSelectA').on('change', function(event) {
-		 	var address_id = $(event.target).val();
-		 	if(address_id){
-		 		self.updateCostSourcesSelect(address_id);
-		 	}
+		 $('.bpm-orders-costs-button').on('click', function(event) {
+		 	var address_id = $(event.target).attr('data-addrressid');
+		 	localStorage.setItem("address_id", address_id);
 		 })
 
-		 $('#costSourcesSelectA').on('change', function(event) {
-		 	var department_id = $('#departmentsSelectA').val();
-		 	var cost_source_id = $(event.target).val();
-		 	self.displayOrders(department_id, cost_source_id);
+		 $('.bpm-orders-orders-button').on('click', function(event) {
+		 	var cost_id = $(event.target).attr('data-costid');
+		 	localStorage.setItem("cost_id", cost_id);
 		 })
 
  		 $('#documentsBtn').on('click', function(event) {
