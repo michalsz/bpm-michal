@@ -4,6 +4,8 @@ $('#cart').on('pageshow', function(){
 
   BPApp.Cart = {
   	start: function(){
+		$('#cartProducts').html('<h2 style="padding-left:10px;">Ładowanie...</h2>');	
+		$('#emptyCartMsg').hide();
   		this.displayProductsFromCart();
   		this.bindEvents();
   	},
@@ -37,7 +39,6 @@ $('#cart').on('pageshow', function(){
 							$('#bpm-cartselects').show();
 							$('#submitOrder').show();
 							$('#cartSummary').show();
-							$('#emptyCartMsg').hide();
 						}else{
 							$('#bpm-cartselects').hide();
 							$('#submitOrder').hide();
