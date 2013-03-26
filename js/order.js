@@ -247,21 +247,21 @@ $('#myWaitnigOrdersPage').on('pageshow', function(event){
 		 $('.bpm-order-button').on('click', function(event) {
 		 	var department_id = $(event.target).attr('data-depid');
 			localStorage.setItem("department_id", department_id);
-		 })
+		 });
 
 		 $('.bpm-orders-costs-button').on('click', function(event) {
 		 	var address_id = $(event.target).attr('data-addrressid');
 		 	localStorage.setItem("address_id", address_id);
-		 })
+		 });
 
 		 $('.bpm-orders-orders-button').on('click', function(event) {
 		 	var cost_id = $(event.target).attr('data-costid');
 		 	localStorage.setItem("cost_id", cost_id);
-		 })
+		 });
 
  		 $('#documentsBtn').on('click', function(event) {
  		 	self.displayDocuments();
-		 })
+		 });
 
 	}
 }
