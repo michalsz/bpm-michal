@@ -233,9 +233,11 @@ $('#myWaitnigOrdersPage').on('pageshow', function(event){
 				console.log(data);
 				$('#myWaitingOrdersList').html('');
 				$.each(data.zamowienia, function(i, item){
-					$('#myWaitingOrdersList').append('<li>Numer: ' +  item.ds_numer  + ' Data: ' + item.ds_data + ' Wartość netto ' + item.ds_netto + '</li>');
+					$('#myWaitingOrdersList').append('<li><span class="paramName2">Numer:</span><span class="paramValue2">' +  item.ds_numer  + '</span><br>' + 
+									     '<span class="paramName2">Data:</span><span class="paramValue2">' + item.ds_data + '</span><br>' + 
+									     '<span class="paramName2">Wartość netto:</span><span class="paramValue2">' + item.ds_netto + '</span></li>');
 				})
-				//$('#costSourcesSelectA').selectmenu('refresh');
+				$('#myWaitingOrdersList').listview('refresh');
        		}
    		});
 	},

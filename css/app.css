@@ -233,6 +233,18 @@ input[type=date]::-webkit-inner-spin-button {
 	float:right;
 }
 
+.paramName2 {
+		display:inline-block;
+		width: 40%;
+}
+
+.paramValue2 {
+	width:40%;
+	display:inline-block;	
+	float:right;
+	text-align: right;
+}
+
 /* CART */
 
 #cartSummary {
