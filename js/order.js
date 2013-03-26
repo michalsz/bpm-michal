@@ -51,9 +51,15 @@ $('#myWaitnigOrdersPage').on('pageshow', function(event){
 			success: function(data){
 				$('#departmentsListA').html('');
     			$.each(data.oddzialy, function(i, item){
+    				console.log(item.kth_id);
 					$('#departmentsListA').append('<li><a href="#ordersAddressesPage" class="bpm-order-button" data-depid="'  + item.kth_id +  '">' + item.dak_skrot + ' </a></li>');
 				})
-				//$('#departmentsSelectA').selectmenu('refresh');
+				//FIX 
+				$('.bpm-order-button').on('click', function(event) {
+			 		var department_id = $(event.target).attr('data-depid');
+					alert('bind ' + department_id);
+					localStorage.setItem("department_id", department_id);
+		 		});
        		}
    		});
 	},
@@ -160,6 +166,7 @@ $('#myWaitnigOrdersPage').on('pageshow', function(event){
 	},
 
 	displayAddresses: function(departmentId){
+		alert(departmentId);
 		var self = this;
 		if(departmentId.length > 0){
 			$.ajax({
@@ -244,10 +251,11 @@ $('#myWaitnigOrdersPage').on('pageshow', function(event){
 
 	bindEvents: function(){
 		var self = this;
-		 $('.bpm-order-button').on('click', function(event) {
-		 	var department_id = $(event.target).attr('data-depid');
-			localStorage.setItem("department_id", department_id);
-		 });
+		 //$('.bpm-order-button').on('click', function(event) {
+		 //	var department_id = $(event.target).attr('data-depid');
+		//	alert(department_id);
+		//	localStorage.setItem("department_id", department_id);
+		 //});
 
 		 $('.bpm-orders-costs-button').on('click', function(event) {
 		 	var address_id = $(event.target).attr('data-addrressid');
