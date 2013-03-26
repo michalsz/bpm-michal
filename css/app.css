@@ -152,11 +152,18 @@ input[type=date]::-webkit-inner-spin-button {
 		max-width: 45%;
 	}	
 }
-*/
+*/ 
 
 
 
 /****************************** MENU */
+
+#loginMessage {
+	text-align: center;
+	margin: 10px;
+	color: #ccc;
+	margin-top: 25px;
+}
 
 .menu-titles > a > img:hover  { /* .menu-titles > a > img:focus */
 	opacity: 0.5;
