@@ -1,13 +1,16 @@
 $('#departmentsPage').on('pageshow', function(event){
+	$('#departmentsList').html('<h2 style="padding-left:10px;">Ładowanie...</h2>');
 	BPApp.Department.start();
 });
 
 $('#departmentPage').on('pageshow', function(event){
+	$('#adresses').html('<h2 style="padding-left:10px;">Ładowanie...</h2>');	
 	var department_id = localStorage.getItem("department_id");
 	BPApp.Department.getAdresses(department_id);
 });
   
 $('#costSourcesPage').on('pageshow', function(event){
+	$('#costSources').html('<h2 style="padding-left:10px;">Ładowanie...</h2>');	
 	var department_id = localStorage.getItem("department_id");
 	var adress_id = localStorage.getItem("adress_id");
 	BPApp.Department.getCostsSource(department_id, adress_id);
@@ -35,8 +38,9 @@ $('#costSourcesPage').on('pageshow', function(event){
     			$('#departmentsList').html('');
     			$.each(data.oddzialy, function(i, item){
     				$('#departmentsList').append('<li><a href="#departmentPage" class="bpm-department-button"  data-depid="' + item.kth_id + '">'+ item.dak_skrot +'</li>');
-				})
-				self.bindEvents();
+			});
+			$('#departmentsList').listview('refresh');
+			self.bindEvents();
        		},
        		error: function(){
        			console.log('error');
@@ -78,7 +82,8 @@ $('#costSourcesPage').on('pageshow', function(event){
 				$('#adresses').html('');
 				$.each(data.adresy, function(i, item){
 					$('#adresses').append('<li><a href="#costSourcesPage" class="bpm-adress-button" data-adressid="' + item.dak_id + '">'+ item.adr_opis +'</li>');
-				})
+				});
+				$('#adresses').listview('refresh');
 				self.bindEvents();
        		}
    		});
@@ -103,7 +108,8 @@ $('#costSourcesPage').on('pageshow', function(event){
 					$('#costSources').append('<li class="bpm-departmentdatalabel">Suma netto dokumentów do akceptacji: <span class="bpm-departmentdata">' + item.stat_sum_netto + 'zł</span></li>');
 					$('#costSources').append('<li class="bpm-departmentdatalabel">Pozostały limit: <span class="bpm-departmentdata">' +  limit +'zł</span></li>');
 					//$('#costSources').listview('refresh');
-				})
+				});
+				$('#costSources').listview('refresh'); 
        		}
    		});
 	}
