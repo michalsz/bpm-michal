@@ -31,7 +31,7 @@ var BPApp = {
 			var showLoginMessage = localStorage.getItem("showLoginMessage");
 			var nazwa = localStorage.getItem("nazwa");
 			if(showLoginMessage == 1){
-				$('#loginMessage').html('Zostałes pomyślnie zalogowany jako ' + nazwa);
+				$('#loginMessage').html('Zostałeś pomyślnie zalogowany jako ' + nazwa + '.');
 			}else{
 				$('#loginMessage').html('');
 			}
