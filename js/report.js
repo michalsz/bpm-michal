@@ -21,7 +21,7 @@ $('#reportsPage').on('pageshow', function(event){
 				contentType: 'application/json; charset=utf-8',
 				success: function(data){     
 					$('#reportsSelect').html('<option data-placeholder="true">Wybierz</option>');
-	    			$.each(data.raporty, function(i, item){
+					$.each(data.raporty, function(i, item){
 						$('#reportsSelect').append('<option value="' + item.raport_kod + '"> '  + item.raport_nazwa +  '</option>');
 
 					});
