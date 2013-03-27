@@ -8,7 +8,11 @@ $('#cart').on('pageshow', function(){
 		$('#bpm-cartselects').hide();
 		$('#departmentsSelect').selectmenu('refresh');
 		$('#departmentsAdressesSelect').selectmenu('refresh');
-		$('#costCenterSelect').selectmenu('refresh');		
+		$('#costCenterSelect').selectmenu('refresh');
+		$('#departmentsSelect').selectmenu('disable');
+		$('#departmentsAdressesSelect').selectmenu('disable');
+		$('#costCenterSelect').selectmenu('disable');
+		
   		this.displayProductsFromCart();
   	},
 
@@ -68,6 +72,7 @@ $('#cart').on('pageshow', function(){
 					$('#departmentsSelect').append('<option value="' + item.kth_id +'">' +  item.dak_skrot + '</option>');
 				})
 				$('#departmentsSelect').selectmenu('refresh');
+				$('#departmentsSelect').selectmenu('enable');
 				$('#departmentsSelect').show();
 			}
 		})
@@ -236,6 +241,7 @@ $('#cart').on('pageshow', function(){
 					$('#departmentsAdressesSelect').append('<option value="' + adress.dak_id +'">' +  adress.adr_opis + '</option>');
 				})
 				$('#departmentsAdressesSelect').selectmenu('refresh');
+				$('#departmentsAdressesSelect').selectmenu('enable');
 			}
 		})
 	},
@@ -278,6 +284,7 @@ $('#cart').on('pageshow', function(){
 					$('#costCenterSelect').append('<option value="' + item.ck_id +'">' +  item.ck_nazwa + '</option>');
 				})
 				$('#costCenterSelect').selectmenu('refresh');
+				$('#costCenterSelect').selectmenu('enable');
 			}    	
 		});
 	},
