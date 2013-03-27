@@ -1,4 +1,5 @@
 $('#priceListPage').on('pageshow', function(event){
+	$('#productsPriceList').html('<h2 class="loadingmsg">Ładowanie...</h2>');		
 	BPApp.ProductList.start();
 });
 

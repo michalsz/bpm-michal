@@ -75,6 +75,13 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 .ui-btn-hover-a {
 	border: 1px solid #333;
 }
+#cartProducts .ui-btn-hover-a {
+	border: 1px solid #bbbbbb;
+}
+
+.ui-header .ui-btn-hover-a {
+	border: 0px solid #333; 
+}
 
 /*
 input[type=date]::-webkit-calendar-picker-indicator {
