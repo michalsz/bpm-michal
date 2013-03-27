@@ -72,7 +72,7 @@ $('#cart').on('pageshow', function(){
 
 	createCart: function(){
 		var self = this;
-		if(localStorage.getItem('cartId') != 'undefined' && localStorage.getItem('cartId') != null ){
+		if(localStorage.getItem('cartId') !== undefined && localStorage.getItem('cartId') !== null ){
 			//console.log('get cart from local');
 			return localStorage.getItem('cartId');
 		}else{
@@ -318,7 +318,7 @@ $('#cart').on('pageshow', function(){
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){              
 				if(message.Zamowiony == 'T'){
-					localStorage.setItem('cartId', null);
+					localStorage.removeItem('cartId');
 					$('#cartProducts').html('');
 					$('#bpm-cartselects').hide();
 					$('#submitOrder').hide();
