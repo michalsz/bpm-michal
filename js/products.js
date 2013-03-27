@@ -1,5 +1,5 @@
 $('#products').on('pageshow', function(){
-	$('#productsList').html('<h2 style="padding-left:10px;">Ładowanie...</h2>');	
+	$('#productsList').html('<h2 class="loadingmsg">Ładowanie...</h2>');	
 	BPApp.Products.start();
 });
 

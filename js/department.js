@@ -1,16 +1,16 @@
 $('#departmentsPage').on('pageshow', function(event){
-	$('#departmentsList').html('<h2 style="padding-left:10px;">Ładowanie...</h2>');
+	$('#departmentsList').html('<h2 class="loadingmsg">Ładowanie...</h2>');
 	BPApp.Department.start();
 });
 
 $('#departmentPage').on('pageshow', function(event){
-	$('#adresses').html('<h2 style="padding-left:10px;">Ładowanie...</h2>');	
+	$('#adresses').html('<h2 class="loadingmsg">Ładowanie...</h2>');	
 	var department_id = localStorage.getItem("department_id");
 	BPApp.Department.getAdresses(department_id);
 });
   
 $('#costSourcesPage').on('pageshow', function(event){
-	$('#costSources').html('<h2 style="padding-left:10px;">Ładowanie...</h2>');	
+	$('#costSources').html('<h2 class="loadingmsg">Ładowanie...</h2>');	
 	var department_id = localStorage.getItem("department_id");
 	var adress_id = localStorage.getItem("adress_id");
 	BPApp.Department.getCostsSource(department_id, adress_id);
