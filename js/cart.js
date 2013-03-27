@@ -394,12 +394,28 @@ $('#cart').on('pageshow', function(){
 		$('#departmentsSelect').on('change', function(event){
 			var department_id = event.target.value;
 			self.setDepartment(department_id);
+
+			$('#departmentsAdressesSelect').html('<option data-placeholder="true">Wybierz adres</option>');
+			$('#departmentsAdressesSelect').selectmenu('refresh');
+			$('#departmentsAdressesSelect').selectmenu('disable');
+			
+
+			$('#costCenterSelect').html('<option data-placeholder="true">Wybierz centrum kosztowe</option>');
+			$('#costCenterSelect').selectmenu('refresh');
+			$('#costCenterSelect').selectmenu('disable');			
+
 			self.getDepartmentAdresses(department_id);
 		});
 
 		$('#departmentsAdressesSelect').on('change', function(event){
 			var adress_id = event.target.value;
 			self.setAdress(adress_id);
+			
+			$('#costCenterSelect').html('<option data-placeholder="true">Wybierz centrum kosztowe</option>');
+			$('#costCenterSelect').selectmenu('refresh');
+			$('#costCenterSelect').selectmenu('disable');			
+
+			
 			self.getCostCenters(adress_id);
 		});
 
