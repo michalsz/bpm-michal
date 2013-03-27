@@ -104,8 +104,8 @@ $('#costSourcesPage').on('pageshow', function(event){
 				$.each(data.centra, function(i, item){
 					var limit = item.stat_limit !== null ? item.stat_limit : 0
 					$('#costSources').append('<li class="bpm-departmentdatalabel">Nazwa: <span class="bpm-departmentdata">' + item.ck_nazwa + '</li>');
-					$('#costSources').append('<li class="bpm-departmentdatalabel">Dokumenty do akceptacji <span class="bpm-departmentdata">' + item.stat_count + '</span></li>');
-					$('#costSources').append('<li class="bpm-departmentdatalabel">Suma netto dokumentów do akceptacji: <span class="bpm-departmentdata">' + item.stat_sum_netto + 'zł</span></li>');
+					$('#costSources').append('<li class="bpm-departmentdatalabel">Dokumenty do akceptacji: <span class="bpm-departmentdata">' + item.stat_count + '</span></li>');
+					$('#costSources').append('<li class="bpm-departmentdatalabel">Suma netto dok. do akceptacji: <span class="bpm-departmentdata">' + item.stat_sum_netto + 'zł</span></li>');
 					$('#costSources').append('<li class="bpm-departmentdatalabel">Pozostały limit: <span class="bpm-departmentdata">' +  limit +'zł</span></li>');
 					//$('#costSources').listview('refresh');
 				});
