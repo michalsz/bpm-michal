@@ -3,7 +3,7 @@ $('#reportsPage').on('pageshow', function(event){
 });
   
   BPApp.Report = {
-  	start: function(){
+  	start: function(){	
   		this.displayReports();
   		this.bindEvents();
   	},
@@ -26,6 +26,7 @@ $('#reportsPage').on('pageshow', function(event){
 
 					});
 					$('#reportsSelect').selectmenu('refresh');
+					$('#reportsSelect').selectmenu('enable');
 					$('#createReport').attr('href','');
 					$('#createReport span span').html('Wygeneruj raport (pdf)');
 					$('#createReport').trigger('create');					

@@ -34,7 +34,12 @@ var BPApp = {
 				$('#productData').hide();
 				
 				$('#productdata > .controls > .ui-field-contain').show();				
-				$('#addToCart').show();					
+				$('#addToCart').show();				
+
+							
+				$('#reportsSelect').html('<option data-placeholder="true">Wybierz</option>');	
+				$('#reportsSelect').selectmenu('refresh');	
+				$('#reportsSelect').selectmenu('disable');
 				
 			} 
 		});
