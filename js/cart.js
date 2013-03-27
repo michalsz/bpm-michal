@@ -32,7 +32,8 @@ $('#cart').on('pageshow', function(){
 						$('#cartProducts').listview('refresh');
 						
 						self.bindEvents();
-						if( (cart.pozycje.length > 0) || (cart.pozycje.length !== undefined )){
+						console.log(cart.pozycje.length);
+						if(cart.pozycje.length > 0){
 							self.displayDepartmentsSelect();
 							self.cartSummary();
 							$('#bpm-cartselects').show();
@@ -399,11 +400,6 @@ $('#cart').on('pageshow', function(){
 		$('#costCenterSelect').on('change', function(event){
 			var cost_center_id = event.target.value;
 			self.setCostCenter(cost_center_id);
-//			if(cost_center_id){
-//				$('#submitOrder').show();
-//			}else{
-//				$('#submitOrder').hide();
-//			}
 		});
 
 		$('#submitOrder').on('tap', function(event){
