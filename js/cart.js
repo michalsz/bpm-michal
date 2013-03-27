@@ -192,13 +192,11 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){   
-				//console.log(message);           
 				self.displayProductsFromCart();
 				self.updateProductCount();
           	},
           	error: function(message){
-					//console.log('errr increase');
-          			//console.log(message);
+
           	}
     	});
 	},
@@ -209,17 +207,17 @@ $('#cart').on('pageshow', function(){
 			url: Config.serviceURL + 'BPK.pkg_json.UstawOdbiorceDlaKoszyk',
 			data: {'OdbId': department_id,  'KoszId': cartId, 'AuthKey': localStorage.getItem("auth_key")},
 			type: 'GET',
-            cache: true,
+			cache: true,
 			dataType: 'jsonp',
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){              
 				if(message.ustawione == 'T'){
-					//alert('Ustawiłeś oddział');
+
 				}
           	},
           	error: function(error){
-          		//console.log(error);
+
           	}
     	});
 	},
@@ -291,18 +289,17 @@ $('#cart').on('pageshow', function(){
 			url: Config.serviceURL + 'BPK.pkg_json.UstawCkDlaKoszyk',
 			data: {'CkId': cost_center_id,  'KoszId': cartId, 'AuthKey': localStorage.getItem("auth_key")},
 			type: 'GET',
-            cache: true,
+			cache: true,
 			dataType: 'jsonp',
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){              
 				if(message.ustawione == 'T'){
-					//alert('Ustawiłeś centrum kosztowe');
 					$('#costCenterSelect').show();
 				}
           	},
           	error: function(error){
-          		//console.log(error);
+			
           	}
     	});
 	},
@@ -315,7 +312,7 @@ $('#cart').on('pageshow', function(){
 			url: Config.serviceURL + 'BPK.pkg_json.ZamowKoszyk',
 			data: {'KoszId': cartId, 'AuthKey': localStorage.getItem("auth_key")},
 			type: 'GET',
-            cache: true,
+			cache: true,
 			dataType: 'jsonp',
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
@@ -333,7 +330,7 @@ $('#cart').on('pageshow', function(){
 				}
           	},
           	error: function(message){
-          		//console.log(message);	
+			
           	}
     	});
 	},
@@ -390,6 +387,7 @@ $('#cart').on('pageshow', function(){
 
 		$('#departmentsSelect').on('change', function(event){
 			var department_id = event.target.value;
+			/* alert('event'); */
 			self.setDepartment(department_id);
 			self.getDepartmentAdresses(department_id);
 		});
