@@ -4,8 +4,10 @@ $('#reportsPage').on('pageshow', function(event){
   
   BPApp.Report = {
   	start: function(){	
+		$('#reportsSelect').selectmenu('disable');
   		this.displayReports();
   		this.bindEvents();
+		
   	},
 
 	displayReports: function(){

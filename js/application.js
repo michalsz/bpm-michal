@@ -38,8 +38,8 @@ var BPApp = {
 
 							
 				$('#reportsSelect').html('<option data-placeholder="true">Wybierz</option>');	
-				$('#reportsSelect').selectmenu('refresh');	
-				$('#reportsSelect').selectmenu('disable');
+
+
 				
 			} 
 		});
