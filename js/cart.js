@@ -67,7 +67,7 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){ 
-				$('#departmentsSelect').html('<option data-placeholder="true">Wybierz oddział</option>');
+				$('#departmentsSelect').html('<option data-placeholder="true" value="placeholder">Wybierz oddział</option>');
 				$.each(data.oddzialy, function(i, item){
 					$('#departmentsSelect').append('<option value="' + item.kth_id +'">' +  item.dak_skrot + '</option>');
 				})
@@ -236,7 +236,7 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){
-				$('#departmentsAdressesSelect').html('<option data-placeholder="true">Wybierz adres</option>');
+				$('#departmentsAdressesSelect').html('<option data-placeholder="true" value="placeholder">Wybierz adres</option>');
 				$.each(data.adresy, function(i, adress){
 					$('#departmentsAdressesSelect').append('<option value="' + adress.dak_id +'">' +  adress.adr_opis + '</option>');
 				})
@@ -279,7 +279,7 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
-				$('#costCenterSelect').html('<option data-placeholder="true">Wybierz centrum kosztowe</option>');
+				$('#costCenterSelect').html('<option data-placeholder="true" value="placeholder">Wybierz centrum kosztowe</option>');
 				$.each(data.centra, function(i, item){
 					$('#costCenterSelect').append('<option value="' + item.ck_id +'">' +  item.ck_nazwa + '</option>');
 				})
@@ -312,6 +312,19 @@ $('#cart').on('pageshow', function(){
 
 
 	submitOrder: function(){
+		
+		$('#departmentsAdressesSelect').val();
+		$('#costCenterSelect').val();		
+		
+		
+		if (    ($('#departmentsSelect').val() == 'placeholder') || 
+			($('#departmentsSelect').val() == 'placeholder') || 
+			($('#departmentsSelect').val() == 'placeholder')) {
+				
+			alert('Przed złożeniem zamówienia musisz wybrać oddział, adres i centrum kosztowe.')
+			
+			return false;
+		}
 		var cartId = this.getCartId();
 		var self = this;
 		$.ajax({
@@ -395,12 +408,12 @@ $('#cart').on('pageshow', function(){
 			var department_id = event.target.value;
 			self.setDepartment(department_id);
 
-			$('#departmentsAdressesSelect').html('<option data-placeholder="true">Wybierz adres</option>');
+			$('#departmentsAdressesSelect').html('<option data-placeholder="true" value="placeholder">Wybierz adres</option>');
 			$('#departmentsAdressesSelect').selectmenu('refresh');
 			$('#departmentsAdressesSelect').selectmenu('disable');
 			
 
-			$('#costCenterSelect').html('<option data-placeholder="true">Wybierz centrum kosztowe</option>');
+			$('#costCenterSelect').html('<option data-placeholder="true" value="placeholder">Wybierz centrum kosztowe</option>');
 			$('#costCenterSelect').selectmenu('refresh');
 			$('#costCenterSelect').selectmenu('disable');			
 
@@ -411,7 +424,7 @@ $('#cart').on('pageshow', function(){
 			var adress_id = event.target.value;
 			self.setAdress(adress_id);
 			
-			$('#costCenterSelect').html('<option data-placeholder="true">Wybierz centrum kosztowe</option>');
+			$('#costCenterSelect').html('<option data-placeholder="true" value="placeholder">Wybierz centrum kosztowe</option>');
 			$('#costCenterSelect').selectmenu('refresh');
 			$('#costCenterSelect').selectmenu('disable');			
 
