@@ -1,14 +1,17 @@
 $('#ordersPage').on('pageshow', function(event){
+	$('#departmentsListA').html('<h2 class="loadingmsg">Ładowanie...</h2>');	
 	BPApp.Order.start();
 });
 
 $('#ordersAddressesPage').on('pageshow', function(event){
+	$('#addressesListA').html('<h2 class="loadingmsg">Ładowanie...</h2>');			
 	var department_id = localStorage.getItem("department_id");
 	BPApp.Order.displayAddresses(department_id);
 	BPApp.Order.bindEvents();
 });
 
 $('#ordersCostSourcesPage').on('pageshow', function(event){
+	$('#costSourcesListA').html('<h2 class="loadingmsg">Ładowanie...</h2>');		
 	var department_id = localStorage.getItem("department_id");
 	var address_id = localStorage.getItem("address_id");
 	BPApp.Order.displayCostSources(department_id, address_id);
@@ -16,6 +19,7 @@ $('#ordersCostSourcesPage').on('pageshow', function(event){
 });
 
 $('#ordersListPage').on('pageshow', function(event){
+	$('#ordersList').html('<h2 class="loadingmsg">Ładowanie...</h2>');
 	var department_id = localStorage.getItem("department_id");
 	var cost_id = localStorage.getItem("cost_id");
 	BPApp.Order.displayOrders(department_id, cost_id);
@@ -57,7 +61,7 @@ $('#myWaitnigOrdersPage').on('pageshow', function(event){
 				//FIX 
 				$('.bpm-order-button').on('click', function(event) {
 			 		var department_id = $(event.target).attr('data-depid');
-					alert('bind ' + department_id);
+					/* alert('bind ' + department_id); */
 					localStorage.setItem("department_id", department_id);
 		 		});
        		}
@@ -166,7 +170,7 @@ $('#myWaitnigOrdersPage').on('pageshow', function(event){
 	},
 
 	displayAddresses: function(departmentId){
-		alert(departmentId);
+		/* alert(departmentId); */
 		var self = this;
 		if(departmentId.length > 0){
 			$.ajax({
