@@ -9,8 +9,6 @@
 	background-image: none;
 }
 
-
-/* show full text in select option boxes */
 li[role=option] .ui-btn-inner a {white-space:normal!important;}
 
 .ui-header, .ui-footer {
@@ -69,38 +67,8 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 	white-space: normal;
 }
 
-[data-role="button"]:hover {
-	
- opacity: 0.5!important; 
-/*	background-color: #18a88f!important;
-	background-image: none!important;
-	text-shadow: none!important; */
-/*	color: white!important; */
-}
-
-/*
-.ui-btn-hover-a {
-	border: 1px solid #333;
-}
-#cartProducts .ui-btn-hover-a {
-	border: 1px solid #bbbbbb;
-}
-
-.ui-header .ui-btn-hover-a {
-	border: 0px solid #333; 
-}
-*/
-
-/*
-input[type=date]::-webkit-calendar-picker-indicator {
-	float: left;
-	width: 20px;	
-	height: 20px;
-	margin-right: 10px;
-}
-*/
-input[type=date]::-webkit-inner-spin-button {
-/*	display:none; */
+[data-role="button"]:hover {	
+	opacity: 0.5!important; 
 }
 
 /****************************** HEADER */
@@ -162,18 +130,6 @@ input[type=date]::-webkit-inner-spin-button {
 		max-width: 30%;
 	}	
 }
-/*
-@media (max-width: 320px) {  
-	.logo {
-		background: url(../img/logo.png) no-repeat center 40%;
-	}
-	.menu-titles > a > img {
-		max-width: 45%;
-	}	
-}
-*/ 
-
-
 
 /****************************** MENU */
 
@@ -184,7 +140,7 @@ input[type=date]::-webkit-inner-spin-button {
 	margin-top: 25px;
 }
 
-.menu-titles > a > img:hover  { /* .menu-titles > a > img:focus */
+.menu-titles > a > img:hover  { 
 	opacity: 0.5;
 }
 
