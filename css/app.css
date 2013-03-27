@@ -225,6 +225,12 @@ input[type=date]::-webkit-inner-spin-button {
 
 /* ORDERS */
 
+#ordersList {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
 .paramName {
 	margin-bottom: 5px;
 	padding-bottom: 5px;

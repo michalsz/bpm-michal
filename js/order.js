@@ -54,14 +54,14 @@ $('#myWaitnigOrdersPage').on('pageshow', function(event){
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){
 				$('#departmentsListA').html('');
-    			$.each(data.oddzialy, function(i, item){
-    				console.log(item.kth_id);
+				$.each(data.oddzialy, function(i, item){
 					$('#departmentsListA').append('<li><a href="#ordersAddressesPage" class="bpm-order-button" data-depid="'  + item.kth_id +  '">' + item.dak_skrot + ' </a></li>');
-				})
-				//FIX 
+				});
+				$('#departmentsListA').listview('refresh');
+				
+				// FIX 
 				$('.bpm-order-button').on('click', function(event) {
 			 		var department_id = $(event.target).attr('data-depid');
-					/* alert('bind ' + department_id); */
 					localStorage.setItem("department_id", department_id);
 		 		});
        		}
@@ -80,28 +80,26 @@ $('#myWaitnigOrdersPage').on('pageshow', function(event){
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
 				$('#ordersList').html('');
-    			$.each(data.zamowienia, function(i, item){
+				
+				$.each(data.zamowienia, function(i, item){
 					$('#ordersList').append('<li id="orderdetail'+item.ds_id+'"><span class="paramName">Numer dokumentu: <span class="paramValue">' + item.ds_id + '</span></span><span class="paramName">Nazwa Centrum Kosztowego <span class="paramValue">' + item.ck_nazwa + '</span></span><span class="paramName">Cena netto:  <span class="paramValue">' + item.ds_netto + 'zł</span></span><span class="paramName">VAT <span class="paramValue">' + item.ds_vat + 'zł</span></span><span class="paramName">Cena Brutto: <span class="paramValue">' + item.ds_brutto + 'zł</span></span><div id="poz'+item.ds_id+'"></div><a id="orderdetails" href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-detail-btn">Szczegóły</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-accept-btn">Akceptuj</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-cancel-btn">Odrzuć</a></li>').trigger('create');
-
-					//$('#ordersList').listview('refresh');
-
-				})
+				});
 
 				$('.order-detail-btn').on('click', function(event) {
 
  				var doc_id = $(event.target).parents('a').attr('data-docid');
 	 				self.displayOrderDetail(doc_id);
-	 			})
+	 			});
 
 				$('.order-accept-btn').on('click', function(event) {
 	 				var doc_id = $(event.target).parents('a').attr('data-docid');
 	 				self.acceptOrder(doc_id);
-	 			})
+	 			});
 
 	 			$('.order-cancel-btn').on('click', function(event) {
 	 				var doc_id = $(event.target).parents('a').attr('data-docid');
 	 				self.cancelOrder(doc_id);
-	 			})
+	 			});
 
 				if(data.zamowienia.length == 0){
 					$('#ordersList').append('<span>W danym centrum kosztowym brak zamówień</span>');
@@ -170,7 +168,6 @@ $('#myWaitnigOrdersPage').on('pageshow', function(event){
 	},
 
 	displayAddresses: function(departmentId){
-		/* alert(departmentId); */
 		var self = this;
 		if(departmentId.length > 0){
 			$.ajax({
@@ -186,6 +183,7 @@ $('#myWaitnigOrdersPage').on('pageshow', function(event){
 					$.each(data.adresy, function(i, item){
 						$('#addressesListA').append('<li><a href="#ordersCostSourcesPage" class="bpm-orders-costs-button"  data-addrressid="' + item.dak_id +  '">' + item.adr_opis + ' </a></li>');
 					})
+					$('#addressesListA').listview('refresh');
 					self.bindEvents();
        			}
    			});
@@ -209,7 +207,8 @@ $('#myWaitnigOrdersPage').on('pageshow', function(event){
 					$('#costSourcesListA').html('');
 					$.each(data.centra, function(i, item){
 						$('#costSourcesListA').append('<li><a href="#ordersListPage" class="bpm-orders-orders-button" data-costid="'  + item.ck_id +  '">' + item.ck_nazwa + ' </a></li>');
-					})
+					});
+					$('#costSourcesListA').listview('refresh');
 					self.bindEvents();
        			}
    			});
