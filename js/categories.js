@@ -1,4 +1,5 @@
 $('#categories').on('pageshow', function(){
+	$('#categoriesList').html('<h2 class="loadingmsg">Ładowanie...</h2>');	
 	BPApp.Categories.getCategories();
 });
 

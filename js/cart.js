@@ -113,8 +113,11 @@ $('#cart').on('pageshow', function(){
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){              
 				self.updateProductCount();				
+				$('#productdata > .controls > .ui-field-contain').hide();				
+				$('#addToCart').hide();					
+				$('#backToProducts').show();				
 				alert('Produkt został dodany');
-				$('#backToProducts').show();
+
 
           	},
 			error: function(message){

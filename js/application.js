@@ -21,6 +21,18 @@ var BPApp = {
 				$('#bpm-cartselects').hide();
 				$('#submitOrder').hide();
 				$('#emptyCartMsg').hide();
+				// rest
+				$('#myWaitingOrdersList').html('');
+				$('#departmentsList').html('');
+				$('#productsPriceList').html('');
+				$('#categoriesList').html('');
+				$('#subcategoriesList').html('');
+				$('#productsList').html('');
+				$('#productData').hide();
+				
+				$('#productdata > .controls > .ui-field-contain').show();				
+				$('#addToCart').show();					
+				
 			} 
 		});
 		this.setupAjax();

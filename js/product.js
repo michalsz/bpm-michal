@@ -1,6 +1,5 @@
 $('#product').on('pageshow', function(event) {
 	$('#product .loadingmsg').show();	
-	$('#productdata').hide(); 
 	$('#productCount').parents('.controls').show();  
 	BPApp.Product.start();
 });
@@ -36,7 +35,7 @@ BPApp.Product = {
 				self.showAddToCart();
 				localStorage.setItem("subcategory", item.kt_id);
 				$('#product .loadingmsg').hide();	
-				$('#productdata').show();				
+				$('#productdata').show();							
           	}
     	});
 	},
