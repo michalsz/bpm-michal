@@ -60,7 +60,7 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){ 
-				$('#departmentsSelect').html('<option>Wybierz oddział</option>');
+				$('#departmentsSelect').html('<option data-placeholder="true">Wybierz oddział</option>');
 				$.each(data.oddzialy, function(i, item){
 					$('#departmentsSelect').append('<option value="' + item.kth_id +'">' +  item.dak_skrot + '</option>');
 				})
@@ -230,7 +230,7 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){
-				$('#departmentsAdressesSelect').html('<option>Wybierz adres</option>');
+				$('#departmentsAdressesSelect').html('<option data-placeholder="true">Wybierz adres</option>');
 				$.each(data.adresy, function(i, adress){
 					$('#departmentsAdressesSelect').append('<option value="' + adress.dak_id +'">' +  adress.adr_opis + '</option>');
 				})
@@ -251,7 +251,6 @@ $('#cart').on('pageshow', function(){
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){              
 				if(message.ustawione == 'T'){
-					//alert('Ustawiłeś adres');
 					$('#costCenterSelect').show();
 				}
           	},
@@ -273,7 +272,7 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
-				$('#costCenterSelect').html('<option>Wybierz centrum kosztowe</option>');
+				$('#costCenterSelect').html('<option data-placeholder="true">Wybierz centrum kosztowe</option>');
 				$.each(data.centra, function(i, item){
 					$('#costCenterSelect').append('<option value="' + item.ck_id +'">' +  item.ck_nazwa + '</option>');
 				})
