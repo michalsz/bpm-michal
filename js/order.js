@@ -22,7 +22,7 @@ $('#ordersListPage').on('pageshow', function(event){
 	$('#ordersList').html('<h2 class="loadingmsg">Ładowanie...</h2>');
 	var department_id = localStorage.getItem("department_id");
 	var cost_id = localStorage.getItem("cost_id");
-	BPApp.Order.displayOrders(department_id, cost_id);
+	BPApp.Order.displayOrders(department_id, cost_id, 'ordersList');
 });
 
 $('#myWaitingOrdersPage').on('pageshow', function(event){
@@ -34,7 +34,6 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
   BPApp.Order = {
   	start: function(){
   		this.displayDepartments();
-  		//this.displayOrders();
   		this.bindEvents();
   	},
 
@@ -69,7 +68,7 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
    		});
 	},
 	
-	displayOrders: function(departmentId, costSourceId){
+	displayOrders: function(departmentId, costSourceId, elementId){
 		var self = this;
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.DoAkceptacji',
@@ -80,10 +79,12 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
-				$('#ordersList').html('');
+				console.log(elementId);
+				console.log(data);
+				$('#' + elementId).html('');
 				
 				$.each(data.zamowienia, function(i, item){
-					$('#ordersList').append('<li id="orderdetail'+item.ds_id+'"><span class="paramName">Numer dokumentu: <span class="paramValue">' + item.ds_id + '</span></span><span class="paramName">Nazwa Centrum Kosztowego <span class="paramValue">' + item.ck_nazwa + '</span></span><span class="paramName">Cena netto:  <span class="paramValue">' + item.ds_netto + 'zł</span></span><span class="paramName">VAT <span class="paramValue">' + item.ds_vat + 'zł</span></span><span class="paramName">Cena Brutto: <span class="paramValue">' + item.ds_brutto + 'zł</span></span><div id="poz'+item.ds_id+'"></div><a id="orderdetails" href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-detail-btn">Szczegóły</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-accept-btn">Akceptuj</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-cancel-btn">Odrzuć</a></li>').trigger('create');
+					$('#' + elementId).append('<li id="orderdetail'+item.ds_id+'"><span class="paramName">Numer dokumentu: <span class="paramValue">' + item.ds_id + '</span></span><span class="paramName">Nazwa Centrum Kosztowego <span class="paramValue">' + item.ck_nazwa + '</span></span><span class="paramName">Cena netto:  <span class="paramValue">' + item.ds_netto + 'zł</span></span><span class="paramName">VAT <span class="paramValue">' + item.ds_vat + 'zł</span></span><span class="paramName">Cena Brutto: <span class="paramValue">' + item.ds_brutto + 'zł</span></span><div id="poz'+item.ds_id+'"></div><a id="orderdetails" href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-detail-btn">Szczegóły</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-accept-btn">Akceptuj</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-cancel-btn">Odrzuć</a></li>').trigger('create');
 				});
 
 				$('.order-detail-btn').on('tap', function(event) {
@@ -103,7 +104,7 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 	 			});
 
 				if(data.zamowienia.length == 0){
-					$('#ordersList').append('<span>W danym centrum kosztowym brak zamówień</span>');
+					$('#' + elementId).append('<span>W danym centrum kosztowym brak zamówień</span>');
 				}
        		},
        		error: function(event){
@@ -130,7 +131,6 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 			}
 		})
 	},
-
 
 	acceptOrder: function(doc_id){
 		 $.ajax({
@@ -255,12 +255,6 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 
 	bindEvents: function(){
 		var self = this;
-		 //$('.bpm-order-button').on('tap', function(event) {
-		 //	var department_id = $(event.target).attr('data-depid');
-		//	alert(department_id);
-		//	localStorage.setItem("department_id", department_id);
-		 //});
-
 		 $('.bpm-orders-costs-button').on('tap', function(event) {
 		 	var address_id = $(event.target).attr('data-addrressid');
 		 	localStorage.setItem("address_id", address_id);
@@ -273,6 +267,12 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 
  		 $('#documentsBtn').on('tap', function(event) {
  		 	self.displayDocuments();
+		 });
+
+		 $('#allOrders').on('click', function(event) {
+		 	var addressid = $('.bpm-orders-costs-button').attr('data-addrressid');
+ 		 	//Platnik - zapytanie o wszystkie zamowienia bez centrum kosztowego - jak nie poda sie centrum kosztowego
+ 		 	self.displayOrders(addressid, '', 'allOrdersList');
 		 });
 
 	}

@@ -35,6 +35,7 @@ $('#costSourcesPage').on('pageshow', function(event){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){     
+				console.log(data);
     			$('#departmentsList').html('');
     			$.each(data.oddzialy, function(i, item){
     				$('#departmentsList').append('<li><a href="#departmentPage" class="bpm-department-button"  data-depid="' + item.kth_id + '">'+ item.dak_skrot +'</li>');
@@ -78,7 +79,8 @@ $('#costSourcesPage').on('pageshow', function(event){
 			dataType: 'jsonp',
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
-			success: function(data){           
+			success: function(data){    
+				console.log(data); 
 				$('#adresses').html('');
 				$.each(data.adresy, function(i, item){
 					$('#adresses').append('<li><a href="#costSourcesPage" class="bpm-adress-button" data-adressid="' + item.dak_id + '">'+ item.adr_opis +'</li>');
@@ -90,6 +92,7 @@ $('#costSourcesPage').on('pageshow', function(event){
 	},
 
 	getCostsSource: function(department_id, adress_id){
+		console.log(department_id + ' ' + adress_id);
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.CentraKosztowe',
 			data: {'OdbId': department_id, 'AdrId': adress_id, 'Stat': 'A', 'AuthKey': localStorage.getItem("auth_key")},
