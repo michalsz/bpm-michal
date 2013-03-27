@@ -10,7 +10,6 @@ $('#cart').on('pageshow', function(){
 		$('#departmentsAdressesSelect').selectmenu('refresh');
 		$('#costCenterSelect').selectmenu('refresh');		
   		this.displayProductsFromCart();
-  		this.bindEvents();
   	},
 
 	displayProductsFromCart: function(){
@@ -385,21 +384,18 @@ $('#cart').on('pageshow', function(){
 			self.increaseProduct(event, (parseInt(count) -1) );
 		});
 
-		$('#departmentsSelect').off('change');
 		$('#departmentsSelect').on('change', function(event){
 			var department_id = event.target.value;
 			self.setDepartment(department_id);
 			self.getDepartmentAdresses(department_id);
 		});
 
-		$('#departmentsAdressesSelect').off('change');
 		$('#departmentsAdressesSelect').on('change', function(event){
 			var adress_id = event.target.value;
 			self.setAdress(adress_id);
 			self.getCostCenters(adress_id);
 		});
 
-		$('#costCenterSelect').off('change');
 		$('#costCenterSelect').on('change', function(event){
 			var cost_center_id = event.target.value;
 			self.setCostCenter(cost_center_id);
