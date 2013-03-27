@@ -25,7 +25,8 @@ $('#ordersListPage').on('pageshow', function(event){
 	BPApp.Order.displayOrders(department_id, cost_id);
 });
 
-$('#myWaitnigOrdersPage').on('pageshow', function(event){
+$('#myWaitingOrdersPage').on('pageshow', function(event){
+	$('#myWaitingOrdersList').html('<h2 class="loadingmsg">Ładowanie...</h2>');	
 	BPApp.Order.displayMyWaitnigOrders();
 });
 
