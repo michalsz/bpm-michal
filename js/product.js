@@ -1,5 +1,6 @@
 $('#product').on('pageshow', function(event) {
-	$('#product_name').html('Ładowanie...');
+	$('#product .loadingmsg').show();	
+	$('#productdata').hide(); 
 	$('#productCount').parents('.controls').show();  
 	BPApp.Product.start();
 });
@@ -34,6 +35,8 @@ BPApp.Product = {
 				$('#count').html(item.tow_stan_mag);
 				self.showAddToCart();
 				localStorage.setItem("subcategory", item.kt_id);
+				$('#product .loadingmsg').hide();	
+				$('#productdata').show();				
           	}
     	});
 	},

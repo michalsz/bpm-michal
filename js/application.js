@@ -9,6 +9,7 @@ var BPApp = {
 			if(showLoginMessage == 0){
 				$('#loginMessage').html('');
 			}
+			$('#productdata').hide();
 		});
 		this.setupAjax();
 	},
