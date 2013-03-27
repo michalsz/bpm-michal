@@ -388,7 +388,6 @@ $('#cart').on('pageshow', function(){
 		$('#departmentsSelect').off('change');
 		$('#departmentsSelect').on('change', function(event){
 			var department_id = event.target.value;
-			alert('event');
 			self.setDepartment(department_id);
 			self.getDepartmentAdresses(department_id);
 		});
