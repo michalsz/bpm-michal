@@ -1,3 +1,8 @@
+.right {
+	float: right;
+	display: inline-block;
+}
+
 /****************************** JQ UI */
 
 .ui-body-a, .ui-overlay-a {
@@ -226,6 +231,7 @@ h2.loadingmsg {
 	padding-bottom:10px;
 	padding-left:10px;
 	font-size: 1.2em;
+text-align: center;	
 }
 .bpm-productdata {
 	display:block;
@@ -243,6 +249,16 @@ h2.loadingmsg {
 	font-weight: bold;
 	float:right;
 }
+
+#product_name {
+	font-size: 20px;
+	color: #ccc;
+}
+
+#productCount {
+	width: 10%;
+}
+
 
 /* ORDERS */
 

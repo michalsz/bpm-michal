@@ -47,7 +47,7 @@ BPApp.ProductList = {
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(item){       
-          		$('#' + element_id).append('<li><a data-transition="slide" class="bpm-price-btn" data-productid="' + item.tow_id + '" href="#product">' + item.tow_nazwa + ' ' +  item.cena_n +' zł</a></li>');
+          		$('#' + element_id).append('<li><a data-transition="slide" class="bpm-price-btn" data-productid="' + item.tow_id + '" href="#product">' + item.tow_nazwa + ' <span class="right">' +  item.cena_n +' zł</span></a></li>');
           		$('#productsPriceList').listview('refresh');
 				self.onButtonClick();          		       		
           	},
