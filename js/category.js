@@ -35,7 +35,7 @@ BPApp.Category = {
 	},
 
 	bindEvents: function(){
-		$('.bpm-subcategory-button').on('click', function(event) {
+		$('.bpm-subcategory-button').on('tap', function(event) {
 			var id = $(event.target).attr('data-subcat');
 			localStorage.setItem("subcategory", id);
 		});

@@ -61,7 +61,7 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 				$('#departmentsListA').listview('refresh');
 				
 				// FIX 
-				$('.bpm-order-button').on('click', function(event) {
+				$('.bpm-order-button').on('tap', function(event) {
 			 		var department_id = $(event.target).attr('data-depid');
 					localStorage.setItem("department_id", department_id);
 		 		});
@@ -86,18 +86,18 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 					$('#ordersList').append('<li id="orderdetail'+item.ds_id+'"><span class="paramName">Numer dokumentu: <span class="paramValue">' + item.ds_id + '</span></span><span class="paramName">Nazwa Centrum Kosztowego <span class="paramValue">' + item.ck_nazwa + '</span></span><span class="paramName">Cena netto:  <span class="paramValue">' + item.ds_netto + 'zł</span></span><span class="paramName">VAT <span class="paramValue">' + item.ds_vat + 'zł</span></span><span class="paramName">Cena Brutto: <span class="paramValue">' + item.ds_brutto + 'zł</span></span><div id="poz'+item.ds_id+'"></div><a id="orderdetails" href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-detail-btn">Szczegóły</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-accept-btn">Akceptuj</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-cancel-btn">Odrzuć</a></li>').trigger('create');
 				});
 
-				$('.order-detail-btn').on('click', function(event) {
+				$('.order-detail-btn').on('tap', function(event) {
 					var doc_id = $(event.target).parents('a').attr('data-docid');
 					self.displayOrderDetail(doc_id);
 					$(event.target).parents('a').remove();
 	 			});
 
-				$('.order-accept-btn').on('click', function(event) {
+				$('.order-accept-btn').on('tap', function(event) {
 	 				var doc_id = $(event.target).parents('a').attr('data-docid');
 	 				self.acceptOrder(doc_id);
 	 			});
 
-	 			$('.order-cancel-btn').on('click', function(event) {
+	 			$('.order-cancel-btn').on('tap', function(event) {
 	 				var doc_id = $(event.target).parents('a').attr('data-docid');
 	 				self.cancelOrder(doc_id);
 	 			});
@@ -255,23 +255,23 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 
 	bindEvents: function(){
 		var self = this;
-		 //$('.bpm-order-button').on('click', function(event) {
+		 //$('.bpm-order-button').on('tap', function(event) {
 		 //	var department_id = $(event.target).attr('data-depid');
 		//	alert(department_id);
 		//	localStorage.setItem("department_id", department_id);
 		 //});
 
-		 $('.bpm-orders-costs-button').on('click', function(event) {
+		 $('.bpm-orders-costs-button').on('tap', function(event) {
 		 	var address_id = $(event.target).attr('data-addrressid');
 		 	localStorage.setItem("address_id", address_id);
 		 });
 
-		 $('.bpm-orders-orders-button').on('click', function(event) {
+		 $('.bpm-orders-orders-button').on('tap', function(event) {
 		 	var cost_id = $(event.target).attr('data-costid');
 		 	localStorage.setItem("cost_id", cost_id);
 		 });
 
- 		 $('#documentsBtn').on('click', function(event) {
+ 		 $('#documentsBtn').on('tap', function(event) {
  		 	self.displayDocuments();
 		 });
 

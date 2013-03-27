@@ -57,12 +57,12 @@ $('#costSourcesPage').on('pageshow', function(event){
 	bindEvents: function(){
 		var self = this;
 
-		$('.bpm-department-button').on('click', function(event) {
+		$('.bpm-department-button').on('tap', function(event) {
 			var department_id = $(event.target).attr('data-depid');
 			localStorage.setItem("department_id", department_id);
 		})
 
-		$('.bpm-adress-button').on('click', function(event) {
+		$('.bpm-adress-button').on('tap', function(event) {
 			var adress_id = $(event.target).attr('data-adressid');
 			localStorage.setItem("adress_id", adress_id);
 		})

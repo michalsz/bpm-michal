@@ -63,7 +63,7 @@ BPApp.Products = {
 	},
 
 	onButtonClick: function(){
-		$('.bpm-product-button').on('click', function(event) {
+		$('.bpm-product-button').on('tap', function(event) {
 			var id = $(event.target).attr('data-productid');
 			localStorage.setItem("product_id", id);
 		});

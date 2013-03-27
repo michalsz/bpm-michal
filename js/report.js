@@ -92,11 +92,11 @@ $('#reportsPage').on('pageshow', function(event){
 
 	bindEvents: function(){
 		var self = this;
-		$('#documents').on('click', function(event) {
+		$('#documents').on('tap', function(event) {
 			self.displayDocuments(event);
 		});
 
-		$('#createReport').on('click', function(event){
+		$('#createReport').on('tap', function(event){
 			self.generateReport(event);
 		})
 	}

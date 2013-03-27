@@ -41,13 +41,13 @@ $('#search').live('pageshow', function(){
 
 	 bindEvents: function(){
       var self = this;
-      $('.pagination_link').live('click', function(event) {
+      $('.pagination_link').live('tap', function(event) {
         var startPoz = $(event.target).attr('data-startpoz');
         localStorage.setItem('startPoz', startPoz);
         self.displayProducts();
       })
 
-      $('.prod').live('click', function(event) {
+      $('.prod').live('tap', function(event) {
         var id = $(event.target).attr('data-productid');
         localStorage.setItem("product_id", id);
       });

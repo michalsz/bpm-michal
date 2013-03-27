@@ -30,7 +30,7 @@ BPApp.Categories = {
 	},
 
 	bindEvents: function(){
-		$('.bpm-cat-button').on('click', function(event) {
+		$('.bpm-cat-button').on('tap', function(event) {
 			var id = $(event.target).attr('data-cat');
 			localStorage.setItem("category", id);
 		});

@@ -9,7 +9,7 @@ BPApp.Login = {
 	},
 
 	bindEvents: function(){
-		$('#loginbtn').on('click', function(event) {
+		$('#loginbtn').on('tap', function(event) {
 			var login = $('#user_login').val();
 			var password = $('#password').val();
 			$.ajax({
