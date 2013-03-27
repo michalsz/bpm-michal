@@ -176,8 +176,16 @@ input[type=date]::-webkit-inner-spin-button {
 
 /* LOADING */
 
-.loadingmsg {
+h2.loadingmsg {
 	padding-left:10px;
+	text-align: center;
+	margin: 10px;
+	color: #ccc;
+	margin-top: 25px;
+	font-size: 16px;
+	padding:0;
+	padding-bottom: 80px;
+	background: url(../img/ajax-loader2.gif) no-repeat center bottom;
 }
 
 /* LOGIN */
