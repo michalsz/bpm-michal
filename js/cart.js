@@ -3,8 +3,7 @@ $('#cart').on('pageshow', function(){
 });
 
   BPApp.Cart = {
-  	start: function(){
-		$('#cartProducts').html('<h2 class="loadingmsg">Ładowanie...</h2>');	
+  	start: function(){	
 		$('#emptyCartMsg').hide();
 		$('#bpm-cartselects').hide();
   		this.displayProductsFromCart();

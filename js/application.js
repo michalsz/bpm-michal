@@ -11,6 +11,18 @@ var BPApp = {
 			}
 			$('#productdata').hide();
 		});
+		$(document).on('pagebeforechange', function(e, data){
+			// hack to avoid doing the same work twice, because pagebeforechange is fired twice 
+			if (typeof data.toPage !== 'string' ) { 
+				// cart 
+				//$('#cartProducts').hide();
+				$('#cartProducts').html('<h2 class="loadingmsg">Ładowanie...</h2>');
+				$('#cartSummary').hide();
+				$('#bpm-cartselects').hide();
+				$('#submitOrder').hide();
+				$('#emptyCartMsg').hide();
+			} 
+		});
 		this.setupAjax();
 	},
 
