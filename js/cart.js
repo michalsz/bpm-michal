@@ -6,6 +6,9 @@ $('#cart').on('pageshow', function(){
   	start: function(){	
 		$('#emptyCartMsg').hide();
 		$('#bpm-cartselects').hide();
+		$('#departmentsSelect').selectmenu('refresh');
+		$('#departmentsAdressesSelect').selectmenu('refresh');
+		$('#costCenterSelect').selectmenu('refresh');		
   		this.displayProductsFromCart();
   		this.bindEvents();
   	},

@@ -21,7 +21,7 @@ var BPApp = {
 				$('#bpm-cartselects').hide();
 					$('#departmentsSelect').html('<option data-placeholder="true">Wybierz oddział</option>');
 					$('#departmentsAdressesSelect').html('<option data-placeholder="true">Wybierz adres</option>');
-					$('#costCenterSelect').html('<option data-placeholder="true">Wybierz centrum kosztowe</option>');
+					$('#costCenterSelect').html('<option data-placeholder="true">Wybierz centrum kosztowe</option>');					
 				$('#submitOrder').hide();
 				$('#emptyCartMsg').hide();
 				// rest
