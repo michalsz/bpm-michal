@@ -58,6 +58,7 @@ $('#cart').on('pageshow', function(){
 	},
 
 	displayDepartmentsSelect: function(){
+		$('#departmentsSelect .btnloader').css('display','inline-block');
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.Oddzialy',
 			data: {'OdbId': '', 'Stat': '', 'AuthKey': localStorage.getItem("auth_key")},
@@ -67,7 +68,8 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){ 
-				$('#departmentsSelect').html('<option data-placeholder="true" value="placeholder">Wybierz oddział</option>');
+				$('#departmentsSelect .btnloader').css('display','none');
+				$('#departmentsSelect').html('<option data-placeholder="true" value="placeholder">Wybierz oddział<div class="btnloader"></div></option>');
 				$.each(data.oddzialy, function(i, item){
 					$('#departmentsSelect').append('<option value="' + item.kth_id +'">' +  item.dak_skrot + '</option>');
 				})
@@ -227,6 +229,7 @@ $('#cart').on('pageshow', function(){
 	},
 
 	getDepartmentAdresses: function(department_id){
+		$('#departmentsAdressesSelect .btnloader').css('display','inline-block');
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.AdresyOddzialu',
 			data: {'OdbId': department_id, 'AuthKey': localStorage.getItem("auth_key")},
@@ -236,7 +239,8 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){
-				$('#departmentsAdressesSelect').html('<option data-placeholder="true" value="placeholder">Wybierz adres</option><option value="0">Brak</option>');
+				$('#departmentsAdressesSelect .btnloader').css('display','none');
+				$('#departmentsAdressesSelect').html('<option data-placeholder="true" value="placeholder">Wybierz adres<div class="btnloader"></div></option><option value="0">Brak</option>');
 				$.each(data.adresy, function(i, adress){
 					$('#departmentsAdressesSelect').append('<option value="' + adress.dak_id +'">' +  adress.adr_opis + '</option>');
 				})
@@ -268,6 +272,7 @@ $('#cart').on('pageshow', function(){
 	},
 
 	getCostCenters: function(adressId){
+		$('#costCenterSelect .btnloader').css('display','inline-block');
 		var cartId = this.getCartId();
 		var departamentId = $('#departmentsSelect').val();
 		$.ajax({
@@ -278,8 +283,9 @@ $('#cart').on('pageshow', function(){
 			dataType: 'jsonp',
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
-			success: function(data){           
-				$('#costCenterSelect').html('<option data-placeholder="true" value="placeholder">Wybierz centrum kosztowe</option><option value="0">Brak</option>');
+			success: function(data){
+				$('#costCenterSelect .btnloader').css('display','none');           
+				$('#costCenterSelect').html('<option data-placeholder="true" value="placeholder">Wybierz centrum kosztowe<div class="btnloader"></div></option><option value="0">Brak</option>');
 				$.each(data.centra, function(i, item){
 					$('#costCenterSelect').append('<option value="' + item.ck_id +'">' +  item.ck_nazwa + '</option>');
 				})
@@ -312,12 +318,8 @@ $('#cart').on('pageshow', function(){
 
 
 	submitOrder: function(){
-		
-		$('#departmentsAdressesSelect').val();
-		$('#costCenterSelect').val();		
-		
-		
-		if (    ($('#departmentsSelect').val() == 'placeholder') || 
+				
+		if (($('#departmentsSelect').val() == 'placeholder') || 
 			($('#departmentsSelect').val() == 'placeholder') || 
 			($('#departmentsSelect').val() == 'placeholder')) {
 				
@@ -325,6 +327,7 @@ $('#cart').on('pageshow', function(){
 			
 			return false;
 		}
+		$('#submitOrder .btnloader').css('display', 'inline-block');
 		var cartId = this.getCartId();
 		var self = this;
 		$.ajax({
@@ -337,6 +340,7 @@ $('#cart').on('pageshow', function(){
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){              
 				if(message.Zamowiony == 'T'){
+					$('#submitOrder .btnloader').css('display', 'none');
 					localStorage.removeItem('cartId');
 					$('#cartProducts').html('');
 					$('#bpm-cartselects').hide();
