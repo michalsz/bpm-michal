@@ -5,9 +5,6 @@
 
 /****************************** JQ UI */
 
-.ui-body-a, .ui-overlay-a {
-	background-image: none;
-}
 
 li[role=option] .ui-btn-inner a {white-space:normal!important;}
 
@@ -42,7 +39,7 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 }
 
 .bpm-navbutton .ui-btn-inner {
-	height: 34px;
+	height: 36px;
 	width: 32px;
 	border-radius: 0;
 	-webkit-border-radius: 0;
@@ -63,20 +60,63 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 	margin-bottom: 10px;
 }
 
-.ui-listview-filter {
-	background: #222;
-}
+
 
 .ui-li .ui-btn-text a.ui-link-inherit {
 	white-space: normal;
 }
 
-/*
-[data-role="button"]:hover {	
-	opacity: 0.5!important; 
+/****************************** BACKGROUND */
+
+.ui-body-a, .ui-overlay-a {
+	background-image: none;
+    background: #0b0e2e; /* fallback for non-supporting browsers */  
+    background-image: -webkit-gradient(radial, center 85%, 0, 70% 70%, 141, #363664, #0b0e2e ); /* old WebKit Syntax */  
+	background-image: -webkit-radial-gradient(center 85%, 70% 70%, #363664, #0b0e2e); /* New WebKit syntax */  
+	
 }
-* 
-* */
+
+.bglogo {
+	width: 80%;
+	position: fixed;
+	bottom: 10%;
+	margin-left: 10%;
+}
+
+.ui-bar-a {
+	background-image: none;
+}
+
+.ui-btn-hover-b {
+	background: transparent;
+	background: #b50000;
+}
+
+.ui-btn-up-b {
+	background: transparent;
+	background-image: none;
+}
+
+.ui-listview-filter {
+	background: transparent;
+}
+
+.ui-focus,
+.ui-btn:focus {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.ui-input-text.ui-focus,
+.ui-input-search.ui-focus {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.ui-btn-active {
+	background-image: none;
+}
 
 /****************************** HEADER */
 
@@ -162,7 +202,7 @@ h2.loadingmsg {
 	padding-left:10px;
 	text-align: center;
 	margin: 10px;
-	color: #ccc;
+	color: #fff;
 	margin-top: 25px;
 	margin-bottom: 25px;
 	font-size: 16px;
