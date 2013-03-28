@@ -39,7 +39,7 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 }
 
 .bpm-navbutton .ui-btn-inner {
-	height: 34px;
+	height: 36px;
 	width: 32px;
 	border-radius: 0;
 	-webkit-border-radius: 0;
@@ -99,6 +99,23 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 
 .ui-listview-filter {
 	background: transparent;
+}
+
+.ui-focus,
+.ui-btn:focus {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.ui-input-text.ui-focus,
+.ui-input-search.ui-focus {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.ui-btn-active {
+	background-image: none;
 }
 
 /****************************** HEADER */
