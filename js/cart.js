@@ -126,10 +126,10 @@ $('#cart').on('pageshow', function(){
 			success: function(message){              
 				self.updateProductCount();
 				$('#addToCart .btnloader').css('display','none');
-				$('#productdata > .controls > .ui-field-contain').hide();				
+				$('.productCount').hide();				
 				$('#addToCart').hide();					
 				$('#backToProducts').show();				
-				alert('Produkt został dodany');
+				//alert('Produkt został dodany');
 
 
           	},

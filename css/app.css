@@ -305,19 +305,6 @@ text-align: center;
 	float:left;
 }
 
-#pcfc {
-	width: 50%;
-	margin: 0 auto;
-}
-#pcfc > .ui-input-text {
-	width:50px;
-}
-#pcfc > label {
-	width: auto!important;
-	line-height: 37px;
-	font-weight: bold;
-}
-
 .bpm-productdatalist {
 	font-weight: bold;
 }
