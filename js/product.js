@@ -1,6 +1,5 @@
 $('#product').on('pageshow', function(event) {
 	$('#product .loadingmsg').show();	
-	$('#productCount').parents('.controls').show();  
 	BPApp.Product.start();
 });
 
@@ -24,7 +23,7 @@ BPApp.Product = {
 			dataType: 'jsonp',
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
-			success: function(item){              
+			success: function(item){      
 				$('#product_name').html(item.tow_nazwa);
 				$('#product_image').append('<img src="' + item.tow_image + '"/>');
 				$('#product_details').html(item.tow_opis);
@@ -35,7 +34,9 @@ BPApp.Product = {
 				self.showAddToCart();
 				localStorage.setItem("subcategory", item.kt_id);
 				$('#product .loadingmsg').hide();	
-				$('#productdata').show();							
+				$('#productdata').show();	
+				$('#addToCart').css('display','block');						
+				$('.productCount').show();
           	}
     	});
 	},
@@ -54,7 +55,7 @@ BPApp.Product = {
 		var authorized = localStorage.getItem("authorized");
 		if (authorized) {
 			$('#addToCart').show();
-			$('#productCount').show();
+			$('.productCount').show();
 		};
 	},
 
@@ -75,10 +76,7 @@ BPApp.Product = {
 			var productId = $('#productId').val(); 
 			var productCount = $('#productCount').val();
 			var productName = $('#productName_' + productId).html();
-			$('#addToCart').unbind('tap'); 
-			$('#addToCart').unbind('tap');
-			//$('#productCount').parents('.controls').hide(); 
-			
+			$('#addToCart').unbind('tap'); 			
 			BPApp.Cart.addProduct(productName, productId, productCount);
 			
 		})

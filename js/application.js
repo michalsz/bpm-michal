@@ -30,10 +30,12 @@ var BPApp = {
 				$('#categoriesList').html('');
 				$('#subcategoriesList').html('');
 				$('#productsList').html('');
-				$('#productData').hide();
 				
-				$('.productCount').show();				
-				$('#addToCart').show();				
+				
+								
+				$('#addToCart').hide();
+				$('.productCount').hide();		
+				$('#productdata').hide();		
 
 				
 				$('#reportsSelect').html('<option data-placeholder="true" value="placeholder">Wybierz</option>');
