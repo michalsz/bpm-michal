@@ -59,6 +59,10 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 	margin: 10px!important;
 }
 
+.ui-listview {
+	margin-bottom: 10px;
+}
+
 .ui-listview-filter {
 	background: #222;
 }
@@ -157,6 +161,7 @@ h2.loadingmsg {
 	margin: 10px;
 	color: #ccc;
 	margin-top: 25px;
+	margin-bottom: 25px;
 	font-size: 16px;
 	padding:0;
 	padding-bottom: 80px;

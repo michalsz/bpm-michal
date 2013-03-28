@@ -37,6 +37,16 @@ var BPApp = {
 
 							
 				$('#reportsSelect').html('<option data-placeholder="true">Wybierz</option>');	
+				
+				// akceptant
+				$('#departmentsListA').html('');
+				$('#addressesListA').html('');
+				$('#costSourcesListA').html('');
+				$('#allOrdersList').html('');
+				
+				
+				
+				
 
 
 				
