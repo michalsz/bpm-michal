@@ -18,9 +18,9 @@ var BPApp = {
 				$('#cartProducts').html('<h2 class="loadingmsg">Ładowanie...</h2>');
 				$('#cartSummary').hide();
 				$('#bpm-cartselects').hide();
-					$('#departmentsSelect').html('<option data-placeholder="true">Wybierz oddział<div class="btnloader"></div></option>');
-					$('#departmentsAdressesSelect').html('<option data-placeholder="true">Wybierz adres<div class="btnloader"></div></option>');
-					$('#costCenterSelect').html('<option data-placeholder="true">Wybierz centrum kosztowe<div class="btnloader"></div></option>');					
+					$('#departmentsSelect').html('<option data-placeholder="true">Wybierz oddział</option>');
+					$('#departmentsAdressesSelect').html('<option data-placeholder="true">Wybierz adres</option>');
+					$('#costCenterSelect').html('<option data-placeholder="true">Wybierz centrum kosztowe</option>');					
 				$('#submitOrder').hide();
 				$('#emptyCartMsg').hide();
 				// rest
