@@ -90,7 +90,7 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 				$('.order-detail-btn').on('tap', function(event) {
 					var doc_id = $(event.target).parents('a').attr('data-docid');
 					self.displayOrderDetail(doc_id);
-					$(event.target).parents('a').remove();
+					//$(event.target).parents('a').remove();
 	 			});
 
 				$('.order-accept-btn').on('tap', function(event) {
