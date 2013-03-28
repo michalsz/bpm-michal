@@ -33,24 +33,24 @@ $('#cart').on('pageshow', function(){
 					if(cart){
 						$.each(cart.pozycje, function(i, item){
 							$('#cartProducts').append('<li class="kontener" data-inset="true"><a href="#product" class="bpm-cart-prod" data-productid="' + item.tow_id + '">' + item.tow_nazwa + '</a><div data-role="controlgroup" data-type="horizontal" data-mini="true" class="kontrolki" ><span class="productcountlabel">sztuk:</span><span class="productcount">' +  item.pds_ilosc +'</span><a data-role="button" data-icon="arrow-u" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-up" data-count="' +  item.pds_ilosc +'" data-pdsid="' + item.pds_id + '">Więcej</a><a data-role="button" data-icon="arrow-d" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-down" data-count="' + item.pds_ilosc + '" data-pdsid="' + item.pds_id + '">Mniej</a><a data-role="button" data-icon="delete" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-remove" data-pdsid="' + item.pds_id + '">Usuń</a></div></li>').trigger('create'); 
-
 						});
 						$('#cartProducts').listview('refresh');
+
+						if(cart.pozycje.length === undefined ) { alert('CartID jest niezdefiniowane. Prosimy o kontakt z pomocą techniczną.') }
 						
-						self.bindEvents();
-						console.log(cart.pozycje.length);
 						if(cart.pozycje.length > 0){
 							self.displayDepartmentsSelect();
 							self.cartSummary();
 							$('#bpm-cartselects').show();
 							$('#submitOrder').show();
 							$('#cartSummary').show();
-						}else{
+						} else {
 							$('#bpm-cartselects').hide();
 							$('#submitOrder').hide();
 							$('#cartSummary').hide();							
 							$('#emptyCartMsg').show();
 						}
+						self.bindEvents();
 					}	
           		}
     		});
