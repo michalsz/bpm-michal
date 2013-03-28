@@ -118,6 +118,8 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 	},
 
 	displayOrderDetail: function(doc_id){
+		$('#orderdetail' + doc_id + ' .order-detail-btn .ui-btn-text').append('<div class="btnloader"></div>');
+		$('#orderdetail' + doc_id + ' .order-detail-btn  .ui-btn-text .btnloader').css('display','inline-block');		
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.PozycjeDokDoAkceptacji',
 			data: {'DsId': doc_id, 'AuthKey': localStorage.getItem("auth_key")},
@@ -127,15 +129,19 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
-    			$('#poz' + doc_id ).html('');
-    			$.each(data.pozycje, function(i, item){
-					$('#poz' + doc_id).html('<span class="paramName">Szczegóły: <span class="paramValue">'+ item.tow_nazwa +' ' +  item.pds_ilosc + item.pds_jm_symbol +'</span></span>');
-				})
+					$('#poz' + doc_id ).html('');
+					$.each(data.pozycje, function(i, item){
+						$('#poz' + doc_id).html('<span class="paramName">Szczegóły: <span class="paramValue">'+ item.tow_nazwa +' ' +  item.pds_ilosc + item.pds_jm_symbol +'</span></span>');
+					});
+					$('#orderdetail' + doc_id + ' .order-detail-btn .ui-btn-text .btnloader').css('display','none');
 			}
 		})
 	},
 
 	acceptOrder: function(doc_id){
+		
+		$('#orderdetail' + doc_id + ' .order-accept-btn .ui-btn-text').append('<div class="btnloader"></div>');
+		$('#orderdetail' + doc_id + ' .order-accept-btn .ui-btn-text .btnloader').css('display','inline-block');
 		 $.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.AkceptujZamowienieCale',
 			data: {'DsId': doc_id, 'Uwagi': '', 'AuthKey': localStorage.getItem("auth_key")},
@@ -146,6 +152,7 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
 				if(data.Zaakceptowane == 'T'){
+				$('#orderdetail' + doc_id + ' .order-accept-btn .ui-btn-text .btnloader').css('display','none');
     				alert('Zamówienie zostało zaakceptowane');
     				$('#orderdetail'+doc_id).html('');	
     			}
@@ -154,6 +161,8 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 	},
 
 	cancelOrder: function(doc_id){
+		$('#orderdetail' + doc_id + ' .order-cancel-btn .ui-btn-text').append('<div class="btnloader"></div>');
+		$('#orderdetail' + doc_id + ' .order-cancel-btn .ui-btn-text .btnloader').css('display','inline-block');		
 		 $.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.OdrzucZamowienie',
 			data: {'DsId': doc_id, 'Uwagi': '', 'AuthKey': localStorage.getItem("auth_key")},
@@ -164,6 +173,7 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
     			if(data.Odrzucone == 'T'){
+				$('#orderdetail' + doc_id + ' .order-cancel-btn .ui-btn-text .btnloader').css('display','none');
     				alert('Zamówienie zostało odrzucone');
     				$('#orderdetail'+doc_id).html('');	
     			}
@@ -229,7 +239,7 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
-				console.log(data);
+//				console.log(data);
        		}
    		});
 	},
