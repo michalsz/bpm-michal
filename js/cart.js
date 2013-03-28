@@ -58,8 +58,8 @@ $('#cart').on('pageshow', function(){
 	},
 
 	displayDepartmentsSelect: function(){
-		$('#departmentsSelect .ui-btn-text').append('<div class="btnloader"></div>'); 
-		$('#departmentsSelect .ui-btn-text .btnloader').css('display','inline-block');			
+		$('#departmentsSelect-button .ui-btn-text').append('<div class="btnloader"></div>'); 
+		$('#departmentsSelect-button .ui-btn-text .btnloader').css('display','inline-block');			
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.Oddzialy',
 			data: {'OdbId': '', 'Stat': '', 'AuthKey': localStorage.getItem("auth_key")},

@@ -11,8 +11,8 @@ $('#reportsPage').on('pageshow', function(event){
   	},
 
 	displayReports: function(){
-		$('#reportsSelect .ui-btn-text').append('<div class="btnloader"></div>'); 
-		$('#reportsSelect .ui-btn-text .btnloader').css('display','inline-block');			
+		$('#reportsSelect-button .ui-btn-text').append('<div class="btnloader"></div>'); 
+		$('#reportsSelect-button .ui-btn-text .btnloader').css('display','inline-block');			
 		var auth_key = localStorage.getItem("auth_key");
 		if($('#reportsSelect').find('option').length == 1){
 			$.ajax({
@@ -23,8 +23,8 @@ $('#reportsPage').on('pageshow', function(event){
 				dataType: 'jsonp',
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
-				success: function(data){     
-					$('#reportsSelect .ui-btn-text .btnloader').css('display','none');					
+				success: function(data){  
+					$('#reportsSelect-button .ui-btn-text .btnloader').css('display','none');					
 					$('#reportsSelect').html('<option data-placeholder="true">Wybierz</option>');
 					$.each(data.raporty, function(i, item){
 						$('#reportsSelect').append('<option value="' + item.raport_kod + '"> '  + item.raport_nazwa +  '</option>');
@@ -72,6 +72,7 @@ $('#reportsPage').on('pageshow', function(event){
 	},
 
 	generateReport: function(event){
+		$('#createReport btnloader').css('display', 'inline-block');
 		var auth_key = localStorage.getItem("auth_key");
 		var dateSince = $('#dateSince').val();
 		var dateTo = $('#dateTo').val();
@@ -84,14 +85,14 @@ $('#reportsPage').on('pageshow', function(event){
 			dataType: 'jsonp',
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
-			success: function(data){     
-    			$('#createReport').attr('href','https://docs.google.com/viewer?url='+data.raport_url);
-    			$('#createReport span span').html('Pobierz raport (pdf)');
-    			$('#createReport').trigger('create');
-       		},
+			success: function(data){ 
+				$('#createReport btnloader').css('display', 'none');
+				$('#createReport').attr('href','https://docs.google.com/viewer?url='+data.raport_url);
+				$('#createReport span span').html('Pobierz raport (pdf)');
+				$('#createReport').trigger('create');
+			},
 			error: function(message){
-					console.log('errr');
-          			console.log(message);
+					console.log('Błąd generowania raportu: ' + message);
           		}
    		});
 	},
