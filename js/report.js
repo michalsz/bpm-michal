@@ -33,7 +33,7 @@ $('#reportsPage').on('pageshow', function(event){
 					$('#reportsSelect').selectmenu('refresh');
 					$('#reportsSelect').selectmenu('enable');
 					$('#createReport').attr('href','');
-					$('#createReport span span').html('Wygeneruj raport (pdf)');
+					$('#createReport span span').html('Wygeneruj raport (pdf) <div class="btnloader"></div>');
 					$('#createReport').trigger('create');					
 	       		},
 				error: function(message){
@@ -72,7 +72,7 @@ $('#reportsPage').on('pageshow', function(event){
 	},
 
 	generateReport: function(event){
-		$('#createReport btnloader').css('display', 'inline-block');
+		$('#createReport .btnloader').css('display', 'inline-block');
 		var auth_key = localStorage.getItem("auth_key");
 		var dateSince = $('#dateSince').val();
 		var dateTo = $('#dateTo').val();
@@ -86,7 +86,7 @@ $('#reportsPage').on('pageshow', function(event){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){ 
-				$('#createReport btnloader').css('display', 'none');
+				$('#createReport .btnloader').css('display', 'none');
 				$('#createReport').attr('href','https://docs.google.com/viewer?url='+data.raport_url);
 				$('#createReport span span').html('Pobierz raport (pdf)');
 				$('#createReport').trigger('create');
