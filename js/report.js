@@ -35,6 +35,7 @@ $('#reportsPage').on('pageshow', function(event){
 					$('#createReport').attr('href','');
 					$('#createReport span span').html('Wygeneruj raport (pdf) <div class="btnloader"></div>');
 					$('#createReport').trigger('create');
+					$('#reportsPage .loadingmsg').hide();
 					$('#reportsPage .ui-content > * ').show();
 	       		},
 				error: function(message){
