@@ -112,6 +112,7 @@ $('#cart').on('pageshow', function(){
 	},
 
 	addProduct: function(name, product_id, count){
+		$('#addToCart .btnloader').css('display','inline-block');
 		var cartId = this.getCartId();
 		var self = this;
 		$.ajax({
@@ -123,7 +124,8 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){              
-				self.updateProductCount();				
+				self.updateProductCount();
+				$('#addToCart .btnloader').css('display','none');
 				$('#productdata > .controls > .ui-field-contain').hide();				
 				$('#addToCart').hide();					
 				$('#backToProducts').show();				

@@ -71,9 +71,12 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 	white-space: normal;
 }
 
+/*
 [data-role="button"]:hover {	
 	opacity: 0.5!important; 
 }
+* 
+* */
 
 /****************************** HEADER */
 
