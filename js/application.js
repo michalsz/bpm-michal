@@ -18,9 +18,9 @@ var BPApp = {
 				$('#cartProducts').html('<h2 class="loadingmsg">Ładowanie...</h2>');
 				$('#cartSummary').hide();
 				$('#bpm-cartselects').hide();
-					$('#departmentsSelect').html('<option data-placeholder="true">Wybierz oddział</option>');
-					$('#departmentsAdressesSelect').html('<option data-placeholder="true">Wybierz adres</option>');
-					$('#costCenterSelect').html('<option data-placeholder="true">Wybierz centrum kosztowe</option>');					
+					$('#departmentsSelect').html('<option data-placeholder="true" value="placeholder">Wybierz oddział</option>');
+					$('#departmentsAdressesSelect').html('<option data-placeholder="true" value="placeholder">Wybierz adres</option>');
+					$('#costCenterSelect').html('<option data-placeholder="true" value="placeholder">Wybierz centrum kosztowe</option>');					
 				$('#submitOrder').hide();
 				$('#emptyCartMsg').hide();
 				// rest
@@ -35,8 +35,11 @@ var BPApp = {
 				$('.productCount').show();				
 				$('#addToCart').show();				
 
-							
-				$('#reportsSelect').html('<option data-placeholder="true">Wybierz</option>');	
+				
+				$('#reportsSelect').html('<option data-placeholder="true" value="placeholder">Wybierz</option>');
+				$('#reportsPage .ui-content > * ').hide();
+				
+					
 				
 				// akceptant
 				$('#departmentsListA').html('');

@@ -129,13 +129,9 @@ $('#cart').on('pageshow', function(){
 				$('.productCount').hide();				
 				$('#addToCart').hide();					
 				$('#backToProducts').show();				
-				//alert('Produkt został dodany');
-
-
           	},
 			error: function(message){
-					//console.log('errr');
-          			//console.log(message);
+				
           		}
     	});
 	},
@@ -180,8 +176,7 @@ $('#cart').on('pageshow', function(){
 				self.updateProductCount();
           	},
           	error: function(message){
-					//console.log('errr remove');
-          			//console.log(message);
+
           	}
     	});
 
@@ -191,7 +186,6 @@ $('#cart').on('pageshow', function(){
 		var pdsId =  $(event.target).parents('a').attr('data-pdsid');
 		var cartId = this.getCartId();
 		var self = this;
-		//console.log('KoszId' + cartId + 'PdsId' + pdsId + 'Ilosc' + number);
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.ZmienPozycjeKoszyk',
 			data: {'KoszId': cartId, 'PdsId': pdsId, 'Ilosc': number, 'AuthKey': localStorage.getItem("auth_key")},
@@ -328,7 +322,7 @@ $('#cart').on('pageshow', function(){
 			($('#departmentsSelect').val() == 'placeholder') || 
 			($('#departmentsSelect').val() == 'placeholder')) {
 				
-			alert('Przed złożeniem zamówienia musisz wybrać oddział, adres i centrum kosztowe.')
+			alert('Przed złożeniem zamówienia musisz wybrać oddział, adres i centrum kosztowe.');
 			
 			return false;
 		}
@@ -375,14 +369,13 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(cartData){              
-				////console.log(cartData);
 				$('#cartSummary').html('');
 				$('#cartSummary').append('<span>Suma brutto:</span> <span> '+ cartData.ds_brutto_w +' zł</span>');
 				$('#cartSummary').append('<br/>');
 				$('#cartSummary').append('<span>Suma netto:</span> <span> '+ cartData.ds_netto_w +' zł</span>');
           	},
           	error: function(message){
-          		//console.log(message);	
+				
           	}
     	});
 	},

@@ -25,7 +25,7 @@ $('#reportsPage').on('pageshow', function(event){
 				contentType: 'application/json; charset=utf-8',
 				success: function(data){  
 					$('#reportsSelect-button .ui-btn-text .btnloader').css('display','none');					
-					$('#reportsSelect').html('<option data-placeholder="true">Wybierz</option>');
+					$('#reportsSelect').html('<option data-placeholder="true" value="placeholder">Wybierz</option>');
 					$.each(data.raporty, function(i, item){
 						$('#reportsSelect').append('<option value="' + item.raport_kod + '"> '  + item.raport_nazwa +  '</option>');
 
@@ -34,7 +34,8 @@ $('#reportsPage').on('pageshow', function(event){
 					$('#reportsSelect').selectmenu('enable');
 					$('#createReport').attr('href','');
 					$('#createReport span span').html('Wygeneruj raport (pdf) <div class="btnloader"></div>');
-					$('#createReport').trigger('create');					
+					$('#createReport').trigger('create');
+					$('#reportsPage .ui-content > * ').show();
 	       		},
 				error: function(message){
 						console.log('errr');
@@ -50,28 +51,32 @@ $('#reportsPage').on('pageshow', function(event){
 			url: Config.serviceURL + 'BPK.pkg_json.DokNieZaplacone',
 			data: {'AuthKey': auth_key},
 			type: 'GET',
-           	cache: true,
+			cache: true,
 			dataType: 'jsonp',
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){    
 				$('#documentsList').html('');
-    			$.each(data.dokumenty, function(i, item){
+				$.each(data.dokumenty, function(i, item){
 					$('#documentsList').append('<span>' + item.ds_id + ' '  + item.ds_brutto +  '</span>');
 				})
 
 				if(data.dokumenty.length == 0){
 					alert('Nie masz dokumentów do zapłaty.');
 				}
-       		},
+			},
 			error: function(message){
-					console.log('errr');
+				console.log('errr');
           			console.log(message);
           		}
    		});
 	},
 
 	generateReport: function(event){
+		if ( $('#reportsSelect').val() == 'placeholder' ) {
+			alert('Wybierz rodzaj raportu.');
+			return false;
+		}
 		$('#createReport .btnloader').css('display', 'inline-block');
 		var auth_key = localStorage.getItem("auth_key");
 		var dateSince = $('#dateSince').val();
