@@ -12,6 +12,7 @@ BPApp.Login = {
 		$('#loginbtn').on('tap', function(event) {
 			var login = $('#user_login').val();
 			var password = $('#password').val();
+			$('#loginbtn .btnloader').css('display', 'inline-block');
 			$.ajax({
 				url: Config.serviceURL + 'BPK.pkg_json.Login',
 				data: {'Login': login, 'Haslo': password},
@@ -36,6 +37,8 @@ BPApp.Login = {
 					localStorage.setItem("rola", data.rola);
 					localStorage.setItem("akceptant", data.akceptant);
 					localStorage.setItem("showLoginMessage", 1);
+					
+					$('#loginbtn .btnloader').css('display', 'none');
 					window.location = "index.html";
 	            },
     	        error: function(){

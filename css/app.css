@@ -168,6 +168,17 @@ h2.loadingmsg {
 	background: url(../img/ajax-loader2.gif) no-repeat center bottom;
 }
 
+.btnloader {
+	display: none; /* 	display: inline-block; */
+
+	background: url('../img/ajax-loader1.gif') no-repeat center center;
+	width: 16px;
+	height: 16px;
+	margin-left: 10px;
+	position: relative;
+	top: 2px;
+}
+
 /* LOGIN */
 
 #loginbtn {
@@ -224,8 +235,13 @@ text-align: center;
 
 #ordersList, #allOrdersList {
 	margin: 0;
+	margin-bottom: 10px;
 	padding: 0;
 	list-style-type: none;
+}
+
+.backbtn {
+	margin-top: 30px;
 }
 
 .paramName {
