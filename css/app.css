@@ -303,7 +303,21 @@ text-align: center;
 	font-weight: bold;
 }
 
+/* new */
+.productCount {
+	width: 250px;
+	text-align: center; 
+	margin: 0 auto;
+}
 
-
+.productCount div.ui-input-text {
+	width: 50px;
+	display: inline-block;	
+}
+.productCount label.ui-input-text {
+	width: 146px;
+	line-height: 37px;
+	display: inline-block;
+}
 
 
