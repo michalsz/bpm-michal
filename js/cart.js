@@ -236,7 +236,7 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){
-				$('#departmentsAdressesSelect').html('<option data-placeholder="true" value="placeholder">Wybierz adres</option>');
+				$('#departmentsAdressesSelect').html('<option data-placeholder="true" value="placeholder">Wybierz adres</option><option value="0">Brak</option>');
 				$.each(data.adresy, function(i, adress){
 					$('#departmentsAdressesSelect').append('<option value="' + adress.dak_id +'">' +  adress.adr_opis + '</option>');
 				})
@@ -279,7 +279,7 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
-				$('#costCenterSelect').html('<option data-placeholder="true" value="placeholder">Wybierz centrum kosztowe</option>');
+				$('#costCenterSelect').html('<option data-placeholder="true" value="placeholder">Wybierz centrum kosztowe</option><option value="0">Brak</option>');
 				$.each(data.centra, function(i, item){
 					$('#costCenterSelect').append('<option value="' + item.ck_id +'">' +  item.ck_nazwa + '</option>');
 				})
