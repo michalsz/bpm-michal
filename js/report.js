@@ -11,6 +11,8 @@ $('#reportsPage').on('pageshow', function(event){
   	},
 
 	displayReports: function(){
+		$('#reportsSelect .ui-btn-text').append('<div class="btnloader"></div>'); 
+		$('#reportsSelect .ui-btn-text .btnloader').css('display','inline-block');			
 		var auth_key = localStorage.getItem("auth_key");
 		if($('#reportsSelect').find('option').length == 1){
 			$.ajax({
@@ -22,6 +24,7 @@ $('#reportsPage').on('pageshow', function(event){
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
 				success: function(data){     
+					$('#reportsSelect .ui-btn-text .btnloader').css('display','none');					
 					$('#reportsSelect').html('<option data-placeholder="true">Wybierz</option>');
 					$.each(data.raporty, function(i, item){
 						$('#reportsSelect').append('<option value="' + item.raport_kod + '"> '  + item.raport_nazwa +  '</option>');
