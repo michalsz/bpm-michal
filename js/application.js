@@ -32,7 +32,7 @@ var BPApp = {
 				$('#productsList').html('');
 				$('#productData').hide();
 				
-				$('#productdata > .controls > .ui-field-contain').show();				
+				$('.productCount').show();				
 				$('#addToCart').show();				
 
 							
