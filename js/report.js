@@ -26,11 +26,10 @@ $('#reportsPage').on('pageshow', function(event){
 				success: function(data){  
 					//$('#reportsSelect-button .ui-btn-text .btnloader').css('display','none');					
 					$('#reportsSelect').html('<option data-placeholder="true" value="placeholder">Wybierz</option>');
-					$('#reportsSelect').html('<option data-placeholder="true" >Test</option>');
-					//$.each(data.raporty, function(i, item){
-					//	$('#reportsSelect').append('<option value="' + item.raport_kod + '"> '  + item.raport_nazwa +  '</option>');
-//
-					//});
+					$.each(data.raporty, function(i, item){
+						$('#reportsSelect').append('<option value="' + item.raport_kod + '"> '  + item.raport_nazwa +  '</option>');
+
+					});
 					$('#reportsSelect').selectmenu('refresh');
 					//$('#reportsSelect').selectmenu('enable');
 					$('#createReport').attr('href','');
