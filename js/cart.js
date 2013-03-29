@@ -16,6 +16,7 @@ $('#cart').on('pageshow', function(){
   		this.getProductsFromCart(this.displayProductsFromCart);
   	},
 
+	
   	getProductsFromCart: function(callback){
 		var self = this;
 		var cartId = this.getCartId();
@@ -29,9 +30,9 @@ $('#cart').on('pageshow', function(){
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
 				success: function(cart){   
-					$.each(cart.pozycje, function(i, item){
-						console.log(item.pds_sv_symbol + ' ilosc ' + item.pds_ilosc + ' cena netto ' + item.pds_cena_s_w + ' tow id ' + item.tow_id);
-					})
+					//$.each(cart.pozycje, function(i, item){
+					//	console.log(item.pds_sv_symbol + ' ilosc ' + item.pds_ilosc + ' cena netto ' + item.pds_cena_s_w + ' tow id ' + item.tow_id);
+					//})
 					callback(cart);
 				}
 			})
@@ -41,10 +42,6 @@ $('#cart').on('pageshow', function(){
 	displayProductsFromCart: function(cart){
 		$('#cartProducts').html('');
 		var productsFromCart = cart;
-
-		productCount = cart['pozycje'].length;
-		localStorage.setItem("productCount", productCount);
-    	$('.cart-number').html(productCount);
 
 		if(productsFromCart){
 			$.each(productsFromCart.pozycje, function(i, item){
@@ -79,7 +76,7 @@ $('#cart').on('pageshow', function(){
 		if(productsFromCart){
 			$.each(productsFromCart.pozycje, function(i, item){
 				$.each(cart.pozycje, function(i, item){
-						console.log(item.pds_sv_symbol + ' ilosc ' + item.pds_ilosc + ' cena netto ' + item.pds_cena_s_w + ' tow id ' + item.tow_id);
+						//console.log(item.pds_sv_symbol + ' ilosc ' + item.pds_ilosc + ' cena netto ' + item.pds_cena_s_w + ' tow id ' + item.tow_id);
 						$('#pid' + item.tow_id).text(item.pds_ilosc);
 						$('#pbuttonincrease' + item.tow_id).attr('data-count', item.pds_ilosc);
 						$('#pbuttondecrease' + item.tow_id).attr('data-count', item.pds_ilosc);
