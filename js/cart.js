@@ -41,6 +41,11 @@ $('#cart').on('pageshow', function(){
 	displayProductsFromCart: function(cart){
 		$('#cartProducts').html('');
 		var productsFromCart = cart;
+
+		productCount = cart['pozycje'].length;
+		localStorage.setItem("productCount", productCount);
+    	$('.cart-number').html(productCount);
+
 		if(productsFromCart){
 			$.each(productsFromCart.pozycje, function(i, item){
 				$('#cartProducts').append('<li class="kontener" data-inset="true"><a href="#product" class="bpm-cart-prod" data-productid="' + item.tow_id + '">' + item.tow_nazwa + '</a><div data-role="controlgroup" data-type="horizontal" data-mini="true" class="kontrolki" ><span class="productcountlabel">sztuk:</span><span class="productcount" id="pid'+item.tow_id+'">' +  item.pds_ilosc +'</span><a data-role="button" id="pbuttonincrease'+item.tow_id+'" data-icon="arrow-u" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-up" data-count="' +  item.pds_ilosc +'" data-pdsid="' + item.pds_id + '">Więcej</a><a data-role="button" id="pbuttondecrease'+item.tow_id+'" data-icon="arrow-d" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-down" data-count="' + item.pds_ilosc + '" data-pdsid="' + item.pds_id + '">Mniej</a><a data-role="button" data-icon="delete" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-remove" data-pdsid="' + item.pds_id + '">Usuń</a></div></li>').trigger('create'); 
@@ -60,12 +65,17 @@ $('#cart').on('pageshow', function(){
 				$('#cartSummary').hide();							
 				$('#emptyCartMsg').show();
 			}
-			BPApp.Cart.bindEvents();
+			BPApp.Cart.bindCartItemEvents();
 		}	
 	},
 
 	updateProductsFromCart: function(cart){
 		var productsFromCart = cart;
+
+		productCount = cart['pozycje'].length;
+		localStorage.setItem("productCount", productCount);
+    	$('.cart-number').html(productCount);
+
 		if(productsFromCart){
 			$.each(productsFromCart.pozycje, function(i, item){
 				$.each(cart.pozycje, function(i, item){
@@ -197,7 +207,7 @@ $('#cart').on('pageshow', function(){
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){
 				self.getProductsFromCart(self.updateProductsFromCart);
-				self.updateProductCount();
+				//self.updateProductCount();
           	},
           	error: function(message){
 
@@ -220,7 +230,7 @@ $('#cart').on('pageshow', function(){
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){   
 				self.getProductsFromCart(self.updateProductsFromCart);
-				self.updateProductCount();
+				//self.updateProductCount();
           	},
           	error: function(message){
 
@@ -413,7 +423,7 @@ $('#cart').on('pageshow', function(){
 		});
 	},
 
-	bindEvents: function(){
+	bindCartItemEvents: function(){
 		var self = this;
 
 		this.onButtonClick();
@@ -431,6 +441,10 @@ $('#cart').on('pageshow', function(){
 			var count = $(event.target).parent().parent().attr('data-count');
 			self.increaseProduct(event, (parseInt(count) -1) );
 		});
+	},
+
+	bindEvents: function(){
+		var self = this;
 
 		$('#departmentsSelect').on('change', function(event){
 			var department_id = event.target.value;
