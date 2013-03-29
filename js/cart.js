@@ -29,6 +29,9 @@ $('#cart').on('pageshow', function(){
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
 				success: function(cart){   
+					$.each(cart.pozycje, function(i, item){
+						console.log(item.pds_sv_symbol + ' ilosc ' + item.pds_ilosc + ' cena netto ' + item.pds_cena_s_w + ' tow id ' + item.tow_id);
+					})
 					callback(cart);
 				}
 			})
@@ -40,7 +43,7 @@ $('#cart').on('pageshow', function(){
 		var productsFromCart = cart;
 		if(productsFromCart){
 			$.each(productsFromCart.pozycje, function(i, item){
-				$('#cartProducts').append('<li class="kontener" data-inset="true"><a href="#product" class="bpm-cart-prod" data-productid="' + item.tow_id + '">' + item.tow_nazwa + '</a><div data-role="controlgroup" data-type="horizontal" data-mini="true" class="kontrolki" ><span class="productcountlabel">sztuk:</span><span class="productcount">' +  item.pds_ilosc +'</span><a data-role="button" data-icon="arrow-u" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-up" data-count="' +  item.pds_ilosc +'" data-pdsid="' + item.pds_id + '">Więcej</a><a data-role="button" data-icon="arrow-d" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-down" data-count="' + item.pds_ilosc + '" data-pdsid="' + item.pds_id + '">Mniej</a><a data-role="button" data-icon="delete" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-remove" data-pdsid="' + item.pds_id + '">Usuń</a></div></li>').trigger('create'); 
+				$('#cartProducts').append('<li class="kontener" data-inset="true"><a href="#product" class="bpm-cart-prod" data-productid="' + item.tow_id + '">' + item.tow_nazwa + '</a><div data-role="controlgroup" data-type="horizontal" data-mini="true" class="kontrolki" ><span class="productcountlabel">sztuk:</span><span class="productcount" id="pid'+item.tow_id+'">' +  item.pds_ilosc +'</span><a data-role="button" id="pbuttonincrease'+item.tow_id+'" data-icon="arrow-u" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-up" data-count="' +  item.pds_ilosc +'" data-pdsid="' + item.pds_id + '">Więcej</a><a data-role="button" id="pbuttondecrease'+item.tow_id+'" data-icon="arrow-d" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-down" data-count="' + item.pds_ilosc + '" data-pdsid="' + item.pds_id + '">Mniej</a><a data-role="button" data-icon="delete" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-remove" data-pdsid="' + item.pds_id + '">Usuń</a></div></li>').trigger('create'); 
 			});
 			$('#cartProducts').listview('refresh');
 
@@ -62,16 +65,19 @@ $('#cart').on('pageshow', function(){
 	},
 
 	updateProductsFromCart: function(cart){
-		$('#cartProducts').html('');
 		var productsFromCart = cart;
 		if(productsFromCart){
 			$.each(productsFromCart.pozycje, function(i, item){
-				$('#cartProducts').append('<li class="kontener" data-inset="true"><a href="#product" class="bpm-cart-prod" data-productid="' + item.tow_id + '">' + item.tow_nazwa + '</a><div data-role="controlgroup" data-type="horizontal" data-mini="true" class="kontrolki" ><span class="productcountlabel">sztuk:</span><span class="productcount">' +  item.pds_ilosc +'</span><a data-role="button" data-icon="arrow-u" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-up" data-count="' +  item.pds_ilosc +'" data-pdsid="' + item.pds_id + '">Więcej</a><a data-role="button" data-icon="arrow-d" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-down" data-count="' + item.pds_ilosc + '" data-pdsid="' + item.pds_id + '">Mniej</a><a data-role="button" data-icon="delete" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-remove" data-pdsid="' + item.pds_id + '">Usuń</a></div></li>').trigger('create'); 
+				$.each(cart.pozycje, function(i, item){
+						console.log(item.pds_sv_symbol + ' ilosc ' + item.pds_ilosc + ' cena netto ' + item.pds_cena_s_w + ' tow id ' + item.tow_id);
+						$('#pid' + item.tow_id).text(item.pds_ilosc);
+						$('#pbuttonincrease' + item.tow_id).attr('data-count', item.pds_ilosc);
+						$('#pbuttondecrease' + item.tow_id).attr('data-count', item.pds_ilosc);
+					})
 			});
 			$('#cartProducts').listview('refresh');
 			if(productsFromCart.pozycje.length === undefined ) { alert('CartID jest niezdefiniowane. Prosimy o kontakt z pomocą techniczną.') }
 			BPApp.Cart.cartSummary();
-			BPApp.Cart.bindEvents();
 		}
 	},
 
@@ -366,7 +372,9 @@ $('#cart').on('pageshow', function(){
 					$('#emptyCartMsg').show();
 					alert(message.Komunikat);
 					self.displayProductsFromCart();
-					self.updateProductCount();
+					var productCount = 0;
+					localStorage.setItem("productCount", productCount);
+    				$('.cart-number').html(productCount);
 				}
           	},
           	error: function(message){
@@ -375,7 +383,7 @@ $('#cart').on('pageshow', function(){
     	});
 	},
 
-	cartSummary: function(){
+	cartSummary: function(callback){
 		var cartId = this.getCartId();
 		var self = this;
 		$.ajax({
@@ -448,7 +456,6 @@ $('#cart').on('pageshow', function(){
 			$('#costCenterSelect').selectmenu('refresh');
 			$('#costCenterSelect').selectmenu('disable');			
 
-			
 			self.getCostCenters(adress_id);
 		});
 
