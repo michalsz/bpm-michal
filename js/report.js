@@ -23,16 +23,15 @@ $('#reportsPage').on('pageshow', function(event){
 				contentType: 'application/json; charset=utf-8',
 				success: function(data){  
 					$('#reportsSelect').html('<option data-placeholder="true" value="placeholder">Wybierz</option>');
-					
 					$.each(data.raporty, function(i, item){
 						$('#reportsSelect').append('<option value="' + item.raport_kod + '">' + item.raport_nazwa + '</option>');
-					})
-					
+					});
 					$('#reportsSelect').selectmenu('refresh');
 					$('#createReport').attr('href','');
 					$('#createReport span span').html('Wygeneruj raport (pdf) <div class="btnloader"></div>');
 					$('#createReport').trigger('create');
-					
+					//$('#reportsPage .loadingmsg').hide();
+					//$('#reportsPage .ui-content > * ').show();
 	       		},
 				error: function(message){
 
