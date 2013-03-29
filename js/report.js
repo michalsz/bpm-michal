@@ -11,8 +11,8 @@ $('#reportsPage').on('pageshow', function(event){
   	},
 
 	displayReports: function(){
-		//$('#reportsSelect-button .ui-btn-text').append('<div class="btnloader"></div>'); 
-		//$('#reportsSelect-button .ui-btn-text .btnloader').css('display','inline-block');			
+		$('#reportsSelect-button .ui-btn-text').append('<div class="btnloader"></div>'); 
+		$('#reportsSelect-button .ui-btn-text .btnloader').css('display','inline-block');			
 		var auth_key = localStorage.getItem("auth_key");
 		if($('#reportsSelect').find('option').length == 1){
 			$.ajax({
@@ -24,7 +24,7 @@ $('#reportsPage').on('pageshow', function(event){
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
 				success: function(data){  
-					//$('#reportsSelect-button .ui-btn-text .btnloader').css('display','none');					
+					$('#reportsSelect-button .ui-btn-text .btnloader').css('display','none');					
 					$('#reportsSelect').html('<option data-placeholder="true" value="placeholder">Wybierz</option>');
 					$.each(data.raporty, function(i, item){
 						$('#reportsSelect').append('<option value="' + item.raport_kod + '"> '  + item.raport_nazwa +  '</option>');
@@ -39,7 +39,8 @@ $('#reportsPage').on('pageshow', function(event){
 					//$('#reportsPage .ui-content > * ').show();
 	       		},
 				error: function(message){
-
+						console.log('errr');
+	          			console.log(message);
 	          		}
 	   		});
 		}
