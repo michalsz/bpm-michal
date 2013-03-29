@@ -30,31 +30,17 @@ var BPApp = {
 				$('#categoriesList').html('');
 				$('#subcategoriesList').html('');
 				$('#productsList').html('');
-				
-				
 								
 				$('#addToCart').hide();
 				$('.productCount').hide();		
 				$('#productdata').hide();		
-
-				
-				//$('#reportsPage .loadingmsg').show();
-				//$('#reportsPage .ui-content > * ').hide();
-				
-					
 				
 				// akceptant
 				$('#departmentsListA').html('');
 				$('#addressesListA').html('');
 				$('#costSourcesListA').html('');
 				$('#allOrdersList').html('');
-				
-				
-				
-				
 
-
-				
 			} 
 		});
 		this.setupAjax();
