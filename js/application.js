@@ -39,8 +39,8 @@ var BPApp = {
 
 				
 				//$('#reportsSelect').html('<option data-placeholder="true" value="placeholder">Wybierz</option>');
-				$('#reportsPage .loadingmsg').show();
-				$('#reportsPage .ui-content > * ').hide();
+				//$('#reportsPage .loadingmsg').show();
+				//$('#reportsPage .ui-content > * ').hide();
 				
 					
 				
