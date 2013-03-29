@@ -11,6 +11,7 @@ var BPApp = {
 			}
 			$('#productdata').hide();
 		});
+		/*
 		$(document).on('pagebeforechange', function(e, data){
 			// hack to avoid doing the same work twice, because pagebeforechange is fired twice 
 			if (typeof data.toPage !== 'string' ) { 
@@ -58,6 +59,7 @@ var BPApp = {
 				
 			} 
 		});
+		* */
 		this.setupAjax();
 	},
 
