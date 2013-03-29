@@ -31,8 +31,6 @@ var BPApp = {
 				$('#subcategoriesList').html('');
 				$('#productsList').html('');
 				
-				
-								
 				$('#addToCart').hide();
 				$('.productCount').hide();		
 				$('#productdata').hide();		
@@ -42,23 +40,23 @@ var BPApp = {
 				//$('#reportsPage .loadingmsg').show();
 				//$('#reportsPage .ui-content > * ').hide();
 				
-					
-				
 				// akceptant
 				$('#departmentsListA').html('');
 				$('#addressesListA').html('');
 				$('#costSourcesListA').html('');
 				$('#allOrdersList').html('');
-				
-				
-				
-				
-
-
-				
 			} 
 		});
 		this.setupAjax();
+
+
+		$('#searchInput').on('keydown', function(e){
+			if (e.keyCode == 13) {
+				var keyword = $('#searchInput').val();
+				localStorage.setItem('keyword', keyword);
+				window.location = "#search";
+    		}
+		});
 	},
 
 	displayProfile: function(){

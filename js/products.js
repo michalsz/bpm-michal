@@ -53,7 +53,7 @@ BPApp.Products = {
 			contentType: 'application/json; charset=utf-8',
 			success: function(item){       
 				$('#' + element_id).append('<li><a data-transition="slide" class="bpm-product-button" data-productid="' + item.tow_id + '" href="#product">' + item.tow_nazwa +  ' <span class="right">' +  item.cena_n +' zł</span></a></li>')
-				$('#productsList').listview('refresh');
+				$('#' + element_id).listview('refresh');
 				self.onButtonClick();
           	},
           	error: function(){
