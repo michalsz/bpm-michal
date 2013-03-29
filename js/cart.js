@@ -13,10 +13,10 @@ $('#cart').on('pageshow', function(){
 		$('#departmentsAdressesSelect').selectmenu('disable');
 		$('#costCenterSelect').selectmenu('disable');
 		
-  		this.getProductsFromCart(this.displayProductsFromCart);
+  		this.displayProductsFromCart();
   	},
 
-  	getProductsFromCart: function(callback){
+	displayProductsFromCart: function(){
 		var self = this;
 		var cartId = this.getCartId();
 		if(cartId){
@@ -29,50 +29,32 @@ $('#cart').on('pageshow', function(){
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
 				success: function(cart){   
-					callback(cart);
-				}
-			})
-		}
-	},
+					$('#cartProducts').html('');
+					if(cart){
+						$.each(cart.pozycje, function(i, item){
+							$('#cartProducts').append('<li class="kontener" data-inset="true"><a href="#product" class="bpm-cart-prod" data-productid="' + item.tow_id + '">' + item.tow_nazwa + '</a><div data-role="controlgroup" data-type="horizontal" data-mini="true" class="kontrolki" ><span class="productcountlabel">sztuk:</span><span class="productcount">' +  item.pds_ilosc +'</span><a data-role="button" data-icon="arrow-u" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-up" data-count="' +  item.pds_ilosc +'" data-pdsid="' + item.pds_id + '">Więcej</a><a data-role="button" data-icon="arrow-d" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-down" data-count="' + item.pds_ilosc + '" data-pdsid="' + item.pds_id + '">Mniej</a><a data-role="button" data-icon="delete" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-remove" data-pdsid="' + item.pds_id + '">Usuń</a></div></li>').trigger('create'); 
+						});
+						$('#cartProducts').listview('refresh');
 
-	displayProductsFromCart: function(cart){
-		$('#cartProducts').html('');
-		var productsFromCart = cart;
-		if(productsFromCart){
-			$.each(productsFromCart.pozycje, function(i, item){
-				$('#cartProducts').append('<li class="kontener" data-inset="true"><a href="#product" class="bpm-cart-prod" data-productid="' + item.tow_id + '">' + item.tow_nazwa + '</a><div data-role="controlgroup" data-type="horizontal" data-mini="true" class="kontrolki" ><span class="productcountlabel">sztuk:</span><span class="productcount">' +  item.pds_ilosc +'</span><a data-role="button" data-icon="arrow-u" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-up" data-count="' +  item.pds_ilosc +'" data-pdsid="' + item.pds_id + '">Więcej</a><a data-role="button" data-icon="arrow-d" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-down" data-count="' + item.pds_ilosc + '" data-pdsid="' + item.pds_id + '">Mniej</a><a data-role="button" data-icon="delete" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-remove" data-pdsid="' + item.pds_id + '">Usuń</a></div></li>').trigger('create'); 
-			});
-			$('#cartProducts').listview('refresh');
-
-			if(productsFromCart.pozycje.length === undefined ) { alert('CartID jest niezdefiniowane. Prosimy o kontakt z pomocą techniczną.') }
-			if(productsFromCart.pozycje.length > 0){
-				BPApp.Cart.displayDepartmentsSelect();
-				BPApp.Cart.cartSummary();
-				$('#bpm-cartselects').show();
-				$('#submitOrder').show();
-				$('#cartSummary').show();
-			} else {
-				$('#bpm-cartselects').hide();
-				$('#submitOrder').hide();
-				$('#cartSummary').hide();							
-				$('#emptyCartMsg').show();
-			}
-			BPApp.Cart.bindEvents();
-		}	
-	},
-
-	updateProductsFromCart: function(cart){
-		$('#cartProducts').html('');
-		var productsFromCart = cart;
-		if(productsFromCart){
-			$.each(productsFromCart.pozycje, function(i, item){
-				$('#cartProducts').append('<li class="kontener" data-inset="true"><a href="#product" class="bpm-cart-prod" data-productid="' + item.tow_id + '">' + item.tow_nazwa + '</a><div data-role="controlgroup" data-type="horizontal" data-mini="true" class="kontrolki" ><span class="productcountlabel">sztuk:</span><span class="productcount">' +  item.pds_ilosc +'</span><a data-role="button" data-icon="arrow-u" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-up" data-count="' +  item.pds_ilosc +'" data-pdsid="' + item.pds_id + '">Więcej</a><a data-role="button" data-icon="arrow-d" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-down" data-count="' + item.pds_ilosc + '" data-pdsid="' + item.pds_id + '">Mniej</a><a data-role="button" data-icon="delete" data-iconpos="notext" data-wrapperels="span" class="bpm-cart-remove" data-pdsid="' + item.pds_id + '">Usuń</a></div></li>').trigger('create'); 
-			});
-			$('#cartProducts').listview('refresh');
-			if(productsFromCart.pozycje.length === undefined ) { alert('CartID jest niezdefiniowane. Prosimy o kontakt z pomocą techniczną.') }
-			BPApp.Cart.cartSummary();
-			BPApp.Cart.bindEvents();
-		}
+						if(cart.pozycje.length === undefined ) { alert('CartID jest niezdefiniowane. Prosimy o kontakt z pomocą techniczną.') }
+						
+						if(cart.pozycje.length > 0){
+							self.displayDepartmentsSelect();
+							self.cartSummary();
+							$('#bpm-cartselects').show();
+							$('#submitOrder').show();
+							$('#cartSummary').show();
+						} else {
+							$('#bpm-cartselects').hide();
+							$('#submitOrder').hide();
+							$('#cartSummary').hide();							
+							$('#emptyCartMsg').show();
+						}
+						self.bindEvents();
+					}	
+          		}
+    		});
+    	}
 	},
 
 	displayDepartmentsSelect: function(){
@@ -190,7 +172,7 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){
-				self.getProductsFromCart(self.updateProductsFromCart);
+				self.displayProductsFromCart();
 				self.updateProductCount();
           	},
           	error: function(message){
@@ -213,7 +195,7 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){   
-				self.getProductsFromCart(self.updateProductsFromCart);
+				self.displayProductsFromCart();
 				self.updateProductCount();
           	},
           	error: function(message){
