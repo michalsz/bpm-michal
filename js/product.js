@@ -63,12 +63,9 @@ BPApp.Product = {
 		var authorized = localStorage.getItem("authorized");
 		if (authorized) {
 			this.addToCartEventBind();
-			console.log('addToCartEventBind');			
 		} else {
 			this.notAuthorisedEventBind();			
-			console.log('notAuthorisedEventBind');
 		};		
-
 	},
 
 	addToCartEventBind: function(){
