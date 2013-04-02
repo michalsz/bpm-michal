@@ -1,17 +1,17 @@
-$('#products').on('pageshow', function(){
+$('#products').on('pageinit', function(){
 	$('#productsList').html('<h2 class="loadingmsg">Ładowanie...</h2>');	
 	BPApp.Products.start();
 });
 
 BPApp.Products = {
 	start: function(){
+		console.log('aa');
 		this.getProducts(localStorage.getItem("subcategory"))
-		//this.onButtonClick();
-		//this.onPaginationClick();
 	},
 
 	getProducts: function(subcategory_id) {
 		var startPoz = localStorage.getItem('startPoz') !== null ? localStorage.getItem('startPoz') : 0
+		console.log(startPoz);
 		var self = this;
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.Towary',
@@ -35,10 +35,19 @@ BPApp.Products = {
 	displayResultCount: function(count){
       var i = (count / 10);
       $('#pagination').html('');
+      var startPoz = localStorage.getItem('startPoz')
       for(var j = 0; j < i; j++){
-        $('#pagination').append('<a href="" class="pagination_link" data-startpoz="' +  j + '">' +  (j + 1)  + '</a>');
+      	if(startPoz == j){
+			$('#pagination').append('<b><a href=""  class="pagination_link" data-startpoz="' +  j + '">' +  (j + 1)  + '</a></b>');      		
+      	}else{
+  	        $('#pagination').append('<a href="" onclick="BPApp.Products.refreshProducts()" class="pagination_link" data-startpoz="' +  j + '">' +  (j + 1)  + '</a>');      			
+      	}
       }
     },
+
+	refreshProducts: function(){
+		$.mobile.changePage('#products');
+	},
 
 	getProductDetails: function(product_id, element_id){
 		var self = this;
