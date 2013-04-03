@@ -35,20 +35,22 @@ BPApp.Products = {
 	},
 
 	displayResultCount: function(count){
-      var i = (count / 10);
-      $('#pagination').html('');
-      var startPoz = localStorage.getItem('startPoz')
-      for(var j = 0; j < i; j++){
-      	if(startPoz == j){
-			$('#pagination').append('<b style="color:red;"><a href=""  class="pagination_link" data-startpoz="' +  j + '">' +  (j + 1)  + '</a></b>');      		
-      	}else{
-  	        $('#pagination').append('<a href="" onclick="BPApp.Products.refreshProducts(event)" class="pagination_link" data-startpoz="' +  j + '">' +  (j + 1)  + '</a>');      			
-      	}
-      }
-    },
+	      var i = (count / 10);
+	      $('#paginationplaceholder').html('<div data-role="controlgroup" data-type="horizontal" data-mini="true" id="pagination"></div>');
+	      var startPoz = localStorage.getItem('startPoz');
+	      for(var j = 0; j < i; j++){
+		if(startPoz == j){
+			$('#pagination').append('<a data-role="button" href="" class="pagination_link" data-startpoz="' +  j + '">' +  (j + 1)  + '</a>').trigger('create');
+		}else{
+			$('#pagination').append('<a data-role="button" href="" onclick="BPApp.Products.refreshProducts(event)" class="pagination_link" data-startpoz="' +  j + '">' +  (j + 1)  + '</a>').trigger('create');      			
+		}
+		$('#pagination').trigger('create');
+	      }
+	},
 
 	refreshProducts: function(event){
-		var startpoz = $(event.target).attr('data-startpoz');
+		console.log('refresh prod.');
+		var startpoz = $(event.target).parents('a').attr('data-startpoz');
 		localStorage.setItem('startPoz', startpoz);
 		this.getProducts(localStorage.getItem("subcategory"))
 	},
