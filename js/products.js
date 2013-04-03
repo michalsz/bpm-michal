@@ -1,14 +1,17 @@
-$('#products').on('pageinit', function(event){
+$('#products').on('pageshow', function(event){
 	$('#productsList').html('<h2 class="loadingmsg">Ładowanie...</h2>');	
 	BPApp.Products.start();
 });
 
 BPApp.Products = {
 	start: function(){
-		this.getProducts(localStorage.getItem("subcategory"))
+		console.log('start');
+		this.getProducts(localStorage.getItem("subcategory"));
+		localStorage.setItem('startPoz', 0);
 	},
 
 	getProducts: function(subcategory_id) {
+		console.log('sub categor ' + subcategory_id);
 		var startPoz = localStorage.getItem('startPoz') !== null ? localStorage.getItem('startPoz') : 0
 		var self = this;
 		$.ajax({
@@ -20,12 +23,15 @@ BPApp.Products = {
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
+				console.log('get products');
 				self.displayResultCount(data.towary_count);
     			$('#productsList').html('');
     			$.each(data.towary, function(i, item){
 					self.getProductDetails(item.tow_id, 'productsList');
 				})
-				
+          	},
+          	error: function(){
+          		console.log('error');
           	}
     	});
 	},

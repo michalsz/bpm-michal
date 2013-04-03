@@ -8,6 +8,7 @@ $('#subcategories').on('pageshow', function(){
 BPApp.Category = {
 	start: function(){
 		this.getSubCategories(localStorage.getItem("category"));
+		localStorage.setItem('startPoz', 0);
 	},
 
 	getSubCategories: function(category_id) {
