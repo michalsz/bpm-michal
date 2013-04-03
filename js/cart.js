@@ -14,6 +14,7 @@ $('#cart').on('pageshow', function(){
 		$('#costCenterSelect').selectmenu('disable');
 		
   		this.getProductsFromCart(this.displayProductsFromCart);
+  		this.bindEvents();
   	},
 
 	
