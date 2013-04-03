@@ -183,6 +183,11 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 	margin-top: 25px;
 }
 
+.menu-titles {
+	z-index: 10;
+	position: relative;
+}
+
 .menu-titles > a > img:hover  { 
 	opacity: 0.5;
 }
