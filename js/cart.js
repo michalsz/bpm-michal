@@ -226,8 +226,10 @@ $('#cart').on('pageshow', function(){
 			success: function(message){   
 				if(currentCount == 1){
 					self.getProductsFromCart(self.displayProductsFromCart);
-					localStorage.setItem("productCount", productCount);
-    				$('.cart-number').html(productCount);
+					var count = localStorage.getItem("productCount");
+					count -= 1;
+					localStorage.setItem("productCount", count);
+    				$('.cart-number').html(count);
 				}else{
 					self.getProductsFromCart(self.updateProductsFromCart);
 				}
