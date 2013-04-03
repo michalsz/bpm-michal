@@ -30,9 +30,6 @@ $('#cart').on('pageshow', function(){
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
 				success: function(cart){   
-					//$.each(cart.pozycje, function(i, item){
-					//	console.log(item.pds_sv_symbol + ' ilosc ' + item.pds_ilosc + ' cena netto ' + item.pds_cena_s_w + ' tow id ' + item.tow_id);
-					//})
 					callback(cart);
 				}
 			})
@@ -203,7 +200,7 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){
-				self.getProductsFromCart(self.updateProductsFromCart);
+				self.getProductsFromCart(self.displayProductsFromCart);
 				//self.updateProductCount();
           	},
           	error: function(message){
@@ -214,7 +211,8 @@ $('#cart').on('pageshow', function(){
 	},
 
 	increaseProduct: function(event, number){
-		var pdsId =  $(event.target).parents('a').attr('data-pdsid');
+		var pdsId = $(event.target).parents('a').attr('data-pdsid');
+		var currentCount = $(event.target).parents('a').attr('data-count');
 		var cartId = this.getCartId();
 		var self = this;
 		$.ajax({
@@ -226,8 +224,13 @@ $('#cart').on('pageshow', function(){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(message){   
-				self.getProductsFromCart(self.updateProductsFromCart);
-				//self.updateProductCount();
+				if(currentCount == 1){
+					self.getProductsFromCart(self.displayProductsFromCart);
+					localStorage.setItem("productCount", productCount);
+    				$('.cart-number').html(productCount);
+				}else{
+					self.getProductsFromCart(self.updateProductsFromCart);
+				}
           	},
           	error: function(message){
 
