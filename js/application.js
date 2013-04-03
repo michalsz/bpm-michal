@@ -48,12 +48,9 @@ var BPApp = {
 			} 
 		});
 		this.setupAjax();
-
-		console.log('start');
-		
+	
 		$(document).ready(function(){ 
 			$('#searchInput').on('keydown', function(e){
-				console.log('searchinapp');
 				if (e.keyCode == 13) {
 					var keyword = $('#searchInput').val();
 					localStorage.setItem('keyword', keyword);

@@ -51,13 +51,5 @@ $('#search').on('pageshow', function(){
         var id = $(event.target).attr('data-productid');
         localStorage.setItem("product_id", id);
       });
-	 },
-
-   submitSearchForm: function(event){
-    console.log('searchinsearch');     
-    if(event.keyCode == 13){
-      localStorage.setItem('keyword', $('#searchInput').val())
-      $.mobile.changePage($("#search"), "none");
-    }
-   }
+	 }
 }
