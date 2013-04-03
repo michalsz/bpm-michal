@@ -1,20 +1,33 @@
 $('#reportsPage').on('pageshow', function(event){
 	BPApp.Report.start();
 });
-  
+
+$('#reportDetailsPage').on('pageshow', function(event){
+	BPApp.Report.startReportDetailsPage();
+});  
+
   BPApp.Report = {
   	start: function(){	
-		//$('#reportsSelect').selectmenu('disable');
   		this.displayReports();
   		this.bindEvents();
-		
+  	},
+
+	startReportDetailsPage: function(){	
+		var self = this;
+		$('#createReport').on('tap', function(event){
+			self.generateReport(event);
+		});
+		$('#createReport').attr('href','');
+		$('#createReport span span').html('Wygeneruj raport (pdf) <div class="btnloader"></div>');
+		$('#createReport').trigger('create');
   	},
 
 	displayReports: function(){
 		$('#reportsSelect-button .ui-btn-text').append('<div class="btnloader"></div>'); 
 		$('#reportsSelect-button .ui-btn-text .btnloader').css('display','inline-block');			
 		var auth_key = localStorage.getItem("auth_key");
-		if($('#reportsSelect').find('option').length == 1){
+		var self = this;
+		if($('#reportsList').find('li').length == 0){
 			$.ajax({
 				url: Config.serviceURL + 'BPK.pkg_json.Raporty',
 				data: {'AuthKey': auth_key},
@@ -24,19 +37,11 @@ $('#reportsPage').on('pageshow', function(event){
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
 				success: function(data){  
-					$('#reportsSelect-button .ui-btn-text .btnloader').css('display','none');					
-					$('#reportsSelect').html('<option data-placeholder="true" value="placeholder">Wybierz</option>');
 					$.each(data.raporty, function(i, item){
-						$('#reportsSelect').append('<option value="' + item.raport_kod + '"> '  + item.raport_nazwa +  '</option>');
-
+						$('#reportsList').append('<li><a href="#reportDetailsPage" class="bpm-report-button" data-reportid="' + item.raport_kod + '"> '  + item.raport_nazwa +  '</a></li>');
 					});
-					$('#reportsSelect').selectmenu('refresh');
-					//$('#reportsSelect').selectmenu('enable');
-					$('#createReport').attr('href','');
-					$('#createReport span span').html('Wygeneruj raport (pdf) <div class="btnloader"></div>');
-					$('#createReport').trigger('create');
-					//$('#reportsPage .loadingmsg').hide();
-					//$('#reportsPage .ui-content > * ').show();
+					$('#reportsList').listview('refresh');
+					self.onButtonClick();
 	       		},
 				error: function(message){
 						console.log('errr');
@@ -44,6 +49,13 @@ $('#reportsPage').on('pageshow', function(event){
 	          		}
 	   		});
 		}
+	},
+
+	onButtonClick: function(){
+		$('.bpm-report-button').on('tap', function(event) {
+			var report_id = $(event.target).attr('data-reportid');
+			localStorage.setItem("report_id", report_id);
+		});
 	},
 	
 	displayDocuments : function(event){
@@ -74,15 +86,11 @@ $('#reportsPage').on('pageshow', function(event){
 	},
 
 	generateReport: function(event){
-		if ( $('#reportsSelect').val() == 'placeholder' ) {
-			alert('Wybierz rodzaj raportu.');
-			return false;
-		}
 		$('#createReport .btnloader').css('display', 'inline-block');
 		var auth_key = localStorage.getItem("auth_key");
 		var dateSince = $('#dateSince').val();
 		var dateTo = $('#dateTo').val();
-		var reportType = $('#reportsSelect').val();
+		var reportType = localStorage.getItem("report_id");
 		$.ajax({
 			url: Config.serviceURL + 'BPK.pkg_json.Raport',
 			data: {'AuthKey': auth_key, 'RaportKod': reportType, 'DataOd': dateSince, 'DataDo': dateTo, 'Typ': 'pdf'},
@@ -108,9 +116,5 @@ $('#reportsPage').on('pageshow', function(event){
 		$('#documents').on('tap', function(event) {
 			self.displayDocuments(event);
 		});
-
-		$('#createReport').on('tap', function(event){
-			self.generateReport(event);
-		})
 	}
 }

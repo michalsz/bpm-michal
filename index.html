@@ -274,8 +274,6 @@
 
 
 <!-- REPORTS PAGE -->		
-		
-		
 		<div data-role="page" data-theme="a" id="reportsPage">		
 
 			<div data-role="header" data-position="inline">
@@ -286,14 +284,27 @@
 			
 			<h2 class="loadingmsg">Ładowanie...</h2>
 			<div data-role="content" class="content">
-
 				<div data-role="fieldcontain" >
 					<label for="reportsSelect" class="select">Rodzaj raportu:</label>
-					<select id="reportsSelect" name="reportsSelect" data-native-menu="false">
-						<option data-placeholder="true" value="placeholder">Wybierz</option>
-					</select>
+					<ul id="reportsList" data-role="listview">
+						
+					</ul>
 				</div>
+			</div>
 				
+		</div>
+
+<!-- REPORTS DETAILS PAGE -->		
+		<div data-role="page" data-theme="a" id="reportDetailsPage">		
+
+			<div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Reports</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+			</div>
+			
+			<div data-role="content" class="content">
+
 				<div data-role="fieldcontain" >
 					<input data-theme="b" type="date" id="dateSince" value="2013-01-10" />
 				</div>
@@ -307,6 +318,8 @@
 			</div>
 				
 		</div>
+
+
 		
 <!-- ORDERS PAGE -->		
 		

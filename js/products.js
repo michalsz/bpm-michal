@@ -5,7 +5,6 @@ $('#products').on('pageshow', function(event){
 
 BPApp.Products = {
 	start: function(){
-		console.log('start');
 		this.getProducts(localStorage.getItem("subcategory"));
 		localStorage.setItem('startPoz', 0);
 	},
@@ -23,7 +22,6 @@ BPApp.Products = {
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
-				console.log('get products');
 				self.displayResultCount(data.towary_count);
     			$('#productsList').html('');
     			$.each(data.towary, function(i, item){
