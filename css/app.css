@@ -72,8 +72,7 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 	background-image: none;
     background: #0b0e2e; /* fallback for non-supporting browsers */  
     background-image: -webkit-gradient(radial, center 85%, 0, 70% 70%, 141, #363664, #0b0e2e ); /* old WebKit Syntax */  
-	background-image: -webkit-radial-gradient(center 85%, 70% 70%, #363664, #0b0e2e); /* New WebKit syntax */  
-	
+	background-image: -webkit-radial-gradient(center 85%, 70% 70%, #363664, #0b0e2e); /* New WebKit syntax */ 
 }
 
 .bglogo {
@@ -173,9 +172,6 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 	.logo {
 		background: url(../img/logo.png) no-repeat center 40%;
 	}
-	.menu-titles > a > img {
-		max-width: 30%;
-	}	
 }
 
 /****************************** MENU */
@@ -191,11 +187,48 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 	opacity: 0.5;
 }
 
+.menu-titles > a > img {
+	margin: 5px;
+	max-width: 140px;
+}
+
+.menu-titles > a {
+	display: block;
+	float: left;
+	z-index: 10;
+	text-decoration: none;	
+}
+
+.menuboxtitle {
+	display: block;
+	width: 100%;
+	height: 40px;
+	line-height:40px;
+	text-align: center;
+	position: relative;
+	top: -15px;	
+	color: white;
+
+}
+
+.search {
+	margin-bottom: 15px;
+}
+
+#searchInput {
+
+}
+
 
 /****************************** CONTENT */
 
 /****************************** PAGES */
-
+/*
+.content {
+	margin: 0;
+	padding-top: 5px;
+}
+*/
 /* LOADING */
 
 h2.loadingmsg {
@@ -242,6 +275,8 @@ h2.loadingmsg {
 .bpm-productdatalist {
 	list-style-type: none;
 }
+
+
 
 .bpm-productlabel {
 	padding-bottom:10px;

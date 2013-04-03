@@ -54,8 +54,9 @@ $('#search').on('pageshow', function(){
 	 },
 
    submitSearchForm: function(event){
+    console.log('searchinsearch');     
     if(event.keyCode == 13){
-      localStorage.setItem('keyword', $('#keyword').val())
+      localStorage.setItem('keyword', $('#searchInput').val())
       $.mobile.changePage($("#search"), "none");
     }
    }

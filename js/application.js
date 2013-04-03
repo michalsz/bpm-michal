@@ -49,13 +49,17 @@ var BPApp = {
 		});
 		this.setupAjax();
 
-
-		$('#searchInput').on('keydown', function(e){
-			if (e.keyCode == 13) {
-				var keyword = $('#searchInput').val();
-				localStorage.setItem('keyword', keyword);
-				window.location = "#search";
-    		}
+		console.log('start');
+		
+		$(document).ready(function(){ 
+			$('#searchInput').on('keydown', function(e){
+				console.log('searchinapp');
+				if (e.keyCode == 13) {
+					var keyword = $('#searchInput').val();
+					localStorage.setItem('keyword', keyword);
+					window.location = "#search";
+				}
+			});				
 		});
 	},
 
