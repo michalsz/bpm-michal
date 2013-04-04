@@ -1,5 +1,5 @@
 $('#reportsPage').on('pageshow', function(event){
-	$('#productsSearchList').html('<h2 class="loadingmsg">Ładowanie...</h2>');		
+	$('#reportsList').html('<h2 class="loadingmsg">Ładowanie...</h2>');		
 	BPApp.Report.start();
 });
 
@@ -37,7 +37,8 @@ $('#reportDetailsPage').on('pageshow', function(event){
 				dataType: 'jsonp',
 				crossDomain: true,
 				contentType: 'application/json; charset=utf-8',
-				success: function(data){  
+				success: function(data){ 
+					$('#reportsList').html(''); 
 					$.each(data.raporty, function(i, item){
 						$('#reportsList').append('<li><a href="#reportDetailsPage" class="bpm-report-button" data-reportid="' + item.raport_kod + '"> '  + item.raport_nazwa +  '</a></li>');
 					});
