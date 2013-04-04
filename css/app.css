@@ -234,8 +234,7 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 /****************************** PAGES */
 
 .content {
-	position: relative;
-	z-index: 10;
+
 }
 
 /* LOADING */
