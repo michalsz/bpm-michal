@@ -17,14 +17,14 @@ BPApp.Products = {
 			url: Config.serviceURL + 'BPK.pkg_json.Towary',
 			data: {'KtId': parseInt(subcategory_id), 'AuthKey': '', 'Query': '', 'StartPoz': startPoz},
 			type: 'GET',
-            cache: true,
+			cache: true,
 			dataType: 'jsonp',
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
 				self.displayResultCount(data.towary_count);
-    			$('#productsList').html('');
-    			$.each(data.towary, function(i, item){
+				$('#productsList').html('');
+				$.each(data.towary, function(i, item){
 					self.getProductDetails(item.tow_id, 'productsList');
 				})
           	},
@@ -61,7 +61,7 @@ BPApp.Products = {
 			url: Config.serviceURL + 'BPK.pkg_json.Towar',
 			data: {'TowId': parseInt(product_id), 'AuthKey': auth_key},
 			type: 'GET',
-            cache: true,
+			cache: true,
 			dataType: 'jsonp',
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
@@ -69,7 +69,7 @@ BPApp.Products = {
 				$('#' + element_id).append('<li><a data-transition="slide" class="bpm-product-button" data-productid="' + item.tow_id + '" href="#product">' + item.tow_nazwa +  ' <span class="right">' +  item.cena_n +' zł</span></a></li>')
 				$('#' + element_id).listview('refresh');
 				self.onButtonClick();
-          	},
+			},
           	error: function(){
           		alert('error');
           	}
