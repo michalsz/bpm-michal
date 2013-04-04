@@ -191,7 +191,7 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 .menu-titles > a > img:hover  { 
 	opacity: 0.5;
 }
-
+/*
 .menu-titles > a > img {
 	margin: 5px;
 	max-width: 140px;
@@ -215,7 +215,11 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 	color: white;
 
 }
+*/
 
+.menuboxtitle {
+	display: none;
+}
 .search {
 	margin-bottom: 15px;
 }
