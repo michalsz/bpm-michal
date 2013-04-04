@@ -37,10 +37,13 @@ $('#search').on('pageshow', function(){
   	},
 
     displayResultCount: function(count){
+      var style = "";
       var i = (count / 10);
       $('#pagination').html('');
       for(var j = 0; j < i; j++){
-        $('#pagination').append('<a href="" class="pagination_link" data-startpoz="' +  j + '">' +  (j + 1)  + '</a>');
+        
+        
+        $('#pagination').append('<a href="" style="' + style + '"class="pagination_link" data-startpoz="' +  j + '">Strona: ' +  (j + 1)  + '</a>');
       }
     },
 

@@ -40,9 +40,9 @@ BPApp.Products = {
 	      var startPoz = localStorage.getItem('startPoz');
 	      for(var j = 0; j < i; j++){
 		if(startPoz == j){
-			$('#pagination').append('<a data-role="button" href="" class="pagination_link" data-startpoz="' +  j + '">' +  (j + 1)  + '</a>').trigger('create');
+			// $('#pagination').append('<a data-role="button" href="" class="pagination_link" data-startpoz="' +  j + '">' +  (j + 1)  + '</a>').trigger('create');
 		}else{
-			$('#pagination').append('<a data-role="button" href="" onclick="BPApp.Products.refreshProducts(event)" class="pagination_link" data-startpoz="' +  j + '">' +  (j + 1)  + '</a>').trigger('create');      			
+			$('#pagination').append('<a data-role="button" href="" onclick="BPApp.Products.refreshProducts(event)" class="pagination_link" data-startpoz="' +  j + '">Strona: ' +  (j + 1)  + '</a>').trigger('create');      			
 		}
 		$('#pagination').trigger('create');
 	      }
