@@ -87,8 +87,7 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 }
 
 .ui-btn-hover-b {
-	background: transparent;
-	background: #b50000;
+	background: #b50000!important;
 }
 
 .ui-btn-up-b {
