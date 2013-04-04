@@ -86,7 +86,7 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 	background-image: none;
 }
 
-.ui-btn-hover-b, .ui-btn-up-b:hover;  {
+.ui-btn-hover-b, .ui-btn-up-b:hover  {
 	background: #b50000!important;
 }
 
@@ -240,7 +240,7 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 */
 /* LOADING */
 
-h2.loadingmsg {
+h2 {
 	padding-left:10px;
 	text-align: center;
 	margin: 10px;
@@ -249,6 +249,10 @@ h2.loadingmsg {
 	margin-bottom: 25px;
 	font-size: 16px;
 	padding:0;
+
+}
+
+h2.loadingmsg {
 	padding-bottom: 80px;
 	background: url(../img/ajax-loader2.gif) no-repeat center bottom;
 }

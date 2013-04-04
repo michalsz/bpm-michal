@@ -30,6 +30,7 @@ var BPApp = {
 				$('#categoriesList').html('');
 				$('#subcategoriesList').html('');
 				$('#productsList').html('');
+				$('#productsSearchList').html('');
 				
 				$('#addToCart').hide();
 				$('.productCount').hide();		

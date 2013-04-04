@@ -1,5 +1,6 @@
 
 $('#search').on('pageshow', function(){
+  $('#productsSearchList').html('<h2 class="loadingmsg">Ładowanie...</h2>');
   BPApp.Search.start();
 });
 
@@ -24,9 +25,13 @@ $('#search').on('pageshow', function(){
 				success: function(data){           
     				self.displayResultCount(data.towary_count);
             $('#productsSearchList').html('');
-            $.each(data.towary, function(i, item){
-						  BPApp.Products.getProductDetails(item.tow_id, 'productsSearchList');
-  					})
+            if (data.towary.length > 0) {
+              $.each(data.towary, function(i, item){
+                BPApp.Products.getProductDetails(item.tow_id, 'productsSearchList');
+              })
+            } else {
+              $('#productsSearchList').html('<h2>Brak wyników.</h2>');  
+            }
           }
     		});
   	},

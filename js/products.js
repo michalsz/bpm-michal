@@ -49,7 +49,6 @@ BPApp.Products = {
 	},
 
 	refreshProducts: function(event){
-		console.log('refresh prod.');
 		var startpoz = $(event.target).parents('a').attr('data-startpoz');
 		localStorage.setItem('startPoz', startpoz);
 		this.getProducts(localStorage.getItem("subcategory"))
