@@ -48,6 +48,7 @@
 					<a data-transition="slidedown" href="#cart" id="cartLink" style="display:none;"><img src="./img/koszyk2.png" alt="Koszyk" /><span class="menuboxtitle" >Katalog</span></a>
 					<a data-transition="slidedown" href="#loginPage" id="login" ><img src="./img/zaloguj2.png" alt="Zaloguj" /><span class="menuboxtitle" >Katalog</span></a>
 					<a data-transition="slidedown" href="tel:122964524" id="infolinia" ><img src="./img/infolinia.png" alt="Infolinia" /><span class="menuboxtitle" >Katalog</span></a>
+					<a data-transition="slidedown" href="#contactPage" id="contact" ><img src="./img/kontakt.png" alt="Kontakt" /><span class="menuboxtitle" >Katalog</span></a>
 					<a data-transition="slidedown" href="#logoutPage" id="logout" style="display:none;" ><img src="./img/wyloguj2.png" alt="Wyloguj" /><span class="menuboxtitle" >Katalog</span></a>
 				</div>
 			</div>			
@@ -125,7 +126,7 @@
 
 			<img class="bglogo" src="./img/bglogo.png"><div data-role="header" data-position="inline">
 				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Products</h1></a></div>
+				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Search</h1></a></div>
 				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
 			</div>
 			
@@ -280,15 +281,13 @@
 
 			<img class="bglogo" src="./img/bglogo.png"><div data-role="header" data-position="inline">
 				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Reports</h1></a></div>
+				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Reports select</h1></a></div>
 				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
 			</div>
 			
-			<h2 class="loadingmsg">Ładowanie...</h2>
 			<div data-role="content" class="content">
 				<div data-role="fieldcontain" >
-					<label for="reportsSelect" class="select">Rodzaj raportu:</label>
-					<ul id="reportsList" data-role="listview">
+					<ul id="reportsList" data-theme="b" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-role="listview">
 						
 					</ul>
 				</div>
@@ -474,6 +473,35 @@
 
 				<a id="submitOrder" data-role="button" style="display:none;">Złóż zamówienie<div class="btnloader"></div></a>
 				<h2 id="emptyCartMsg">Twój koszyk jest pusty <a href="#categories" data-role="button" data-transition="slidedown">Przeglądaj katalog</a></h2>
+
+			</div>
+				
+		</div>
+		
+		
+<!-- CONTACT PAGE -->		
+		
+		<div data-role="page" data-theme="a" id="contactPage">		
+
+			<img class="bglogo" src="./img/bglogo.png"><div data-role="header" data-position="inline">
+				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Cart</h1></a></div>
+				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+			</div>
+			
+
+			<div data-role="content" class="content">
+
+					<h2>BIURO PLUS</h2>
+					ul. Bonarka 21<br>
+					30-415 Kraków<br>
+
+
+					<h2>BIURO OBSŁUGI KLIENTA</h2>
+					tel. 12 296 45 24<br>
+					fax 12 296 45 24 w.10, w.35<br>
+					e-mail: biuroserwis@krakow.biuroplus.pl<br>
+					www.biuroplus-krakow.pl<br>
 
 			</div>
 				

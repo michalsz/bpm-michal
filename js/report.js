@@ -1,4 +1,5 @@
 $('#reportsPage').on('pageshow', function(event){
+	$('#productsSearchList').html('<h2 class="loadingmsg">Ładowanie...</h2>');		
 	BPApp.Report.start();
 });
 
