@@ -86,7 +86,7 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 	background-image: none;
 }
 
-.ui-btn-hover-b {
+.ui-btn-hover-b, .ui-btn-up-b:hover;  {
 	background: #b50000!important;
 }
 
