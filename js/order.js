@@ -168,10 +168,10 @@ BPApp.Order = {
                 });
 
                 $('.bpm-remove').on('tap', function(event) {
-                    var pds_id = $(event.target).attr('data-pdsid');
+                    var pds_id = $(this).attr('data-pdsid');
                     var count = 0;
                     self.acceptCount(pds_id, count);
-
+                    console.log(pds_id);
                 })
             }
         })
