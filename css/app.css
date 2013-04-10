@@ -453,9 +453,14 @@ h2.loadingmsg {
     padding: 10px;
 }
 
+#contact_table td + td {
+    text-align: left;
+}
+
 #contact_table h2 {
     margin: 10px 0;
     font-size: 25px;
+    text-align: left;
 }
 
 #contact_table a {
