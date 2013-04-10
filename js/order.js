@@ -79,12 +79,10 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 			crossDomain: true,
 			contentType: 'application/json; charset=utf-8',
 			success: function(data){           
-				console.log(elementId);
-				console.log(data);
 				$('#' + elementId).html('');
 				
 				$.each(data.zamowienia, function(i, item){
-					$('#' + elementId).append('<li id="orderdetail'+item.ds_id+'"><span class="paramName">Numer dokumentu: <span class="paramValue">' + item.ds_id + '</span></span><span class="paramName">Nazwa Centrum Kosztowego <span class="paramValue">' + item.ck_nazwa + '</span></span><span class="paramName">Cena netto:  <span class="paramValue">' + item.ds_netto + 'zł</span></span><span class="paramName">VAT <span class="paramValue">' + item.ds_vat + 'zł</span></span><span class="paramName">Cena Brutto: <span class="paramValue">' + item.ds_brutto + 'zł</span></span><div id="poz'+item.ds_id+'"></div><a id="orderdetails" href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-detail-btn">Szczegóły</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-accept-btn">Akceptuj</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-cancel-btn">Odrzuć</a></li>').trigger('create');
+					$('#' + elementId).append('<li id="orderdetail'+item.ds_id+'"><span class="paramName">Numer dokumentu: <span class="paramValue">' + item.ds_id + '</span></span><span class="paramName">Nazwa Centrum Kosztowego <span class="paramValue">' + item.ck_nazwa + '</span></span><span class="paramName">Cena netto:  <span class="paramValue">' + item.ds_netto + 'zł</span></span><span class="paramName">VAT <span class="paramValue">' + item.ds_vat + 'zł</span></span><span class="paramName">Cena Brutto: <span class="paramValue">' + item.ds_brutto + 'zł</span></span><div id="poz'+item.ds_id+'"></div><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-edit-btn">Edytuj</a><a id="orderdetails" href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-detail-btn">Szczegóły</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-accept-btn">Akceptuj</a><a href="#" data-docid="' +  item.ds_id + '" data-role="button" class="order-cancel-btn">Odrzuć</a></li>').trigger('create');
 				});
 				
 				$('.order-detail-btn').trigger('create');
@@ -95,6 +93,12 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 					$('.order-detail-btn').off('tap');
 					//$(event.target).parents('a').remove();
 	 			});
+
+
+				$('.order-edit-btn').on('tap', function(event){
+					var doc_id = $(event.target).parents('a').attr('data-docid');
+					self.displayOrderEdit(doc_id);
+				});
 
 				$('.order-accept-btn').on('tap', function(event) {
 	 				var doc_id = $(event.target).parents('a').attr('data-docid');
@@ -137,6 +141,63 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 			}
 		})
 	},
+
+	displayOrderEdit: function(doc_id){
+		var self = this;
+		$('#orderdetail' + doc_id + ' .order-detail-btn .ui-btn-text').append('<div class="btnloader"></div>');
+		$('#orderdetail' + doc_id + ' .order-detail-btn  .ui-btn-text .btnloader').css('display','inline-block');		
+		$.ajax({
+			url: Config.serviceURL + 'BPK.pkg_json.PozycjeDokDoAkceptacji',
+			data: {'DsId': doc_id, 'AuthKey': localStorage.getItem("auth_key")},
+			type: 'GET',
+           	cache: true,
+			dataType: 'jsonp',
+			crossDomain: true,
+			contentType: 'application/json; charset=utf-8',
+			success: function(data){           
+					$('#poz' + doc_id ).html('');
+					$.each(data.pozycje, function(i, item){
+						$('#poz' + doc_id).html('<span class="paramName">Szczegóły: <span class="paramValue">'+ item.tow_nazwa +' <input id="count_'+item.pds_id+'" value="' +  item.pds_ilosc  +'" />' + item.pds_jm_symbol +  '<a href="#" data-pdsid="' + item.pds_id + '" class="bpm-accept-count">Zatwierdź ilość</a> <a href="#" data-pdsid="'+item.pds_id+'" class="bpm-remove">Usuń</a></span></span>');
+					});
+					$('#orderdetail' + doc_id + ' .order-detail-btn .ui-btn-text .btnloader').css('display','none');
+
+					$('.bpm-accept-count').on('tap', function(event){
+						var pds_id = $(event.target).attr('data-pdsid');
+						var count = $('#count_' + pds_id).val();
+						self.acceptCount(pds_id, count);
+					});
+
+					$('.bpm-remove').on('tap', function(event){
+						var pds_id = $(event.target).attr('data-pdsid');
+						var count = 0;
+						self.acceptCount(pds_id, count);
+					})
+			}
+		})
+	},
+
+
+	acceptCount: function(pds_id, count){
+		 $.ajax({
+			url: Config.serviceURL + 'BPK.pkg_json.ZmienPozycjeZamDoAkcept',
+			data: {'PdsId': pds_id, 'Ilosc': count, 'AuthKey': localStorage.getItem("auth_key")},
+			type: 'GET',
+           	cache: true,
+			dataType: 'jsonp',
+			crossDomain: true,
+			contentType: 'application/json; charset=utf-8',
+			success: function(data){           
+				if(data.Komunikat){
+					alert(data.Komunikat);
+				}
+
+				if(data.Zmienione == 'T'){
+    				alert('Ilość została zaakceptowana');
+    			}
+			}
+		})
+	},
+
 
 	acceptOrder: function(doc_id){
 		
