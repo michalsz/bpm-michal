@@ -157,7 +157,7 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 			success: function(data){           
 					$('#poz' + doc_id ).html('');
 					$.each(data.pozycje, function(i, item){
-						$('#poz' + doc_id).html('<span class="paramName">Szczegóły: <span class="paramValue">'+ item.tow_nazwa +' <input id="count_'+item.pds_id+'" value="' +  item.pds_ilosc  +'" />' + item.pds_jm_symbol +  '<a href="#" data-pdsid="' + item.pds_id + '" class="bpm-accept-count">Zatwierdź ilość</a> <a href="#" data-pdsid="'+item.pds_id+'" class="bpm-remove">Usuń</a></span></span>');
+						$('#poz' + doc_id).append('<span class="paramName">Szczegóły: <span class="paramValue">'+ item.tow_nazwa +' <input id="count_'+item.pds_id+'" value="' +  item.pds_ilosc  +'" />' + item.pds_jm_symbol +  '<a href="#" data-pdsid="' + item.pds_id + '" class="bpm-accept-count">Zatwierdź ilość</a> <a href="#" data-pdsid="'+item.pds_id+'" class="bpm-remove">Usuń</a></span></span>');
 					});
 					$('#orderdetail' + doc_id + ' .order-detail-btn .ui-btn-text .btnloader').css('display','none');
 
@@ -193,6 +193,10 @@ $('#myWaitingOrdersPage').on('pageshow', function(event){
 
 				if(data.Zmienione == 'T'){
     				alert('Ilość została zaakceptowana');
+    				$('#ordersList').html('<h2 class="loadingmsg">Ładowanie...</h2>');
+					var department_id = localStorage.getItem("department_id");
+					var cost_id = localStorage.getItem("cost_id");
+					BPApp.Order.displayOrders(department_id, cost_id, 'ordersList');
     			}
 			}
 		})
