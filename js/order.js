@@ -168,13 +168,16 @@ BPApp.Order = {
                 $('.bpm-remove').on('tap', function(event) {
                     var pds_id = $(this).attr('data-pdsid');
                     var count = 0;
-                    self.acceptCount(pds_id, count);
+                    self.acceptCount(pds_id, count, true);
                     console.log(pds_id);
                 })
             }
         })
     },
-    acceptCount: function(pds_id, count) {
+    acceptCount: function(pds_id, count, to_delete) {
+        
+        to_delete = to_delete || false;
+        
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.ZmienPozycjeZamDoAkcept',
             data: {'PdsId': pds_id, 'Ilosc': count, 'AuthKey': localStorage.getItem("auth_key")},
@@ -188,8 +191,11 @@ BPApp.Order = {
                     alert(data.Komunikat);
                 }
 
-                if (data.Zmienione == 'T') {
-                    alert('Ilość została zaakceptowana');
+                if (data.Zmienione === 'T') {
+                    if (!to_delete)
+                        alert('Ilość została zaakceptowana');
+                    else
+                        alert('Usunięto produkt');
                     $('#ordersList').html('<h2 class="loadingmsg">Ładowanie...</h2>');
                     var department_id = localStorage.getItem("department_id");
                     var cost_id = localStorage.getItem("cost_id");
