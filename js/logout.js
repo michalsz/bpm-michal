@@ -5,7 +5,11 @@ $('#logoutPage').on('pageshow', function(){
 BPApp.Logout = {
 
 	start: function(){
-		this.logout();
+                
+                if ( confirm('Czy na pewno chcesz się wylogować?') )
+                    this.logout();
+                
+                window.location = "index.html";
 	},
 
 	logout: function(){

@@ -78,8 +78,8 @@ BPApp.Product = {
 			var productName = $('#productName_' + productId).html();
 			$('#addToCart').unbind('tap'); 			
 			BPApp.Cart.addProduct(productName, productId, productCount);
-			
-		})
+			alert('Produkt dodany do koszyka');
+		});
 	},
 	
 	notAuthorisedEventBind: function(){
