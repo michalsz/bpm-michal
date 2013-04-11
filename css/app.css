@@ -447,23 +447,54 @@ h2.loadingmsg {
 
 #contact_table {
     margin: 0 auto;
+    font-size: 14px;
+    border-collapse: collapse;
 }
 
 #contact_table td {
     padding: 10px;
+    word-break: break-all;
+    vertical-align: middle;
+}
+
+#contact_table tr + tr td {
+    border-top: 1px solid #656680;
 }
 
 #contact_table td + td {
     text-align: left;
+    vertical-align: top;
 }
 
 #contact_table h2 {
-    margin: 10px 0;
-    font-size: 25px;
+    margin: 0 0 5px 0;
+    font-size: 18px;
     text-align: left;
 }
 
 #contact_table a {
     color: white;
     text-decoration: none;
+}
+
+.bpm-remove, .bpm-accept-count {
+    margin-top: 10px;
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    background: url("../img/remove_button.png") no-repeat;
+    display: block;
+}
+
+.bpm-remove:hover {
+    background: url("../img/remove_button_hover.png") no-repeat;
+}
+
+.bpm-accept-count {
+    background: url("../img/accept_button.png") no-repeat;
+    
+}
+
+.bpm-accept-count:hover {
+    background: url("../img/accept_button_hover.png") no-repeat;
 }

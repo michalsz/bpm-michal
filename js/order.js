@@ -153,9 +153,9 @@ BPApp.Order = {
                 $('#poz' + doc_id).html('');
                 $.each(data.pozycje, function(i, item) {
                     $('#poz' + doc_id).append(
-                      '<span class="paramName"><span class="product_details">Szczegóły: <br/><a href="#" data-pdsid="' + item.pds_id + '" class="bpm-remove"><img src="img/remove_product.png" alt="" /></a></span>'
+                      '<span class="paramName"><span class="product_details">Szczegóły: <br/><a href="#" data-pdsid="' + item.pds_id + '" class="bpm-remove"></a><a href="#" data-pdsid="' + item.pds_id + '" class="bpm-accept-count"></a></span>'
                     + '<span class="paramValue">' + item.tow_nazwa + ' ' + item.pds_ilosc + ' ' + item.pds_jm_symbol + '</span>'
-                    + '<span class="product_change_count"><span class="title">Zmień ilość:</span><br/><input id="count_' + item.pds_id + '" value="' + item.pds_ilosc + '" class="product_count" /><br/><a href="#" data-pdsid="' + item.pds_id + '" class="bpm-accept-count">Zatwierdź ilość</a></span></span>'
+                    + '<span class="product_change_count"><span class="title">Zmień ilość:</span><br/><input id="count_' + item.pds_id + '" value="' + item.pds_ilosc + '" class="product_count" /><br/></span></span>'
                     );
                 });
                 $('#orderdetail' + doc_id + ' .order-detail-btn .ui-btn-text .btnloader').css('display', 'none');
@@ -163,8 +163,6 @@ BPApp.Order = {
                     var pds_id = $(event.target).attr('data-pdsid');
                     var count = $('#count_' + pds_id).val();
                     self.acceptCount(pds_id, count);
-                    
-                    
                 });
 
                 $('.bpm-remove').on('tap', function(event) {
