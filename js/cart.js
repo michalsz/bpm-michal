@@ -424,7 +424,7 @@ BPApp.Cart = {
         });
 
         $('.bpm-cart-up').on('tap', function(event) {
-            var count = parseInt( $(this).attr('data-count') ) + 1;
+            var count = parseInt( $(this).prev().html() ) + 1;
             
             $(this).prev().html( count );
             $(this).attr('data-count', count);
@@ -438,7 +438,7 @@ BPApp.Cart = {
         });
 
         $('.bpm-cart-down').on('tap', function(event) {
-            var count = parseInt( $(this).attr('data-count') ) - 1;
+            var count = parseInt( $(this).prev().prev().html() ) - 1;
             
             $(this).prev().prev().html( count );
             $(this).attr('data-count', count);
