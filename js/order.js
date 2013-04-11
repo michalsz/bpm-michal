@@ -109,7 +109,7 @@ BPApp.Order = {
 
                 $('.order-cancel-btn').on('tap', function(event) {
                     var doc_id = $(event.target).parents('a').attr('data-docid');
-                    self.cancelOrder(doc_id);
+                    self.cancelOrder(doc_id, true);
                 });
 
                 if (data.zamowienia.length == 0) {
@@ -138,7 +138,7 @@ BPApp.Order = {
                 $.each(data.pozycje, function(i, item) {
                     BPApp.Cart.addProduct(item.tow_nazwa, item.pds_tow_id, item.pds_ilosc);
                 });
-                self.cancelOrder(doc_id);
+                self.cancelOrder(doc_id, false);
             }
         })
     },
@@ -251,7 +251,7 @@ BPApp.Order = {
             }
         })
     },
-    cancelOrder: function(doc_id) {
+    cancelOrder: function(doc_id, ifDisplayAlert) {
         $('#orderdetail' + doc_id + ' .order-cancel-btn .ui-btn-text').append('<div class="btnloader"></div>');
         $('#orderdetail' + doc_id + ' .order-cancel-btn .ui-btn-text .btnloader').css('display', 'inline-block');
         $.ajax({
@@ -263,7 +263,8 @@ BPApp.Order = {
             crossDomain: true,
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
-                if (data.Odrzucone == 'T') {
+                console.log(data);
+                if (ifDisplayAlert && data.Odrzucone == 'T') {
                     $('#orderdetail' + doc_id + ' .order-cancel-btn .ui-btn-text .btnloader').css('display', 'none');
                     alert('Zamówienie zostało odrzucone');
                     $('#orderdetail' + doc_id).html('');
