@@ -135,10 +135,16 @@ BPApp.Order = {
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
                 var cartId = BPApp.Cart.createCart();
+                
+                $.mobile.changePage($("#cart"));
+                
                 $.each(data.pozycje, function(i, item) {
                     BPApp.Cart.addProduct(item.tow_nazwa, item.pds_tow_id, item.pds_ilosc);
                 });
+                
                 self.cancelOrder(doc_id, false);
+                
+                
             }
         })
     },
