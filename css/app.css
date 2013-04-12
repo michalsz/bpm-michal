@@ -127,6 +127,7 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 
 .back {
 	background: url(../img/back_icon.png) no-repeat center center;
+        background-size: 32px 36px;
 }
 
 .back .ui-btn-text {
@@ -139,7 +140,8 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 
 .cart {
 	background: url(../img/cart_icon.png) no-repeat center left;
-	padding-left: 30px;	
+	padding-left: 35px;	
+        background-size: 30px 30px;
 }
 
 .cart:hover {
@@ -165,6 +167,7 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 	margin: 0 auto;
 	text-indent: -9999px;
 	height:34px;
+        background-size: 170px 34px;
 }
 
 @media (max-width: 480px) {  
