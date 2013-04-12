@@ -79,7 +79,7 @@ BPApp.Order = {
                 $('#' + elementId).html('');
 
                 $.each(data.zamowienia, function(i, item) {
-                    $('#' + elementId).append('<li id="orderdetail' + item.ds_id + '"><span class="paramName">Numer dokumentu: <span class="paramValue">' + item.ds_id + '</span></span><span class="paramName">Nazwa Centrum Kosztowego <span class="paramValue">' + item.ck_nazwa + '</span></span><span class="paramName">Cena netto:  <span class="paramValue">' + item.ds_netto + 'zł</span></span><span class="paramName">VAT <span class="paramValue">' + item.ds_vat + 'zł</span></span><span class="paramName">Cena Brutto: <span class="paramValue">' + item.ds_brutto + 'zł</span></span><div id="poz' + item.ds_id + '"></div><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-edit-btn">Edytuj</a><a id="orderdetails" href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-detail-btn">Szczegóły</a><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-accept-btn">Akceptuj</a><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-cancel-btn">Odrzuć</a></li>').trigger('create');
+                    $('#' + elementId).append('<li id="orderdetail' + item.ds_id + '"><span class="paramName">Numer dokumentu: <span class="paramValue">' + item.ds_id + '</span></span><span class="paramName">Nazwa Centrum Kosztowego <span class="paramValue">' + item.ck_nazwa + '</span></span><span class="paramName">Cena netto:  <span class="paramValue">' + item.ds_netto + 'zł</span></span><span class="paramName">VAT <span class="paramValue">' + item.ds_vat + 'zł</span></span><span class="paramName">Cena Brutto: <span class="paramValue">' + item.ds_brutto + 'zł</span></span><div id="poz' + item.ds_id + '"></div><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-edit-btn">Edytuj</a><a id="orderdetails" href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-detail-btn">Szczegóły</a><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-accept-btn">Akceptuj</a><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-add-btn">Dodaje produkt</a><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-cancel-btn">Odrzuć</a></li>').trigger('create');
                 });
 
                 $('.order-detail-btn').trigger('create');
@@ -97,6 +97,11 @@ BPApp.Order = {
                     self.displayOrderEdit(doc_id);
                 });
 
+                $('.order-add-btn').on('tap', function(event) {
+                    var doc_id = $(event.target).parents('a').attr('data-docid');
+                    self.addToOrder(doc_id);
+                });
+
                 $('.order-accept-btn').on('tap', function(event) {
                     var doc_id = $(event.target).parents('a').attr('data-docid');
                     self.acceptOrder(doc_id);
@@ -104,7 +109,7 @@ BPApp.Order = {
 
                 $('.order-cancel-btn').on('tap', function(event) {
                     var doc_id = $(event.target).parents('a').attr('data-docid');
-                    self.cancelOrder(doc_id);
+                    self.cancelOrder(doc_id, true);
                 });
 
                 if (data.zamowienia.length == 0) {
@@ -117,6 +122,27 @@ BPApp.Order = {
             }
         });
     },
+
+    addToOrder: function(doc_id){
+        var self = this;
+        $.ajax({
+            url: Config.serviceURL + 'BPK.pkg_json.PozycjeDokDoAkceptacji',
+            data: {'DsId': doc_id, 'AuthKey': localStorage.getItem("auth_key")},
+            type: 'GET',
+            cache: true,
+            dataType: 'jsonp',
+            crossDomain: true,
+            contentType: 'application/json; charset=utf-8',
+            success: function(data) {
+                var cartId = BPApp.Cart.createCart();
+                $.each(data.pozycje, function(i, item) {
+                    BPApp.Cart.addProduct(item.tow_nazwa, item.pds_tow_id, item.pds_ilosc);
+                });
+                self.cancelOrder(doc_id, false);
+            }
+        })
+    },
+
     displayOrderDetail: function(doc_id) {
         $('#orderdetail' + doc_id + ' .order-detail-btn .ui-btn-text').append('<div class="btnloader"></div>');
         $('#orderdetail' + doc_id + ' .order-detail-btn  .ui-btn-text .btnloader').css('display', 'inline-block');
@@ -225,7 +251,7 @@ BPApp.Order = {
             }
         })
     },
-    cancelOrder: function(doc_id) {
+    cancelOrder: function(doc_id, ifDisplayAlert) {
         $('#orderdetail' + doc_id + ' .order-cancel-btn .ui-btn-text').append('<div class="btnloader"></div>');
         $('#orderdetail' + doc_id + ' .order-cancel-btn .ui-btn-text .btnloader').css('display', 'inline-block');
         $.ajax({
@@ -237,7 +263,8 @@ BPApp.Order = {
             crossDomain: true,
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
-                if (data.Odrzucone == 'T') {
+                console.log(data);
+                if (ifDisplayAlert && data.Odrzucone == 'T') {
                     $('#orderdetail' + doc_id + ' .order-cancel-btn .ui-btn-text .btnloader').css('display', 'none');
                     alert('Zamówienie zostało odrzucone');
                     $('#orderdetail' + doc_id).html('');
