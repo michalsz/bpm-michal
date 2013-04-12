@@ -16,6 +16,7 @@ BPApp.Cart = {
         this.getProductsFromCart(this.displayProductsFromCart);
         this.bindEvents();
     },
+            
     getProductsFromCart: function(callback) {
         var self = this;
         var cartId = this.getCartId();
@@ -150,6 +151,7 @@ BPApp.Cart = {
             contentType: 'application/json; charset=utf-8',
             success: function(message) {
                 self.updateProductCount();
+                alert('Produkt dodany do koszyka');
                 $('#addToCart .btnloader').css('display', 'none');
                 $('.productCount').hide();
                 $('#addToCart').hide();
@@ -195,8 +197,9 @@ BPApp.Cart = {
             crossDomain: true,
             contentType: 'application/json; charset=utf-8',
             success: function(message) {
+                
+                self.updateProductCount();
                 self.getProductsFromCart(self.displayProductsFromCart);
-                //self.updateProductCount();
             },
             error: function(message) {
 

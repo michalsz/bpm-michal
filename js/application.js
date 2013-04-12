@@ -54,7 +54,10 @@ var BPApp = {
 			$('#searchInput').on('keydown', function(e){
 				if (e.keyCode == 13) {
 					var keyword = $('#searchInput').val();
-					localStorage.setItem('keyword', keyword);
+					localStorage.setItem('keyword', keyword);                    
+                    
+                    $('#searchInput').val('');
+                    
 					window.location = "#search";
 				}
 			});				
@@ -105,3 +108,10 @@ var BPApp = {
 		});
 	}
 }
+
+
+$('.openlink').on('tap', function() {
+    window.open( $(this).attr('url'), "_system");
+    
+    
+});

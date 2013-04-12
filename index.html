@@ -43,14 +43,26 @@
                 <div class="menu-titles ui-grid">
                     <a data-transition="slidedown" href="#categories"><img src="./img/katalog.png" alt="Katalog" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#priceListPage" id="priceList" style="display:none;"><img src="./img/cennik.png" alt="Cennik" /><span class="menuboxtitle" >Katalog</span></a>
-                    <a data-transition="slidedown" href="#departmentsPage" id="departments" style="display:none;"><img src="./img/historia.png" alt="Oddziały" /><span class="menuboxtitle" >Katalog</span></a>
+                    <a data-transition="slidedown" href="#departmentsPage" id="departments" style="display:none;"><img src="./img/podsumowanie.png" alt="Oddziały" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#reportsPage" id="reports" style="display:none;"><img src="./img/raporty.png" alt="Raporty" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#ordersPage" id="orders" style="display:none;"><img src="./img/zamowienia.png" alt="Zamówienia" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#myWaitingOrdersPage" id="myWaitingOrders" style="display:none;"><img src="./img/zamowienia.png" alt="Zamówienia" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#cart" id="cartLink" style="display:none;"><img src="./img/koszyk.png" alt="Koszyk" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#loginPage" id="login" ><img src="./img/zaloguj.png" alt="Zaloguj" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#contactPage" id="contact" ><img src="./img/kontakt.png" alt="Kontakt" /><span class="menuboxtitle" >Katalog</span></a>
-                    <a data-transition="slidedown" href="#logoutPage" id="logout" style="display:none;" ><img src="./img/wyloguj.png" alt="Wyloguj" /><span class="menuboxtitle" >Katalog</span></a>
+                                 
+                    <a href="#logout_dialog" data-rel="popup" data-position-to="window" data-transition="pop">
+                        <img src="./img/wyloguj.png" alt="Wyloguj" />
+                    </a>
+                    
+                    <div data-role="popup" id="logout_dialog">
+
+                            <div data-role="content" data-theme="c">
+                                <h3>Czy na pewno chcesz się wylogować?</h3>
+                                <a href="#logoutPage" data-role="button" data-theme="a">Wyloguj</a>       
+                                <a href="#"  data-role="button" data-theme="c">Anuluj</a>    
+                            </div>
+                    </div>
                 </div>
             </div>			
 
@@ -192,6 +204,7 @@
                     <!-- </div> -->
                     <a data-role="button" data-theme="a" id="addToCart">Dodaj do koszyka<div class="btnloader"></div></a>
                     <a data-role="button" data-theme="a" id="backToProducts" data-rel="back">Powrót do produktów</a>
+                    <a data-role="button" data-theme="a" href="#cart">Przejdź do koszyka</a>
                 </div>
 
             </div>
@@ -495,15 +508,15 @@
 
                 <table id="contact_table">
                     <tr>
-                        <td><img src="./img/email_icon.png" alt="" /></td>
+                        <td><img src="./img/email_icon.png" alt="" width="54" /></td>
                         <td>
                             <h2>Napisz do nas</h2>
                             <a href="mailto:biuroserwis@krakow.biuroplus.pl?subject=Zapytanie">biuroserwis@krakow.biuroplus.pl</a><br/>
-                            <a href="http://www.biuroplus-krakow.pl">www.biuroplus-krakow.pl</a>
+                            <a href="#" url="http://www.biuroplus-krakow.pl" class="openlink">www.biuroplus-krakow.pl</a>
                         </td>
                     </tr>
                     <tr>
-                        <td><img src="./img/phone_icon.png" alt="#" /></td>
+                        <td><img src="./img/phone_icon.png" alt="#"  width="56" /></td>
                         <td>
                             <h2>Infolinia</h2>
                             <a href="tel:122964524">tel. 12 296 45 24</a><br/>
@@ -511,9 +524,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><img src="./img/home_icon.png" alt="" /></td>
+                        <td><img src="./img/home_icon.png" alt="" width="51" /></td>
                         <td>
-                            <h2>Adres siedzimy</h2>
+                            <h2>Adres siedziby</h2>
                             ul. Bonarka 21<br>
                             30-415 Kraków<br>
                         </td>
@@ -526,6 +539,7 @@
 
         </div>
 
+        
         <script src="js/application.js"></script>
         <script src="js/department.js"></script>
         <script src="js/report.js"></script>
