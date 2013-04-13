@@ -67,8 +67,10 @@ BPApp.Order = {
     },
     displayOrders: function(departmentId, costSourceId, elementId) {
         var self = this;
+        var myRand = Math.floor((Math.random()*1000)+1);
+        
         $.ajax({
-            url: Config.serviceURL + 'BPK.pkg_json.DoAkceptacji',
+            url: Config.serviceURL + 'BPK.pkg_json.DoAkceptacji?' + myRand,
             data: {'OdbId': departmentId, 'CkId': costSourceId, 'AuthKey': localStorage.getItem("auth_key")},
             type: 'GET',
             cache: false,
