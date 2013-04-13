@@ -141,6 +141,7 @@ BPApp.Cart = {
         $('#addToCart .btnloader').css('display', 'inline-block');
         var cartId = this.getCartId();
         var self = this;
+        
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.DodajPozycjeKoszyk',
             data: {'KoszId': cartId, 'AuthKey': localStorage.getItem("auth_key"), 'TowId': product_id, 'Ilosc': count},
