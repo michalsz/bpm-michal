@@ -162,18 +162,17 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 }
 
 .logo {
-	background: url(../img/logo.png) no-repeat center -1px;
-	background-size: auto;
+	background: url(../img/logo.png) no-repeat center 0 / 170px 34px;
+
 	margin: 0 auto;
 	text-indent: -9999px;
 	height:34px;
-        background-size: 170px 34px;
 }
 
 @media (max-width: 480px) {  
-	.logo {
-		background: url(../img/logo.png) no-repeat center 40%;
-	}
+    .logo {
+        /* background: url(../img/logo.png) no-repeat center 40%; */
+    }
 }
 
 /****************************** MENU */
@@ -513,4 +512,50 @@ h2.loadingmsg {
 
 #categoriesList li .ui-btn-inner, #subcategoriesList li .ui-btn-inner, #productsList li .ui-btn-inner {
     padding: 10px 0;
+}
+
+
+#pagination  > * {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 40px;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+
+#pagination_prev, #pagination_next {
+    width: 50px;
+    height: 50px;
+    background: url("../img/prev_page.png") no-repeat 0 0 / 50px 50px;
+    padding: 0;
+}
+
+#pagination_prev:hover {
+    background: url("../img/prev_page_hover.png") no-repeat 0 0 / 50px 50px;
+}
+
+#pagination_next {
+    background: url("../img/next_page.png") no-repeat 0 0 / 50px 50px;
+}
+
+#pagination_next:hover {
+    background: url("../img/next_page_hover.png") no-repeat 0 0 / 50px 50px;
+}
+
+#pagination {
+    text-align: center;
+    font-size: 22px;
+}
+
+#pagination > span {
+    color: #ae0000;
+}
+
+#pagination a {
+    color: white;
+}
+
+#pagination a:hover {
+    color: #ccc;
 }
