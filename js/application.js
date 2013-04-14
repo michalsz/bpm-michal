@@ -116,5 +116,5 @@ $('.openlink').on('tap', function() {
 
 $('#wwwNotification').on('tap', function() {
     alert('Przejdź do przeglądarki by odwiedzić stronę');
-    window.open( $(this).attr('url'), "_system");
+    window.open( $(this).attr('url'), '_blank' ,'location=yes');
 });
