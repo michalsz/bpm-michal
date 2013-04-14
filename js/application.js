@@ -112,6 +112,8 @@ var BPApp = {
 
 $('.openlink').on('tap', function() {
     window.open( $(this).attr('url'), "_system");
-    
-    
+});
+
+$('#wwwNotification').on('tap', function() {
+    alert('Przejdź do przeglądarki by odwiedzić stronę');
 });

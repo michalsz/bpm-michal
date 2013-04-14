@@ -67,8 +67,8 @@ BPApp.Order = {
     },
     displayOrders: function(departmentId, costSourceId, elementId) {
         var self = this;
-        var myRand = Math.floor((Math.random()*1000)+1);
-        
+        var myRand = Math.floor((Math.random() * 1000) + 1);
+
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.DoAkceptacji?' + myRand,
             data: {'OdbId': departmentId, 'CkId': costSourceId, 'AuthKey': localStorage.getItem("auth_key")},
@@ -106,12 +106,42 @@ BPApp.Order = {
 
                 $('.order-accept-btn').on('tap', function(event) {
                     var doc_id = $(event.target).parents('a').attr('data-docid');
-                    self.acceptOrder(doc_id);
+
+                    $(this).simpledialog({
+                        'mode': 'bool',
+                        'prompt': 'Czy na pewno chcesz akceptować zamówienie?',
+                        'pickPageTheme' :'c',
+                        'useDialogForceFalse': true,
+                        'useModal': true,
+                        'buttons': {
+                            'Tak': { click: function() {
+                                    self.acceptOrder(doc_id);
+                                }
+                            },
+                            'Nie': { icon: "delete", theme: "c", click: function() {} }
+                        }
+                    });
                 });
 
                 $('.order-cancel-btn').on('tap', function(event) {
                     var doc_id = $(event.target).parents('a').attr('data-docid');
-                    self.cancelOrder(doc_id, true);
+                    
+                    $(this).simpledialog({
+                        'mode': 'bool',
+                        'prompt': 'Czy na pewno chcesz anulować zamówienie?',
+                        'pickPageTheme' :'c',
+                        'useDialogForceFalse': true,
+                        'useModal': true,
+                        'buttons': {
+                            'Tak': { click: function() {
+                                    self.cancelOrder(doc_id, true);
+                                }
+                            },
+                            'Nie': { icon: "delete", theme: "c", click: function() {} }
+                        }
+                    });
+                    
+                    
                 });
 
                 if (data.zamowienia.length == 0) {
@@ -124,8 +154,7 @@ BPApp.Order = {
             }
         });
     },
-
-    addToOrder: function(doc_id){
+    addToOrder: function(doc_id) {
         var self = this;
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.PozycjeDokDoAkceptacji',
@@ -137,20 +166,19 @@ BPApp.Order = {
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
                 var cartId = BPApp.Cart.createCart();
-                
+
                 $.mobile.changePage($("#cart"));
-                
+
                 $.each(data.pozycje, function(i, item) {
                     BPApp.Cart.addProduct(item.tow_nazwa, item.pds_tow_id, item.pds_ilosc);
                 });
-                
+
                 self.cancelOrder(doc_id, false);
-                
-                
+
+
             }
         })
     },
-
     displayOrderDetail: function(doc_id) {
         $('#orderdetail' + doc_id + ' .order-detail-btn .ui-btn-text').append('<div class="btnloader"></div>');
         $('#orderdetail' + doc_id + ' .order-detail-btn  .ui-btn-text .btnloader').css('display', 'inline-block');
@@ -187,10 +215,10 @@ BPApp.Order = {
                 $('#poz' + doc_id).html('');
                 $.each(data.pozycje, function(i, item) {
                     $('#poz' + doc_id).append(
-                      '<span class="paramName"><span class="product_details">Szczegóły: <br/><a href="#" data-pdsid="' + item.pds_id + '" class="bpm-remove"></a><a href="#" data-pdsid="' + item.pds_id + '" class="bpm-accept-count"></a></span>'
-                    + '<span class="paramValue">' + item.tow_nazwa + ' ' + item.pds_ilosc + ' ' + item.pds_jm_symbol + '</span>'
-                    + '<span class="product_change_count"><span class="title">Zmień ilość:</span><br/><input id="count_' + item.pds_id + '" value="' + item.pds_ilosc + '" class="product_count" type="number" /><br/></span></span>'
-                    );
+                            '<span class="paramName"><span class="product_details">Szczegóły: <br/><a href="#" data-pdsid="' + item.pds_id + '" class="bpm-remove"></a><a href="#" data-pdsid="' + item.pds_id + '" class="bpm-accept-count"></a></span>'
+                            + '<span class="paramValue">' + item.tow_nazwa + ' ' + item.pds_ilosc + ' ' + item.pds_jm_symbol + '</span>'
+                            + '<span class="product_change_count"><span class="title">Zmień ilość:</span><br/><input id="count_' + item.pds_id + '" value="' + item.pds_ilosc + '" class="product_count" type="number" /><br/></span></span>'
+                            );
                 });
                 $('#orderdetail' + doc_id + ' .order-detail-btn .ui-btn-text .btnloader').css('display', 'none');
                 $('.bpm-accept-count').on('tap', function(event) {
@@ -209,9 +237,9 @@ BPApp.Order = {
         })
     },
     acceptCount: function(pds_id, count, to_delete) {
-        
+
         to_delete = to_delete || false;
-        
+
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.ZmienPozycjeZamDoAkcept',
             data: {'PdsId': pds_id, 'Ilosc': count, 'AuthKey': localStorage.getItem("auth_key")},
