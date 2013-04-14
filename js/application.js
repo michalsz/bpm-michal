@@ -116,6 +116,12 @@ $('.openlink').on('tap', function() {
 
 $('#wwwNotification').on('tap', function() {
     alert('Przejdź do przeglądarki by odwiedzić stronę');
-    //window.open( $(this).attr('url'), '_blank' ,'location=yes');
-    navigator.app.loadUrl(url, { openExternal:true });
+    window.open( $(this).attr('url'), '_system' );
+    //navigator.app.loadUrl(url, { openExternal:true });
 });
+
+function loadURL(url){
+    navigator.app.loadUrl(url, { openExternal:true });
+    console.log('test');
+    return false;
+} 

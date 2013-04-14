@@ -13,8 +13,9 @@
         Maneuver
     </author>
 
+    <access origin="*biuroplus-krakow.pl" browserOnly="true"/> 
     <access origin="*"/>
-
+    
     <feature name="http://api.phonegap.com/1.0/device" />
 
     <plugin name="WebIntent" value="com.borismus.webintent.WebIntent" />
