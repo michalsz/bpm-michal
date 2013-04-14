@@ -67,10 +67,10 @@ BPApp.Order = {
     },
     displayOrders: function(departmentId, costSourceId, elementId) {
         var self = this;
-        var myRand = Math.floor((Math.random() * 1000) + 1);
+        var time = new Date().getTime();
 
         $.ajax({
-            url: Config.serviceURL + 'BPK.pkg_json.DoAkceptacji?' + myRand,
+            url: Config.serviceURL + 'BPK.pkg_json.DoAkceptacji?' + time,
             data: {'OdbId': departmentId, 'CkId': costSourceId, 'AuthKey': localStorage.getItem("auth_key")},
             type: 'GET',
             cache: false,
@@ -155,9 +155,12 @@ BPApp.Order = {
         });
     },
     addToOrder: function(doc_id) {
+        
+        var time = new Date().getTime();
+
         var self = this;
         $.ajax({
-            url: Config.serviceURL + 'BPK.pkg_json.PozycjeDokDoAkceptacji',
+            url: Config.serviceURL + 'BPK.pkg_json.PozycjeDokDoAkceptacji?' + time,
             data: {'DsId': doc_id, 'AuthKey': localStorage.getItem("auth_key")},
             type: 'GET',
             cache: false,
@@ -182,8 +185,9 @@ BPApp.Order = {
     displayOrderDetail: function(doc_id) {
         $('#orderdetail' + doc_id + ' .order-detail-btn .ui-btn-text').append('<div class="btnloader"></div>');
         $('#orderdetail' + doc_id + ' .order-detail-btn  .ui-btn-text .btnloader').css('display', 'inline-block');
+        var time = new Date().getTime();
         $.ajax({
-            url: Config.serviceURL + 'BPK.pkg_json.PozycjeDokDoAkceptacji',
+            url: Config.serviceURL + 'BPK.pkg_json.PozycjeDokDoAkceptacji?'+time,
             data: {'DsId': doc_id, 'AuthKey': localStorage.getItem("auth_key")},
             type: 'GET',
             cache: false,
@@ -203,8 +207,9 @@ BPApp.Order = {
         var self = this;
         $('#orderdetail' + doc_id + ' .order-detail-btn .ui-btn-text').append('<div class="btnloader"></div>');
         $('#orderdetail' + doc_id + ' .order-detail-btn  .ui-btn-text .btnloader').css('display', 'inline-block');
+        var time = new Date().getTime();
         $.ajax({
-            url: Config.serviceURL + 'BPK.pkg_json.PozycjeDokDoAkceptacji',
+            url: Config.serviceURL + 'BPK.pkg_json.PozycjeDokDoAkceptacji?'+time,
             data: {'DsId': doc_id, 'AuthKey': localStorage.getItem("auth_key")},
             type: 'GET',
             cache: false,
