@@ -2,7 +2,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.phonegap.bpmobile"
-        version   = "2.4.0">
+        version   = "2.4.1">
     <name>BP Mobile</name>
 
     <description>
@@ -22,7 +22,7 @@
     <plugin name="File" value="org.apache.cordova.FileUtils" />
     <plugin name="FileTransfer" value="org.apache.cordova.FileTransfer" />
 
-    <preference name="phonegap-version" value="2.3.0" />
+    <preference name="phonegap-version" value="2.5.0" />
     <preference name="orientation"      value="default" />
     <preference name="target-device"    value="universal" />
     <preference name="fullscreen"       value="false" />
