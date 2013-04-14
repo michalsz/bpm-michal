@@ -25,7 +25,10 @@
     <preference name="orientation"      value="default" />
     <preference name="target-device"    value="universal" />
     <preference name="fullscreen"       value="false" />
-
+    <preference name="stay-in-webview"  value="false" />
+    
+    
+    
     <icon src="icon.png" />
     <icon src="images/office.png"   gap:platform="android"    gap:density="ldpi" />
     <icon src="images/office.png"   gap:platform="android"    gap:density="mdpi" />
