@@ -14,6 +14,7 @@ BPApp.Products = {
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.Towary',
             data: {'KtId': parseInt(subcategory_id), 'AuthKey': '', 'Query': '', 'StartPoz': startPoz},
+            jsonpCallback: 'getPr',
             type: 'GET',
             cache: true,
             dataType: 'jsonp',
@@ -44,11 +45,10 @@ BPApp.Products = {
         
         for (var j = 0; j < i; j++) {
             
-            if (startPoz == j) {
+            if (startPoz === j) {
                 $('#pagination').append('<span id="pagination_current"> '+ (j + 1) + '</span>');
             } else {
                 $('#pagination')
-                    //.append('<a  href="" onclick="BPApp.Products.refreshProducts(event)" class="pagination_link" data-startpoz="' + j + '">Strona: ' + (j + 1) + '</a>').trigger('create');
                     .append('<a href="" onclick="BPApp.Products.refreshProducts(event)" class="pagination_link" data-startpoz="' + j + '">' + (j + 1) + '</a>').trigger('create');
             }
         }

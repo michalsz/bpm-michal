@@ -36,11 +36,8 @@ BPApp.Order = {
         this.displayDepartments();
         this.bindEvents();
     },
-    clearOldData: function() {
-        //$('#departmentsSelect').html('');
-    },
     displayDepartments: function() {
-        this.clearOldData();
+
         var auth_key = localStorage.getItem("auth_key");
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.Oddzialy',
@@ -236,10 +233,9 @@ BPApp.Order = {
                     var pds_id = $(this).attr('data-pdsid');
                     var count = 0;
                     self.acceptCount(pds_id, count, true);
-                    console.log(pds_id);
-                })
+                });
             }
-        })
+        });
     },
     acceptCount: function(pds_id, count, to_delete) {
 
@@ -304,10 +300,8 @@ BPApp.Order = {
             crossDomain: true,
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
-                console.log(data);
-                if (ifDisplayAlert && data.Odrzucone == 'T') {
+                if (ifDisplayAlert && data.Odrzucone === 'T') {
                     $('#orderdetail' + doc_id + ' .order-cancel-btn .ui-btn-text .btnloader').css('display', 'none');
-                    alert('Zamówienie zostało odrzucone');
                     $('#orderdetail' + doc_id).html('');
                 }
             }
@@ -366,9 +360,7 @@ BPApp.Order = {
             dataType: 'jsonp',
             crossDomain: true,
             contentType: 'application/json; charset=utf-8',
-            success: function(data) {
-//				console.log(data);
-            }
+            success: function(data) { }
         });
     },
     displayMyWaitnigOrders: function() {
@@ -381,13 +373,12 @@ BPApp.Order = {
             crossDomain: true,
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
-                console.log(data);
                 $('#myWaitingOrdersList').html('');
                 $.each(data.zamowienia, function(i, item) {
                     $('#myWaitingOrdersList').append('<li><span class="paramName2">Numer:</span><span class="paramValue2">' + item.ds_numer + '</span><br>' +
-                            '<span class="paramName2">Data:</span><span class="paramValue2">' + item.ds_data + '</span><br>' +
-                            '<span class="paramName2">Wartość netto:</span><span class="paramValue2">' + item.ds_netto + '</span></li>');
-                })
+                      '<span class="paramName2">Data:</span><span class="paramValue2">' + item.ds_data + '</span><br>' +
+                      '<span class="paramName2">Wartość netto:</span><span class="paramValue2">' + item.ds_netto + '</span></li>');
+                });
                 $('#myWaitingOrdersList').listview('refresh');
             }
         });

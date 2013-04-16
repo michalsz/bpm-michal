@@ -73,7 +73,6 @@ BPApp.Cart = {
         if (productsFromCart) {
             $.each(productsFromCart.pozycje, function(i, item) {
                 $.each(cart.pozycje, function(i, item) {
-                    //console.log(item.pds_sv_symbol + ' ilosc ' + item.pds_ilosc + ' cena netto ' + item.pds_cena_s_w + ' tow id ' + item.tow_id);
                     $('#pid' + item.tow_id).text(item.pds_ilosc);
                     $('#pbuttonincrease' + item.tow_id).attr('data-count', item.pds_ilosc);
                     $('#pbuttondecrease' + item.tow_id).attr('data-count', item.pds_ilosc);
@@ -112,10 +111,8 @@ BPApp.Cart = {
     createCart: function() {
         var self = this;
         if (localStorage.getItem('cartId') !== undefined && localStorage.getItem('cartId') !== null) {
-            //console.log('get cart from local');
             return localStorage.getItem('cartId');
         } else {
-            //console.log('get cart from server');
             $.ajax({
                 url: Config.serviceURL + 'BPK.pkg_json.DodajKoszyk',
                 data: {'AuthKey': localStorage.getItem("auth_key")},
@@ -298,9 +295,7 @@ BPApp.Cart = {
                     $('#costCenterSelect').show();
                 }
             },
-            error: function(error) {
-                //console.log(error);
-            }
+            error: function(error) { }
         });
     },
     getCostCenters: function(adressId) {
