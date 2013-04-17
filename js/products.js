@@ -27,17 +27,14 @@ BPApp.Products = {
                     self.getProductDetails(item.tow_id, 'productsList');
                 })
             },
-            error: function() {
-                console.log('error');
-            }
+            error: function() { }
         });
     },
     displayResultCount: function(count) {
         var i = (count / 10);
         $('#paginationplaceholder').html('<div data-role="controlgroup" data-type="horizontal" data-mini="true" id="pagination"></div>');
         var startPoz = parseInt( localStorage.getItem('startPoz') );
-        
-        console.log(startPoz);
+
         
         if ( startPoz > 0 ) {
             $('#pagination').append('<a id="pagination_prev" href="#" onclick="BPApp.Products.refreshProducts(event)" data-startpoz="' + (startPoz - 1) + '"></a>');

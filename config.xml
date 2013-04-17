@@ -28,18 +28,8 @@
     <preference name="fullscreen"       value="false" />
     <preference name="stay-in-webview"  value="false" />
     
+    <icon src="img/icon_app.jpg" />
     
-    
-    <icon src="icon.png" />
-    <icon src="images/office.png"   gap:platform="android"    gap:density="ldpi" />
-    <icon src="images/office.png"   gap:platform="android"    gap:density="mdpi" />
-    <icon src="images/office.png"   gap:platform="android"    gap:density="hdpi" />
-    <icon src="images/office.png"  gap:platform="android"    gap:density="xhdpi" />
-    <icon src="res/icon/ios/icon-57.png"            gap:platform="ios"        width="57" height="57" />
-    <icon src="res/icon/ios/icon-72.png"            gap:platform="ios"        width="72" height="72" />
-    <icon src="res/icon/ios/icon-57-2x.png"         gap:platform="ios"        width="114" height="114" />
-    <icon src="res/icon/ios/icon-72-2x.png"         gap:platform="ios"        width="144" height="144" />
-
     <gap:splash src="img/welcome.jpg" gap:platform="android" gap:density="ldpi" />
     <gap:splash src="img/welcome.jpg" gap:platform="android" gap:density="mdpi" />
     <gap:splash src="img/welcome.jpg" gap:platform="android" gap:density="hdpi" />

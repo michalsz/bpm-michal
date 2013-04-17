@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=device-dpi, user-scalable=0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <title>Biuro Plus</title>
         <link rel="stylesheet" href="themes/bpmobile.css" />
         <link rel="stylesheet" href="js/jquery.mobile.structure-1.3.0.min.css" />
@@ -44,13 +44,13 @@
             <div data-role="content" class="content">
 
                 <div class="search">
-                    <input type="search" placeholder="Szukaj" data-theme="b" id="searchInput" /> 
+                    <input type="search" placeholder="Szukaj produktu.." data-theme="b" id="searchInput" /> 
                 </div>			
 
                 <div class="menu-titles ui-grid">
                     <a data-transition="slidedown" href="#categories"><img src="./img/katalog.png" alt="Katalog" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#priceListPage" id="priceList" style="display:none;"><img src="./img/cennik.png" alt="Cennik" /><span class="menuboxtitle" >Katalog</span></a>
-                    <a data-transition="slidedown" href="#departmentsPage" id="departments" style="display:none;"><img src="./img/podsumowanie.png" alt="Oddziały" /><span class="menuboxtitle" >Katalog</span></a>
+                    <a data-transition="slidedown" href="#departmentsPage" id="departments" style="display:none;"><img src="./img/stan_konta.png" alt="Oddziały" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#reportsPage" id="reports" style="display:none;"><img src="./img/raporty.png" alt="Raporty" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#ordersPage" id="orders" style="display:none;"><img src="./img/zamowienia.png" alt="Zamówienia" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#myWaitingOrdersPage" id="myWaitingOrders" style="display:none;"><img src="./img/zamowienia.png" alt="Zamówienia" /><span class="menuboxtitle" >Katalog</span></a>
@@ -88,9 +88,9 @@
             <div data-role="content" class="content">
                 <div class="controls" >
                     <label for="user_login">Login:</label>
-                    <span><input type="text" id="user_login" name="login" placeholder="Login" value="piotr@" data-theme="b"></span>
+                    <span><input type="text" id="user_login" name="login" placeholder="Login" value="" data-theme="b"></span>
                     <label for="password"  >Hasło:</label>
-                    <span><input type="text" id="password" name="password" placeholder="Hasło" value="apmob" data-theme="b"></span>
+                    <span><input type="text" id="password" name="password" placeholder="Hasło" value="" data-theme="b"></span>
                     <a data-role="button" data-theme="a" id="loginbtn">Zaloguj<div class="btnloader"></div></a>
                 </div>
             </div>
@@ -206,7 +206,7 @@
                     <!-- <div id="pcfc" data-role="fieldcontain"> -->
                     <div class="productCount">
                         <label for="productCount"  >Sztuk zamówienia:</label>
-                        <input id="productCount" name="productCount" value="1" data-theme="b" />
+                        <input id="productCount" name="productCount" value="1" data-theme="b" type="number" />
                     </div>
                     <!-- </div> -->
                     <a data-role="button" data-theme="a" id="addToCart">Dodaj do koszyka<div class="btnloader"></div></a>
