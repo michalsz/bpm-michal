@@ -268,7 +268,6 @@ BPApp.Order = {
         })
     },
     acceptOrder: function(doc_id) {
-
         $('#orderdetail' + doc_id + ' .order-accept-btn .ui-btn-text').append('<div class="btnloader"></div>');
         $('#orderdetail' + doc_id + ' .order-accept-btn .ui-btn-text .btnloader').css('display', 'inline-block');
         $.ajax({
@@ -281,7 +280,7 @@ BPApp.Order = {
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
                 if (data.Zaakceptowane == 'T') {
-                    $('#orderdetail' + doc_id + ' .order-accept-btn .ui-btn-text .btnloader').css('display', 'none');
+                    $('#orderdetail' + doc_id ).css('display', 'none');
                     alert('Zamówienie zostało zaakceptowane');
                     $('#orderdetail' + doc_id).html('');
                 }
@@ -301,7 +300,7 @@ BPApp.Order = {
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
                 if (ifDisplayAlert && data.Odrzucone === 'T') {
-                    $('#orderdetail' + doc_id + ' .order-cancel-btn .ui-btn-text .btnloader').css('display', 'none');
+                    $('#orderdetail' + doc_id).css('display', 'none');
                     $('#orderdetail' + doc_id).html('');
                 }
             }
