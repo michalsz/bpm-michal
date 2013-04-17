@@ -77,7 +77,7 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 
 .bglogo {
 	width: 80%;
-	position: fixed;
+	position: absolute;
 	bottom: 10%;
 	margin-left: 10%;
 }
