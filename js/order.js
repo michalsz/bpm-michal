@@ -62,10 +62,11 @@ BPApp.Order = {
             }
         });
     },
-    displayOrders: function(departmentId, costSourceId, elementId) {
+    displayOrders: function(departmentId, costSourceId, elementId, type) {
         var self = this;
         var time = new Date().getTime();
-
+        var mess = mess || false;
+        
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.DoAkceptacji?' + time,
             data: {'OdbId': departmentId, 'CkId': costSourceId, 'AuthKey': localStorage.getItem("auth_key")},
@@ -76,6 +77,13 @@ BPApp.Order = {
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
                 $('#' + elementId).html('');
+
+                if ( type ) {
+                    if ( type = 'ilosc' )
+                        alert('Ilość została zaakceptowana');
+                    else if ( type = 'usun' )
+                        alert('Usunięto produkt');
+                }
 
                 $.each(data.zamowienia, function(i, item) {
                     $('#' + elementId).append('<li id="orderdetail' + item.ds_id + '"><span class="paramName">Numer dokumentu: <span class="paramValue">' + item.ds_id + '</span></span><span class="paramName">Nazwa Centrum Kosztowego <span class="paramValue">' + item.ck_nazwa + '</span></span><span class="paramName">Cena netto:  <span class="paramValue">' + item.ds_netto + 'zł</span></span><span class="paramName">VAT <span class="paramValue">' + item.ds_vat + 'zł</span></span><span class="paramName">Cena Brutto: <span class="paramValue">' + item.ds_brutto + 'zł</span></span><div id="poz' + item.ds_id + '"></div><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-edit-btn">Edytuj</a><a id="orderdetails" href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-detail-btn">Szczegóły</a><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-accept-btn">Akceptuj</a><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-add-btn">Dodaje produkt</a><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-cancel-btn">Odrzuć</a></li>').trigger('create');
@@ -241,6 +249,9 @@ BPApp.Order = {
 
         to_delete = to_delete || false;
 
+        $('#ordersList > li > div').html('<h2 class="loadingmsg">Ładowanie...</h2>');
+        console.log(pds_id);
+
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.ZmienPozycjeZamDoAkcept',
             data: {'PdsId': pds_id, 'Ilosc': count, 'AuthKey': localStorage.getItem("auth_key")},
@@ -255,14 +266,18 @@ BPApp.Order = {
                 }
 
                 if (data.Zmienione === 'T') {
+                    var type;
                     if (!to_delete)
-                        alert('Ilość została zaakceptowana');
+                        type = 'ilosc';
                     else
-                        alert('Usunięto produkt');
-                    $('#ordersList').html('<h2 class="loadingmsg">Ładowanie...</h2>');
+                        type = 'usun';
+                    
                     var department_id = localStorage.getItem("department_id");
                     var cost_id = localStorage.getItem("cost_id");
-                    BPApp.Order.displayOrders(department_id, cost_id, 'ordersList');
+                    
+                    console.log('1', department_id, cost_id);
+                    
+                    BPApp.Order.displayOrders(department_id, cost_id, 'ordersList', type);
                 }
             }
         })
