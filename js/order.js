@@ -79,9 +79,9 @@ BPApp.Order = {
                 $('#' + elementId).html('');
 
                 if ( type ) {
-                    if ( type = 'ilosc' )
+                    if ( type === 'ilosc' )
                         alert('Ilość została zaakceptowana');
-                    else if ( type = 'usun' )
+                    else if ( type === 'usun' )
                         alert('Usunięto produkt');
                 }
 

@@ -95,10 +95,10 @@ BPApp.Department = {
                 $('#costSources').html('');
                 $.each(data.centra, function(i, item) {
                     var limit = item.stat_limit !== null ? item.stat_limit : 0
-                    $('#costSources').append('<li class="bpm-departmentdatalabel">Nazwa: <span class="bpm-departmentdata">' + item.ck_nazwa + '</li>');
-                    $('#costSources').append('<li class="bpm-departmentdatalabel">Dokumenty do akceptacji: <span class="bpm-departmentdata">' + item.stat_count + '</span></li>');
-                    $('#costSources').append('<li class="bpm-departmentdatalabel">Suma netto dok. do akceptacji: <span class="bpm-departmentdata">' + item.stat_sum_netto + 'zł</span></li>');
-                    $('#costSources').append('<li class="bpm-departmentdatalabel" style="margin-bottom: 20px;">Pozostały limit: <span class="bpm-departmentdata">' + limit + 'zł</span></li>');
+                    $('#costSources').append('<li class="bpm-departmentdatalabel">Nazwa: <span class="bpm-departmentdata">' + item.ck_nazwa + '</span><div class="clearfix"></div></li>');
+                    $('#costSources').append('<li class="bpm-departmentdatalabel">Dokumenty do akceptacji: <span class="bpm-departmentdata">' + item.stat_count + '</span><div class="clearfix"></div></li>');
+                    $('#costSources').append('<li class="bpm-departmentdatalabel">Suma netto dok. do akceptacji: <span class="bpm-departmentdata">' + item.stat_sum_netto + 'zł</span><div class="clearfix"></div></li>');
+                    $('#costSources').append('<li class="bpm-departmentdatalabel" style="margin-bottom: 20px;">Pozostały limit: <span class="bpm-departmentdata">' + limit + 'zł</span><div class="clearfix"></div></li>');
                 });
                 $('#costSources').listview('refresh');
             }

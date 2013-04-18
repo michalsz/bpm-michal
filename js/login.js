@@ -20,26 +20,35 @@ BPApp.Login = {
                 crossDomain: true,
                 contentType: 'application/json; charset=utf-8',
                 success: function(data) {
-                    localStorage.removeItem("auth_key");
-                    localStorage.removeItem("cartId");
-                    localStorage.removeItem("category");
-                    localStorage.removeItem("login");
-                    localStorage.removeItem("productCount");
-                    localStorage.removeItem("product_id");
-                    localStorage.removeItem("subcategory");
-
-                    localStorage.setItem("auth_key", data.auth_key);
-                    localStorage.setItem("authorized", data.success);
-                    localStorage.setItem("login", login);
-                    localStorage.setItem("nazwa", data.nazwa);
-                    localStorage.setItem("rola", data.rola);
-                    localStorage.setItem("akceptant", data.akceptant);
-                    localStorage.setItem("showLoginMessage", 1);
-
+                    console.log(data);  
+                    
                     $('#loginbtn .btnloader').css('display', 'none');
-                    window.location = "index.html";
+                    
+                    if ( data.success == 'false' ) {
+                        alert('Niepoprawne dane logowania');
+                    } else {
+                        
+                        localStorage.removeItem("auth_key");
+                        localStorage.removeItem("cartId");
+                        localStorage.removeItem("category");
+                        localStorage.removeItem("login");
+                        localStorage.removeItem("productCount");
+                        localStorage.removeItem("product_id");
+                        localStorage.removeItem("subcategory");
+
+                        localStorage.setItem("auth_key", data.auth_key);
+                        localStorage.setItem("authorized", data.success);
+                        localStorage.setItem("login", login);
+                        localStorage.setItem("nazwa", data.nazwa);
+                        localStorage.setItem("rola", data.rola);
+                        localStorage.setItem("akceptant", data.akceptant);
+                        localStorage.setItem("showLoginMessage", 1);
+
+                        //$.mobile.changePage($("#startPage"));
+                        window.location = "index.html";
+                    }
                 },
-                error: function() { }
+                error: function() {alert('test'); }
             });
         });
     },
