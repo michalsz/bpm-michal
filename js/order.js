@@ -108,7 +108,7 @@ BPApp.Order = {
                     localStorage.setItem("hide_added_alert", 1);
                     var doc_id = $(event.target).parents('a').attr('data-docid');
                     self.addToOrder(doc_id);
-                    alert('Zamówienie w koszyku. Dodaj produkt w katalogu.');
+                    alert('Zamówienie w koszyku. Dodaj produkt z katalogu.');
                 });
 
                 $('.order-accept-btn').on('tap', function(event) {
@@ -233,6 +233,7 @@ BPApp.Order = {
                             );
                 });
                 $('#orderdetail' + doc_id + ' .order-detail-btn .ui-btn-text .btnloader').css('display', 'none');
+                
                 $('.bpm-accept-count').on('tap', function(event) {
                     var pds_id = $(event.target).attr('data-pdsid');
                     var count = $('#count_' + pds_id).val();
@@ -251,8 +252,7 @@ BPApp.Order = {
 
         to_delete = to_delete || false;
 
-        $('#ordersList > li > div').html('<h2 class="loadingmsg">Ładowanie...</h2>');
-        console.log(pds_id);
+        $('#ordersList > li > div, #allOrdersList > li > div').html('<h2 class="loadingmsg">Ładowanie...</h2>');
 
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.ZmienPozycjeZamDoAkcept',
@@ -276,10 +276,11 @@ BPApp.Order = {
                     
                     var department_id = localStorage.getItem("department_id");
                     var cost_id = localStorage.getItem("cost_id");
+                    var target  = 'ordersList';
                     
-                    console.log('1', department_id, cost_id);
+                    if ( window.location.hash !== '#ordersListPage' )  target = 'allOrdersList';                    
                     
-                    BPApp.Order.displayOrders(department_id, cost_id, 'ordersList', type);
+                    BPApp.Order.displayOrders(department_id, cost_id, target, type);
                 }
             }
         })
