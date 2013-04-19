@@ -139,6 +139,10 @@ BPApp.Cart = {
         var cartId = this.getCartId();
         var self = this;
         
+        var hide_alert = localStorage.getItem("hide_added_alert") || false;
+        
+        console.log(hide_alert);
+        
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.DodajPozycjeKoszyk',
             data: {'KoszId': cartId, 'AuthKey': localStorage.getItem("auth_key"), 'TowId': product_id, 'Ilosc': count},
@@ -149,7 +153,11 @@ BPApp.Cart = {
             contentType: 'application/json; charset=utf-8',
             success: function(message) {
                 self.updateProductCount();
-                alert('Produkt dodany do koszyka');
+                
+                if ( !hide_alert )
+                    alert('Produkt dodany do koszyka');
+                
+                localStorage.setItem("hide_added_alert", 0);
                 $('#addToCart .btnloader').css('display', 'none');
                 $('.productCount').hide();
                 $('#addToCart').hide();

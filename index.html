@@ -33,7 +33,12 @@
 
             <img class="bglogo" src="./img/bglogo.png">
             <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <!--
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>-->
+                <a data-transition="pop" data-position-to="window" data-rel="popup" href="#logout_dialog" class="bpm-navbutton back" id="main_logout"></a>
+                
+                
+                
                 <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Login</h1></a></div>
                 <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
             </div>

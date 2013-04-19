@@ -75,6 +75,9 @@ BPApp.Product = {
         
             if ( authKey !== null ) {
                 $('#addToCart').unbind('tap');
+                
+                $('#productCount').val(1);
+                
                 BPApp.Cart.addProduct(productName, productId, productCount);
             } else {
                 alert('Musisz się zalogować by dodawać produkty do koszyka');

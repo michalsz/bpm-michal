@@ -66,6 +66,7 @@ var BPApp = {
         var authorized = localStorage.getItem("authorized");
         var akceptant = localStorage.getItem("akceptant");
         if (authorized == 'true') {
+            $('#main_logout').show();
             $('#login').hide();
             $('#logout').show();
             $('#priceList').show();
@@ -115,4 +116,10 @@ $('.openlink').on('tap', function() {
 $('#wwwNotification').on('tap', function() {
     alert('Przejdź do przeglądarki by odwiedzić stronę');
     window.open( $(this).attr('url'), '_system' );
+});
+
+$('[data-rel="back"]').on('click', function() {
+    var url = window.location.hash;
+    
+    console.log(url);
 });

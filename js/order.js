@@ -105,8 +105,10 @@ BPApp.Order = {
                 });
 
                 $('.order-add-btn').on('tap', function(event) {
+                    localStorage.setItem("hide_added_alert", 1);
                     var doc_id = $(event.target).parents('a').attr('data-docid');
                     self.addToOrder(doc_id);
+                    alert('Zamówienie w koszyku. Dodaj produkt w katalogu.');
                 });
 
                 $('.order-accept-btn').on('tap', function(event) {
