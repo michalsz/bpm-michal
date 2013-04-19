@@ -566,5 +566,9 @@ h2.loadingmsg {
 .clearfix { *zoom: 1; }
 
 #main_logout {
-    display: none;
+/*    display: none;*/
+}
+
+#main_logout_not_logged {
+    float: left;
 }

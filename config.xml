@@ -28,7 +28,7 @@
     <preference name="fullscreen"       value="false" />
     <preference name="stay-in-webview"  value="false" />
     
-    <icon src="img/icon_app.jpg" />
+    <icon src="img/app_icon.png" />
     
     <gap:splash src="img/welcome.jpg" gap:platform="android" gap:density="ldpi" />
     <gap:splash src="img/welcome.jpg" gap:platform="android" gap:density="mdpi" />

@@ -15,6 +15,13 @@ BPApp.Cart = {
 
         this.getProductsFromCart(this.displayProductsFromCart);
         this.bindEvents();
+        
+        var authorized = localStorage.getItem("authorized");
+        
+        if (authorized !== 'true') {
+            alert('Aby przejsc do koszyka musisz sie zalogowac');
+            $.mobile.changePage($("#startPage"));
+        }
     },
             
     getProductsFromCart: function(callback) {
@@ -279,7 +286,7 @@ BPApp.Cart = {
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
                 $('#departmentsAdressesSelect-button .ui-btn-text .btnloader').css('display', 'none');
-                $('#departmentsAdressesSelect').html('<option data-placeholder="true" value="placeholder">Wybierz adres</option><option value="0">Brak</option>');
+                $('#departmentsAdressesSelect').html('<option data-placeholder="true" value="placeholder">Wybierz adres</option>');
                 $.each(data.adresy, function(i, adress) {
                     $('#departmentsAdressesSelect').append('<option value="' + adress.dak_id + '">' + adress.adr_opis + '</option>');
                 })
@@ -321,7 +328,7 @@ BPApp.Cart = {
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
                 $('#costCenterSelect-button .ui-btn-text .btnloader').css('display', 'none');
-                $('#costCenterSelect').html('<option data-placeholder="true" value="placeholder">Wybierz centrum kosztowe</option><option value="0">Brak</option>');
+                $('#costCenterSelect').html('<option data-placeholder="true" value="placeholder">Wybierz centrum kosztowe</option>');
                 $.each(data.centra, function(i, item) {
                     $('#costCenterSelect').append('<option value="' + item.ck_id + '">' + item.ck_nazwa + '</option>');
                 })

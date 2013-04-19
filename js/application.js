@@ -5,7 +5,7 @@ var BPApp = {
             BPApp.Cart.updateProductCount();
             var showLoginMessage = localStorage.getItem("showLoginMessage");
             localStorage.setItem("showLoginMessage", 0);
-            if (showLoginMessage == 0) {
+            if (showLoginMessage === 0) {
                 $('#loginMessage').html('');
             }
             $('#productdata').hide();
@@ -67,6 +67,7 @@ var BPApp = {
         var akceptant = localStorage.getItem("akceptant");
         if (authorized == 'true') {
             $('#main_logout').show();
+            $('#main_logout_not_logged').hide();
             $('#login').hide();
             $('#logout').show();
             $('#priceList').show();
@@ -122,4 +123,10 @@ $('[data-rel="back"]').on('click', function() {
     var url = window.location.hash;
     
     console.log(url);
+});
+
+$('#main_logout').on('click', function(e) {
+    var authorized = localStorage.getItem("authorized");
+    if (authorized !== 'true')
+        e.preventDefault();
 });
