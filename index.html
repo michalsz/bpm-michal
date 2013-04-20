@@ -1,528 +1,576 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Biuro Plus</title>
-		<link rel="stylesheet" href="themes/bpmobile.css" />
-		<link rel="stylesheet" href="js/jquery.mobile.structure-1.3.0.min.css" />
-		<link rel="stylesheet" href="css/app.css" />
-		<script src="js/jquery-1.9.1.min.js"></script>
-		<script src="js/jquery.mobile-1.3.0.min.js"></script>
-		<script src="js/config.js"></script>
-		<script>
-		function hideLoginMsg()
-			{
-				setTimeout(function(){ $('#loginMessage').fadeOut()},2000);
-			}
-		</script>
-	</head>
-	<body onload="hideLoginMsg()">
-		
-<!-- START PAGE -->		
-		
-		<div data-role="page" data-theme="a" id="startPage" class="page">		
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <title>Biuro Plus</title>
+        <link rel="stylesheet" href="themes/bpmobile.css" />
+        <link rel="stylesheet" href="js/jquery.mobile.structure-1.3.0.min.css" />
+        <link rel="stylesheet" href="js/jquery.mobile.simpledialog.min.css" />
+        <link rel="stylesheet" href="css/app.css" />
+        <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="js/jquery.mobile-1.3.0.min.js"></script>
+        <script src="js/jquery.mobile.simpledialog.min.js"></script>
+        <script src="js/cordova-2.5.0.js"></script>
+        <script src="js/config.js"></script>
+        <script>
+            jQuery.migrateMute = true;
+            
+            function hideLoginMsg()
+            {
+                setTimeout(function() {
+                    $('#loginMessage').fadeOut()
+                }, 2000);
+            }
+        </script>
+        <script src="js/jquery-migrate-1.1.1.js"></script>
+    </head>
+    <body onload="hideLoginMsg()">
+
+        <!-- START PAGE -->		
+
+        <div data-role="page" data-theme="a" id="startPage" class="page">		
+
+            <img class="bglogo" src="./img/bglogo.png">
+            <div data-role="header" data-position="inline">
+                <!--
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>-->
+                <a data-transition="pop" data-position-to="window" data-rel="popup" href="#logout_dialog" class="bpm-navbutton back" id="main_logout"></a>                
+                
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Login</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
+
+            <div id="loginMessage"></div>
+
+            <div data-role="content" class="content">
+
+                <div class="search">
+                    <input type="search" placeholder="Szukaj produktu.." data-theme="b" id="searchInput" /> 
+                </div>			
+
+                <div class="menu-titles ui-grid">
+                    <a data-transition="slidedown" href="#categories"><img src="./img/katalog.png" alt="Katalog" /><span class="menuboxtitle" >Katalog</span></a>
+                    <a data-transition="slidedown" href="#priceListPage" id="priceList" style="display:none;"><img src="./img/cennik.png" alt="Cennik" /><span class="menuboxtitle" >Katalog</span></a>
+                    <a data-transition="slidedown" href="#departmentsPage" id="departments" style="display:none;"><img src="./img/stan_konta.png" alt="Oddziały" /><span class="menuboxtitle" >Katalog</span></a>
+                    <a data-transition="slidedown" href="#reportsPage" id="reports" style="display:none;"><img src="./img/raporty.png" alt="Raporty" /><span class="menuboxtitle" >Katalog</span></a>
+                    <a data-transition="slidedown" href="#ordersPage" id="orders" style="display:none;"><img src="./img/zamowienia.png" alt="Zamówienia" /><span class="menuboxtitle" >Katalog</span></a>
+                    <a data-transition="slidedown" href="#myWaitingOrdersPage" id="myWaitingOrders" style="display:none;"><img src="./img/zamowienia.png" alt="Zamówienia" /><span class="menuboxtitle" >Katalog</span></a>
+                    <a data-transition="slidedown" href="#cart" id="cartLink" style="display:none;"><img src="./img/koszyk.png" alt="Koszyk" /><span class="menuboxtitle" >Katalog</span></a>
+                    <a data-transition="slidedown" href="#loginPage" id="login" ><img src="./img/zaloguj.png" alt="Zaloguj" /><span class="menuboxtitle" >Katalog</span></a>
+                    <a data-transition="slidedown" href="#contactPage" id="contact" ><img src="./img/kontakt.png" alt="Kontakt" /><span class="menuboxtitle" >Katalog</span></a>
+                                 
+                    <a href="#logout_dialog" id="logout" data-rel="popup" data-position-to="window" data-transition="pop">
+                        <img src="./img/wyloguj.png" alt="Wyloguj" />
+                    </a>
+                    
+                    <div data-role="popup" id="logout_dialog">
+
+                            <div data-role="content" data-theme="c">
+                                <h3>Czy na pewno chcesz się wylogować?</h3>
+                                <a href="#logoutPage" data-role="button" data-theme="a">Wyloguj</a>       
+                                <a href="#" data-rel="back" data-role="button" data-theme="c">Anuluj</a>    
+                            </div>
+                    </div>
+                </div>
+            </div>			
+
+        </div>
+
+        <!-- LOGIN PAGE -->			
+
+        <div data-role="page" data-theme="a" id="loginPage">		
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Login</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
+
+            <div data-role="content" class="content">
+                <div class="controls" >
+                    <label for="user_login">Login:</label>
+                    <span><input type="text" id="user_login" name="login" placeholder="Login" value="" data-theme="b"></span>
+                    <label for="password"  >Hasło:</label>
+                    <span><input type="password" id="password" name="password" placeholder="Hasło" value="" data-theme="b"></span>
+                    <a data-role="button" data-theme="a" id="loginbtn">Zaloguj<div class="btnloader"></div></a>
+                </div>
+            </div>
+
+        </div>		
+
+        <!-- LOGOUT PAGE -->			
+        <div data-role="page" data-theme="a" id="logoutPage">
+
+        </div>		
 
 
-			<img class="bglogo" src="./img/bglogo.png"><div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Start</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<div id="loginMessage"></div>
-			  			
-			<div data-role="content" class="content">
-				
-				<div class="search">
-					<input type="search" placeholder="Szukaj" data-theme="b" id="searchInput" /> 
-				</div>			
+        <!-- CATEGORIES PAGE -->		
 
-				<div class="menu-titles ui-grid">
-					<a data-transition="slidedown" href="#categories"><img src="./img/katalog2.png" alt="Katalog" /><span class="menuboxtitle" >Katalog</span></a>
-					<a data-transition="slidedown" href="#priceListPage" id="priceList" style="display:none;"><img src="./img/cennik2.png" alt="Cennik" /><span class="menuboxtitle" >Katalog</span></a>
-					<a data-transition="slidedown" href="#departmentsPage" id="departments" style="display:none;"><img src="./img/historia2.png" alt="Oddziały" /><span class="menuboxtitle" >Katalog</span></a>
-					<a data-transition="slidedown" href="#reportsPage" id="reports" style="display:none;"><img src="./img/raporty.png" alt="Raporty" /><span class="menuboxtitle" >Katalog</span></a>
-					<a data-transition="slidedown" href="#ordersPage" id="orders" style="display:none;"><img src="./img/zamowienia2.png" alt="Zamówienia" /><span class="menuboxtitle" >Katalog</span></a>
-					<a data-transition="slidedown" href="#myWaitingOrdersPage" id="myWaitingOrders" style="display:none;"><img src="./img/zamowienia2.png" alt="Zamówienia" /><span class="menuboxtitle" >Katalog</span></a>
-					<a data-transition="slidedown" href="#cart" id="cartLink" style="display:none;"><img src="./img/koszyk2.png" alt="Koszyk" /><span class="menuboxtitle" >Katalog</span></a>
-					<a data-transition="slidedown" href="#loginPage" id="login" ><img src="./img/zaloguj2.png" alt="Zaloguj" /><span class="menuboxtitle" >Katalog</span></a>
-					<a data-transition="slidedown" href="tel:122964524" id="infolinia" ><img src="./img/infolinia.png" alt="Infolinia" /><span class="menuboxtitle" >Katalog</span></a>
-					<a data-transition="slidedown" href="#contactPage" id="contact" ><img src="./img/kontakt.png" alt="Kontakt" /><span class="menuboxtitle" >Katalog</span></a>
-					<a data-transition="slidedown" href="#logoutPage" id="logout" style="display:none;" ><img src="./img/wyloguj2.png" alt="Wyloguj" /><span class="menuboxtitle" >Katalog</span></a>
-				</div>
-			</div>			
+        <div data-role="page" data-theme="a" id="categories">		
 
-		</div>
-		
-<!-- LOGIN PAGE -->			
-		
-		<div data-role="page" data-theme="a" id="loginPage">		
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Categories</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
 
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Login</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<div data-role="content" class="content">
-				<div class="controls" >
-					<label for="user_login">Login:</label>
-					<span><input type="text" id="user_login" name="login" placeholder="Login" value="piotr@" data-theme="b"></span>
-					<label for="password"  >Hasło:</label>
-					<span><input type="text" id="password" name="password" placeholder="Hasło" value="apmob" data-theme="b"></span>
-					<a data-role="button" data-theme="a" id="loginbtn">Zaloguj<div class="btnloader"></div></a>
-				</div>
-			</div>
-					
-		</div>		
-
-<!-- LOGOUT PAGE -->			
-		<div data-role="page" data-theme="a" id="logoutPage">
-			
-		</div>		
-		
-
-<!-- CATEGORIES PAGE -->		
-		
-		<div data-role="page" data-theme="a" id="categories">		
-
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Categories</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<div data-role="content" class="content">
-				<ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="categoriesList">   
-				</ul>
-				<a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
-			</div>
-			
-							
-		</div>		
-		
-<!-- SUB-CATEGORIES PAGE -->		
-		
-		<div data-role="page" data-theme="a" id="subcategories">		
-
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Sub-categories</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<div data-role="content" class="content">
-				<ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="subcategoriesList">   
-				</ul>
-				<a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>				
-			</div>
-						
-		</div>		
-
-<!-- SEARCH PAGE -->		
-		
-		<div data-role="page" data-theme="a" id="search">		
-
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Search</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<div data-role="content" class="content">
-				<ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="productsSearchList">   
-				</ul>
-				<a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>				
-			</div>
-					
-		</div>
-		
-<!-- PRODUCTS PAGE -->		
-		
-		<div data-role="page" data-theme="a" id="products">		
-
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Products</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<div data-role="content" class="content">
-				<ul data-role="listview" data-theme="b" id="productsList">   
-				</ul>
-				<div id="paginationplaceholder"></div>
-				
-				<a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
-				
-			</div>
-					
-		</div>
-				
-<!-- PRODUCT PAGE -->		
-		
-		<div data-role="page" data-theme="a" id="product">		
-
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Product</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<h2 class="loadingmsg">Ładowanie...</h2>
-			<div id="productdata" data-role="content">
-				<h1 id="product_name"></h1>
-				<div class="ui-grid-a">
-					<div class="ui-block-a" id="product_image"><img src="https://www.biuroplus-krakow.pl/obrazek?id=1122531" /></div>
-					<ul class="ui-block-b bpm-productdatalist">
-						<li class="bpm-productlabel">Cena (netto):<span class="bpm-productdata" id="product_price_netto"></span>zł</li>
-						<li class="bpm-productlabel">Cena (brutto):<span class="bpm-productdata" id="product_price_brutto"></span>zł</li>
-						<li class="bpm-productlabel">Dostepność:<span class="bpm-productdata" id="count"></span></li>
-					</ul>
-				</div>
-				<p id="product_details"></p>
-				<div class="controls" >
-					<input id="productId" value="" type="hidden" data-theme="b"/>
-					<!-- <div id="pcfc" data-role="fieldcontain"> -->
-						<div class="productCount">
-						<label for="productCount"  >Sztuk zamówienia:</label>
-						<input id="productCount" name="productCount" value="1" data-theme="b" />
-						</div>
-					<!-- </div> -->
-					<a data-role="button" data-theme="a" id="addToCart">Dodaj do koszyka<div class="btnloader"></div></a>
-					<a data-role="button" data-theme="a" id="backToProducts" data-rel="back">Powrót do produktów</a>
-				</div>
-							   
-			</div>
-						
-		</div>		
-		
-<!-- PRICE LIST PAGE -->		
-		
-		<div data-role="page" data-theme="a" id="priceListPage">		
-
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Pricelist</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<div data-role="content" class="content">
-				<ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="productsPriceList">   
-				</ul>
-				<a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>				
-			</div>
-							
-		</div>		
-		
-<!-- DEPARTMENTS PAGE -->		
-		
-		<div data-role="page" data-theme="a" id="departmentsPage">		
-
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Departments</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<div data-role="content" class="content">
-				<div data-role="fieldcontain" >
-					<ul id="departmentsList" data-role="listview" name="departmentsList" data-role="listview" data-theme="b">
-					</ul>
-				</div>
-								<a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
-
-				<ul data-role="listview"  data-theme="c" id="departmentdata" class="bpm-departmentdatalist">
-				</ul>
-				
-			</div>
-					
-		</div>	
-
-<!-- DEPARTMENT PAGE -->	
-		<div data-role="page" data-theme="a" id="departmentPage">		
-
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Department</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-
-			<div data-role="content" class="content">
-				<div data-role="fieldcontain" >
-					<ul id="adresses" data-role="listview" name="departmentsList" data-role="listview" data-theme="b">
-					</ul>
-				</div>
-				<a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
-			</div>
-		</div>
-		
-<!-- COST SOURCES -->	
-		<div data-role="page" data-theme="a" id="costSourcesPage">		
-
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Cost sources</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-
-			<div data-role="content" class="content">
-				<div data-role="fieldcontain" >
-					<ul id="costSources" data-role="listview"   >
-					</ul>
-				</div>
-				<a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
-			</div>
-		</div>
+            <div data-role="content" class="content">
+                <ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="categoriesList">   
+                </ul>
+                <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
+            </div>
 
 
-<!-- REPORTS PAGE -->		
-		<div data-role="page" data-theme="a" id="reportsPage">		
+        </div>		
 
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Reports select</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<div data-role="content" class="content">
-				<div data-role="fieldcontain" >
-					<ul id="reportsList" data-theme="b" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-role="listview">
-						
-					</ul>
-				</div>
-			</div>
-				
-		</div>
+        <!-- SUB-CATEGORIES PAGE -->		
 
-<!-- REPORTS DETAILS PAGE -->		
-		<div data-role="page" data-theme="a" id="reportDetailsPage">		
+        <div data-role="page" data-theme="a" id="subcategories">		
 
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Reports</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<div data-role="content" class="content">
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Sub-categories</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
 
-				<div data-role="fieldcontain" >
-					<input data-theme="b" type="date" id="dateSince" value="2013-01-10" />
-				</div>
-				
-				<div data-role="fieldcontain" >
-					<input data-theme="b" type="date" id="dateTo" value="2013-02-10" />					
-				</div>
-				
-				<a data-role="button" href="" target="_parent"  id="createReport">Wygeneruj raport<div class="btnloader"></div></a>
-				
-			</div>
-				
-		</div>
+            <div data-role="content" class="content">
+                <ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="subcategoriesList">   
+                </ul>
+                <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>				
+            </div>
 
+        </div>		
 
-		
-<!-- ORDERS PAGE -->		
-		
-		<div data-role="page" data-theme="a" id="ordersPage">		
+        <!-- SEARCH PAGE -->		
 
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Orders</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<div data-role="content" class="content">		
+        <div data-role="page" data-theme="a" id="search">		
 
-				<div data-role="fieldcontain" >
-					<ul data-role="listview" data-theme="b" id="departmentsListA" >
-					</ul>
-				</div>
-				<a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>			
-				
-			</div>
-					
-		</div>
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Search</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
 
-<!-- ORDERS ADDRESSES PAGE -->		
-		
-		<div data-role="page" data-theme="a" id="ordersAddressesPage">		
+            <div data-role="content" class="content">
+                <ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="productsSearchList">   
+                </ul>
+                <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>				
+            </div>
 
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Orders adresses </h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<div data-role="content" class="content">		
-				<div data-role="fieldcontain" >
-					<ul data-role="listview" data-theme="b" id="addressesListA" >
-					</ul>
-				</div>
-			
-			
-				<a data-role="button" id="allOrders" >Wszystkie zamówienia</a>
-				<ul id="allOrdersList" >
-				</ul>
-				<a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>			
-			</div>
-		</div>
+        </div>
 
-<!-- ORDERS COSTSSOURCES PAGE -->		
-		
-		<div data-role="page" data-theme="a" id="ordersCostSourcesPage">		
+        <!-- PRODUCTS PAGE -->		
 
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Orders cost sources</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<div data-role="content" class="content">		
-				<div data-role="fieldcontain" >
-					<ul data-role="listview" data-theme="b" id="costSourcesListA" >
-					</ul>
-				</div>
-				<a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
-			</div>
-					
-		</div>
+        <div data-role="page" data-theme="a" id="products">		
 
-<!-- ORDERS LIST PAGE -->		
-		
-		<div data-role="page" data-theme="a" id="ordersListPage">		
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Products</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
 
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Orders list</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<div data-role="content" class="content">		
-				<div data-role="fieldcontain" >
-					<ul id="ordersList" >
-					</ul>
-				</div>
-					<a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>				
-			</div>
-					
-		</div>
+            <div data-role="content" class="content">
+                <ul data-role="listview" data-theme="b" id="productsList">   
+                </ul>
+                <div id="paginationplaceholder"></div>
 
-<!-- MY WAITING ORDERS PAGE -->		
-		
-		<div data-role="page" data-theme="a" id="myWaitingOrdersPage">		
+                <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
 
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Waiting orders</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
-			<div data-role="content" class="content">		
-				<div data-role="fieldcontain" >
-					<ul id="myWaitingOrdersList" data-role="listview" >
-					</ul>
-				</div>
-				<a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>			
-			</div>
-					
-		</div>
+            </div>
 
+        </div>
 
-<!-- CART PAGE -->		
-		
-		<div data-role="page" data-theme="a" id="cart">		
+        <!-- PRODUCT PAGE -->		
 
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Cart</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
+        <div data-role="page" data-theme="a" id="product">		
 
-			<div data-role="content" class="content">
-				
-				<div id="cartProducts" data-role="listview" data-inset="true" style="padding-left: 15px;">
-				</div>
-				
-				<div id="cartSummary">
-				</div>
-				
-				<div id="bpm-cartselects">
-					<div data-role="fieldcontain" >
-						<label for="departmentsSelect" class="select">Oddział:</label>
-						<select id="departmentsSelect" name="departmentsSelect" data-native-menu="false">
-							<option data-placeholder="true">Wybierz<div class="btnloader"></div></option>
-						</select>
-					</div>
-					
-					<div data-role="fieldcontain" >
-						<label for="departmentsAdressesSelect" class="select">Adress:</label>
-						<select id="departmentsAdressesSelect" name="departmentsAdressesSelect" data-native-menu="false">
-							<option data-placeholder="true">Wybierz<div class="btnloader"></div></option>
-						</select>
-					</div>
-					
-					<div data-role="fieldcontain" >
-						<label for="costCenterSelect" class="select">Centrum kosztowe:</label>
-						<select id="costCenterSelect" name="costCenterSelect" data-native-menu="false">
-							<option data-placeholder="true">Wybierz<div class="btnloader"></div></option>
-						</select>				
-					</div>
-				</div>
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Product</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
 
-				<a id="submitOrder" data-role="button" style="display:none;">Złóż zamówienie<div class="btnloader"></div></a>
-				<h2 id="emptyCartMsg">Twój koszyk jest pusty <a href="#categories" data-role="button" data-transition="slidedown">Przeglądaj katalog</a></h2>
+            <h2 class="loadingmsg">Ładowanie...</h2>
+            <div id="productdata" data-role="content">
+                <h1 id="product_name"></h1>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a" id="product_image"><img src="https://www.biuroplus-krakow.pl/obrazek?id=1122531" /></div>
+                    <ul class="ui-block-b bpm-productdatalist">
+                        <li class="bpm-productlabel">Cena (netto):<span class="bpm-productdata" id="product_price_netto"></span>zł</li>
+                        <li class="bpm-productlabel">Cena (brutto):<span class="bpm-productdata" id="product_price_brutto"></span>zł</li>
+                        <li class="bpm-productlabel">Dostepność:<span class="bpm-productdata" id="count"></span></li>
+                    </ul>
+                </div>
+                <p id="product_details"></p>
+                <div class="controls" >
+                    <input id="productId" value="" type="hidden" data-theme="b"/>
+                    <!-- <div id="pcfc" data-role="fieldcontain"> -->
+                    <div class="productCount">
+                        <label for="productCount"  >Sztuk zamówienia:</label>
+                        <input id="productCount" name="productCount" value="1" data-theme="b" type="number" />
+                    </div>
+                    <!-- </div> -->
+                    <a data-role="button" data-theme="a" id="addToCart">Dodaj do koszyka<div class="btnloader"></div></a>
+                    <a data-role="button" data-theme="a" id="backToProducts" data-rel="back">Powrót do produktów</a>
+                    <a data-role="button" data-theme="a" href="#cart">Przejdź do koszyka</a>
+                </div>
 
-			</div>
-				
-		</div>
-		
-		
-<!-- CONTACT PAGE -->		
-		
-		<div data-role="page" data-theme="a" id="contactPage">		
+            </div>
 
-			<div data-role="header" data-position="inline">
-				<a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-				<div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Cart</h1></a></div>
-				<a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-			</div>
-			
+        </div>		
 
-			<div data-role="content" class="content">
+        <!-- PRICE LIST PAGE -->		
 
-					<h2>BIURO PLUS</h2>
-					ul. Bonarka 21<br>
-					30-415 Kraków<br>
+        <div data-role="page" data-theme="a" id="priceListPage">		
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Pricelist</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
+
+            <div data-role="content" class="content">
+                <ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="productsPriceList">   
+                </ul>
+                <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>				
+            </div>
+
+        </div>		
+
+        <!-- DEPARTMENTS PAGE -->		
+
+        <div data-role="page" data-theme="a" id="departmentsPage">		
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Departments</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
+
+            <div data-role="content" class="content">
+                <div data-role="fieldcontain" >
+                    <ul id="departmentsList" data-role="listview" name="departmentsList" data-role="listview" data-theme="b">
+                    </ul>
+                </div>
+                <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
+
+                <ul data-role="listview"  data-theme="c" id="departmentdata" class="bpm-departmentdatalist">
+                </ul>
+
+            </div>
+
+        </div>	
+
+        <!-- DEPARTMENT PAGE -->	
+        <div data-role="page" data-theme="a" id="departmentPage">		
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Department</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
+
+            <div data-role="content" class="content">
+                <div data-role="fieldcontain" >
+                    <ul id="adresses" data-role="listview" name="departmentsList" data-role="listview" data-theme="b">
+                    </ul>
+                </div>
+                <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
+            </div>
+        </div>
+
+        <!-- COST SOURCES -->	
+        <div data-role="page" data-theme="a" id="costSourcesPage">		
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Cost sources</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
+
+            <div data-role="content" class="content">
+                <div data-role="fieldcontain" >
+                    <ul id="costSources" data-role="listview"   >
+                    </ul>
+                </div>
+                <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
+            </div>
+        </div>
 
 
-					<h2>BIURO OBSŁUGI KLIENTA</h2>
-					tel. 12 296 45 24<br>
-					fax 12 296 45 24 w.10, w.35<br>
-					e-mail: <a href="mailto:biuroserwis@krakow.biuroplus.pl?subject=Zapytanie">biuroserwis@krakow.biuroplus.pl</a><br>
-					www.biuroplus-krakow.pl<br>
+        <!-- REPORTS PAGE -->		
+        <div data-role="page" data-theme="a" id="reportsPage">		
 
-			</div>
-				
-		</div>
-		
-	<script src="js/application.js"></script>
-    <script src="js/department.js"></script>
-    <script src="js/report.js"></script>
-    <script src="js/categories.js"></script>
-    <script src="js/category.js"></script>
-    <script src="js/price_list.js"></script>
-	<script src="js/search.js"></script>
-    <script src="js/products.js"></script>
-    <script src="js/product.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/order.js"></script>
-    <script src="js/login.js"></script>
-    <script src="js/logout.js"></script>
-  <script>
-    BPApp.start();
-  </script>
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Reports select</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
 
-	</body>
+            <div data-role="content" class="content">
+                <div data-role="fieldcontain" >
+                    <ul id="reportsList" data-theme="b" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-role="listview">
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- REPORTS DETAILS PAGE -->		
+        <div data-role="page" data-theme="a" id="reportDetailsPage">		
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Reports</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
+
+            <div data-role="content" class="content">
+
+                <div data-role="fieldcontain" >
+                    <input data-theme="b" type="date" id="dateSince" value="2013-01-10" />
+                </div>
+
+                <div data-role="fieldcontain" >
+                    <input data-theme="b" type="date" id="dateTo" value="2013-02-10" />					
+                </div>
+
+                <a data-role="button" href="" target="_parent"  id="createReport">Wygeneruj raport<div class="btnloader"></div></a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ORDERS PAGE -->		
+
+        <div data-role="page" data-theme="a" id="ordersPage">		
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Orders</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
+
+            <div data-role="content" class="content">		
+
+                <div data-role="fieldcontain" >
+                    <ul data-role="listview" data-theme="b" id="departmentsListA" >
+                    </ul>
+                </div>
+                <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>			
+
+            </div>
+
+        </div>
+
+        <!-- ORDERS ADDRESSES PAGE -->		
+
+        <div data-role="page" data-theme="a" id="ordersAddressesPage">		
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Orders adresses </h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
+
+            <div data-role="content" class="content">		
+                <div data-role="fieldcontain" >
+                    <ul data-role="listview" data-theme="b" id="addressesListA" >
+                    </ul>
+                </div>
+
+
+                <a data-role="button" id="allOrders" >Wszystkie zamówienia</a>
+                <ul id="allOrdersList" >
+                </ul>
+                <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>			
+            </div>
+        </div>
+
+        <!-- ORDERS COSTSSOURCES PAGE -->		
+
+        <div data-role="page" data-theme="a" id="ordersCostSourcesPage">		
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Orders cost sources</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
+
+            <div data-role="content" class="content">		
+                <div data-role="fieldcontain" >
+                    <ul data-role="listview" data-theme="b" id="costSourcesListA" >
+                    </ul>
+                </div>
+                <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
+            </div>
+
+        </div>
+
+        <!-- ORDERS LIST PAGE -->		
+
+        <div data-role="page" data-theme="a" id="ordersListPage">		
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Orders list</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
+
+            <div data-role="content" class="content">		
+                <div data-role="fieldcontain" >
+                    <ul id="ordersList" >
+                    </ul>
+                </div>
+                <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>				
+            </div>
+
+        </div>
+
+        <!-- MY WAITING ORDERS PAGE -->		
+
+        <div data-role="page" data-theme="a" id="myWaitingOrdersPage">		
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Waiting orders</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
+
+            <div data-role="content" class="content">		
+                <div data-role="fieldcontain" >
+                    <ul id="myWaitingOrdersList" data-role="listview" >
+                    </ul>
+                </div>
+                <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>			
+            </div>
+
+        </div>
+
+
+        <!-- CART PAGE -->		
+
+        <div data-role="page" data-theme="a" id="cart">		
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Cart</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
+
+
+            <div data-role="content" class="content">
+
+                <div id="cartProducts" data-role="listview" data-inset="true">
+                </div>
+
+                <div id="cartSummary">
+                </div>
+
+                <div id="bpm-cartselects">
+                    <div data-role="fieldcontain" >
+                        <label for="departmentsSelect" class="select">Oddział:</label>
+                        <select id="departmentsSelect" name="departmentsSelect" data-native-menu="false">
+                            <option data-placeholder="true">Wybierz<div class="btnloader"></div></option>
+                        </select>
+                    </div>
+
+                    <div data-role="fieldcontain" >
+                        <label for="departmentsAdressesSelect" class="select">Adress:</label>
+                        <select id="departmentsAdressesSelect" name="departmentsAdressesSelect" data-native-menu="false">
+                            <option data-placeholder="true">Wybierz<div class="btnloader"></div></option>
+                        </select>
+                    </div>
+
+                    <div data-role="fieldcontain" >
+                        <label for="costCenterSelect" class="select">Centrum kosztowe:</label>
+                        <select id="costCenterSelect" name="costCenterSelect" data-native-menu="false">
+                            <option data-placeholder="true">Wybierz<div class="btnloader"></div></option>
+                        </select>				
+                    </div>
+                </div>
+
+                <a id="submitOrder" data-role="button" style="display:none;">Złóż zamówienie<div class="btnloader"></div></a>
+                <h2 id="emptyCartMsg">Twój koszyk jest pusty <a href="#categories" data-role="button" data-transition="slidedown">Przeglądaj katalog</a></h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONTACT PAGE -->		
+
+        <div data-role="page" data-theme="a" id="contactPage">		
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Cart</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
+
+
+            <div data-role="content" class="content">
+
+                <table id="contact_table">
+                    <tr>
+                        <td><img src="./img/email_icon.png" alt="" width="54" /></td>
+                        <td>
+                            <h2>Napisz do nas</h2>
+                            <a href="mailto:biuroserwis@krakow.biuroplus.pl?subject=Zapytanie">biuroserwis@krakow.biuroplus.pl</a><br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="./img/phone_icon.png" alt="#"  width="56" /></td>
+                        <td>
+                            <h2>Infolinia</h2>
+                            <a href="tel:122964524">tel. 12 296 45 24</a><br/>
+                            fax 12 296 45 24 w.10, w.35
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="./img/www_kontakt.png" alt="#"  width="56" /></td>
+                        <td>
+                            <h2>Strona WWW</h2>
+                            <a href="#" url="http://www.biuroplus-krakow.pl" id="wwwNotification">www.biuroplus-krakow.pl</a><br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="./img/home_icon.png" alt="" width="51" /></td>
+                        <td>
+                            <h2>Adres siedziby</h2>
+                            ul. Bonarka 21<br>
+                            30-415 Kraków<br>
+                        </td>
+                        
+                    </tr>
+                    
+                </table>
+
+            </div>
+
+        </div>
+
+        
+        <script src="js/application.js"></script>
+        <script src="js/department.js"></script>
+        <script src="js/report.js"></script>
+        <script src="js/categories.js"></script>
+        <script src="js/category.js"></script>
+        <script src="js/price_list.js"></script>
+        <script src="js/search.js"></script>
+        <script src="js/products.js"></script>
+        <script src="js/product.js"></script>
+        <script src="js/cart.js"></script>
+        <script src="js/order.js"></script>
+        <script src="js/login.js"></script>
+        <script src="js/logout.js"></script>
+        <script>
+            BPApp.start();
+        </script>
+
+    </body>
 </html>

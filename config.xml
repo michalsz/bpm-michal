@@ -2,8 +2,8 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.phonegap.bpmobile"
-        version   = "2.4.0">
-    <name>BP Mobile</name>
+        version   = "2.4.1">
+    <name>BiuroPlus</name>
 
     <description>
         BP 
@@ -13,29 +13,23 @@
         Maneuver
     </author>
 
+    <access origin="*biuroplus-krakow.pl" browserOnly="true"/> 
     <access origin="*"/>
-
+    
     <feature name="http://api.phonegap.com/1.0/device" />
 
     <plugin name="WebIntent" value="com.borismus.webintent.WebIntent" />
     <plugin name="File" value="org.apache.cordova.FileUtils" />
     <plugin name="FileTransfer" value="org.apache.cordova.FileTransfer" />
 
-    <preference name="phonegap-version" value="2.2.0" />
+    <preference name="phonegap-version" value="2.5.0" />
     <preference name="orientation"      value="default" />
     <preference name="target-device"    value="universal" />
     <preference name="fullscreen"       value="false" />
-
-    <icon src="icon.png" />
-    <icon src="images/office.png"   gap:platform="android"    gap:density="ldpi" />
-    <icon src="images/office.png"   gap:platform="android"    gap:density="mdpi" />
-    <icon src="images/office.png"   gap:platform="android"    gap:density="hdpi" />
-    <icon src="images/office.png"  gap:platform="android"    gap:density="xhdpi" />
-    <icon src="res/icon/ios/icon-57.png"            gap:platform="ios"        width="57" height="57" />
-    <icon src="res/icon/ios/icon-72.png"            gap:platform="ios"        width="72" height="72" />
-    <icon src="res/icon/ios/icon-57-2x.png"         gap:platform="ios"        width="114" height="114" />
-    <icon src="res/icon/ios/icon-72-2x.png"         gap:platform="ios"        width="144" height="144" />
-
+    <preference name="stay-in-webview"  value="false" />
+    
+    <icon src="img/app_icon.png" />
+    
     <gap:splash src="img/welcome.jpg" gap:platform="android" gap:density="ldpi" />
     <gap:splash src="img/welcome.jpg" gap:platform="android" gap:density="mdpi" />
     <gap:splash src="img/welcome.jpg" gap:platform="android" gap:density="hdpi" />
