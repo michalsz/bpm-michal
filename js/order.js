@@ -86,7 +86,7 @@ BPApp.Order = {
                 }
 
                 $.each(data.zamowienia, function(i, item) {
-                    $('#' + elementId).append('<li id="orderdetail' + item.ds_id + '"><span class="paramName">Numer dokumentu: <span class="paramValue">' + item.ds_id + '</span></span><span class="paramName">Nazwa Centrum Kosztowego <span class="paramValue">' + item.ck_nazwa + '</span></span><span class="paramName">Cena netto:  <span class="paramValue">' + item.ds_netto + 'zł</span></span><span class="paramName">VAT <span class="paramValue">' + item.ds_vat + 'zł</span></span><span class="paramName">Cena Brutto: <span class="paramValue">' + item.ds_brutto + 'zł</span></span><div id="poz' + item.ds_id + '"></div><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-edit-btn">Edytuj</a><a id="orderdetails" href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-detail-btn">Szczegóły</a><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-accept-btn">Akceptuj</a><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-add-btn">Dodaje produkt</a><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-cancel-btn">Odrzuć</a></li>').trigger('create');
+                    $('#' + elementId).append('<li id="orderdetail' + item.ds_id + '"><span class="paramName">Numer dokumentu: <span class="paramValue">' + item.ds_id + '</span></span><span class="paramName">Nazwa Centrum Kosztowego <span class="paramValue">' + item.ck_nazwa + '</span></span><span class="paramName">Cena netto:  <span class="paramValue">' + item.ds_netto + 'zł</span></span><span class="paramName">VAT <span class="paramValue">' + item.ds_vat + 'zł</span></span><span class="paramName">Cena Brutto: <span class="paramValue">' + item.ds_brutto + 'zł</span></span><div id="poz' + item.ds_id + '"></div><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-edit-btn">Edytuj</a><a id="orderdetails" href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-detail-btn">Szczegóły</a><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-accept-btn">Akceptuj</a><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-add-btn">Dodaj produkt</a><a href="#" data-docid="' + item.ds_id + '" data-role="button" class="order-cancel-btn">Odrzuć</a></li>').trigger('create');
                 });
 
                 $('.order-detail-btn').trigger('create');
@@ -180,12 +180,13 @@ BPApp.Order = {
                 $.mobile.changePage($("#cart"));
 
                 $.each(data.pozycje, function(i, item) {
+                    clearInterval(interval);
+
+                    interval = setInteval(function(){}, 5000);
                     BPApp.Cart.addProduct(item.tow_nazwa, item.pds_tow_id, item.pds_ilosc);
                 });
 
-                self.cancelOrder(doc_id, false);
-
-
+                //self.cancelOrder(doc_id, false);
             }
         })
     },
