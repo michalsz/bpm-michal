@@ -271,7 +271,7 @@ BPApp.Cart = {
             }
         });
     },
-    getDepartmentAdresses: function(department_id) {
+    getDepartmentAdresses: function(department_id, callback) {
         $('#departmentsAdressesSelect-button .ui-btn-text').append('<div class="btnloader"></div>');
         $('#departmentsAdressesSelect-button .ui-btn-text .btnloader').css('display', 'inline-block');
         $.ajax({
@@ -290,6 +290,7 @@ BPApp.Cart = {
                 })
                 $('#departmentsAdressesSelect').selectmenu('refresh');
                 $('#departmentsAdressesSelect').selectmenu('enable');
+                callback();
             }
         })
     },
@@ -311,7 +312,7 @@ BPApp.Cart = {
             error: function(error) { }
         });
     },
-    getCostCenters: function(adressId) {
+    getCostCenters: function(adressId, callback) {
         $('#costCenterSelect-button .ui-btn-text').append('<div class="btnloader"></div>');
         $('#costCenterSelect-button .ui-btn-text .btnloader').css('display', 'inline-block');
         var cartId = this.getCartId();
@@ -332,6 +333,8 @@ BPApp.Cart = {
                 })
                 $('#costCenterSelect').selectmenu('refresh');
                 $('#costCenterSelect').selectmenu('enable');
+
+                callback();
             }
         });
     },
@@ -409,6 +412,23 @@ BPApp.Cart = {
             crossDomain: true,
             contentType: 'application/json; charset=utf-8',
             success: function(cartData) {
+                console.log(cartData);
+                if(cartData.ds_id_odb){
+                    $('#departmentsSelect').val(cartData.ds_id_odb); 
+                    $('#departmentsSelect').selectmenu('refresh'); 
+                    updateAdresessesSelect = function(){
+                        $('#departmentsAdressesSelect').val(cartData.ds_id_adr); 
+                        $('#departmentsAdressesSelect').selectmenu('refresh'); 
+                    }
+
+                    self.getDepartmentAdresses(cartData.ds_id_odb, updateAdresessesSelect);
+                    updateCostCenterSelect = function(){
+                        $('#costCenterSelect').val(cartData.ds_ck_id); 
+                        $('#costCenterSelect').selectmenu('refresh'); 
+                    }
+                    self.getCostCenters(cartData.ds_id_adr, updateCostCenterSelect);
+                }
+                
                 $('#cartSummary').html('');
                 $('#cartSummary').append('<span>Suma brutto:</span> <span> ' + cartData.ds_brutto_w + ' zł</span>');
                 $('#cartSummary').append('<br/>');
