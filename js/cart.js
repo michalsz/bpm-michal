@@ -431,7 +431,10 @@ BPApp.Cart = {
                         $('#costCenterSelect').selectmenu('refresh'); 
                     }
                     self.getCostCenters(cartData.ds_id_adr, updateCostCenterSelect);
-                }
+					$('#add-from-catalog').show();
+                }else{
+					$('#add-from-catalog').hide();
+				}
                 
                 $('#cartSummary').html('');
                 $('#cartSummary').append('<span>Suma brutto:</span> <span> ' + cartData.ds_brutto_w + ' zł</span>');
