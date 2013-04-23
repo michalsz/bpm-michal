@@ -111,8 +111,22 @@ BPApp.Order = {
                     var odb_id = $(event.target).parents('a').attr('data-odbid');
                     var adr_id = $(event.target).parents('a').attr('data-adrid');
                     var ck_id = $(event.target).parents('a').attr('data-ckid');
-                    self.addToOrder(doc_id, odb_id, adr_id, ck_id);
-                    alert('Zamówienie w koszyku. Dodaj produkt z katalogu.');
+                    
+					$(this).simpledialog({
+                        'mode': 'bool',
+                        'prompt': 'Czy na pewno chcesz dodać produkt?',
+                        'pickPageTheme' :'c',
+                        'useDialogForceFalse': true,
+                        'useModal': true,
+                        'buttons': {
+                            'Tak': { click: function() {
+                    			self.addToOrder(doc_id, odb_id, adr_id, ck_id);
+                                }
+                            },
+                            'Nie': { icon: "delete", theme: "c", click: function() {} }
+                        }
+                    });
+
                 });
 
                 $('.order-accept-btn').on('tap', function(event) {
@@ -166,7 +180,6 @@ BPApp.Order = {
         });
     },
     addToOrder: function(doc_id, odb_id, adr_id, ck_id) {
-        console.log(odb_id + ' ' + adr_id + ' ' + ck_id);
         var time = new Date().getTime();
 
         var self = this;
@@ -180,7 +193,6 @@ BPApp.Order = {
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
                 var cartId = BPApp.Cart.createCart();
-
                 
                 interval = setInterval(function(){}, 5000);
                 $.each(data.pozycje, function(i, item) {
@@ -189,14 +201,12 @@ BPApp.Order = {
                     interval = setInterval(function(){}, 5000);
                     BPApp.Cart.addProduct(item.tow_nazwa, item.pds_tow_id, item.pds_ilosc);
                 });
-
-
                 BPApp.Cart.setDepartment(odb_id);
                 BPApp.Cart.setAdress(adr_id);
                 BPApp.Cart.setCostCenter(ck_id);
-                $.mobile.changePage($("#cart"));
-
-                //self.cancelOrder(doc_id, false);
+				localStorage.setItem("updateCartSelects", 1);
+				self.cancelOrder(doc_id, false);                
+				$.mobile.changePage($("#cart"));
             }
         })
     },

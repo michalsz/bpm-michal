@@ -868,4 +868,6 @@ a.ui-link-inherit {
 	outline-width: 1px;
 	outline-style: auto;
 }
+
+a.order-edit-btn,a.order-detail-btn,a.order-accept-btn,a.order-add-btn,a.order-cancel-btn{margin-top:0.75em;margin-bottom:0.75em;}
 			

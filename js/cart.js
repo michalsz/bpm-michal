@@ -207,8 +207,7 @@ BPApp.Cart = {
             dataType: 'jsonp',
             crossDomain: true,
             contentType: 'application/json; charset=utf-8',
-            success: function(message) {
-                
+            success: function(message) {                
                 self.updateProductCount();
                 self.getProductsFromCart(self.displayProductsFromCart);
             },
@@ -290,7 +289,9 @@ BPApp.Cart = {
                 })
                 $('#departmentsAdressesSelect').selectmenu('refresh');
                 $('#departmentsAdressesSelect').selectmenu('enable');
-                callback();
+                if(callback){
+					callback();
+				}
             }
         })
     },
@@ -334,7 +335,9 @@ BPApp.Cart = {
                 $('#costCenterSelect').selectmenu('refresh');
                 $('#costCenterSelect').selectmenu('enable');
 
-                callback();
+				if(callback){
+                	callback();
+				}
             }
         });
     },
@@ -412,8 +415,9 @@ BPApp.Cart = {
             crossDomain: true,
             contentType: 'application/json; charset=utf-8',
             success: function(cartData) {
-                console.log(cartData);
-                if(cartData.ds_id_odb){
+				var updateSelects = localStorage.getItem("updateCartSelects");
+                if(cartData.ds_id_odb && updateSelects == 1){
+					localStorage.setItem("updateCartSelects", 0);
                     $('#departmentsSelect').val(cartData.ds_id_odb); 
                     $('#departmentsSelect').selectmenu('refresh'); 
                     updateAdresessesSelect = function(){
