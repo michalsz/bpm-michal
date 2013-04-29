@@ -93,6 +93,8 @@ BPApp.Report = {
             success: function(data) {
                 $('#createReport .btnloader').css('display', 'none');
                 //$('#createReport').attr('href', 'https://docs.google.com/viewer?url=' + data.raport_url);
+                $('#createReport').attr('href', '#iframePage');
+                
                 $('#pdfIframe').attr('src', 'https://docs.google.com/viewer?url=' + data.raport_url);
                 $('#createReport span span').html('Pobierz raport (pdf)');
                 $('#createReport').trigger('create');
