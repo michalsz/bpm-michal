@@ -572,3 +572,10 @@ h2.loadingmsg {
 #main_logout_not_logged {
     float: left;
 }
+
+#pdfIframe {
+    margin-top: 20px;
+    width: 100%;
+    height: 90%;
+    border: 1px solid white;
+}

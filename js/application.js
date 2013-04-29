@@ -130,3 +130,8 @@ $('#main_logout').on('click', function(e) {
     if (authorized !== 'true')
         e.preventDefault();
 });
+
+
+$('#pdfIframe')
+        .height( window.innerHeight-70)
+        .width( window.innerWidth-25);
