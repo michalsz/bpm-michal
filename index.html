@@ -60,7 +60,7 @@
                     <a data-transition="slidedown" href="#loginPage" id="login" ><img src="./img/zaloguj.png" alt="Zaloguj" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#contactPage" id="contact" ><img src="./img/kontakt.png" alt="Kontakt" /><span class="menuboxtitle" >Katalog</span></a>
                                  
-                    <a href="#logout_dialog" id="logout" data-rel="popup" data-position-to="window" data-transition="pop">
+                    <a href="#logout_dialog" id="logout" data-rel="popup" data-position-to="window" data-transition="pop" style="display:none;">
                         <img src="./img/wyloguj.png" alt="Wyloguj" />
                     </a>
                     
@@ -318,6 +318,18 @@
 
         </div>
 
+        <!-- REPORTS PAGE -->		
+        <div data-role="page" data-theme="a" id="iframePage">		
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Reports PDF</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
+            </div>
+
+            <iframe id="pdfIframe" allowfullscreen></iframe>
+        </div>
+        
         <!-- REPORTS DETAILS PAGE -->		
         <div data-role="page" data-theme="a" id="reportDetailsPage">		
 
@@ -337,7 +349,7 @@
                     <input data-theme="b" type="date" id="dateTo" value="2013-02-10" />					
                 </div>
 
-                <a data-role="button" href="" target="_parent"  id="createReport">Wygeneruj raport<div class="btnloader"></div></a>
+                <a data-role="button" href="#iframePage" id="createReport">Wygeneruj raport<div class="btnloader"></div></a>
 
             </div>
 
