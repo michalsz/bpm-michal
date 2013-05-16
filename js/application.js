@@ -50,14 +50,20 @@ var BPApp = {
         this.setupAjax();
 
         $(document).ready(function() {
-            $('#searchInput').on('keydown', function(e) {
+            $('.searchInput').live('keydown', function(e) {
+				console.log('test');
                 if (e.keyCode == 13) {
-                    var keyword = $('#searchInput').val();
+                    var keyword = $(this).val();
                     localStorage.setItem('keyword', keyword);
 
-                    $('#searchInput').val('');
+                    $('.searchInput').val('');
+					var timestamp = new Date().getTime();
 
-                    window.location = "#search";
+					if ( window.location.hash === '#search' ) {
+						$('#search').trigger('pageshow');
+					}
+					
+					window.location = "#search";
                 }
             });
         });

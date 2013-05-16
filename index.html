@@ -46,7 +46,7 @@
             <div data-role="content" class="content">
 
                 <div class="search">
-                    <input type="search" placeholder="Szukaj produktu.." data-theme="b" id="searchInput" /> 
+                    <input type="search" placeholder="Szukaj produktu.." data-theme="b" class="searchInput" /> 
                 </div>			
 
                 <div class="menu-titles ui-grid">
@@ -116,7 +116,12 @@
             </div>
 
             <div data-role="content" class="content">
-                <ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="categoriesList">   
+                
+                <div class="search">
+                    <input type="search" placeholder="Szukaj produktu.." data-theme="b" class="searchInput" /><br/>
+                </div>
+                
+                <ul data-role="listview" data-theme="b" id="categoriesList">   
                 </ul>
                 <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
             </div>
@@ -135,7 +140,10 @@
             </div>
 
             <div data-role="content" class="content">
-                <ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="subcategoriesList">   
+                <div class="search">
+                    <input type="search" placeholder="Szukaj produktu.." data-theme="b" class="searchInput" /><br/>
+                </div>
+                <ul data-role="listview" data-theme="b" id="subcategoriesList">   
                 </ul>
                 <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>				
             </div>
@@ -153,7 +161,10 @@
             </div>
 
             <div data-role="content" class="content">
-                <ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="productsSearchList">   
+                <div class="search">
+                    <input type="search" placeholder="Szukaj produktu.." data-theme="b" class="searchInput" /><br/>
+                </div>
+                <ul data-role="listview" data-theme="b" id="productsSearchList">   
                 </ul>
                 <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>				
             </div>
