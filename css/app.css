@@ -69,6 +69,11 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 
 .ui-mobile [data-role="page"], .ui-mobile [data-role="dialog"], .ui-page {top: 48px;}
 
+.ui-btn-down-a {
+    background: #B50000;
+    color: white !important;
+}
+
 /****************************** BACKGROUND */
 
 .ui-body-a, .ui-overlay-a {
