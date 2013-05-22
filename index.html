@@ -29,24 +29,23 @@
 
         <!-- START PAGE -->		
 
+		
+		<div data-position="inline" data-role="header" class="ui-header ui-bar-a" role="banner">
+			<a class="bpm-navbutton back ui-btn-left ui-btn ui-btn-up-a ui-btn-corner-all" data-iconshadow="false" data-shadow="false" data-rel="back" data-transition="slide" data-corners="true" data-wrapperels="span" data-theme="a"><span class="ui-btn-inner"><span class="ui-btn-text"></span></span></a>
+			<div><a href="#startPage" data-transition="slideup" class="ui-link"><h1 class="logo">Categories</h1></a></div>
+			<a class="bpm-navbutton cart ui-btn-right ui-btn ui-btn-up-a ui-shadow ui-btn-corner-all" href="#cart" data-transition="flip" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a"><span class="ui-btn-inner"><span class="ui-btn-text"><span class="cart-number">0</span></span></span></a>	
+		</div>
+		
         <div data-role="page" data-theme="a" id="startPage" class="page">		
 
             <img class="bglogo" src="./img/bglogo.png">
-            <div data-role="header" data-position="inline">
-                <!--
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>-->
-                <a data-transition="pop" data-position-to="window" data-rel="popup" href="#logout_dialog" class="bpm-navbutton back" id="main_logout"></a>                
-                
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Login</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
 
             <div id="loginMessage"></div>
 
             <div data-role="content" class="content">
 
                 <div class="search">
-                    <input type="search" placeholder="Szukaj produktu.." data-theme="b" id="searchInput" /> 
+                    <input type="search" placeholder="Szukaj produktu.." data-theme="b" class="searchInput" /> 
                 </div>			
 
                 <div class="menu-titles ui-grid">
@@ -81,11 +80,6 @@
 
         <div data-role="page" data-theme="a" id="loginPage">		
 
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Login</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
 
             <div data-role="content" class="content">
                 <div class="controls" >
@@ -109,14 +103,13 @@
 
         <div data-role="page" data-theme="a" id="categories">		
 
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Categories</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
-
             <div data-role="content" class="content">
-                <ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="categoriesList">   
+                
+                <div class="search">
+                    <input type="search" placeholder="Szukaj produktu.." data-theme="b" class="searchInput" /><br/>
+                </div>
+                
+                <ul data-role="listview" data-theme="b" id="categoriesList">   
                 </ul>
                 <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
             </div>
@@ -128,14 +121,11 @@
 
         <div data-role="page" data-theme="a" id="subcategories">		
 
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Sub-categories</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
-
             <div data-role="content" class="content">
-                <ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="subcategoriesList">   
+                <div class="search">
+                    <input type="search" placeholder="Szukaj produktu.." data-theme="b" class="searchInput" /><br/>
+                </div>
+                <ul data-role="listview" data-theme="b" id="subcategoriesList">   
                 </ul>
                 <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>				
             </div>
@@ -146,14 +136,11 @@
 
         <div data-role="page" data-theme="a" id="search">		
 
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Search</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
-
             <div data-role="content" class="content">
-                <ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="productsSearchList">   
+                <div class="search">
+                    <input type="search" placeholder="Szukaj produktu.." data-theme="b" class="searchInput" /><br/>
+                </div>
+                <ul data-role="listview" data-theme="b" id="productsSearchList">   
                 </ul>
                 <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>				
             </div>
@@ -163,12 +150,6 @@
         <!-- PRODUCTS PAGE -->		
 
         <div data-role="page" data-theme="a" id="products">		
-
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Products</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
 
             <div data-role="content" class="content">
                 <ul data-role="listview" data-theme="b" id="productsList">   
@@ -185,11 +166,6 @@
 
         <div data-role="page" data-theme="a" id="product">		
 
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Product</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
 
             <h2 class="loadingmsg">Ładowanie...</h2>
             <div id="productdata" data-role="content">
@@ -197,8 +173,8 @@
                 <div class="ui-grid-a">
                     <div class="ui-block-a" id="product_image"><img src="https://www.biuroplus-krakow.pl/obrazek?id=1122531" /></div>
                     <ul class="ui-block-b bpm-productdatalist">
-                        <li class="bpm-productlabel">Cena (netto):<span class="bpm-productdata" id="product_price_netto"></span>zł</li>
-                        <li class="bpm-productlabel">Cena (brutto):<span class="bpm-productdata" id="product_price_brutto"></span>zł</li>
+                        <li class="bpm-productlabel">Wartość (netto):<span class="bpm-productdata" id="product_price_netto"></span>zł</li>
+                        <li class="bpm-productlabel">Wartość (brutto):<span class="bpm-productdata" id="product_price_brutto"></span>zł</li>
                         <li class="bpm-productlabel">Dostepność:<span class="bpm-productdata" id="count"></span></li>
                     </ul>
                 </div>
@@ -224,12 +200,6 @@
 
         <div data-role="page" data-theme="a" id="priceListPage">		
 
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Pricelist</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
-
             <div data-role="content" class="content">
                 <ul data-role="listview" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-theme="b" id="productsPriceList">   
                 </ul>
@@ -241,12 +211,6 @@
         <!-- DEPARTMENTS PAGE -->		
 
         <div data-role="page" data-theme="a" id="departmentsPage">		
-
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Departments</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
 
             <div data-role="content" class="content">
                 <div data-role="fieldcontain" >
@@ -265,12 +229,6 @@
         <!-- DEPARTMENT PAGE -->	
         <div data-role="page" data-theme="a" id="departmentPage">		
 
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Department</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
-
             <div data-role="content" class="content">
                 <div data-role="fieldcontain" >
                     <ul id="adresses" data-role="listview" name="departmentsList" data-role="listview" data-theme="b">
@@ -282,12 +240,6 @@
 
         <!-- COST SOURCES -->	
         <div data-role="page" data-theme="a" id="costSourcesPage">		
-
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Cost sources</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
 
             <div data-role="content" class="content">
                 <div data-role="fieldcontain" >
@@ -302,12 +254,6 @@
         <!-- REPORTS PAGE -->		
         <div data-role="page" data-theme="a" id="reportsPage">		
 
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Reports select</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
-
             <div data-role="content" class="content">
                 <div data-role="fieldcontain" >
                     <ul id="reportsList" data-theme="b" data-filter="true" data-filter-placeholder="Filtruj wyniki..." data-role="listview">
@@ -321,23 +267,11 @@
         <!-- REPORTS PAGE -->		
         <div data-role="page" data-theme="a" id="iframePage">		
 
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Reports PDF</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
-
             <iframe id="pdfIframe" allowfullscreen></iframe>
         </div>
         
         <!-- REPORTS DETAILS PAGE -->		
         <div data-role="page" data-theme="a" id="reportDetailsPage">		
-
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Reports</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
 
             <div data-role="content" class="content">
 
@@ -361,12 +295,6 @@
 
         <div data-role="page" data-theme="a" id="ordersPage">		
 
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Orders</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
-
             <div data-role="content" class="content">		
 
                 <div data-role="fieldcontain" >
@@ -382,12 +310,6 @@
         <!-- ORDERS ADDRESSES PAGE -->		
 
         <div data-role="page" data-theme="a" id="ordersAddressesPage">		
-
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Orders adresses </h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
 
             <div data-role="content" class="content">		
                 <div data-role="fieldcontain" >
@@ -407,12 +329,6 @@
 
         <div data-role="page" data-theme="a" id="ordersCostSourcesPage">		
 
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Orders cost sources</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
-
             <div data-role="content" class="content">		
                 <div data-role="fieldcontain" >
                     <ul data-role="listview" data-theme="b" id="costSourcesListA" >
@@ -426,12 +342,6 @@
         <!-- ORDERS LIST PAGE -->		
 
         <div data-role="page" data-theme="a" id="ordersListPage">		
-
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Orders list</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
 
             <div data-role="content" class="content">		
                 <div data-role="fieldcontain" >
@@ -447,12 +357,6 @@
 
         <div data-role="page" data-theme="a" id="myWaitingOrdersPage">		
 
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Waiting orders</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
-
             <div data-role="content" class="content">		
                 <div data-role="fieldcontain" >
                     <ul id="myWaitingOrdersList" data-role="listview" >
@@ -467,13 +371,6 @@
         <!-- CART PAGE -->		
 
         <div data-role="page" data-theme="a" id="cart">		
-
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Cart</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
-
 
             <div data-role="content" class="content">
 
@@ -517,13 +414,6 @@
         <!-- CONTACT PAGE -->		
 
         <div data-role="page" data-theme="a" id="contactPage">		
-
-            <div data-role="header" data-position="inline">
-                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
-                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Cart</h1></a></div>
-                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>	
-            </div>
-
 
             <div data-role="content" class="content">
 

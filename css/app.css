@@ -54,6 +54,7 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 
 .ui-input-search {
     margin: 10px!important;
+    border: 0;
 }
 
 .ui-listview {
@@ -64,6 +65,13 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 
 .ui-li .ui-btn-text a.ui-link-inherit {
     white-space: normal;
+}
+
+.ui-mobile [data-role="page"], .ui-mobile [data-role="dialog"], .ui-page {top: 48px;}
+
+.ui-btn-down-a {
+    background: #B50000;
+    color: white !important;
 }
 
 /****************************** BACKGROUND */
