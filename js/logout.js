@@ -4,9 +4,8 @@ $('#logoutPage').on('pageshow', function() {
 
 BPApp.Logout = {
     start: function() {
-
         this.logout();
-         window.location = "index.html";
+        window.location = "index.html";
     },
     logout: function() {
         localStorage.setItem("authorized", false);
@@ -26,5 +25,6 @@ BPApp.Logout = {
         $('#reports').hide();
         $('#orders').hide();
         $('#cartLink').hide();
+        $('#history').hide();
     }
 }
