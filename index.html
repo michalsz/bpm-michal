@@ -50,6 +50,7 @@
 
                 <div class="menu-titles ui-grid">
                     <a data-transition="slidedown" href="#categories"><img src="./img/katalog.png" alt="Katalog" /><span class="menuboxtitle" >Katalog</span></a>
+                    <a data-transition="slidedown" href="#historyPage" id="history" style="display:none;"><img src="./img/cennik.png" alt="Cennik" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#priceListPage" id="priceList" style="display:none;"><img src="./img/cennik.png" alt="Cennik" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#departmentsPage" id="departments" style="display:none;"><img src="./img/stan_konta.png" alt="Oddziały" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#reportsPage" id="reports" style="display:none;"><img src="./img/raporty.png" alt="Raporty" /><span class="menuboxtitle" >Katalog</span></a>
@@ -162,7 +163,7 @@
 
         </div>
 
-        <!-- PRODUCT PAGE -->		
+        <!-- PRODUCT PAGE -->
 
         <div data-role="page" data-theme="a" id="product">		
 
@@ -194,7 +195,44 @@
 
             </div>
 
-        </div>		
+        </div>
+
+        <!-- HISTORY PAGE -->
+
+        <div data-role="page" data-theme="a" id="historyPage">
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo"Historia</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>
+            </div>
+
+            <div data-role="content" class="content">
+                <ul data-role="listview" data-theme="b" id="historyList">
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- HISTORY DOCUMENT PAGE -->
+
+        <div data-role="page" data-theme="a" id=historyDocumentPage>
+
+            <div data-role="header" data-position="inline">
+                <a data-transition="slide" data-rel="back" data-shadow="false" data-iconshadow="false" class="bpm-navbutton back"></a>
+                <div><a data-transition="slideup" href="#startPage" ><h1 class="logo">Dokument</h1></a></div>
+                <a data-transition="flip" href="#cart" class="bpm-navbutton cart"><span class="cart-number">0</span></a>
+            </div>
+
+
+            <div id="historyDocumentDetails">
+                Numer:<span id="document_numer"></span>
+                <ul id="documentProducts">
+                    <li>Kod | Cena netto | J.m.  |Ilość | Wartość netto |VAT | Wartość VAT | Wartość brutto |</li>
+                </ul>
+            </div>
+
+        </div>
 
         <!-- PRICE LIST PAGE -->		
 
@@ -459,6 +497,7 @@
         
         <script src="js/application.js"></script>
         <script src="js/department.js"></script>
+        <script src="js/history.js"></script>
         <script src="js/report.js"></script>
         <script src="js/categories.js"></script>
         <script src="js/category.js"></script>

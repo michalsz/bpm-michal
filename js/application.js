@@ -79,6 +79,7 @@ var BPApp = {
             $('#priceList').show();
             $('#departments').show();
             $('#reports').show();
+            $('#history').show();
             if (akceptant == 'T') {
                 $('#orders').show();
             } else {
@@ -96,6 +97,7 @@ var BPApp = {
             $('#login').show();
             $('#logout').hide();
             $('#priceList').hide();
+            $('#history').hide();
             $('#departments').hide();
             $('#reports').hide();
             $('#orders').hide();
