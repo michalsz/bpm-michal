@@ -9,8 +9,6 @@ $('#historyDocumentPage').on('pageshow', function(event) {
 
 BPApp.History = {
     start: function() {
-        //odbID 1048308
-        //ckid 8759
         BPApp.Cart.displayDepartmentsSelect('historyDepartmentsSelect');
         this.bindEvents();
     },
@@ -47,7 +45,6 @@ BPApp.History = {
             var id = $(event.target).attr('data-documentid');
             localStorage.setItem("document_id", id);
         });
-
     },
 
     documentDetails: function(){
@@ -95,8 +92,8 @@ BPApp.History = {
                 data = new Object();
                 data['pozycje'] = [poz1, poz2];
                 $.each(data.pozycje, function(i, item) {
-                    console.log(item);
                     self.displayProduct(item);
+                    self.onProductClick();
                 })
             },
             error: function() { }
@@ -104,7 +101,38 @@ BPApp.History = {
     },
 
     displayProduct: function(item){
-        $('#documentProducts').append('<li><a data-transition="slide" class="bpm-product-button">' +  item.tow_kod + ' | ' + item.pds_cena_s_w + ' zł | '+  item.pds_jm_symbol + ' | ' +  item.pds_ilosc + ' | ' + item.pds_netto_w + ' zł| ' + item.pds_sv_symbol + ' | ' + item.pds_vat_w + ' zł | ' +  item.pds_brutto_w  +  'zł </a></li>');
+        $('#documentProducts').append('<li><a data-transition="slide" class="bpm-product-button" >' +  item.tow_kod + ' | ' + item.pds_cena_s_w + ' zł | '+  item.pds_jm_symbol + ' | ' +  item.pds_ilosc + ' | ' + item.pds_netto_w + ' zł| ' + item.pds_sv_symbol + ' | ' + item.pds_vat_w + ' zł | ' +  item.pds_brutto_w  +  'zł </a></li>');
+    },
+
+    onProductClick: function(){
+        var self = this;
+        $('.bpm-product-button').on('tap', function(event) {
+            var id = $(event.target).attr('data-documentid');
+            self.addProductToCart();
+        });
+    },
+
+    addProductToCart: function(){
+        var dsId = 62049;
+        var cartId = BPApp.Cart.getCartId();
+        $.ajax({
+            url: Config.serviceURL + 'BPK.pkg_json.PrzepiszZamowienieDoKoszyka',
+            data: {'DsId': dsId, 'KoszId': cartId, AuthKey: localStorage.getItem("auth_key") },
+            type: 'GET',
+            cache: true,
+            dataType: 'jsonp',
+            crossDomain: true,
+            contentType: 'application/json; charset=utf-8',
+            success: function(data) {
+                $('#historyList').html('');
+                $.each(data.zamowienia, function(i, item) {
+                    self.displayDocumentDetails(item);
+                    self.onButtonClick();
+                })
+            },
+            error: function() { }
+        });
+
     },
 
     bindEvents: function() {
