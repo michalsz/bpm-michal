@@ -202,6 +202,31 @@
         <div data-role="page" data-theme="a" id="historyPage">
 
             <div data-role="content" class="content">
+                <div id="bpm-historyselects">
+                    <div data-role="fieldcontain" >
+                        <label for="departmentsSelect" class="select">Oddział:</label>
+                        <select id="historyDepartmentsSelect" name="departmentsSelect" data-native-menu="false">
+                            <option data-placeholder="true">Wybierz<div class="btnloader"></div></option>
+                        </select>
+                    </div>
+
+                    <div data-role="fieldcontain" >
+                        <label for="departmentsAdressesSelect" class="select">Adress:</label>
+                        <select id="historyDepartmentsAdressesSelect" name="departmentsAdressesSelect"
+                                data-native-menu="false">
+                            <option data-placeholder="true">Wybierz<div class="btnloader"></div></option>
+                        </select>
+                    </div>
+
+                    <div data-role="fieldcontain" >
+                        <label for="costCenterSelect" class="select">Centrum kosztowe:</label>
+                        <select id="historyCostCenterSelect" name="costCenterSelect" data-native-menu="false">
+                            <option data-placeholder="true">Wybierz<div class="btnloader"></div></option>
+                        </select>
+                    </div>
+                </div>
+
+
                 <ul data-role="listview" data-theme="b" id="historyList">
                 </ul>
             </div>
@@ -275,8 +300,7 @@
             </div>
         </div>
 
-
-        <!-- REPORTS PAGE -->		
+        <!-- REPORTS PAGE -->
         <div data-role="page" data-theme="a" id="reportsPage">		
 
             <div data-role="content" class="content">
@@ -314,9 +338,7 @@
 
         </div>
 
-
-
-        <!-- ORDERS PAGE -->		
+        <!-- ORDERS PAGE -->
 
         <div data-role="page" data-theme="a" id="ordersPage">		
 

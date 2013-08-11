@@ -56,7 +56,7 @@ BPApp.Cart = {
                 alert('CartID jest niezdefiniowane. Prosimy o kontakt z pomocą techniczną.')
             }
             if (productsFromCart.pozycje.length > 0) {
-                BPApp.Cart.displayDepartmentsSelect();
+                BPApp.Cart.displayDepartmentsSelect('departmentsSelect');
                 BPApp.Cart.cartSummary();
                 $('#bpm-cartselects').show();
                 $('#submitOrder').show();
@@ -92,7 +92,7 @@ BPApp.Cart = {
             BPApp.Cart.cartSummary();
         }
     },
-    displayDepartmentsSelect: function() {
+    displayDepartmentsSelect: function(selectId) {
         $('#departmentsSelect-button .ui-btn-text').append('<div class="btnloader"></div>');
         $('#departmentsSelect-button .ui-btn-text .btnloader').css('display', 'inline-block');
         $.ajax({
@@ -105,13 +105,13 @@ BPApp.Cart = {
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
                 $('#departmentsSelect-button .ui-btn-text .btnloader').css('display', 'none');
-                $('#departmentsSelect').html('<option data-placeholder="true" value="placeholder">Wybierz oddział</option>');
+                $('#' + selectId).html('<option data-placeholder="true" value="placeholder">Wybierz oddział</option>');
                 $.each(data.oddzialy, function(i, item) {
-                    $('#departmentsSelect').append('<option value="' + item.kth_id + '">' + item.dak_skrot + '</option>');
+                    $('#' + selectId).append('<option value="' + item.kth_id + '">' + item.dak_skrot + '</option>');
                 })
-                $('#departmentsSelect').selectmenu('refresh');
-                $('#departmentsSelect').selectmenu('enable');
-                $('#departmentsSelect').show();
+                $('#' + selectId).selectmenu('refresh');
+                $('#' + selectId).selectmenu('enable');
+                $('#' + selectId).show();
             }
         })
     },
@@ -270,7 +270,7 @@ BPApp.Cart = {
             }
         });
     },
-    getDepartmentAdresses: function(department_id, callback) {
+    getDepartmentAdresses: function(department_id, selectId, callback) {
         $('#departmentsAdressesSelect-button .ui-btn-text').append('<div class="btnloader"></div>');
         $('#departmentsAdressesSelect-button .ui-btn-text .btnloader').css('display', 'inline-block');
         $.ajax({
@@ -283,12 +283,12 @@ BPApp.Cart = {
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
                 $('#departmentsAdressesSelect-button .ui-btn-text .btnloader').css('display', 'none');
-                $('#departmentsAdressesSelect').html('<option data-placeholder="true" value="placeholder">Wybierz adres</option>');
+                $('#' + selectId).html('<option data-placeholder="true" value="placeholder">Wybierz adres</option>');
                 $.each(data.adresy, function(i, adress) {
-                    $('#departmentsAdressesSelect').append('<option value="' + adress.dak_id + '">' + adress.adr_opis + '</option>');
+                    $('#' + selectId).append('<option value="' + adress.dak_id + '">' + adress.adr_opis + '</option>');
                 })
-                $('#departmentsAdressesSelect').selectmenu('refresh');
-                $('#departmentsAdressesSelect').selectmenu('enable');
+                $('#' + selectId).selectmenu('refresh');
+                $('#' + selectId).selectmenu('enable');
                 if(callback){
 					callback();
 				}
@@ -313,11 +313,16 @@ BPApp.Cart = {
             error: function(error) { }
         });
     },
-    getCostCenters: function(adressId, callback) {
+    getCostCenters: function(adressId, selectId, callback) {
         $('#costCenterSelect-button .ui-btn-text').append('<div class="btnloader"></div>');
         $('#costCenterSelect-button .ui-btn-text .btnloader').css('display', 'inline-block');
         var cartId = this.getCartId();
-        var departamentId = $('#departmentsSelect').val();
+
+        if(selectId == 'historyCostCenterSelect'){
+            var departamentId = $('#historyDepartmentsSelect').val();
+        }else{
+            var departamentId = $('#departmentsSelect').val();
+        }
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.CentraKosztowe',
             data: {'OdbId': departamentId, 'AdrId': adressId, 'Stat': 'A', 'AuthKey': localStorage.getItem("auth_key")},
@@ -328,12 +333,12 @@ BPApp.Cart = {
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
                 $('#costCenterSelect-button .ui-btn-text .btnloader').css('display', 'none');
-                $('#costCenterSelect').html('<option data-placeholder="true" value="placeholder">Wybierz centrum kosztowe</option>');
+                $('#' + selectId).html('<option data-placeholder="true" value="placeholder">Wybierz centrum kosztowe</option>');
                 $.each(data.centra, function(i, item) {
-                    $('#costCenterSelect').append('<option value="' + item.ck_id + '">' + item.ck_nazwa + '</option>');
+                    $('#' + selectId).append('<option value="' + item.ck_id + '">' + item.ck_nazwa + '</option>');
                 })
-                $('#costCenterSelect').selectmenu('refresh');
-                $('#costCenterSelect').selectmenu('enable');
+                $('#' + selectId).selectmenu('refresh');
+                $('#' + selectId).selectmenu('enable');
 
 				if(callback){
                 	callback();
@@ -425,12 +430,12 @@ BPApp.Cart = {
                         $('#departmentsAdressesSelect').selectmenu('refresh'); 
                     }
 
-                    self.getDepartmentAdresses(cartData.ds_id_odb, updateAdresessesSelect);
+                    self.getDepartmentAdresses(cartData.ds_id_odb, 'departmentsAdressesSelect', updateAdresessesSelect);
                     updateCostCenterSelect = function(){
                         $('#costCenterSelect').val(cartData.ds_ck_id); 
                         $('#costCenterSelect').selectmenu('refresh'); 
                     }
-                    self.getCostCenters(cartData.ds_id_adr, updateCostCenterSelect);
+                    self.getCostCenters(cartData.ds_id_adr, 'costCenterSelect', updateCostCenterSelect);
 					$('#add-from-catalog').show();
                 }else{
 					$('#add-from-catalog').hide();
@@ -506,7 +511,7 @@ BPApp.Cart = {
             $('#costCenterSelect').selectmenu('refresh');
             $('#costCenterSelect').selectmenu('disable');
 
-            self.getDepartmentAdresses(department_id);
+            self.getDepartmentAdresses(department_id, 'departmentsAdressesSelect');
         });
 
         $('#departmentsAdressesSelect').on('change', function(event) {
@@ -517,7 +522,7 @@ BPApp.Cart = {
             $('#costCenterSelect').selectmenu('refresh');
             $('#costCenterSelect').selectmenu('disable');
 
-            self.getCostCenters(adress_id);
+            self.getCostCenters(adress_id, 'costCenterSelect');
         });
 
         $('#costCenterSelect').on('change', function(event) {

@@ -11,15 +11,16 @@ BPApp.History = {
     start: function() {
         //odbID 1048308
         //ckid 8759
-        this.getDocuments();
+        BPApp.Cart.displayDepartmentsSelect('historyDepartmentsSelect');
+        this.bindEvents();
     },
 
-    getDocuments: function(){
+    getDocuments: function(odbId, ckId){
         var auth_key = localStorage.getItem("auth_key");
         var self = this;
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.Historia',
-            data: {'OdbId': 1048308, 'CkId': 8759, AuthKey: auth_key },
+            data: {'OdbId': odbId, 'CkId': ckId, AuthKey: auth_key },
             type: 'GET',
             cache: true,
             dataType: 'jsonp',
@@ -108,10 +109,38 @@ BPApp.History = {
 
     bindEvents: function() {
         var authorized = localStorage.getItem("authorized");
+        var self = this;
         if (authorized) {
-            this.addToCartEventBind();
-        } else {
-            this.notAuthorisedEventBind();
+            $('#historyDepartmentsSelect').on('change', function(event) {
+                var department_id = event.target.value;
+
+                $('#historyDepartmentsAdressesSelect').html('<option data-placeholder="true" value="placeholder">Wybierz adres</option>');
+                $('#historyDepartmentsAdressesSelect').selectmenu('refresh');
+                $('#historyDepartmentsAdressesSelect').selectmenu('disable');
+
+
+                $('#historyCostCenterSelect').html('<option data-placeholder="true" value="placeholder">Wybierz centrum kosztowe</option>');
+                $('#historyCostCenterSelect').selectmenu('refresh');
+                $('#historyCostCenterSelect').selectmenu('disable');
+
+                BPApp.Cart.getDepartmentAdresses(department_id, 'historyDepartmentsAdressesSelect' );
+            });
+
+            $('#historyDepartmentsAdressesSelect').on('change', function(event) {
+                var address_id = event.target.value;
+
+                $('#historyCostCenterSelect').html('<option data-placeholder="true" value="placeholder">Wybierz centrum kosztowe</option>');
+                $('#historyCostCenterSelect').selectmenu('refresh');
+                $('#historyCostCenterSelect').selectmenu('disable');
+
+                BPApp.Cart.getCostCenters(address_id, 'historyCostCenterSelect');
+            });
+
+            $('#historyCostCenterSelect').on('change', function(event) {
+                var cost_center_id = event.target.value;
+                var odb_id = $('#historyDepartmentsSelect').val();
+                self.getDocuments(odb_id, cost_center_id);
+            });
         };
     }
 };
