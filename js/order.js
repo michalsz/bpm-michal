@@ -38,11 +38,10 @@ BPApp.Order = {
         this.bindEvents();
     },
     displayDepartments: function() {
-
         var auth_key = localStorage.getItem("auth_key");
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.Oddzialy',
-            data: {'OdbId': '', 'Stat': '', 'AuthKey': auth_key},
+            data: {'OdbId': '', 'Stat': 'A', 'AuthKey': auth_key},
             type: 'GET',
             cache: true,
             dataType: 'jsonp',
@@ -51,7 +50,7 @@ BPApp.Order = {
             success: function(data) {
                 $('#departmentsListA').html('');
                 $.each(data.oddzialy, function(i, item) {
-                    $('#departmentsListA').append('<li><a href="#ordersAddressesPage" class="bpm-order-button" data-depid="' + item.kth_id + '">' + item.dak_skrot + ' </a></li>');
+                    $('#departmentsListA').append('<li><a href="#ordersAddressesPage" class="bpm-order-button" data-depid="' + item.kth_id + '">' + item.dak_skrot  +' <span class="right">' + item.stat_count  + '</span></a></li>');
                 });
                 $('#departmentsListA').listview('refresh');
 

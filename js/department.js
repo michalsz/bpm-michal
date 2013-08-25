@@ -27,7 +27,7 @@ BPApp.Department = {
         var auth_key = localStorage.getItem("auth_key");
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.Oddzialy',
-            data: {'OdbId': '', 'Stat': '', 'AuthKey': auth_key},
+            data: {'OdbId': '', 'Stat': 'A', 'AuthKey': auth_key},
             type: 'GET',
             cache: true,
             dataType: 'jsonp',

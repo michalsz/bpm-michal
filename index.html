@@ -50,9 +50,9 @@
 
                 <div class="menu-titles ui-grid">
                     <a data-transition="slidedown" href="#categories"><img src="./img/katalog.png" alt="Katalog" /><span class="menuboxtitle" >Katalog</span></a>
-                    <a data-transition="slidedown" href="#historyPage" id="history" style="display:none;"><img src="./img/cennik.png" alt="Cennik" /><span class="menuboxtitle" >Katalog</span></a>
+
                     <a data-transition="slidedown" href="#priceListPage" id="priceList" style="display:none;"><img src="./img/cennik.png" alt="Cennik" /><span class="menuboxtitle" >Katalog</span></a>
-                    <a data-transition="slidedown" href="#departmentsPage" id="departments" style="display:none;"><img src="./img/stan_konta.png" alt="Oddziały" /><span class="menuboxtitle" >Katalog</span></a>
+                    <a data-transition="slidedown" href="#historyPage" id="history" style="display:none;"><img src="./img/stan_konta.png" alt="Stan konta" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#reportsPage" id="reports" style="display:none;"><img src="./img/raporty.png" alt="Raporty" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#ordersPage" id="orders" style="display:none;"><img src="./img/zamowienia.png" alt="Zamówienia" /><span class="menuboxtitle" >Katalog</span></a>
                     <a data-transition="slidedown" href="#myWaitingOrdersPage" id="myWaitingOrders" style="display:none;"><img src="./img/zamowienia.png" alt="Zamówienia" /><span class="menuboxtitle" >Katalog</span></a>
@@ -197,45 +197,59 @@
 
         </div>
 
-        <!-- HISTORY PAGE -->
+        <!-- HISTORY DEPARTMENTS PAGE -->
 
         <div data-role="page" data-theme="a" id="historyPage">
-
             <div data-role="content" class="content">
-                <div id="bpm-historyselects">
-                    <div data-role="fieldcontain" >
-                        <label for="departmentsSelect" class="select">Oddział:</label>
-                        <select id="historyDepartmentsSelect" name="departmentsSelect" data-native-menu="false">
-                            <option data-placeholder="true">Wybierz<div class="btnloader"></div></option>
-                        </select>
-                    </div>
+                <div data-role="fieldcontain" >
+                    <ul data-role="listview" data-theme="b" id="historyDepartmentsList" >
+                    </ul>
+                </div>	      
+            </div>
+        </div>
 
-                    <div data-role="fieldcontain" >
-                        <label for="departmentsAdressesSelect" class="select">Adress:</label>
-                        <select id="historyDepartmentsAdressesSelect" name="departmentsAdressesSelect"
-                                data-native-menu="false">
-                            <option data-placeholder="true">Wybierz<div class="btnloader"></div></option>
-                        </select>
-                    </div>
+        <!-- HISTORY ADDRESSES PAGE -->
 
-                    <div data-role="fieldcontain" >
-                        <label for="costCenterSelect" class="select">Centrum kosztowe:</label>
-                        <select id="historyCostCenterSelect" name="costCenterSelect" data-native-menu="false">
-                            <option data-placeholder="true">Wybierz<div class="btnloader"></div></option>
-                        </select>
-                    </div>
+        <div data-role="page" data-theme="a" id="historyAddressesPage">
+            <div data-role="content" class="content">
+                <div data-role="fieldcontain" >
+                    <ul data-role="listview" data-theme="b" id="historyAddressesList" >
+                    </ul>
+                </div>	      
+            </div>
+        </div>
+
+        <!-- HISTORY COSTSSOURCES PAGE -->		
+
+        <div data-role="page" data-theme="a" id="historyCostSourcesPage">		
+
+            <div data-role="content" class="content">		
+                <div data-role="fieldcontain" >
+                    <ul data-role="listview" data-theme="b" id="historyCostSourcesList" >
+                    </ul>
                 </div>
+                <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
+            </div>
 
+        </div>
 
-                <ul data-role="listview" data-theme="b" id="historyList">
-                </ul>
+        <!-- HISTORY DOCUMENT LIST PAGE -->
+
+        <div data-role="page" data-theme="a" id="historyDocumentListPage">		
+
+            <div data-role="content" class="content">		
+                <div data-role="fieldcontain" >
+                    <ul data-role="listview" data-theme="b" id="historyDocumentList" >
+                    </ul>
+                </div>
+                <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
             </div>
 
         </div>
 
         <!-- HISTORY DOCUMENT PAGE -->
 
-        <div data-role="page" data-theme="a" id=historyDocumentPage>
+        <div data-role="page" data-theme="a" id="historyDocumentPage">
 
             <div id="historyDocumentDetails">
                 Numer:<span id="document_numer"></span>

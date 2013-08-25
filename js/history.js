@@ -2,15 +2,108 @@ $('#historyPage').on('pageshow', function(event) {
     BPApp.History.start();
 });
 
+$('#historyAddressesPage').on('pageshow', function(event) {
+    $('#historyAddressesList').html('<h2 class="loadingmsg">Ładowanie...</h2>');
+    var department_id = localStorage.getItem("department_id");
+    BPApp.History.displayAddresses(department_id);
+    //    BPApp.Order.bindEvents();
+});
+
+$('#historyCostSourcesPage').on('pageshow', function(event) {
+    $('#historyCostSourcesList').html('<h2 class="loadingmsg">Ładowanie...</h2>');
+    var department_id = localStorage.getItem("department_id");
+    var address_id = localStorage.getItem("address_id");
+    BPApp.History.displayCostSources(department_id, address_id);
+    //    BPApp.Order.bindEvents();
+});
+
+$('#historyDocumentListPage').on('pageshow', function(event) {
+    $('#historyCostSourcesList').html('<h2 class="loadingmsg">Ładowanie...</h2>');
+    var department_id = localStorage.getItem("department_id");
+    var address_id = localStorage.getItem("address_id");
+    BPApp.History.getDocuments(department_id, address_id);
+});
+
 $('#historyDocumentPage').on('pageshow', function(event) {
     BPApp.History.documentDetails();
 });
 
-
 BPApp.History = {
     start: function() {
-        BPApp.Cart.displayDepartmentsSelect('historyDepartmentsSelect');
+        var auth_key = localStorage.getItem("auth_key");
+        $.ajax({
+            url: Config.serviceURL + 'BPK.pkg_json.Oddzialy',
+            data: {'OdbId': '', 'Stat': 'A', 'AuthKey': auth_key},
+            type: 'GET',
+            cache: true,
+            dataType: 'jsonp',
+            crossDomain: true,
+            contentType: 'application/json; charset=utf-8',
+            success: function(data) {
+		var listId = '#historyDepartmentsList';
+                $(listId).html('');
+                $.each(data.oddzialy, function(i, item) {
+			$(listId).append('<li><a href="#historyAddressesPage" class="bpm-hisotry-button" data-depid="' + item.kth_id + '">' + item.dak_skrot  +' <span class="right">' + item.stat_count  + '</span></a></li>');
+                });
+                $(listId).listview('refresh');
+
+                // FIX 
+                $('.bpm-history-button').on('tap', function(event) {
+                    var department_id = $(event.target).attr('data-depid');
+                    localStorage.setItem("department_id", department_id);
+                });
+            }
+        });
+
         this.bindEvents();
+    },
+
+    displayAddresses: function(departmentId) {
+        var self = this;
+        if (departmentId.length > 0) {
+            $.ajax({
+                url: Config.serviceURL + 'BPK.pkg_json.AdresyOddzialu',
+                data: {'OdbId': departmentId, 'AuthKey': localStorage.getItem("auth_key")},
+                type: 'GET',
+                cache: true,
+                dataType: 'jsonp',
+                crossDomain: true,
+                contentType: 'application/json; charset=utf-8',
+                success: function(data) {
+	            var listId = '#historyAddressesList';
+                    $(listId).html('');
+                    $.each(data.adresy, function(i, item) {
+                        $(listId).append('<li><a href="#historyCostSourcesPage" class="bpm-history-costs-button"  data-addrressid="' + item.dak_id + '">' + item.adr_opis + ' </a></li>');
+                    })
+                    $(listId).listview('refresh');
+		    //                    self.bindEvents();
+                }
+            });
+        }
+    },
+
+    displayCostSources: function(departmentId, adressId) {
+        var self = this;
+        if (departmentId.length > 0) {
+            $.ajax({
+                url: Config.serviceURL + 'BPK.pkg_json.CentraKosztowe',
+                data: {'OdbId': departmentId, 'AdrId': adressId, 'Stat': 'A', 'AuthKey': localStorage.getItem("auth_key")},
+                type: 'GET',
+                cache: false,
+                dataType: 'jsonp',
+                crossDomain: true,
+                contentType: 'application/json; charset=utf-8',
+                success: function(data) {
+                    var listId = '#historyCostSourcesList';
+		    $(listId).html('');
+                    $.each(data.centra, function(i, item) {
+                        $(listId).append('<li><a href="#historyDocumentListPage" class="bpm-history-costsources-button" data-costid="' + item.ck_id + '">' + item.ck_nazwa + ' </a></li>');
+                    });
+                    $(listId).listview('refresh');
+		    //                    self.bindEvents();
+                }
+            });
+        }
     },
 
     getDocuments: function(odbId, ckId){
@@ -25,7 +118,7 @@ BPApp.History = {
             crossDomain: true,
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
-                $('#historyList').html('');
+                $('#historyDocumentList').html('');
                 $.each(data.zamowienia, function(i, item) {
                     self.displayDocumentDetails(item);
                     self.onButtonClick();
@@ -36,8 +129,8 @@ BPApp.History = {
     },
 
     displayDocumentDetails: function(item){
-        $('#historyList').append('<li><a data-transition="slide" class="bpm-product-button" data-documentid="' + item.ds_id + '" href="#historyDocumentPage">' + item.ds_numer + '  '  + item.ds_netto  + ' zł ' + item.ds_brutto  + ' zł <span class="right">' + item.ds_status + '</span></a></li>')
-        $('#historyList').listview('refresh');
+        $('#historyDocumentList').append('<li><a data-transition="slide" class="bpm-product-button" data-documentid="' + item.ds_id + '" href="#historyDocumentPage">' + item.ds_numer + '  '  + item.ds_netto  + ' zł ' + item.ds_brutto  + ' zł <span class="right">' + item.ds_status + '</span></a></li>')
+        $('#historyDocumentList').listview('refresh');
     },
 
     onButtonClick: function(){
@@ -60,38 +153,8 @@ BPApp.History = {
             crossDomain: true,
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
-                //$('#historyDocumentDetails').html('');
-                poz1 = new Object();
-                poz1['pds_id'] = 2394;
-                poz1['pds_nr_poz'] =   1;
-                poz1['pds_tow_id'] =  1062730;
-                poz1['tow_kod'] = "0686";
-                poz1['tow_nazwa'] = "FOLIA DO LAMINACJI 60X95 100MIC BŁYSK ANTYSTATYCZNA \f\n100SZT ";
-                poz1['pds_sv_symbol'] = "23%";
-                poz1['pds_ilosc'] = 1;
-                poz1['pds_jm_symbol'] =  "op";
-                poz1['pds_cena_s_w'] = 10.29;
-                poz1['pds_netto_w'] = 10.29;
-                poz1['pds_vat_w'] = 2.37;
-                poz1['pds_brutto_w'] = 12.66;
-
-                poz2 = new Object();
-                poz2['pds_id'] = 2394;
-                poz2['pds_nr_poz'] =   1;
-                poz2['pds_tow_id'] =  1062730;
-                poz2['tow_kod'] = "0687";
-                poz2['tow_nazwa'] = "FOLIA DO LAMINACJI 120X95 100MIC BŁYSK ANTYSTATYCZNA \f\n100SZT ";
-                poz2['pds_sv_symbol'] = "23%";
-                poz2['pds_ilosc'] = 1;
-                poz2['pds_jm_symbol'] =  "op";
-                poz2['pds_cena_s_w'] = 20.29;
-                poz2['pds_netto_w'] = 20.29;
-                poz2['pds_vat_w'] = 4.37;
-                poz2['pds_brutto_w'] = 24.66;
-
-                data = new Object();
-                data['pozycje'] = [poz1, poz2];
                 $.each(data.pozycje, function(i, item) {
+		    console.log(data);
                     self.displayProduct(item);
                     self.onProductClick();
                 })
@@ -107,13 +170,13 @@ BPApp.History = {
     onProductClick: function(){
         var self = this;
         $('.bpm-product-button').on('tap', function(event) {
-            var id = $(event.target).attr('data-documentid');
+	    var id = localStorage.getItem("document_id");
             self.addProductToCart();
         });
     },
 
     addProductToCart: function(){
-        var dsId = 62049;
+        var dsId = localStorage.getItem("document_id");
         var cartId = BPApp.Cart.getCartId();
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.PrzepiszZamowienieDoKoszyka',
@@ -125,10 +188,7 @@ BPApp.History = {
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
                 $('#historyList').html('');
-                $.each(data.zamowienia, function(i, item) {
-                    self.displayDocumentDetails(item);
-                    self.onButtonClick();
-                })
+		alert('dodałeś produktu do koszyka');
             },
             error: function() { }
         });
