@@ -106,12 +106,13 @@ BPApp.Order = {
 
                 $('.order-add-btn').on('tap', function(event) {
                     localStorage.setItem("hide_added_alert", 1);
+		    localStorage.setItem("block_cart_dropdowns", 1);
                     var doc_id = $(event.target).parents('a').attr('data-docid');
                     var odb_id = $(event.target).parents('a').attr('data-odbid');
                     var adr_id = $(event.target).parents('a').attr('data-adrid');
                     var ck_id = $(event.target).parents('a').attr('data-ckid');
                     
-					$(this).simpledialog({
+		    $(this).simpledialog({
                         'mode': 'bool',
                         'prompt': 'Czy na pewno chcesz dodać produkt?',
                         'pickPageTheme' :'c',

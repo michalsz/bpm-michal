@@ -43,7 +43,7 @@ BPApp.History = {
 		var listId = '#historyDepartmentsList';
                 $(listId).html('');
                 $.each(data.oddzialy, function(i, item) {
-			$(listId).append('<li><a href="#historyAddressesPage" class="bpm-hisotry-button" data-depid="' + item.kth_id + '">' + item.dak_skrot  +' <span class="right">' + item.stat_count  + '</span></a></li>');
+			$(listId).append('<li><a href="#historyAddressesPage" class="bpm-history-button" data-depid="' + item.kth_id + '">' + item.dak_skrot  +' <span class="right">' + item.stat_count  + '</span></a></li>');
                 });
                 $(listId).listview('refresh');
 
@@ -100,6 +100,11 @@ BPApp.History = {
                         $(listId).append('<li><a href="#historyDocumentListPage" class="bpm-history-costsources-button" data-costid="' + item.ck_id + '">' + item.ck_nazwa + ' </a></li>');
                     });
                     $(listId).listview('refresh');
+
+		    if(data.centra.length == 0){
+			var department_id = localStorage.getItem("department_id");
+			self.getDocuments(department_id, '');
+		    }
 		    //                    self.bindEvents();
                 }
             });
@@ -123,8 +128,12 @@ BPApp.History = {
                     self.displayDocumentDetails(item);
                     self.onButtonClick();
                 })
+
+		if(data.zamowienia.length == 0 ){
+		    alert('Brak zamówień');
+		}
             },
-            error: function() { }
+		    error: function() {console.log('error get history documents ') }
         });
     },
 
@@ -153,6 +162,7 @@ BPApp.History = {
             crossDomain: true,
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
+		$('#documentProducts').html('');
                 $.each(data.pozycje, function(i, item) {
                     self.displayProduct(item);
                 })
@@ -187,7 +197,8 @@ BPApp.History = {
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
                 $('#historyList').html('');
-		alert('dodałeś produktu do koszyka');
+		alert('Dodałeś wszystkie produktu do koszyka');
+		BPApp.Cart.updateProductCount();
             },
             error: function() { }
         });

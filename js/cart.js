@@ -13,6 +13,11 @@ BPApp.Cart = {
         $('#departmentsAdressesSelect').selectmenu('disable');
         $('#costCenterSelect').selectmenu('disable');
 
+	var ifSetAndBlockDropDowns = localStorage.getItem("block_cart_dropdowns");
+	if(ifSetAndBlockDropDowns){
+	    console.log('set dropdowns base on ');
+	}
+
         this.getProductsFromCart(this.displayProductsFromCart);
         this.bindEvents();
         
@@ -420,9 +425,9 @@ BPApp.Cart = {
             crossDomain: true,
             contentType: 'application/json; charset=utf-8',
             success: function(cartData) {
-				var updateSelects = localStorage.getItem("updateCartSelects");
+		    var updateSelects = localStorage.getItem("updateCartSelects");
                 if(cartData.ds_id_odb && updateSelects == 1){
-					localStorage.setItem("updateCartSelects", 0);
+		    //		    localStorage.setItem("updateCartSelects", 0);
                     $('#departmentsSelect').val(cartData.ds_id_odb); 
                     $('#departmentsSelect').selectmenu('refresh'); 
                     updateAdresessesSelect = function(){
