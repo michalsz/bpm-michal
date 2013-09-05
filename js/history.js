@@ -170,10 +170,11 @@ BPApp.History = {
             },
             error: function() { }
         });
+	self.onAddButtonsClick();
     },
 
     displayProduct: function(item){
-        $('#documentProducts').append('<li><a data-transition="slide" class="bpm-history-item" >' +  item.tow_kod + ' | ' + item.pds_cena_s_w + ' zł | '+  item.pds_jm_symbol + ' | ' +  item.pds_ilosc + ' | ' + item.pds_netto_w + ' zł| ' + item.pds_sv_symbol + ' | ' + item.pds_vat_w + ' zł | ' +  item.pds_brutto_w  +  'zł </a></li>');
+        $('#documentProducts').append('<li><input name="products[]" value="' + item.pds_id  + '" type="checkbox" class="inputItem" data-count="' + item.pds_ilosc + '" /><a data-transition="slide" class="bpm-history-item" >' +  item.tow_kod + ' | ' + item.pds_cena_s_w + ' zł | '+  item.pds_jm_symbol + ' | ' +  item.pds_ilosc + ' | ' + item.pds_netto_w + ' zł| ' + item.pds_sv_symbol + ' | ' + item.pds_vat_w + ' zł | ' +  item.pds_brutto_w  +  'zł </a></li>');
     },
 
     onProductClick: function(){
@@ -182,6 +183,53 @@ BPApp.History = {
 	    var id = localStorage.getItem("document_id");
             self.addProductToCart();
         });
+    },
+
+    onAddButtonsClick: function(){
+        var self = this;
+        $('#addToCartOne').on('tap', function(event) {
+	    var id = localStorage.getItem("document_id");
+	    $.each($('.inputItem'), function(i, item) {
+		 if(item.checked){
+	            self.addOneProduct(item.value, 1);
+		 }
+	    })
+	    alert('Dodałeś wybrane produkty do koszyka');
+        });
+
+        $('#addToCartOriginalCount').on('tap', function(event) {
+	    var id = localStorage.getItem("document_id");
+	    $.each($('.inputItem'), function(i, item) {
+		 if(item.checked){
+                    var count = $(item).attr('data-count');
+	            self.addOneProduct(item.value, count);
+		 }
+	    })
+	    alert('Dodałeś wybrane produkty do koszyka');
+        });
+
+
+    },
+
+    addOneProduct: function(pdsId, count){
+        var dsId = localStorage.getItem("document_id");
+        var cartId = BPApp.Cart.getCartId();
+        $.ajax({
+            url: Config.serviceURL + 'BPK.pkg_json.PrzepiszPozZamDoKoszyka',
+		    data: {'DsId': dsId, 'PdsId': pdsId, 'KoszId': cartId, 'Ilosc': count, AuthKey: localStorage.getItem("auth_key") },
+            type: 'GET',
+            cache: true,
+            dataType: 'jsonp',
+            crossDomain: true,
+            contentType: 'application/json; charset=utf-8',
+            success: function(data) {
+                $('#historyList').html('');
+		BPApp.Cart.updateProductCount();
+            },
+            error: function() { }
+        });
+
+
     },
 
     addProductToCart: function(){
@@ -202,7 +250,6 @@ BPApp.History = {
             },
             error: function() { }
         });
-
     },
 
     bindEvents: function() {
