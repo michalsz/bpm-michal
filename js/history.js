@@ -138,7 +138,7 @@ BPApp.History = {
     },
 
     displayDocumentDetails: function(item){
-        $('#historyDocumentList').append('<li><a data-transition="slide" class="bpm-product-button" data-documentid="' + item.ds_id + '" href="#historyDocumentPage">' + item.ds_numer + '  '  + item.ds_netto  + ' zł ' + item.ds_brutto  + ' zł <span class="right">' + item.ds_status + '</span></a></li>')
+		$('#historyDocumentList').append('<li><a data-transition="slide" class="bpm-product-button" data-documentid="' + item.ds_id + '" href="#historyDocumentPage">' + '<span class="cell"><strong>' + item.ds_numer + '</strong></span><span class="cell">' + ( item.hasOwnProperty("ds_data") ? item.ds_data : "" )+ '</span><span class="cell tright">' + item.ds_netto.toFixed(2) + '&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cell">' + item.ds_status + '</span>' + '</a></li>')
         $('#historyDocumentList').listview('refresh');
     },
 
@@ -174,7 +174,7 @@ BPApp.History = {
     },
 
     displayProduct: function(item){
-        $('#documentProducts').append('<li><input name="products[]" value="' + item.pds_id  + '" type="checkbox" class="inputItem" data-count="' + item.pds_ilosc + '" /><a data-transition="slide" class="bpm-history-item" >' +  item.tow_kod + ' | ' + item.pds_cena_s_w + ' zł | '+  item.pds_jm_symbol + ' | ' +  item.pds_ilosc + ' | ' + item.pds_netto_w + ' zł| ' + item.pds_sv_symbol + ' | ' + item.pds_vat_w + ' zł | ' +  item.pds_brutto_w  +  'zł </a></li>');
+        $('#documentProducts').append('<li><span class="cell"><input name="products[]" value="' + item.pds_id  + '" type="checkbox" class="inputItem" data-count="' + item.pds_ilosc + '" /></span><span class="cell">' +  item.tow_nazwa + ' ' + item.tow_kod + '</span><span class="cell tcenter">' +  item.pds_ilosc + '</span><span class="cell tright">' +  item.pds_netto_w.toFixed(2) + ' PL</span></li>');
     },
 
     onProductClick: function(){

@@ -223,7 +223,15 @@
 
         <div data-role="page" data-theme="a" id="historyCostSourcesPage">		
 
-            <div data-role="content" class="content">		
+            <div data-role="content" class="content">
+				<table width="100%">
+					<tr>
+						<th>Numer</th>
+						<th>Data</th>
+						<th>Wartość netto</th>
+						<th>Status</th>
+					</tr>
+				</table>
                 <div data-role="fieldcontain" >
                     <ul data-role="listview" data-theme="b" id="historyCostSourcesList" >
                     </ul>
@@ -239,7 +247,7 @@
         <!-- HISTORY DOCUMENT LIST PAGE -->
 
         <div data-role="page" data-theme="a" id="historyDocumentListPage">		
-
+		
             <div data-role="content" class="content">		
                 <div data-role="fieldcontain" >
                     <ul data-role="listview" data-theme="b" id="historyDocumentList" >
@@ -253,19 +261,28 @@
         <!-- HISTORY DOCUMENT DETAILS PAGE -->
 
         <div data-role="page" data-theme="a" id="historyDocumentPage">
-
-            <div id="historyDocumentDetails">
-                <ul id="documentProducts">
+			<div data-role="content" class="content">		
+				<table width="100%">
+					<tr>
+						<th>W koszyku</th>
+						<th>Kod towaru</th>
+						<th>Ilość</th>
+						<th>Cena netto</th>
+					</tr>
+				</table>
+                <div data-role="fieldcontain" >
+                <ul data-role="listview" data-theme="b" id="documentProducts">
                     <li>Kod | Cena netto | J.m.  |Ilość | Wartość netto |VAT | Wartość VAT | Wartość brutto |</li>
                 </ul>
 
-		<span id="addToCartFromHistory">Dodaj do koszyka</span>
-		<br/>
-		<span id="addToCartOriginalCount">Dodaj do koszyka z podana ilościa</span>
-		<br/>
-		<span id="addToCartOne">Dodaj do koszyka po jednym</span>
+				
             </div>
-
+				<br/>
+				<br/>
+				<span data-transition="slidedown" data-role="button" data-shadow="false" data-iconshadow="false" id="addToCartFromHistory">Przenieś do koszyka całość</span>
+				<span data-transition="slidedown" data-role="button" data-shadow="false" data-iconshadow="false" id="addToCartOriginalCount">Przenieś do koszyka zaznaczone</span>
+				<span data-transition="slidedown" data-role="button" data-shadow="false" data-iconshadow="false" id="addToCartOne">Przenieś do koszyka po sztuce</span>
+            </div>
         </div>
 
         <!-- PRICE LIST PAGE -->		

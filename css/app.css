@@ -76,11 +76,17 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
 
 /****************************** BACKGROUND */
 
-.ui-body-a, .ui-overlay-a {
-    background-image: none;
-    background: #0b0e2e; /* fallback for non-supporting browsers */  
-    background-image: -webkit-gradient(radial, center 85%, 0, 70% 70%, 141, #363664, #0b0e2e ); /* old WebKit Syntax */  
-    background-image: -webkit-radial-gradient(center 85%, 70% 70%, #363664, #0b0e2e); /* New WebKit syntax */ 
+.ui-body-a, .ui-overlay-a {   
+	background: rgb(47,53,109); /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMyZjM1NmQiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMGIwZTJlIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-radial-gradient(center, ellipse cover, rgba(47,53,109,1) 0%, rgba(11,14,46,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(47,53,109,1)), color-stop(100%,rgba(11,14,46,1))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover, rgba(47,53,109,1) 0%,rgba(11,14,46,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover, rgba(47,53,109,1) 0%,rgba(11,14,46,1) 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover, rgba(47,53,109,1) 0%,rgba(11,14,46,1) 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center, rgba(47,53,109,1) 0%,rgba(11,14,46,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f356d', endColorstr='#0b0e2e',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
 }
 
 .bglogo {
@@ -592,3 +598,69 @@ h2.loadingmsg {
     border: 1px solid white;
     
 }
+
+/*************************************
+Screen Styles
+Screen Name : historyCostSourcesPage
+*************************************/
+#historyDocumentPage #documentProducts.ui-listview li
+{
+	border-bottom: 1px solid #222222;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+	padding: 11px 15px;
+}
+
+#historyDocumentPage #documentProducts.ui-listview li,
+#historyCostSourcesPage #historyDocumentList.ui-listview li
+{
+	margin-left: 25px;
+    margin-right: 25px;
+}
+
+#historyDocumentPage #documentProducts.ui-listview li span.cell,
+#historyCostSourcesPage #historyDocumentList.ui-listview li span.cell
+{
+	display:inline-block;
+	width:25%;
+	font-weight: normal;
+	font-size: 12px;
+	font-family: arial;
+	vertical-align:middle;	
+}
+
+#historyDocumentPage #documentProducts.ui-listview li span.cell.tcenter
+{
+	text-align:center;
+}
+
+#historyDocumentPage #documentProducts.ui-listview li span.cell.tright,
+#historyCostSourcesPage #historyDocumentList.ui-listview li span.cell.tright
+{
+	text-align:right;
+	
+}
+
+#historyCostSourcesPage.ui-page div.content div.ui-field-contain ul#historyDocumentList.ui-listview li.ui-btn div.ui-btn-inner span.ui-icon
+{
+	display:none;
+}
+
+#historyCostSourcesPage.ui-page div.content div.ui-field-contain ul#historyDocumentList.ui-listview li.ui-btn div.ui-btn-inner div.ui-btn-text a.bpm-product-button
+{
+	padding-right: 15px;
+}
+
+div.content>table
+{
+	background-color:#e8e8e8;
+	-webkit-border-radius: 5px;
+	border-radius: 5px; 
+}
+
+div.content>table th
+{
+	color: #2F3E46;
+    font-weight: bold;
+    text-shadow: 0 1px 0 #FFFFFF;
+	padding: 11px;
+}	
