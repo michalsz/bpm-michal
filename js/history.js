@@ -95,7 +95,7 @@ BPApp.History = {
                 contentType: 'application/json; charset=utf-8',
                 success: function(data) {
                     var listId = '#historyCostSourcesList';
-		    $(listId).html('');
+					$(listId).html('');
                     $.each(data.centra, function(i, item) {
                         $(listId).append('<li><a href="#historyDocumentListPage" class="bpm-history-costsources-button" data-costid="' + item.ck_id + '">' + item.ck_nazwa + ' </a></li>');
                     });
@@ -125,7 +125,7 @@ BPApp.History = {
             success: function(data) {
                 $('#historyDocumentList').html('');
                 $.each(data.zamowienia, function(i, item) {
-                    self.displayDocumentDetails(item);
+                    self.displayDocumentDetails(i, item);
                     self.onButtonClick();
                 })
 
@@ -137,7 +137,11 @@ BPApp.History = {
         });
     },
 
-    displayDocumentDetails: function(item){
+    displayDocumentDetails: function(i, item){
+		if(!i)
+		{
+			$('#historyDocumentList').append('<li class="header">' + '<span class="cell">Numer</span><span class="cell">Data</span><span class="cell">Wartość netto</span><span class="cell">Status</span>' + '</a></li>')
+		}
 		$('#historyDocumentList').append('<li><a data-transition="slide" class="bpm-product-button" data-documentid="' + item.ds_id + '" href="#historyDocumentPage">' + '<span class="cell"><strong>' + item.ds_numer + '</strong></span><span class="cell">' + ( item.hasOwnProperty("ds_data") ? item.ds_data : "" )+ '</span><span class="cell tright">' + item.ds_netto.toFixed(2) + '&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cell">' + item.ds_status + '</span>' + '</a></li>')
         $('#historyDocumentList').listview('refresh');
     },
@@ -164,7 +168,7 @@ BPApp.History = {
             success: function(data) {
 		$('#documentProducts').html('');
                 $.each(data.pozycje, function(i, item) {
-                    self.displayProduct(item);
+                    self.displayProduct(i, item);
                 })
                 self.onProductClick();
             },
@@ -173,7 +177,11 @@ BPApp.History = {
 	self.onAddButtonsClick();
     },
 
-    displayProduct: function(item){
+    displayProduct: function(i, item){
+		if(!i)
+		{
+			$('#documentProducts').append('<li class="header"><span class="cell">W koszyku</span><span class="cell">Kod towaru</span><span class="cell">Ilość</span><span class="cell">Cena netto</span></li>');
+		}
         $('#documentProducts').append('<li><span class="cell"><input name="products[]" value="' + item.pds_id  + '" type="checkbox" class="inputItem" data-count="' + item.pds_ilosc + '" /></span><span class="cell">' +  item.tow_nazwa + ' ' + item.tow_kod + '</span><span class="cell tcenter">' +  item.pds_ilosc + '</span><span class="cell tright">' +  item.pds_netto_w.toFixed(2) + ' PL</span></li>');
     },
 

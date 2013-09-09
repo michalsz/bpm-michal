@@ -650,6 +650,33 @@ Screen Name : historyCostSourcesPage
 	padding-right: 15px;
 }
 
+#historyDocumentPage #documentProducts li.header,
+#historyDocumentPage #documentProducts li.header:hover,
+#historyCostSourcesPage #historyDocumentList li.header,
+#historyCostSourcesPage #historyDocumentList li.header:hover
+{
+	background-color: #E8E8E8 !important;
+    border-radius: 5px 5px 5px 5px;
+}
+
+#historyDocumentPage #documentProducts li.header span.cell,
+#historyCostSourcesPage #historyDocumentList li.header span.cell
+{
+	color: #2F3E46;
+    font-weight: bold;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+#historyDocumentPage #documentProducts li.header a,
+#historyDocumentPage #documentProducts li.header a:hover,
+#historyCostSourcesPage #historyDocumentList li.header a,
+#historyCostSourcesPage #historyDocumentList li.header a:hover
+{
+	padding-left: 0px;
+	padding-right: 0px;
+	background-color: #E8E8E8 !important;
+}
+
 div.content>table
 {
 	background-color:#e8e8e8;
