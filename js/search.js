@@ -2,6 +2,7 @@
 $('#search').on('pageshow', function() {
     $('#productsSearchList').html('<h2 class="loadingmsg">Ładowanie...</h2>');
     BPApp.Search.start();
+    
 });
 
 BPApp.Search = {
@@ -22,6 +23,7 @@ BPApp.Search = {
             crossDomain: true,
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
+                $('body, html').scrollTop(0);
                 self.displayResultCount(data.towary_count);
                 $('#productsSearchList').html('');
                 if (data.towary.length > 0) {

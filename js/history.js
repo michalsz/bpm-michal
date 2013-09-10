@@ -95,12 +95,12 @@ BPApp.History = {
                 contentType: 'application/json; charset=utf-8',
                 success: function(data) {
                     var listId = '#historyCostSourcesList';
-					$(listId).html('');
+		    $(listId).html('');
                     $.each(data.centra, function(i, item) {
                         $(listId).append('<li><a href="#historyDocumentListPage" class="bpm-history-costsources-button" data-costid="' + item.ck_id + '">' + item.ck_nazwa + ' </a></li>');
                     });
                     $(listId).listview('refresh');
-
+		    console.log(data);
 		    if(data.centra.length == 0){
 			var department_id = localStorage.getItem("department_id");
 			self.getDocuments(department_id, '');
@@ -125,33 +125,29 @@ BPApp.History = {
             success: function(data) {
                 $('#historyDocumentList').html('');
                 $.each(data.zamowienia, function(i, item) {
-                    self.displayDocumentDetails(i, item);
+		    self.displayDocumentDetails(i, item);
                     self.onButtonClick();
                 })
 
 		if(data.zamowienia.length == 0 ){
 		    alert('Brak zamówień');
 		}
-            },
-		    error: function() {console.log('error get history documents ') }
+           },
+           error: function() {console.log('error get history documents ') }
         });
     },
 
     displayDocumentDetails: function(i, item){
-		if(!i)
-		{
-			$('#historyDocumentList').append('<li class="header">' + '<span class="cell">Numer</span><span class="cell">Data</span><span class="cell">Wartość netto</span><span class="cell">Status</span>' + '</a></li>')
-		}
-		$('#historyDocumentList').append('<li><a data-transition="slide" class="bpm-product-button" data-documentid="' + item.ds_id + '" href="#historyDocumentPage">' + '<span class="cell"><strong>' + item.ds_numer + '</strong></span><span class="cell">' + ( item.hasOwnProperty("ds_data") ? item.ds_data : "" )+ '</span><span class="cell tright">' + item.ds_netto.toFixed(2) + '&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cell">' + item.ds_status + '</span>' + '</a></li>')
-
+	if(!i){
+	  $('#historyDocumentList').append('<li class="header">' + '<span class="cell">Numer</span><span class="cell">Data</span><span class="cell">Wartość netto</span><span class="cell">Status</span>' + '</a></li>')
+	}
+	$('#historyDocumentList').append('<li class="aa" data-documentid="' + item.ds_id + '"><a data-transition="slide" class="bpm-product-button" data-documentid="' + item.ds_id + '" href="#historyDocumentPage">' + '<span class="cell"><strong data-documentid="' + item.ds_id + '">' + item.ds_numer + '</strong></span><span class="cell">' + ( item.hasOwnProperty("ds_data") ? item.ds_data : "" )+ '</span><span class="cell tright" data-documentid="' + item.ds_id + '">' + item.ds_netto.toFixed(2) + '&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cell" data-documentid="' + item.ds_id + '">' + item.ds_status + '</span>' + '</a></li>')
         $('#historyDocumentList').listview('refresh');
     },
 
     onButtonClick: function(){
         $('li.aa').on('tap', function(event) {
             var id = $(event.target).attr('data-documentid');
-	    console.log('event ' + event.target.tagName);
-	    console.log('id ' + id);
             localStorage.setItem("document_id", id);
         });
 
@@ -164,6 +160,7 @@ BPApp.History = {
         var document_id = localStorage.getItem("document_id");
         var auth_key = localStorage.getItem("auth_key");
         var self = this;
+	console.log(document_id);
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.PozycjeDokHistorii',
             data: {'DsId': document_id, AuthKey: auth_key },

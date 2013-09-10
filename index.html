@@ -51,17 +51,17 @@
                 <div class="menu-titles ui-grid">
                     <a data-transition="slidedown" href="#categories"><img src="./img/katalog.png" alt="Katalog" /><span class="menuboxtitle" >Katalog</span></a>
 
-                    <a data-transition="slidedown" href="#priceListPage" id="priceList" style="display:none;"><img src="./img/cennik.png" alt="Cennik" /><span class="menuboxtitle" >Katalog</span></a>
-                    <a data-transition="slidedown" href="#historyPage" id="history" style="display:none;"><img src="./img/stan_konta.png" alt="Historia zamówień" /><span class="menuboxtitle" >Katalog</span></a>
-                    <a data-transition="slidedown" href="#reportsPage" id="reports" style="display:none;"><img src="./img/raporty.png" alt="Raporty" /><span class="menuboxtitle" >Katalog</span></a>
-                    <a data-transition="slidedown" href="#ordersPage" id="orders" style="display:none;"><img src="./img/zamowienia.png" alt="Zamówienia" /><span class="menuboxtitle" >Katalog</span></a>
-                    <a data-transition="slidedown" href="#myWaitingOrdersPage" id="myWaitingOrders" style="display:none;"><img src="./img/zamowienia.png" alt="Zamówienia" /><span class="menuboxtitle" >Katalog</span></a>
-                    <a data-transition="slidedown" href="#cart" id="cartLink" style="display:none;"><img src="./img/koszyk.png" alt="Koszyk" /><span class="menuboxtitle" >Katalog</span></a>
-                    <a data-transition="slidedown" href="#loginPage" id="login" ><img src="./img/zaloguj.png" alt="Zaloguj" /><span class="menuboxtitle" >Katalog</span></a>
-                    <a data-transition="slidedown" href="#contactPage" id="contact" ><img src="./img/kontakt.png" alt="Kontakt" /><span class="menuboxtitle" >Katalog</span></a>
-                                 
+                    <a data-transition="slidedown" href="#priceListPage" id="priceList" style="display:none;"><img src="./img/cennik.png" alt="Cennik" /><span class="menuboxtitle" >Mój cennik</span></a>
+                    <a data-transition="slidedown" href="#historyPage" id="history" style="display:none;"><img src="./img/stan_konta.png" alt="Historia zamówień" /><span class="menuboxtitle" >Historia Zamówień</span></a>
+                    <a data-transition="slidedown" href="#reportsPage" id="reports" style="display:none;"><img src="./img/raporty.png" alt="Raporty" /><span class="menuboxtitle" >Raporty</span></a>
+                    <a data-transition="slidedown" href="#ordersPage" id="orders" style="display:none;"><img src="./img/zamowienia.png" alt="Zamówienia" /><span class="menuboxtitle" >Zamówienia do akceptacji</span></a>
+                    <a data-transition="slidedown" href="#myWaitingOrdersPage" id="myWaitingOrders" style="display:none;"><img src="./img/zamowienia.png" alt="Zamówienia" /><span class="menuboxtitle" >Zamówienia do akceptacji</span></a>
+                    <a data-transition="slidedown" href="#cart" id="cartLink" style="display:none;"><img src="./img/koszyk.png" alt="Koszyk" /><span class="menuboxtitle" >Koszyk</span></a>
+                    <a data-transition="slidedown" href="#loginPage" id="login" ><img src="./img/wyloguj.png" alt="Zaloguj" /><span class="menuboxtitle" >Zaloguj</span></a>
+                    <a data-transition="slidedown" href="#contactPage" id="contact" ><img src="./img/kontakt.png" alt="Kontakt" /><span class="menuboxtitle" >Kontakt</span></a>
+                    
                     <a href="#logout_dialog" id="logout" data-rel="popup" data-position-to="window" data-transition="pop" style="display:none;">
-                        <img src="./img/wyloguj.png" alt="Wyloguj" />
+                        <img src="./img/wyloguj.png" alt="Wyloguj" /><span class="menuboxtitle" >Wyloguj</span>
                     </a>
                     
                     <div data-role="popup" id="logout_dialog">
@@ -225,11 +225,8 @@
 
             <div data-role="content" class="content">
 				<div data-role="fieldcontain" >
-                    <ul data-role="listview" data-theme="b" id="historyCostSourcesList" >
-                    </ul>
-                    <ul data-role="listview" data-theme="b" id="historyDocumentList" >
-                    </ul>
-
+                    <ul data-role="listview" data-theme="b" id="historyCostSourcesList" ></ul>
+                    <ul data-role="listview" data-theme="b" id="historyDocumentList" ></ul>
                 </div>
                 <a class="backbtn" data-transition="slidedown" data-role="button" data-rel="back" data-shadow="false" data-iconshadow="false">Powrót</a>
             </div>
