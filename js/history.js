@@ -43,7 +43,7 @@ BPApp.History = {
 		var listId = '#historyDepartmentsList';
                 $(listId).html('');
                 $.each(data.oddzialy, function(i, item) {
-			$(listId).append('<li><a href="#historyAddressesPage" class="bpm-history-button" data-depid="' + item.kth_id + '">' + item.dak_skrot  +' <span class="right">' + item.stat_count  + '</span></a></li>');
+			$(listId).append('<li><a href="#historyAddressesPage" class="bpm-history-button" data-depid="' + item.kth_id + '">' + item.dak_skrot  +'</a></li>');
                 });
                 $(listId).listview('refresh');
 
@@ -125,6 +125,7 @@ BPApp.History = {
             success: function(data) {
                 $('#historyDocumentList').html('');
                 $.each(data.zamowienia, function(i, item) {
+		    console.log(item);
                     self.displayDocumentDetails(item);
                     self.onButtonClick();
                 })
@@ -138,18 +139,24 @@ BPApp.History = {
     },
 
     displayDocumentDetails: function(item){
-		$('#historyDocumentList').append('<li><a data-transition="slide" class="bpm-product-button" data-documentid="' + item.ds_id + '" href="#historyDocumentPage">' + '<span class="cell"><strong>' + item.ds_numer + '</strong></span><span class="cell">' + ( item.hasOwnProperty("ds_data") ? item.ds_data : "" )+ '</span><span class="cell tright">' + item.ds_netto.toFixed(2) + '&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cell">' + item.ds_status + '</span>' + '</a></li>')
+       $('#historyDocumentList').append('<li class="aa" data-documentid="' + item.ds_id + '"><a data-transition="slide" class="bpm-product-button" data-documentid="' + item.ds_id + '" href="#historyDocumentPage">' + '<span class="cell"  data-documentid="' + item.ds_id + '">' + item.ds_numer + '</span><span class="cell" data-documentid="' + item.ds_id + '">' + ( item.hasOwnProperty("ds_data") ? item.ds_data : "" )+ '</span><span class="cell tright"  data-documentid="' + item.ds_id + '">' + item.ds_netto.toFixed(2) + '&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cell" data-documentid="' + item.ds_id + '">' + item.ds_status + '</span>' + '</a></li>')
         $('#historyDocumentList').listview('refresh');
     },
 
     onButtonClick: function(){
-        $('.bpm-product-button').on('tap', function(event) {
+        $('li.aa').on('tap', function(event) {
             var id = $(event.target).attr('data-documentid');
+	    console.log('event ' + event.target.tagName);
+	    console.log('id ' + id);
             localStorage.setItem("document_id", id);
         });
+
     },
 
     documentDetails: function(){
+	$('#addToCartFromHistory').unbind();
+	$('#addToCartOne').unbind();
+	$('#addToCartOriginalCount').unbind();
         var document_id = localStorage.getItem("document_id");
         var auth_key = localStorage.getItem("auth_key");
         var self = this;
@@ -166,49 +173,57 @@ BPApp.History = {
                 $.each(data.pozycje, function(i, item) {
                     self.displayProduct(item);
                 })
-                self.onProductClick();
             },
             error: function() { }
         });
+	self.onAddToCartClick();
 	self.onAddButtonsClick();
     },
 
     displayProduct: function(item){
-        $('#documentProducts').append('<li><span class="cell"><input name="products[]" value="' + item.pds_id  + '" type="checkbox" class="inputItem" data-count="' + item.pds_ilosc + '" /></span><span class="cell">' +  item.tow_nazwa + ' ' + item.tow_kod + '</span><span class="cell tcenter">' +  item.pds_ilosc + '</span><span class="cell tright">' +  item.pds_netto_w.toFixed(2) + ' PL</span></li>');
+	$('#documentProducts').append('<li><span class="cell"><input name="products[]" value="' + item.pds_id  + '" type="checkbox" class="inputItem" data-count="' + item.pds_ilosc + '" /></span><span class="cell">' +  item.tow_nazwa + ' ' + item.tow_kod + '</span><span class="cell tcenter">' +  item.pds_ilosc + '</span><span class="cell tright">' +  item.pds_netto_w.toFixed(2) + ' PL</span></li>');
     },
 
-    onProductClick: function(){
+    onAddToCartClick: function(){
+	console.log('on product click');
         var self = this;
-        $('.bpm-history-item').on('tap', function(event) {
-	    var id = localStorage.getItem("document_id");
-            self.addProductToCart();
-        });
+        $('#addToCartFromHistory').on('tap', function(event) {
+	     var id = localStorage.getItem("document_id");
+	     console.log('clicked id ');
+             self.addProductToCart();
+         });
     },
 
     onAddButtonsClick: function(){
         var self = this;
         $('#addToCartOne').on('tap', function(event) {
 	    var id = localStorage.getItem("document_id");
+	    var added = false
 	    $.each($('.inputItem'), function(i, item) {
 		 if(item.checked){
-	            self.addOneProduct(item.value, 1);
+	           self.addOneProduct(item.value, 1);
+  		   added = true;
 		 }
 	    })
-	    alert('Dodałeś wybrane produkty do koszyka');
+            if(added){
+	      alert('Dodałeś wybrane produkty do koszyka');
+	    }
         });
 
         $('#addToCartOriginalCount').on('tap', function(event) {
 	    var id = localStorage.getItem("document_id");
+	    var added = false;
 	    $.each($('.inputItem'), function(i, item) {
 		 if(item.checked){
                     var count = $(item).attr('data-count');
 	            self.addOneProduct(item.value, count);
+		    added = true;
 		 }
 	    })
-	    alert('Dodałeś wybrane produkty do koszyka');
+            if(added){		
+  	      alert('Dodałeś wybrane produkty do koszyka');
+	    }
         });
-
-
     },
 
     addOneProduct: function(pdsId, count){
@@ -228,11 +243,10 @@ BPApp.History = {
             },
             error: function() { }
         });
-
-
     },
 
     addProductToCart: function(){
+	console.log('----adding ---');
         var dsId = localStorage.getItem("document_id");
         var cartId = BPApp.Cart.getCartId();
         $.ajax({
