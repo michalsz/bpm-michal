@@ -21,7 +21,7 @@ $('#historyDocumentListPage').on('pageshow', function(event) {
     $('#historyCostSourcesList').html('<h2 class="loadingmsg">Ładowanie...</h2>');
     var department_id = localStorage.getItem("department_id");
     var address_id = localStorage.getItem("address_id");
-    BPApp.History.getDocuments(department_id, address_id);
+    BPApp.History.getDocuments(department_id, address_id, '#historyDocumentListA');
 });
 
 $('#historyDocumentPage').on('pageshow', function(event) {
@@ -100,10 +100,9 @@ BPApp.History = {
                         $(listId).append('<li><a href="#historyDocumentListPage" class="bpm-history-costsources-button" data-costid="' + item.ck_id + '">' + item.ck_nazwa + ' </a></li>');
                     });
                     $(listId).listview('refresh');
-		    console.log(data);
 		    if(data.centra.length == 0){
 			var department_id = localStorage.getItem("department_id");
-			self.getDocuments(department_id, '');
+			self.getDocuments(department_id, '', '#historyDocumentList');
 		    }
 		    //                    self.bindEvents();
                 }
@@ -111,7 +110,7 @@ BPApp.History = {
         }
     },
 
-    getDocuments: function(odbId, ckId){
+    getDocuments: function(odbId, ckId, elementId){
         var auth_key = localStorage.getItem("auth_key");
         var self = this;
         $.ajax({
@@ -125,7 +124,7 @@ BPApp.History = {
             success: function(data) {
                 $('#historyDocumentList').html('');
                 $.each(data.zamowienia, function(i, item) {
-		    self.displayDocumentDetails(i, item);
+			self.displayDocumentDetails(i, item, elementId);
                     self.onButtonClick();
                 })
 
@@ -137,12 +136,12 @@ BPApp.History = {
         });
     },
 
-    displayDocumentDetails: function(i, item){
+    displayDocumentDetails: function(i, item, element_id){
 	if(!i){
-	  $('#historyDocumentList').append('<li class="header">' + '<span class="cell">Numer</span><span class="cell">Data</span><span class="cell">Wartość netto</span><span class="cell">Status</span>' + '</a></li>')
+	  $(element_id).append('<li class="header">' + '<span class="cell">Numer</span><span class="cell">Data</span><span class="cell">Wartość netto</span><span class="cell">Status</span>' + '</a></li>')
 	}
-	$('#historyDocumentList').append('<li class="aa" data-documentid="' + item.ds_id + '"><a data-transition="slide" class="bpm-product-button" data-documentid="' + item.ds_id + '" href="#historyDocumentPage">' + '<span class="cell"><strong data-documentid="' + item.ds_id + '">' + item.ds_numer + '</strong></span><span class="cell">' + ( item.hasOwnProperty("ds_data") ? item.ds_data : "" )+ '</span><span class="cell tright" data-documentid="' + item.ds_id + '">' + item.ds_netto.toFixed(2) + '&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cell" data-documentid="' + item.ds_id + '">' + item.ds_status + '</span>' + '</a></li>')
-        $('#historyDocumentList').listview('refresh');
+	$(element_id).append('<li class="aa" data-documentid="' + item.ds_id + '"><a data-transition="slide" class="bpm-product-button" data-documentid="' + item.ds_id + '" href="#historyDocumentPage">' + '<span class="cell"><strong data-documentid="' + item.ds_id + '">' + item.ds_numer + '</strong></span><span class="cell">' + ( item.hasOwnProperty("ds_data") ? item.ds_data : "" )+ '</span><span class="cell tright" data-documentid="' + item.ds_id + '">' + item.ds_netto.toFixed(2) + '&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cell" data-documentid="' + item.ds_id + '">' + item.ds_status + '</span>' + '</a></li>')
+        $(element_id).listview('refresh');
     },
 
     onButtonClick: function(){
@@ -194,7 +193,6 @@ BPApp.History = {
         var self = this;
         $('#addToCartFromHistory').on('tap', function(event) {
 	     var id = localStorage.getItem("document_id");
-	     console.log('clicked id ');
              self.addProductToCart();
          });
     },
@@ -303,7 +301,7 @@ BPApp.History = {
             $('#historyCostCenterSelect').on('change', function(event) {
                 var cost_center_id = event.target.value;
                 var odb_id = $('#historyDepartmentsSelect').val();
-                self.getDocuments(odb_id, cost_center_id);
+                self.getDocuments(odb_id, cost_center_id, '#historyDocumentListA');
             });
         };
     }
