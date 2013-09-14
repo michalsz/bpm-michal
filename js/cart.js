@@ -152,7 +152,7 @@ BPApp.Cart = {
         var cartId = this.getCartId();
         var self = this;
         
-        var hide_alert = localStorage.getItem("hide_added_alert") || false;
+        var hide_alert = false;// localStorage.getItem("hide_added_alert") || false;
         
         $.ajax({
             url: Config.serviceURL + 'BPK.pkg_json.DodajPozycjeKoszyk',
