@@ -3,17 +3,17 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.phonegap.bpmobile"
         version   = "2.4.1">
-    <name>BiuroPlus</name>
+    <name>BiuroLink</name>
 
     <description>
-        BP 
+        Biuro Link 
     </description>
 
     <author href="http://maneuver.pl" email="biuro@maneuver.pl">
         Maneuver
     </author>
 
-    <access origin="*biuroplus-krakow.pl" browserOnly="true"/> 
+    <access origin="*biurolink-krakow.pl" browserOnly="true"/> 
     <access origin="*"/>
     
     <feature name="http://api.phonegap.com/1.0/device" />
