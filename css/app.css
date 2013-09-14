@@ -147,6 +147,7 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
     top: 0;
     width: 100%;
     margin:auto;
+    z-index:10;
 }
 
 .back {
