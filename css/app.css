@@ -356,6 +356,10 @@ h2.loadingmsg {
     margin-top: 30px!important;
 }
 
+.kontener .ui-btn-text{
+	cursor: default;
+}
+
 .bpm-departmentdata, .bpm-orderdata {
     font-weight: bold;
     float:right;
