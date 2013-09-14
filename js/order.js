@@ -382,7 +382,7 @@ BPApp.Order = {
                 success: function(data) {
                     $('#costSourcesListA').html('');
                     $.each(data.centra, function(i, item) {
-                        $('#costSourcesListA').append('<li><a href="#ordersListPage" class="bpm-orders-orders-button" data-costid="' + item.ck_id + '">' + item.ck_nazwa + ' </a></li>');
+                        $('#costSourcesListA').append('<li><a href="#ordersListPage" class="bpm-orders-orders-button" data-costid="' + item.ck_id + '">' + item.ck_nazwa + ' <span class="right">' + item.stat_count  + '</span></a></li>');
                     });
                     $('#costSourcesListA').listview('refresh');
                     self.bindEvents();
