@@ -520,7 +520,7 @@ h2.loadingmsg {
 }
 
 #contact_table a {
-    color: #000;
+    color: white;
     text-decoration: none;
 }
 

@@ -470,7 +470,7 @@
                     </div>
                 </div>
 
-                <a href="#order_confirmation_dialog" id="submitOrderaa" data-role="button" data-rel="popup" data-position-to="window" data-transition="pop" >Złóż zamówienie<div class="btnloader"></div></a>
+                <a href="#order_confirmation_dialog" id="submitOrder" data-role="button" data-rel="popup" data-position-to="window" data-transition="pop" >Złóż zamówienie<div class="btnloader"></div></a>
                 <h2 id="emptyCartMsg">Twój koszyk jest pusty <a href="#categories" data-role="button" data-transition="slidedown">Przeglądaj katalog</a></h2>
 
                  <div data-role="popup" id="order_confirmation_dialog">
