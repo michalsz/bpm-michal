@@ -143,6 +143,10 @@ li[role=option] .ui-btn-inner a {white-space:normal!important;}
     -webkit-border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px; 
+    position:fixed;
+    top: 0;
+    width: 100%;
+    margin:auto;
 }
 
 .back {
