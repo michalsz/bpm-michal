@@ -13,20 +13,21 @@ BPApp.Cart = {
         $('#departmentsAdressesSelect').selectmenu('disable');
         $('#costCenterSelect').selectmenu('disable');
 
-	var ifSetAndBlockDropDowns = localStorage.getItem("block_cart_dropdowns");
-	if(ifSetAndBlockDropDowns){
-	    console.log('set dropdowns base on ');
-	}
+		var ifSetAndBlockDropDowns = localStorage.getItem("block_cart_dropdowns");
+		if(ifSetAndBlockDropDowns){
+			console.log('set dropdowns base on ');
+		}
 
         this.getProductsFromCart(this.displayProductsFromCart);
         this.bindEvents();
         
         var authorized = localStorage.getItem("authorized");
-        
         if (authorized !== 'true') {
             alert('Aby przejsc do koszyka musisz sie zalogowac');
             $.mobile.changePage($("#startPage"));
         }
+        
+        $('#submitOrder').hide();
     },
             
     getProductsFromCart: function(callback) {
@@ -64,11 +65,11 @@ BPApp.Cart = {
                 BPApp.Cart.displayDepartmentsSelect('departmentsSelect');
                 BPApp.Cart.cartSummary();
                 $('#bpm-cartselects').show();
-//                $('#submitOrderBtn').show();
+                $('#submitOrder').show();
                 $('#cartSummary').show();
             } else {
                 $('#bpm-cartselects').hide();
-//                $('#submitOrderBtn').hide();
+                $('#submitOrder').hide();
                 $('#cartSummary').hide();
                 $('#emptyCartMsg').show();
             }
@@ -294,6 +295,7 @@ BPApp.Cart = {
                 })
                 $('#' + selectId).selectmenu('refresh');
                 $('#' + selectId).selectmenu('enable');
+                
                 if(callback){
 					callback();
 				}
@@ -364,6 +366,8 @@ BPApp.Cart = {
             success: function(message) {
                 if (message.ustawione == 'T') {
                     $('#costCenterSelect').show();
+                    console.log('odblokuj button');
+                    $('#submitOrder').show();
                 }
             },
             error: function(error) {
@@ -372,8 +376,7 @@ BPApp.Cart = {
         });
     },
     submitOrder: function() {
-
-        if (($('#departmentsSelect').val() == 'placeholder') ||
+       if (($('#departmentsSelect').val() == 'placeholder') ||
                 ($('#departmentsSelect').val() == 'placeholder') ||
                 ($('#departmentsSelect').val() == 'placeholder')) {
 
@@ -381,7 +384,7 @@ BPApp.Cart = {
 
             return false;
         }
-//        $('#submitOrder .btnloader').css('display', 'inline-block');
+        $('#submitOrder .btnloader').css('display', 'inline-block');
         var cartId = this.getCartId();
         var self = this;
         $.ajax({
@@ -394,13 +397,14 @@ BPApp.Cart = {
             contentType: 'application/json; charset=utf-8',
             success: function(message) {
                 if (message.Zamowiony == 'T') {
-//                    $('#submitOrder .btnloader').css('display', 'none');
+                    $('#submitOrder .btnloader').css('display', 'none');
                     localStorage.removeItem('cartId');
                     $('#cartProducts').html('');
                     $('#bpm-cartselects').hide();
-//                    $('#submitOrderBtn').hide();
+                    $('#submitOrder').hide();
                     $('#cartSummary').hide();
                     $('#emptyCartMsg').show();
+                    $('#order_confirmation_dialog').popup('close');
                     alert(message.Komunikat);
                     self.displayProductsFromCart();
                     var productCount = 0;
@@ -535,7 +539,9 @@ BPApp.Cart = {
             self.setCostCenter(cost_center_id);
         });
 
-        $('#submitOrderBtn').on('tap', function(event) {
+		console.log('bind');
+        $('#submitOrderConfirmation').on('tap', function(event) {
+			console.log('submit');
             self.submitOrder();
         });
 
