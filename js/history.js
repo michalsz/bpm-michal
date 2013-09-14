@@ -18,13 +18,14 @@ $('#historyCostSourcesPage').on('pageshow', function(event) {
 });
 
 $('#historyDocumentListPage').on('pageshow', function(event) {
-    $('#historyCostSourcesList').html('<h2 class="loadingmsg">Ładowanie...</h2>');
+    $('#historyDocumentListA').html('<h2 class="loadingmsg">Ładowanie...</h2>');
     var department_id = localStorage.getItem("department_id");
     var address_id = localStorage.getItem("address_id");
     BPApp.History.getDocuments(department_id, address_id, '#historyDocumentListA');
 });
 
 $('#historyDocumentPage').on('pageshow', function(event) {
+    $('#documentProducts').html('<h2 class="loadingmsg">Ładowanie...</h2>');
     BPApp.History.documentDetails();
 });
 
@@ -122,9 +123,10 @@ BPApp.History = {
             crossDomain: true,
             contentType: 'application/json; charset=utf-8',
             success: function(data) {
-                $('#historyDocumentList').html('');
+                $(elementId).html('');
                 $.each(data.zamowienia, function(i, item) {
-			self.displayDocumentDetails(i, item, elementId);
+		    console.log(item);
+		    self.displayDocumentDetails(i, item, elementId);
                     self.onButtonClick();
                 })
 
@@ -138,7 +140,7 @@ BPApp.History = {
 
     displayDocumentDetails: function(i, item, element_id){
 	if(!i){
-	  $(element_id).append('<li class="header">' + '<span class="cell">Numer</span><span class="cell">Data</span><span class="cell">Wartość netto</span><span class="cell">Status</span>' + '</a></li>')
+	  $(element_id).append('<li class="header">' + '<span class="cell">Numer</span><!--span class="cell">Data</span--><span class="cell">Wartość netto</span><span class="cell">Status</span>' + '</a></li>')
 	}
 	$(element_id).append('<li class="aa" data-documentid="' + item.ds_id + '"><a data-transition="slide" class="bpm-product-button" data-documentid="' + item.ds_id + '" href="#historyDocumentPage">' + '<span class="cell"><strong data-documentid="' + item.ds_id + '">' + item.ds_numer + '</strong></span><span class="cell">' + ( item.hasOwnProperty("ds_data") ? item.ds_data : "" )+ '</span><span class="cell tright" data-documentid="' + item.ds_id + '">' + item.ds_netto.toFixed(2) + '&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cell" data-documentid="' + item.ds_id + '">' + item.ds_status + '</span>' + '</a></li>')
         $(element_id).listview('refresh');
